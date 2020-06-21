@@ -1,0 +1,16 @@
+#stations rect {
+    stroke: black;
+    fill: none;
+}
+
+#stations rect.helper {
+    stroke: none;
+}
+
+#lines path {
+    stroke: black;
+    stroke-width: 3;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}

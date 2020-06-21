@@ -1,0 +1,20 @@
+<?xml-stylesheet type="text/css" href="styles.css" ?>
+<svg viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">  
+    <g id="stations">
+        <rect id="FH-S" x="580" y="190" data-dir="n" />
+        <rect id="FMZ" x="305" y="605" data-dir="n" />
+        <rect id="FF" x="395" y="555" data-dir="ne" />
+        <rect id="TS" x="420" y="735" data-dir="nw" />
+        <rect id="MM" x="800" y="635" data-dir="w" />
+        <rect id="h1" x="460" y="400" data-dir="n" class="helper" />
+        <rect id="h2" x="650" y="400" data-dir="nw" class="helper" />
+    </g>
+    <g id="lines">
+        <path data-line="ICE11" data-stops="FH-S h1 FF" data-terminus="FH-S" data-show="2020 1" data-hide="2020 5" />
+        <path data-line="ICE12" data-stops="FF FMZ TS MM" data-terminus="TS" data-show="2020 2" data-hide="2020 5" />
+        <path data-line="ICE13" data-stops="_r FH-S h1 FF FMZ TS MM" style="stroke:red" data-terminus="TS" data-show="2020 2" data-hide="2020 5" />
+        <path data-line="ICE14" data-stops="_r FH-S FF MM" style="stroke:red" data-terminus="TS" data-show="2020 2" data-hide="2020 5" />
+        <path data-line="ICE14" data-stops="_r FMZ MM h2 FH-S" style="stroke:red" data-terminus="TS" data-show="2020 2" data-hide="2020 5" />
+    </g>
+    <script xlink:href="render.js" />
+</svg>
