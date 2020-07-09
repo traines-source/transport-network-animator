@@ -3,6 +3,7 @@ const DEFAULT_STOP_DIMEN = 10;
 const UNITV = [0, -1];
 const NODE_DISTANCE = 20;
 const DIRS = {'n': 0, 'ne': 45};
+const svgns = "http://www.w3.org/2000/svg";
 var stationLines = {};
 var lines = document.getElementById('lines').children;
 
@@ -19,97 +20,9 @@ for (var i=0; i<lines.length; i++) {
             continue;
         }
         var stop = document.getElementById(stops[j]);
-        var dir = DIRS[stop.dataset.dir];
-        /*
+        var dir = DIRS[stop.dataset.dir];       
         
-        var baseCoord = getStopBaseCoord(stop)
-        if (stationLines[stops[j]] == undefined) {
-            stationLines[stops[j]] = {x : [], y: []};
-        }
-        var existingLinesAtStation = stationLines[stops[j]];
-        var positionBoundaries = getPositionBoundaries(existingLinesAtStation);
-        var newDir;
-        if (path.length != 0) {
-            var oldCoord = path[path.length-1];
-            console.log('stop', document.getElementById(stops[j+1]), j, stops);
-            var targetCoord = getNextStopBaseCoord(stops, j, baseCoord);
-            //var targetCoord = baseCoord;
-            newDir = getStopOrientation(vdelta(oldCoord, targetCoord), dir);
-        } else {
-            newDir = getStopOrientation(vdelta(getNextStopBaseCoord(stops, j, [0,0]), baseCoord), dir);
-        }
-        if (newDir % 180 == 0) {
-            var newPos = getPosition(rightSide, positionBoundaries.x);
-            newCoord = [newPos * LINE_DISTANCE, 0];
-            existingLinesAtStation.x.push({line: lines[i].dataset.line, pos: newPos})
-        } else {
-            var newPos = getPosition(rightSide, positionBoundaries.y);
-            newCoord = [0, newPos * LINE_DISTANCE];
-            existingLinesAtStation.y.push({line: lines[i].dataset.line, pos: newPos})
-        }
-        console.log(stops[j])
-        console.log(newCoord)
-        newCoord = rotate(newCoord, dir)
-        console.log(newCoord);
-        newCoord = [baseCoord[0] + newCoord[0], baseCoord[1] + newCoord[1]];
-
-        var positionBoundaries = getPositionBoundaries(existingLinesAtStation);
-        var stopDimen = [Math.max(positionBoundaries.x[1] - positionBoundaries.x[0], 0), Math.max(positionBoundaries.y[1] - positionBoundaries.y[0], 0)];
-       
-        console.log("--", stopDimen);
-        stop.setAttribute('width', stopDimen[0] * LINE_DISTANCE + DEFAULT_STOP_DIMEN);
-        stop.setAttribute('height', stopDimen[1] * LINE_DISTANCE + DEFAULT_STOP_DIMEN);
-      
-        stop.setAttribute('transform','rotate(' + dir + ' ' + baseCoord[0] + ' ' + baseCoord[1] + ') translate(' + (Math.min(positionBoundaries.x[0], 0) * LINE_DISTANCE - DEFAULT_STOP_DIMEN / 2) + ',' + (Math.min(positionBoundaries.y[0], 0) * LINE_DISTANCE - DEFAULT_STOP_DIMEN / 2) + ')');
-           
-        */
-       
-        
-        var found = create(stop, getNextStopBaseCoord(stops, j, getStopBaseCoord(stop)), path, lines[i]);
-        
-        
-        /*
-        if (path.length != 0) {
-            var oldCoord = path[path.length-1];
-
-            if (precedingDir == undefined) {
-                precedingDir = addDeg(getStopOrientation(vdelta(newCoord, oldCoord), DIRS[precedingStop.dataset.dir]), DIRS[precedingStop.dataset.dir]);
-            } else {
-                precedingDir = addDeg(precedingDir, 180);
-            }
-            
-            //var newDir = addDeg(dir, getStopOrientation(vdelta(oldCoord, newCoord), dir));
-            var newDir = addDeg(newDir, dir);
-            var found = insertNode(oldCoord, precedingDir, newCoord, newDir);
-            
-            if (!found) {
-                console.log('no easy solution found');
-                var delta = vdelta(oldCoord, newCoord);
-                var adjacent = [0,-Math.abs(delta[1])];
-
-                var deg = (Math.sign(delta[0])*Math.acos(vscalar(adjacent, delta)/vlength(adjacent)/vlength(delta))*180/Math.PI);
-                var intermediateDir = ((deg >= 0 ? Math.ceil(deg / 45) : Math.floor(deg / 45)) * 45);
-                //Math.ceil((addDeg(precedingDir, 180) + newDir) / 90) * 45 + 45;
-                var intermediateCoord = vadd(oldCoord, vwithlength(vadd(rotateUnitV(addDeg(intermediateDir, 180)), rotateUnitV(precedingDir)), NODE_DISTANCE));
-                var helpStopId = 'h_' + precedingStop.id + '_' + stop.id;
-                var helpStop = document.getElementById(helpStopId);
-                if (helpStop == 'undefined') {
-                    helpStop = document.createElement('rect');
-                    helpStop.id = helpStopId;
-                    helpStop.dataset.dir = intermediateDir == 0 ? 'n' : 'ne';
-                    helpStop.className = 'helper';
-                    document.getElementById('stations').appendChild(helpStop);
-                }
-                
-                console.log('interdir', delta, adjacent, deg, newDir, intermediateDir);
-                if(insertNode(oldCoord, precedingDir, intermediateCoord, intermediateDir) || true) {
-                    insertNode(intermediateCoord, addDeg(intermediateDir, 180), newCoord, newDir);
-                }
-            }
-            precedingDir = newDir;
-        }
-        path.push(newCoord);
-        precedingStop = stop;*/
+        var found = create(stop, getNextStopBaseCoord(stops, j, getStopBaseCoord(stop)), rightSide, path, lines[i], true);
     }
     var d = 'M' + path.join(' L');
     console.log(d);
@@ -118,44 +31,38 @@ for (var i=0; i<lines.length; i++) {
     console.log('line')
 }
 
-
-function create(stop, nextStopBaseCoord, path, line) {
-    var dir = DIRS[stop.dataset.dir];
-    var baseCoord = getStopBaseCoord(stop)
+function getExistingLinesAtStation(stop) {
     if (stationLines[stop.id] == undefined) {
         stationLines[stop.id] = {x : [], y: []};
     }
-    var existingLinesAtStation = stationLines[stop.id];
+    return stationLines[stop.id];
+}
+
+function create(stop, nextStopBaseCoord, rightSide, path, line, recurse) {
+    var dir = DIRS[stop.getAttribute('data-dir')];
+    var baseCoord = getStopBaseCoord(stop)
+    var existingLinesAtStation = getExistingLinesAtStation(stop);
     var positionBoundaries = getPositionBoundaries(existingLinesAtStation);
     var newDir;
     var newCoord;
     if (path.length != 0) {
         var oldCoord = path[path.length-1];
-        //var targetCoord = baseCoord;
         newDir = getStopOrientation(vdelta(oldCoord, nextStopBaseCoord), dir);
     } else {
         newDir = getStopOrientation(vdelta(nextStopBaseCoord, baseCoord), dir);
     }
+    var newPos;
     if (newDir % 180 == 0) {
-        var newPos = getPosition(rightSide, positionBoundaries.x);
+        newPos = getPosition(rightSide, positionBoundaries.x);
         newCoord = [newPos * LINE_DISTANCE, 0];
-        existingLinesAtStation.x.push({line: line.dataset.line, pos: newPos})
     } else {
-        var newPos = getPosition(rightSide, positionBoundaries.y);
+        newPos = getPosition(rightSide, positionBoundaries.y);
         newCoord = [0, newPos * LINE_DISTANCE];
-        existingLinesAtStation.y.push({line: line.dataset.line, pos: newPos})
     }
     newCoord = rotate(newCoord, dir)
     newCoord = [baseCoord[0] + newCoord[0], baseCoord[1] + newCoord[1]];
 
-    var positionBoundaries = getPositionBoundaries(existingLinesAtStation);
-    var stopDimen = [Math.max(positionBoundaries.x[1] - positionBoundaries.x[0], 0), Math.max(positionBoundaries.y[1] - positionBoundaries.y[0], 0)];
     
-    stop.setAttribute('width', stopDimen[0] * LINE_DISTANCE + DEFAULT_STOP_DIMEN);
-    stop.setAttribute('height', stopDimen[1] * LINE_DISTANCE + DEFAULT_STOP_DIMEN);
-    
-    stop.setAttribute('transform','rotate(' + dir + ' ' + baseCoord[0] + ' ' + baseCoord[1] + ') translate(' + (Math.min(positionBoundaries.x[0], 0) * LINE_DISTANCE - DEFAULT_STOP_DIMEN / 2) + ',' + (Math.min(positionBoundaries.y[0], 0) * LINE_DISTANCE - DEFAULT_STOP_DIMEN / 2) + ')');
-
     var found = true;
     if (path.length != 0) {
         var oldCoord = path[path.length-1];
@@ -167,13 +74,47 @@ function create(stop, nextStopBaseCoord, path, line) {
         }
         
         //var newDir = addDeg(dir, getStopOrientation(vdelta(oldCoord, newCoord), dir));
-        var newDir = addDeg(newDir, dir);
-        found = insertNode(oldCoord, precedingDir, newCoord, newDir);
-        precedingDir = newDir;
+        var stationDir = addDeg(newDir, dir);
+        found = insertNode(oldCoord, precedingDir, newCoord, stationDir);
+
+        if (!found && recurse) {
+            console.log('no easy solution found');
+            var delta = vdelta(oldCoord, newCoord);
+            var adjacent = [0,-Math.abs(delta[1])];
+
+            var deg = (Math.sign(delta[0])*Math.acos(vscalar(adjacent, delta)/vlength(adjacent)/vlength(delta))*180/Math.PI);
+            var intermediateDir = ((deg >= 0 ? Math.ceil(deg / 45) : Math.floor(deg / 45)) * 45);
+            //Math.ceil((addDeg(precedingDir, 180) + newDir) / 90) * 45 + 45;
+            //var intermediateCoord = vadd(oldCoord, vwithlength(vadd(rotateUnitV(addDeg(intermediateDir, 180)), rotateUnitV(precedingDir)), NODE_DISTANCE));
+            var intermediateCoord = vadd(vwithlength(delta, vlength(delta)/2), newCoord);
+            var helpStopId = 'h_' + precedingStop.id + '_' + stop.id;
+            var helpStop = document.getElementById(helpStopId);
+            if (helpStop == undefined) {
+                helpStop = document.createElementNS(svgns, 'rect');
+                helpStop.id = helpStopId;
+                helpStop.setAttribute('data-dir', intermediateDir == 0 ? 'n' : 'ne');
+                helpStop.className.baseVal = 'helper';
+                helpStop.setAttribute('x', intermediateCoord[0]);
+                helpStop.setAttribute('y', intermediateCoord[1]);
+                document.getElementById('stations').appendChild(helpStop);
+            }
+            precedingDir = addDeg(precedingDir, 180);
+            create(helpStop, nextStopBaseCoord, rightSide, path, line, false);
+            create(stop, nextStopBaseCoord, rightSide, path, line, false);
+            return;
+        }
+        precedingDir = stationDir;
     }
+    existingLinesAtStation[newDir % 180 == 0 ? 'x' : 'y'].push({line: line.dataset.line, pos: newPos});
+    var positionBoundaries = getPositionBoundaries(existingLinesAtStation);
+    var stopDimen = [Math.max(positionBoundaries.x[1] - positionBoundaries.x[0], 0), Math.max(positionBoundaries.y[1] - positionBoundaries.y[0], 0)];
+    
+    stop.setAttribute('width', stopDimen[0] * LINE_DISTANCE + DEFAULT_STOP_DIMEN);
+    stop.setAttribute('height', stopDimen[1] * LINE_DISTANCE + DEFAULT_STOP_DIMEN);    
+    stop.setAttribute('transform','rotate(' + dir + ' ' + baseCoord[0] + ' ' + baseCoord[1] + ') translate(' + (Math.min(positionBoundaries.x[0], 0) * LINE_DISTANCE - DEFAULT_STOP_DIMEN / 2) + ',' + (Math.min(positionBoundaries.y[0], 0) * LINE_DISTANCE - DEFAULT_STOP_DIMEN / 2) + ')');
+
     path.push(newCoord);
     precedingStop = stop;
-    return found;
 }
 
 
