@@ -1,10 +1,12 @@
 #stations rect {
     stroke: black;
-    fill: none;
+    fill: white;
+    rx: 3;
 }
 
 #stations rect.helper {
     stroke: none;
+    fill: none;
 }
 
 #lines path {
