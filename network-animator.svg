@@ -14,7 +14,7 @@
         <path data-line="ICE11" data-stops="FF FMZ TS MM" />
         <path data-line="ICE13" data-stops="_r AH h1 FF FMZ TS MM" style="stroke:gray"  />
         <path data-line="ICE14" data-stops="_r AH MM" style="stroke:ray"  />
-        <path data-line="ICE15" data-stops="_r FMZ MM h2 FH-S" style="stroke:gray"  />
+        <path data-line="ICE15" data-stops="_r FMZ MM BL" style="stroke:gray"  />
     </g>
     <g id="stations">
         <rect id="AH" x="580" y="190" data-dir="n" />
@@ -48,7 +48,7 @@
         <rect id="MM" x="606" y="815" data-dir="n" />
       
         <rect id="h1" x="480" y="400" data-dir="n" class="helper" />
-        <rect id="h2" x="650" y="400" data-dir="ne" class="helper" />
+        <rect id="h2" x="670" y="400" data-dir="ne" class="helper" />
         <rect id="hFF" x="370" y="570" data-dir="ne" class="helper" />
         <rect id="hBL" x="650" y="200" data-dir="ne" class="helper" />
         <rect id="hHH" x="550" y="315" data-dir="ne" class="helper" />
