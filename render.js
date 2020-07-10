@@ -1,18 +1,48 @@
 const LINE_DISTANCE = 6;
 const DEFAULT_STOP_DIMEN = 10;
-const UNITV = [0, -1];
 const NODE_DISTANCE = 20;
+const SPEED = 200;
+
+const UNITV = [0, -1];
 const DIRS = {'n': 0, 'ne': 45};
 const svgns = "http://www.w3.org/2000/svg";
 const stationLines = {};
+const slideIndex = {};
 const lines = document.getElementById('lines').children;
 
+var precedingStop = undefined;
+var precedingDir = undefined;
 
-for (let i=0; i<lines.length; i++) {
-    const stops = lines[i].dataset.stops.split(' ');
+createSlideIndex();
+slide(0, 0);
+
+function slide(epoch, second) {
+    const elements = slideIndex[epoch][second];
+    let delay = 0;
+    for (let i=0; i<elements.length; i++) {
+        delay += drawOrEraseElement(elements[i], delay);
+    }
+    const next = getNextEpochAndSecond(epoch, second);
+    
+    if (next) {
+        const seconds = getTimeDelta([epoch, second], next);
+        window.setTimeout(function() { slide(next[0], next[1]); }, seconds * 1000);
+    }
+}
+
+function drawOrEraseElement(element, delay) {
+    return drawOrEraseLine(element, delay);
+}
+
+function drawOrEraseLine(line, delay) {
+    return drawLine(line, delay);
+}
+
+function drawLine(line, delay) {
+    const stops = line.dataset.stops.split(' ');
     const path = [];
-    var precedingStop = undefined;
-    var precedingDir = undefined;
+    precedingStop = undefined;
+    precedingDir = undefined;
     let rightSide = true;
     for (let j=0; j<stops.length; j++) {
         if (stops[j][0] == '_') {
@@ -20,10 +50,66 @@ for (let i=0; i<lines.length; i++) {
             continue;
         }
         const stop = document.getElementById(stops[j]);        
-        createConnection(stop, getNextStopBaseCoord(stops, j, getStopBaseCoord(stop)), rightSide, path, lines[i], true);
+        createConnection(stop, getNextStopBaseCoord(stops, j, getStopBaseCoord(stop)), rightSide, path, line, true);
     }
     let d = 'M' + path.join(' L');
-    lines[i].setAttribute('d', d);
+    line.setAttribute('d', d);
+    return animate(line, delay);
+}
+
+function getTimeDelta(time1, time2) {
+    if (time1[0] == time2[0]) {
+        return parseInt(time2[1]) - parseInt(time1[1]);
+    }
+    return time2[1];
+}
+
+function getNextEpochAndSecond(epoch, second) {
+    second = findSmallestAbove(second, slideIndex[epoch]);
+    if (second == undefined) {
+        epoch = findSmallestAbove(epoch, slideIndex);
+        if (epoch == undefined)
+            return false;
+        second = findSmallestAbove(-1, slideIndex[epoch]);
+    }
+    return [epoch, second];
+}
+
+function findSmallestAbove(threshold, dict) {
+    threshold = parseInt(threshold);
+    let smallest = undefined;
+    for (const [key, value] of Object.entries(dict)) {
+        if (parseInt(key) > threshold && (smallest == undefined || parseInt(key) < smallest)) {
+            smallest = parseInt(key);
+        }
+    }
+    return smallest;
+}
+
+function createSlideIndex() {
+    for (let i=0; i<lines.length; i++) {
+        setSlideIndexElement(getEpochAndSecond(lines[i], 'from'), lines[i]);
+        const to = getEpochAndSecond(lines[i], 'to');
+        if (to != undefined)
+            setSlideIndexElement(to, lines[i]);
+    }
+}
+
+function getEpochAndSecond(line, fromOrTo) {
+    if (line.dataset[fromOrTo] != undefined) {
+        return line.dataset[fromOrTo].split(' ');
+    }
+    return undefined;
+}
+
+function setSlideIndexElement(time, element) {
+    if (time == undefined)
+        time = [0, 0];
+    if (slideIndex[time[0]] == undefined)
+        slideIndex[time[0]] = {};
+    if (slideIndex[time[0]][time[1]] == undefined)
+        slideIndex[time[0]][time[1]] = [];
+    slideIndex[time[0]][time[1]].push(element);
 }
 
 function createConnection(stop, nextStopBaseCoord, rightSide, path, line, recurse) {
@@ -254,4 +340,18 @@ function matchingParallel(axis, fromCoord, toCoord, oldDirV, newDirV) {
 function addDeg(a, b) {
     //TODO attention -10 % 360 != 350
     return (a % 360 + b % 360) % 360;
+}
+
+function animate(line, delay) {
+    const length = line.getTotalLength();
+    const duration = length / SPEED;
+
+    line.style.transition = line.style.WebkitTransition = 'none';
+    line.style.strokeDasharray = length + ' ' + length;
+    line.style.strokeDashoffset = length;
+    line.getBoundingClientRect();
+    line.style.transition = line.style.WebkitTransition = 'stroke-dashoffset ' + duration + 's linear ' + delay + 's';
+    line.style.strokeDashoffset = '0';
+    
+    return duration;
 }

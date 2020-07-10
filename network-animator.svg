@@ -10,9 +10,9 @@
         <path data-line="ICE29" style="stroke:#F58232" data-stops="_l BL LHA _r UE NN MM" />
         <path data-line="ICE30" style="stroke:#F58232" data-stops="AH EE KD KK" />
 
-        <path data-line="ICE11" data-stops="AH h1 FF" />
-        <path data-line="ICE11" data-stops="FF FMZ TS MM" />
-        <path data-line="ICE13" data-stops="_r AH h1 FF FMZ TS MM" style="stroke:gray"  />
+        <path data-line="ICE11" data-stops="AH h1 FF" data-from="1950 5" data-to="2020 2" />
+        <path data-line="ICE11" data-stops="FF FMZ TS MM" data-from="1950 5" data-to="2020 3" />
+        <path data-line="ICE13" data-stops="_r AH h1 FF FMZ TS MM" style="stroke:gray" data-from="1960 5" data-to="2020 3"  />
         <path data-line="ICE14" data-stops="_r AH MM" style="stroke:ray"  />
         <path data-line="ICE15" data-stops="_r FMZ MM BL" style="stroke:gray"  />
     </g>
