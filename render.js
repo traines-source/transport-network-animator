@@ -49,8 +49,8 @@ function drawLine(line, delay) {
             rightSide = stops[j] == '_r';
             continue;
         }
-        const stop = document.getElementById(stops[j]);        
-        createConnection(stop, getNextStopBaseCoord(stops, j, getStopBaseCoord(stop)), rightSide, path, line, true);
+        const stop = document.getElementById(stops[j]);
+        createConnection(stop, getNextStopBaseCoord(stops, j, getStopBaseCoord(stop)), rightSide, path, line, delay, true);
     }
     let d = 'M' + path.join(' L');
     line.setAttribute('d', d);
@@ -112,7 +112,7 @@ function setSlideIndexElement(time, element) {
     slideIndex[time[0]][time[1]].push(element);
 }
 
-function createConnection(stop, nextStopBaseCoord, rightSide, path, line, recurse) {
+function createConnection(stop, nextStopBaseCoord, rightSide, path, line, delay, recurse) {
     const dir = DIRS[stop.getAttribute('data-dir')];
     const baseCoord = getStopBaseCoord(stop)
     const existingLinesAtStation = getExistingLinesAtStation(stop);
@@ -133,18 +133,28 @@ function createConnection(stop, nextStopBaseCoord, rightSide, path, line, recurs
             const helpStop = getOrCreateHelperStop(precedingStop, stop);
             
             precedingDir = addDeg(precedingDir, 180);
-            createConnection(helpStop, nextStopBaseCoord, rightSide, path, line, false);
-            createConnection(stop, nextStopBaseCoord, rightSide, path, line, false);
+            createConnection(helpStop, nextStopBaseCoord, rightSide, path, line, delay, false);
+            createConnection(stop, nextStopBaseCoord, rightSide, path, line, delay, false);
             return;
         } else if (!found) {
             console.log('path to fix on line', line.dataset.line, 'at station', stop.id);
         }
         precedingDir = stationDir;
     }
-    
-    redrawStation(existingLinesAtStation, newDir, dir, newPos, baseCoord, stop, line);
+    existingLinesAtStation[newDir % 180 == 0 ? 'x' : 'y'].push({line: line.dataset.line, pos: newPos});
     path.push(newCoord);
+    delay = getTotalLength(path) / SPEED + delay;
+    window.setTimeout(function() { redrawStation(existingLinesAtStation, dir, baseCoord, stop); }, delay * 1000);
+
     precedingStop = stop;
+}
+
+function getTotalLength(path) {
+    let length = 0;
+    for (let i=0; i<path.length-1; i++) {
+        length += vlength(vdelta(path[i], path[i+1]));
+    }
+    return length;
 }
 
 function getExistingLinesAtStation(stop) {
@@ -177,8 +187,7 @@ function getRotatedPositionCoordinates(dir, newDir, newPos, baseCoord) {
     return newCoord;
 }
 
-function redrawStation(existingLinesAtStation, newDir, dir, newPos, baseCoord, stop, line) {
-    existingLinesAtStation[newDir % 180 == 0 ? 'x' : 'y'].push({line: line.dataset.line, pos: newPos});
+function redrawStation(existingLinesAtStation, dir, baseCoord, stop) {
     const positionBoundaries = getPositionBoundaries(existingLinesAtStation);
     const stopDimen = [Math.max(positionBoundaries.x[1] - positionBoundaries.x[0], 0), Math.max(positionBoundaries.y[1] - positionBoundaries.y[0], 0)];
     
