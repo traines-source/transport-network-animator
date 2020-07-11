@@ -205,10 +205,10 @@ function createConnection(stop, nextStopBaseCoord, rightSide, path, line, delay,
         const found = insertNode(oldCoord, precedingDir, newCoord, stationDir, path);
 
         if (!found && recurse) {            
-            const helpStop = getOrCreateHelperStop(precedingStop, stop);
+            const helpStop = getOrCreateHelperStop(precedingDir, precedingStop, stop);
             
             precedingDir = addDeg(precedingDir, 180);
-            createConnection(helpStop, nextStopBaseCoord, rightSide, path, line, delay, animate, false);
+            createConnection(helpStop, baseCoord, rightSide, path, line, delay, animate, false);
             createConnection(stop, nextStopBaseCoord, rightSide, path, line, delay, animate, false);
             return;
         } else if (!found) {
@@ -276,21 +276,56 @@ function rerenderStation(existingLinesAtStation, dir, baseCoord, stop) {
     stop.setAttribute('transform','rotate(' + dir + ' ' + baseCoord[0] + ' ' + baseCoord[1] + ') translate(' + (Math.min(positionBoundaries.x[0], 0) * LINE_DISTANCE - DEFAULT_STOP_DIMEN / 2) + ',' + (Math.min(positionBoundaries.y[0], 0) * LINE_DISTANCE - DEFAULT_STOP_DIMEN / 2) + ')');
 }
 
-function getOrCreateHelperStop(fromStop, toStop) {
-    const helpStopId = 'h_' + fromStop.id + '_' + toStop.id;
+function alphabeticId(a, b) {
+    if (a < b)
+        return a + '_' + b;
+    return b + '_' + a;
+}
+
+function getDirName(dir) {
+    for (const [key, value] of Object.entries(DIRS)) {
+        if (value == dir) {
+            return key;
+        }
+    }
+    return 'n';
+}
+
+function vinclination(delta) {
+    if (delta[0] == 0)
+        return delta[1] > 0 ? 180 : 0;
+    if (delta[1] == 0)
+        return delta[0] > 0 ? 90 : -90;
+    const adjacent = [0,-Math.abs(delta[1])];
+    return (Math.sign(delta[0])*Math.acos(vscalar(adjacent, delta)/vlength(adjacent)/vlength(delta))*180/Math.PI);
+    //const deltaDir = Math.sign(delta[0])*Math.acos(-delta[1]/Math.sqrt(Math.pow(delta[0], 2) + Math.pow(delta[1], 2)));
+}
+
+function normalizeDir(dir) {
+    if (dir == 90)
+        dir = 0;
+    else if (dir < -90)
+        dir += 180;
+    else if (dir > 90)
+        dir -= 180;
+    return dir;
+}
+
+function getOrCreateHelperStop(fromDir, fromStop, toStop) {
+    const helpStopId = 'h_' + alphabeticId(fromStop.id, toStop.id);
     let helpStop = document.getElementById(helpStopId);
     if (helpStop == undefined) {
         const oldCoord = getStopBaseCoord(fromStop);
         const newCoord = getStopBaseCoord(toStop);
         const delta = vdelta(oldCoord, newCoord);
-        const adjacent = [0,-Math.abs(delta[1])];
-        const deg = (Math.sign(delta[0])*Math.acos(vscalar(adjacent, delta)/vlength(adjacent)/vlength(delta))*180/Math.PI);
-        const intermediateDir = ((deg >= 0 ? Math.ceil(deg / 45) : Math.floor(deg / 45)) * 45);
+        const deg = vinclination(vdelta(newCoord, oldCoord));
+        console.log(helpStopId, deg, fromDir);
+        const intermediateDir = normalizeDir((fromDir >= deg ? Math.floor(deg / 45) : Math.ceil(deg / 45)) * 45);
         const intermediateCoord = vadd(vwithlength(delta, vlength(delta)/2), newCoord);
 
         helpStop = document.createElementNS(svgns, 'rect');
         helpStop.id = helpStopId;    
-        helpStop.setAttribute('data-dir', intermediateDir == 0 ? 'n' : 'ne');
+        helpStop.setAttribute('data-dir', getDirName(intermediateDir));
         helpStop.setAttribute('x', intermediateCoord[0]);
         helpStop.setAttribute('y', intermediateCoord[1]);
         helpStop.className.baseVal = 'helper';
@@ -401,9 +436,10 @@ function vscalar(v1, v2) {
 }
 
 function getStopOrientation(delta, dir) {
-    const deltaDir = Math.sign(delta[0])*Math.acos(-delta[1]/Math.sqrt(Math.pow(delta[0], 2) + Math.pow(delta[1], 2)));
-    const deg = Math.floor((deltaDir*180/Math.PI-dir+45)/90)*90;
-    return deg;
+    //const deltaDir = (Math.sign(delta[0])*Math.acos(-delta[1]/Math.sqrt(Math.pow(delta[0], 2) + Math.pow(delta[1], 2))))*180/Math.PI;
+    const deltaDir = vinclination(delta)-dir;
+    const deg = deltaDir < 0 ? Math.ceil((deltaDir-45)/90) : Math.floor((deltaDir+45)/90);
+    return deg*90;
 }
 
 function insertNode(fromCoord, fromDir, toCoord, toDir, path) {
@@ -427,8 +463,12 @@ function matchingParallel(axis, fromCoord, toCoord, oldDirV, newDirV) {
 }
 
 function addDeg(a, b) {
-    //TODO attention -10 % 360 != 350
-    return (a % 360 + b % 360) % 360;
+    let sum = a + b;
+    if (sum <= -180)
+        sum += 360;
+    if (sum > 180)
+        sum -= 360;
+    return sum;
 }
 
 function rerenderLine(line, path, animate) {
