@@ -320,7 +320,7 @@ function getOrCreateHelperStop(fromDir, fromStop, toStop) {
         const delta = vdelta(oldCoord, newCoord);
         const deg = vinclination(vdelta(newCoord, oldCoord));
         console.log(helpStopId, deg, fromDir);
-        const intermediateDir = normalizeDir((fromDir >= deg ? Math.floor(deg / 45) : Math.ceil(deg / 45)) * 45);
+        const intermediateDir = normalizeDir((degDist(deg, fromDir) >= 0 ? Math.floor(deg / 45) : Math.ceil(deg / 45)) * 45);
         const intermediateCoord = vadd(vwithlength(delta, vlength(delta)/2), newCoord);
 
         helpStop = document.createElementNS(svgns, 'rect');
@@ -436,7 +436,6 @@ function vscalar(v1, v2) {
 }
 
 function getStopOrientation(delta, dir) {
-    //const deltaDir = (Math.sign(delta[0])*Math.acos(-delta[1]/Math.sqrt(Math.pow(delta[0], 2) + Math.pow(delta[1], 2))))*180/Math.PI;
     const deltaDir = vinclination(delta)-dir;
     const deg = deltaDir < 0 ? Math.ceil((deltaDir-45)/90) : Math.floor((deltaDir+45)/90);
     return deg*90;
@@ -469,6 +468,18 @@ function addDeg(a, b) {
     if (sum > 180)
         sum -= 360;
     return sum;
+}
+
+function degDist(a, b) {
+    let dist = b-a;
+    if (Math.abs(dist) > 180) {
+        if (a < 0)
+            a += 360;
+        if (b < 0)
+            b += 360;
+        dist = b-a;
+    }
+    return b-a;
 }
 
 function rerenderLine(line, path, animate) {

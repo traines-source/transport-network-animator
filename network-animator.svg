@@ -7,7 +7,7 @@
         </filter>
     </defs>
     <g id="lines">
-        <path data-line="ICE291" style="stroke:#F58232" data-stops="MM NN UE LHA BL" />
+        <path data-line="ICE291" style="stroke:blue" data-stops="MM NN UE LHA BL" />
 
         <path data-line="ICE10" style="stroke:#B41E8E" data-stops="BL hHH HH EBIL EDO EE ED KK KA" filter="url(#double)"/>
         <path data-line="ICE11" style="stroke:#ED1C24" data-stops="AH hBL BL LL UE FFU _l FF hFF RM TS TU MA MP MM" />
@@ -18,7 +18,7 @@
         <path data-line="ICE29" style="stroke:#F58232" data-stops="_l BL LHA _r UE NN MM" />
         <path data-line="ICE30" style="stroke:#F58232" data-stops="AH EE KD KK" />
 
-        <path data-line="ICE11" data-stops="AH h1 FF" style="stroke:red" data-from="1950 0" data-to="2020 5" />
+        <path data-line="ICE11" data-stops="AH h1 FF" style="stroke:red" data-from="1950 0" />
         <path data-line="ICE11" data-stops="FF FMZ TS MM" style="stroke:green" data-from="1950 0" data-to="2020 5" />
         <path data-line="ICE13" data-stops="_r AH h1 FF FMZ TS MM" style="stroke:yellow" data-from="1960 5" data-to="2020 6"   />
         <path data-line="ICE14" data-stops="_r AH MM" style="stroke:black"  />
@@ -38,7 +38,7 @@
         <rect id="LHA" x="625" y="410" data-dir="ne" />
         <rect id="LL" x="645" y="440" data-dir="ne" />
         <rect id="UE" x="545" y="480" data-dir="n" />
-        <rect id="FFU" x="445" y="530" data-dir="ne" />
+        <rect id="FFU" x="445" y="530" data-dir="nw" />
         <rect id="FF" x="395" y="555" data-dir="n" />
         <rect id="FFLF" x="340" y="585" data-dir="ne" />
         <rect id="FMZ" x="305" y="605" data-dir="n" />
