@@ -1,0 +1,14 @@
+version: "3.0"
+
+services:
+  network-animator-render:
+    build: ./
+    container_name: network-animator-render
+    volumes:
+      - ./render.js:/app/render.js
+      - ./styles.css:/app/styles.css
+      - ./network-animator.svg:/app/network-animator.svg
+      - ./output/:/app/output/
+    shm_size: 1G
+    entrypoint: "timecut network-animator.svg --duration=5 --viewport=2000,2000 --fps=60 --pipe-mode --launch-arguments='--no-sandbox --disable-setuid-sandbox' --pix-fmt=yuv420p --output=output/video.mp4"
+

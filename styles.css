@@ -16,3 +16,7 @@
     stroke-linecap: round;
     stroke-linejoin: round;
 }
+
+svg {
+    background-color: white;
+}

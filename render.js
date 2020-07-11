@@ -1,7 +1,8 @@
 const LINE_DISTANCE = 6;
 const DEFAULT_STOP_DIMEN = 10;
 const NODE_DISTANCE = 20;
-const SPEED = 200;
+const SPEED = 3;
+const FPS = 60;
 
 const UNITV = [0, -1];
 const DIRS = {'n': 0, 'ne': 45, 'nw': -45, 'w': -90};
@@ -227,7 +228,7 @@ function createConnection(stop, nextStopBaseCoord, rightSide, path, line, delay,
 function getAnimationDuration(path, animate) {
     if (!animate)
         return 0;
-    return getTotalLength(path) / SPEED;
+    return getTotalLength(path) / SPEED / FPS;
 }
 function getTotalLength(path) {
     let length = 0;
@@ -484,17 +485,23 @@ function degDist(a, b) {
 
 function rerenderLine(line, path, animate) {
     const length = getTotalLength(path);
-    const duration = length / SPEED;
 
     const d = 'M' + path.join(' L');
     line.setAttribute('d', d);
 
-    line.style.transition = line.style.WebkitTransition = 'none';
     line.style.strokeDasharray = length + ' ' + length;
-    if (animate) {        
-        line.style.strokeDashoffset = length;
-        line.getBoundingClientRect();
-        line.style.transition = line.style.WebkitTransition = 'stroke-dashoffset ' + duration + 's linear';
+    if (!animate) {
+        length = 0;
     }
-    line.style.strokeDashoffset = '0';
+    animateFrame(line, length);
+}
+
+function animateFrame(line, length) {
+    if (length > 0) {
+        line.style.strokeDashoffset = length;
+        length -= SPEED;
+        window.requestAnimationFrame(function() { animateFrame(line, length); });
+    } else {
+        line.style.strokeDashoffset = '0';
+    }
 }
