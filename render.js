@@ -4,7 +4,7 @@ const NODE_DISTANCE = 20;
 const SPEED = 200;
 
 const UNITV = [0, -1];
-const DIRS = {'n': 0, 'ne': 45};
+const DIRS = {'n': 0, 'ne': 45, 'nw': -45, 'w': -90};
 const svgns = "http://www.w3.org/2000/svg";
 const stationLines = {};
 const slideIndex = {};
@@ -14,31 +14,57 @@ var precedingStop = undefined;
 var precedingDir = undefined;
 
 createSlideIndex();
-slide(0, 0);
 
-function slide(epoch, second) {
+const animateFromEpoch = getStartEpoch();
+slide(0, 0, false);
+
+function getStartEpoch() {
+    if(window.location.hash && slideIndex[window.location.hash.replace('#', '')] != undefined) {
+        const animateFromEpoch = window.location.hash.replace('#', '');
+        console.log('fast forward to ' + animateFromEpoch);
+        return animateFromEpoch;
+    }
+    return 0;
+}
+
+function slide(epoch, second, animate) {
+    if (epoch == animateFromEpoch)
+        animate = true;
+
     const elements = slideIndex[epoch][second];
     let delay = 0;
     for (let i=0; i<elements.length; i++) {
-        delay += drawOrEraseElement(elements[i], delay);
+        delay += drawOrEraseElement(elements[i], delay, animate, epoch, second);
     }
     const next = getNextEpochAndSecond(epoch, second);
     
     if (next) {
-        const seconds = getTimeDelta([epoch, second], next);
-        window.setTimeout(function() { slide(next[0], next[1]); }, seconds * 1000);
+        const delay = animate ? getInstantDelta([epoch, second], next) : 0;
+        window.setTimeout(function() { slide(next[0], next[1], animate); }, delay * 1000);
     }
 }
 
-function drawOrEraseElement(element, delay) {
-    return drawOrEraseLine(element, delay);
+function drawOrEraseElement(element, delay, animate, epoch, second) {
+    var from = getInstant(element, 'from')
+    var to = getInstant(element, 'to')
+
+    if (equalsInstant(to, [epoch, second]) && !equalsInstant(from, to)) {
+        return eraseElement(element, delay, shouldAnimate(to, animate));
+    }
+    return drawLine(element, delay, shouldAnimate(from, animate));
 }
 
-function drawOrEraseLine(line, delay) {
-    return drawLine(line, delay);
+
+
+function drawElement(element, delay, animate) {
+    return drawLine(element, delay, animate);
 }
 
-function drawLine(line, delay) {
+function eraseElement(element, delay, animate) {
+    return eraseLine(element, delay);
+}
+
+function drawLine(line, delay, animate) {
     const stops = line.dataset.stops.split(' ');
     const path = [];
     precedingStop = undefined;
@@ -50,18 +76,59 @@ function drawLine(line, delay) {
             continue;
         }
         const stop = document.getElementById(stops[j]);
-        createConnection(stop, getNextStopBaseCoord(stops, j, getStopBaseCoord(stop)), rightSide, path, line, delay, true);
+        createConnection(stop, getNextStopBaseCoord(stops, j, getStopBaseCoord(stop)), rightSide, path, line, delay, animate, true);
     }
-    let d = 'M' + path.join(' L');
-    line.setAttribute('d', d);
-    return animate(line, delay);
+    let duration = getAnimationDuration(path, animate);
+    window.setTimeout(function () { rerenderLine(line, path, animate); }, delay * 1000);
+    return duration;
 }
 
-function getTimeDelta(time1, time2) {
-    if (time1[0] == time2[0]) {
-        return parseInt(time2[1]) - parseInt(time1[1]);
+function eraseLine(line, delay) {
+    if (delay > 0) {
+        window.setTimeout(function() { eraseLine(line, 0); }, delay * 1000);
+        return;
     }
-    return time2[1];
+    line.setAttribute('d', '');
+    const stops = line.dataset.stops.split(' ');
+    for (let j=0; j<stops.length; j++) {
+        if (stops[j][0] == '_') {
+            continue;
+        }
+        const stop = document.getElementById(stops[j]);
+        const dir = DIRS[stop.getAttribute('data-dir')];
+        const baseCoord = getStopBaseCoord(stop);
+        const existingLinesAtStation = getExistingLinesAtStation(stops[j]);
+        removeExistingLineAtStationAxis(existingLinesAtStation.x, line.dataset.line);
+        removeExistingLineAtStationAxis(existingLinesAtStation.y, line.dataset.line);
+        rerenderStation(existingLinesAtStation, dir, baseCoord, stop);
+    }
+    return 0;
+}
+
+function removeExistingLineAtStationAxis(existingLinesAtStationAxis, lineId) {
+    let i = 0;
+    while (i < existingLinesAtStationAxis.length) {
+        if (existingLinesAtStationAxis[i].line == lineId) {
+            existingLinesAtStationAxis.splice(i, 1);
+        } else {
+            i++;
+        }
+    }
+}
+
+
+function getInstantDelta(instant1, instant2) {
+    if (instant1[0] == instant2[0]) {
+        return parseInt(instant2[1]) - parseInt(instant1[1]);
+    }
+    return instant2[1];
+}
+
+function equalsInstant(instant1, instant2) {
+    if (instant1[0] == instant2[0] && instant1[1] == instant2[1]) {
+        return true;
+    }
+    return false;
 }
 
 function getNextEpochAndSecond(epoch, second) {
@@ -88,34 +155,42 @@ function findSmallestAbove(threshold, dict) {
 
 function createSlideIndex() {
     for (let i=0; i<lines.length; i++) {
-        setSlideIndexElement(getEpochAndSecond(lines[i], 'from'), lines[i]);
-        const to = getEpochAndSecond(lines[i], 'to');
-        if (to != undefined)
+        setSlideIndexElement(getInstant(lines[i], 'from'), lines[i]);
+        const to = getInstant(lines[i], 'to');
+        if (!equalsInstant(to, [0, 0]))
             setSlideIndexElement(to, lines[i]);
     }
 }
 
-function getEpochAndSecond(line, fromOrTo) {
-    if (line.dataset[fromOrTo] != undefined) {
-        return line.dataset[fromOrTo].split(' ');
+
+
+function getInstant(element, fromOrTo) {
+    if (element.dataset[fromOrTo] != undefined) {
+        return element.dataset[fromOrTo].split(' ');
     }
-    return undefined;
+    return [0, 0];
 }
 
-function setSlideIndexElement(time, element) {
-    if (time == undefined)
-        time = [0, 0];
-    if (slideIndex[time[0]] == undefined)
-        slideIndex[time[0]] = {};
-    if (slideIndex[time[0]][time[1]] == undefined)
-        slideIndex[time[0]][time[1]] = [];
-    slideIndex[time[0]][time[1]].push(element);
+function shouldAnimate(instant, animate) {
+    if (!animate)
+        return false;
+    if (instant.length > 2 && instant[2] == 'noanim')
+        return false;
+    return animate;
 }
 
-function createConnection(stop, nextStopBaseCoord, rightSide, path, line, delay, recurse) {
+function setSlideIndexElement(instant, element) {
+    if (slideIndex[instant[0]] == undefined)
+        slideIndex[instant[0]] = {};
+    if (slideIndex[instant[0]][instant[1]] == undefined)
+        slideIndex[instant[0]][instant[1]] = [];
+    slideIndex[instant[0]][instant[1]].push(element);
+}
+
+function createConnection(stop, nextStopBaseCoord, rightSide, path, line, delay, animate, recurse) {
     const dir = DIRS[stop.getAttribute('data-dir')];
-    const baseCoord = getStopBaseCoord(stop)
-    const existingLinesAtStation = getExistingLinesAtStation(stop);
+    const baseCoord = getStopBaseCoord(stop);
+    const existingLinesAtStation = getExistingLinesAtStation(stop.id);
     const positionBoundaries = getPositionBoundaries(existingLinesAtStation);
     const newDir = getStopOrientationBasedOnThreeStops(baseCoord, nextStopBaseCoord, dir, path);
     const newPos = getPosition(rightSide, positionBoundaries[newDir % 180 == 0 ? 'x' : 'y']);
@@ -133,8 +208,8 @@ function createConnection(stop, nextStopBaseCoord, rightSide, path, line, delay,
             const helpStop = getOrCreateHelperStop(precedingStop, stop);
             
             precedingDir = addDeg(precedingDir, 180);
-            createConnection(helpStop, nextStopBaseCoord, rightSide, path, line, delay, false);
-            createConnection(stop, nextStopBaseCoord, rightSide, path, line, delay, false);
+            createConnection(helpStop, nextStopBaseCoord, rightSide, path, line, delay, animate, false);
+            createConnection(stop, nextStopBaseCoord, rightSide, path, line, delay, animate, false);
             return;
         } else if (!found) {
             console.log('path to fix on line', line.dataset.line, 'at station', stop.id);
@@ -143,12 +218,17 @@ function createConnection(stop, nextStopBaseCoord, rightSide, path, line, delay,
     }
     existingLinesAtStation[newDir % 180 == 0 ? 'x' : 'y'].push({line: line.dataset.line, pos: newPos});
     path.push(newCoord);
-    delay = getTotalLength(path) / SPEED + delay;
-    window.setTimeout(function() { redrawStation(existingLinesAtStation, dir, baseCoord, stop); }, delay * 1000);
+    delay = getAnimationDuration(path, animate) + delay;
+    window.setTimeout(function() { rerenderStation(existingLinesAtStation, dir, baseCoord, stop); }, delay * 1000);
 
     precedingStop = stop;
 }
 
+function getAnimationDuration(path, animate) {
+    if (!animate)
+        return 0;
+    return getTotalLength(path) / SPEED;
+}
 function getTotalLength(path) {
     let length = 0;
     for (let i=0; i<path.length-1; i++) {
@@ -157,11 +237,11 @@ function getTotalLength(path) {
     return length;
 }
 
-function getExistingLinesAtStation(stop) {
-    if (stationLines[stop.id] == undefined) {
-        stationLines[stop.id] = {x : [], y: []};
+function getExistingLinesAtStation(stopId) {
+    if (stationLines[stopId] == undefined) {
+        stationLines[stopId] = {x : [], y: []};
     }
-    return stationLines[stop.id];
+    return stationLines[stopId];
 }
 
 function getStopOrientationBasedOnThreeStops(baseCoord, nextStopBaseCoord, dir, path) {
@@ -187,7 +267,7 @@ function getRotatedPositionCoordinates(dir, newDir, newPos, baseCoord) {
     return newCoord;
 }
 
-function redrawStation(existingLinesAtStation, dir, baseCoord, stop) {
+function rerenderStation(existingLinesAtStation, dir, baseCoord, stop) {
     const positionBoundaries = getPositionBoundaries(existingLinesAtStation);
     const stopDimen = [Math.max(positionBoundaries.x[1] - positionBoundaries.x[0], 0), Math.max(positionBoundaries.y[1] - positionBoundaries.y[0], 0)];
     
@@ -270,7 +350,7 @@ function getPositionBoundariesForAxis(existingLinesAtStationAxis) {
     }
     let left = 0;
     let right = 0;
-    for (let i=0;i<existingLinesAtStationAxis.length;i++) {
+    for (let i=0; i<existingLinesAtStationAxis.length; i++) {
         if (right < existingLinesAtStationAxis[i].pos) {
             right = existingLinesAtStationAxis[i].pos;
         }
@@ -351,16 +431,19 @@ function addDeg(a, b) {
     return (a % 360 + b % 360) % 360;
 }
 
-function animate(line, delay) {
-    const length = line.getTotalLength();
+function rerenderLine(line, path, animate) {
+    const length = getTotalLength(path);
     const duration = length / SPEED;
+
+    const d = 'M' + path.join(' L');
+    line.setAttribute('d', d);
 
     line.style.transition = line.style.WebkitTransition = 'none';
     line.style.strokeDasharray = length + ' ' + length;
-    line.style.strokeDashoffset = length;
-    line.getBoundingClientRect();
-    line.style.transition = line.style.WebkitTransition = 'stroke-dashoffset ' + duration + 's linear ' + delay + 's';
+    if (animate) {        
+        line.style.strokeDashoffset = length;
+        line.getBoundingClientRect();
+        line.style.transition = line.style.WebkitTransition = 'stroke-dashoffset ' + duration + 's linear';
+    }
     line.style.strokeDashoffset = '0';
-    
-    return duration;
 }
