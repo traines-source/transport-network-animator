@@ -1,6 +1,7 @@
 const LINE_DISTANCE = 6;
 const DEFAULT_STOP_DIMEN = 10;
-const NODE_DISTANCE = 20;
+const NODE_DISTANCE = 0;
+const IMPRECISION = 0.001;
 const SPEED = 3;
 const FPS = 60;
 
@@ -70,14 +71,16 @@ function drawLine(line, delay, animate) {
     const path = [];
     precedingStop = undefined;
     precedingDir = undefined;
-    let rightSide = true;
+    let track = '+';
     for (let j=0; j<stops.length; j++) {
-        if (stops[j][0] == '_') {
-            rightSide = stops[j] == '_r';
+        const trackAssignment = getTrackAssignment(stops[j]);
+        if (trackAssignment) {
+            track = trackAssignment;
             continue;
         }
         const stop = document.getElementById(stops[j]);
-        createConnection(stop, getNextStopBaseCoord(stops, j, getStopBaseCoord(stop)), rightSide, path, line, delay, animate, true);
+        createConnection(stop, getNextStopBaseCoord(stops, j, getStopBaseCoord(stop)), track, path, line, delay, animate, true);
+        track = track[0];
     }
     let duration = getAnimationDuration(path, animate);
     window.setTimeout(function () { rerenderLine(line, path, animate); }, delay * 1000);
@@ -92,7 +95,7 @@ function eraseLine(line, delay) {
     line.setAttribute('d', '');
     const stops = line.dataset.stops.split(' ');
     for (let j=0; j<stops.length; j++) {
-        if (stops[j][0] == '_') {
+        if (getTrackAssignment(stops[j])) {
             continue;
         }
         const stop = document.getElementById(stops[j]);
@@ -104,6 +107,12 @@ function eraseLine(line, delay) {
         rerenderStation(existingLinesAtStation, dir, baseCoord, stop);
     }
     return 0;
+}
+
+function getTrackAssignment(tag) {
+    if (tag[0] != '-' && tag[0] != '+')
+        return false;
+    return tag;    
 }
 
 function removeExistingLineAtStationAxis(existingLinesAtStationAxis, lineId) {
@@ -188,13 +197,13 @@ function setSlideIndexElement(instant, element) {
     slideIndex[instant[0]][instant[1]].push(element);
 }
 
-function createConnection(stop, nextStopBaseCoord, rightSide, path, line, delay, animate, recurse) {
+function createConnection(stop, nextStopBaseCoord, track, path, line, delay, animate, recurse) {
     const dir = DIRS[stop.getAttribute('data-dir')];
     const baseCoord = getStopBaseCoord(stop);
     const existingLinesAtStation = getExistingLinesAtStation(stop.id);
     const positionBoundaries = getPositionBoundaries(existingLinesAtStation);
     const newDir = getStopOrientationBasedOnThreeStops(baseCoord, nextStopBaseCoord, dir, path);
-    const newPos = getPosition(rightSide, positionBoundaries[newDir % 180 == 0 ? 'x' : 'y']);
+    const newPos = getPosition(track, positionBoundaries[newDir % 180 == 0 ? 'x' : 'y']);
     const newCoord = getRotatedPositionCoordinates(dir, newDir, newPos, baseCoord);
 
     if (path.length != 0) {
@@ -205,12 +214,12 @@ function createConnection(stop, nextStopBaseCoord, rightSide, path, line, delay,
         const stationDir = addDeg(newDir, dir);
         const found = insertNode(oldCoord, precedingDir, newCoord, stationDir, path);
 
-        if (!found && recurse) {            
+        if (!found && recurse) {
             const helpStop = getOrCreateHelperStop(precedingDir, precedingStop, stop);
             
             precedingDir = addDeg(precedingDir, 180);
-            createConnection(helpStop, baseCoord, rightSide, path, line, delay, animate, false);
-            createConnection(stop, nextStopBaseCoord, rightSide, path, line, delay, animate, false);
+            createConnection(helpStop, baseCoord, track[0], path, line, delay, animate, false);
+            createConnection(stop, nextStopBaseCoord, track, path, line, delay, animate, false);
             return;
         } else if (!found) {
             console.log('path to fix on line', line.dataset.line, 'at station', stop.id);
@@ -285,7 +294,7 @@ function alphabeticId(a, b) {
 
 function getDirName(dir) {
     for (const [key, value] of Object.entries(DIRS)) {
-        if (value == dir) {
+        if (equals(value, dir)) {
             return key;
         }
     }
@@ -293,17 +302,16 @@ function getDirName(dir) {
 }
 
 function vinclination(delta) {
-    if (delta[0] == 0)
+    if (equals(delta[0], 0))
         return delta[1] > 0 ? 180 : 0;
-    if (delta[1] == 0)
+    if (equals(delta[1], 0))
         return delta[0] > 0 ? 90 : -90;
     const adjacent = [0,-Math.abs(delta[1])];
     return (Math.sign(delta[0])*Math.acos(vscalar(adjacent, delta)/vlength(adjacent)/vlength(delta))*180/Math.PI);
-    //const deltaDir = Math.sign(delta[0])*Math.acos(-delta[1]/Math.sqrt(Math.pow(delta[0], 2) + Math.pow(delta[1], 2)));
 }
 
 function normalizeDir(dir) {
-    if (dir == 90)
+    if (equals(dir, 90))
         dir = 0;
     else if (dir < -90)
         dir += 180;
@@ -347,7 +355,7 @@ function getPrecedingDir(precedingDir, precedingStop, oldCoord, newCoord) {
 
 function getNextStopBaseCoord(stops, currentStopIndex, defaultCoord) {
     for (let j=currentStopIndex+1;j<stops.length;j++) {
-        if (stops[j][0] == '_') {
+        if (getTrackAssignment(stops[j])) {
             continue;
         }
         return getStopBaseCoord(document.getElementById(stops[j]));
@@ -369,8 +377,11 @@ function ensureDefault(number, def) {
     return number;
 }
 
-function getPosition(rightSide, positionBoundariesAtStationAxis) {
-    return rightSide ? positionBoundariesAtStationAxis[1] + 1 : positionBoundariesAtStationAxis[0] - 1;
+function getPosition(track, positionBoundariesAtStationAxis) {
+    if (track.length > 1) {
+        return parseInt(track);
+    }
+    return track == '+' ? positionBoundariesAtStationAxis[1] + 1 : positionBoundariesAtStationAxis[0] - 1;
 }
 
 function getPositionBoundaries(existingLinesAtStation) {
@@ -407,11 +418,11 @@ function rotateUnitV(theta) {
 }
 
 function solveForAAndB(delta, v1, v2) {
-    const swapZeroDivision = v2[1] == 0;
+    const swapZeroDivision = equals(v2[1], 0);
     const x = 0 ^ swapZeroDivision;
     const y = 1 ^ swapZeroDivision;
     const denominator = (v1[y]*v2[x]-v1[x]*v2[y]);
-    if (denominator == 0) {
+    if (equals(denominator, 0)) {
         return [NaN, NaN];
     }
     const a = (delta[x]*v2[y]-delta[y]*v2[x])/denominator;
@@ -449,9 +460,8 @@ function insertNode(fromCoord, fromDir, toCoord, toDir, path) {
     if (matchingParallel(0, fromCoord, toCoord, oldDirV, newDirV) || matchingParallel(1, fromCoord, toCoord, oldDirV, newDirV)) {
         return true;
     }
-    //let a = (delta[0]*newDirV[1]-delta[1]*newDirV[0])/(oldDirV[1]*newDirV[0]-oldDirV[0]*newDirV[1]);
     const solution = solveForAAndB(delta, oldDirV, newDirV)
-    if (solution[0] > 0 && solution[1] > 0) {
+    if (solution[0] > NODE_DISTANCE && solution[1] > NODE_DISTANCE) {
         path.push([fromCoord[0]+oldDirV[0]*solution[0], fromCoord[1]+oldDirV[1]*solution[0]]);
         return newDirV;
     }
@@ -459,7 +469,11 @@ function insertNode(fromCoord, fromDir, toCoord, toDir, path) {
 }
 
 function matchingParallel(axis, fromCoord, toCoord, oldDirV, newDirV) {
-    return fromCoord[axis] == toCoord[axis] && oldDirV[axis] == 0 && newDirV[axis] == 0
+    return equals(fromCoord[axis], toCoord[axis]) && equals(oldDirV[axis], 0) && equals(newDirV[axis], 0)
+}
+
+function equals(a, b) {
+    return Math.abs(a - b) < IMPRECISION;
 }
 
 function addDeg(a, b) {
@@ -484,7 +498,7 @@ function degDist(a, b) {
 }
 
 function rerenderLine(line, path, animate) {
-    const length = getTotalLength(path);
+    let length = getTotalLength(path);
 
     const d = 'M' + path.join(' L');
     line.setAttribute('d', d);
