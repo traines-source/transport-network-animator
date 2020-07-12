@@ -2,6 +2,7 @@
     stroke: black;
     fill: white;
     rx: 3;
+    stroke-width: 1;
 }
 
 #stations rect.helper {
@@ -9,12 +10,17 @@
     fill: none;
 }
 
-#lines path {
+#elements path {
     stroke: black;
     stroke-width: 3;
     fill: none;
     stroke-linecap: round;
     stroke-linejoin: round;
+}
+
+#elements text {
+    font-family: sans-serif;
+    visibility: hidden;
 }
 
 svg {

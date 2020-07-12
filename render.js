@@ -1,16 +1,17 @@
 const LINE_DISTANCE = 6;
 const DEFAULT_STOP_DIMEN = 10;
 const NODE_DISTANCE = 0;
+const LABEL_DISTANCE = 0;
 const IMPRECISION = 0.001;
 const SPEED = 3;
 const FPS = 60;
 
 const UNITV = [0, -1];
-const DIRS = {'n': 0, 'ne': 45, 'nw': -45, 'w': -90};
+const DIRS = {'sw': -135, 'w': -90, 'nw': -45, 'n': 0, 'ne': 45, 'e': 90, 'se': 135, 's': 180};
 const svgns = "http://www.w3.org/2000/svg";
 const stationLines = {};
 const slideIndex = {};
-const lines = document.getElementById('lines').children;
+const elements = document.getElementById('elements').children;
 
 var precedingStop = undefined;
 var precedingDir = undefined;
@@ -53,13 +54,57 @@ function drawOrEraseElement(element, delay, animate, epoch, second) {
     if (equalsInstant(to, [epoch, second]) && !equalsInstant(from, to)) {
         return eraseElement(element, delay, shouldAnimate(to, animate));
     }
-    return drawLine(element, delay, shouldAnimate(from, animate));
+    return drawElement(element, delay, shouldAnimate(from, animate));
 }
 
 
 
 function drawElement(element, delay, animate) {
-    return drawLine(element, delay, animate);
+    if (element.localName == 'path')
+        return drawLine(element, delay, animate);
+    if (element.localName == 'text')
+        return drawLabel(element, delay, animate);
+}
+
+function drawLabel(text, delay, animate) {
+    if (delay > 0) {
+        window.setTimeout(function() { drawLabel(text, 0); }, delay * 1000);
+        return 0;
+    }
+    if (text.dataset.station != undefined) {
+        const station = document.getElementById(text.dataset.station);
+        const baseCoord = getStopBaseCoord(station);
+        const positionBoundaries = getPositionBoundaries(getExistingLinesAtStation(station.id));
+        const labelDir = DIRS[station.dataset.labelDir || 'n'];
+        const stationDir = DIRS[station.dataset.dir];
+        const diffDir = addDeg(labelDir , -stationDir);
+        const unitv = rotateUnitV(diffDir)
+        const anchor = [getStationSizeForAxis(positionBoundaries.x, unitv[0]), getStationSizeForAxis(positionBoundaries.y, unitv[1])]
+        const textCoord = vadd(baseCoord, rotate(anchor, stationDir));
+        setCoord(text, textCoord);
+        const labelunitv = rotateUnitV(labelDir);
+        text.style.textAnchor = makeTripleDecision(labelunitv[0], ['end', 'middle', 'start']);
+        text.style.dominantBaseline = makeTripleDecision(labelunitv[1], ['baseline', 'middle', 'hanging']);
+        text.style.visibility = 'visible';
+        text.className.baseVal += ' station';
+    }
+    return 0;
+}
+
+function makeTripleDecision(int, options) {
+    if (equals(int, 0)) {
+        return options[1];
+    } else if (int > 0) {
+        return options[2];
+    }
+    return options[0];
+}
+
+function getStationSizeForAxis(positionBoundariesForAxis, vector) {
+    if (equals(vector, 0))
+        return 0;
+    const size = positionBoundariesForAxis[vector < 0 ? 0 : 1] * LINE_DISTANCE;
+    return size + Math.sign(vector) * (DEFAULT_STOP_DIMEN + LABEL_DISTANCE);
 }
 
 function eraseElement(element, delay, animate) {
@@ -90,7 +135,7 @@ function drawLine(line, delay, animate) {
 function eraseLine(line, delay) {
     if (delay > 0) {
         window.setTimeout(function() { eraseLine(line, 0); }, delay * 1000);
-        return;
+        return 0;
     }
     line.setAttribute('d', '');
     const stops = line.dataset.stops.split(' ');
@@ -164,11 +209,11 @@ function findSmallestAbove(threshold, dict) {
 }
 
 function createSlideIndex() {
-    for (let i=0; i<lines.length; i++) {
-        setSlideIndexElement(getInstant(lines[i], 'from'), lines[i]);
-        const to = getInstant(lines[i], 'to');
+    for (let i=0; i<elements.length; i++) {
+        setSlideIndexElement(getInstant(elements[i], 'from'), elements[i]);
+        const to = getInstant(elements[i], 'to');
         if (!equalsInstant(to, [0, 0]))
-            setSlideIndexElement(to, lines[i]);
+            setSlideIndexElement(to, elements[i]);
     }
 }
 
@@ -335,12 +380,16 @@ function getOrCreateHelperStop(fromDir, fromStop, toStop) {
         helpStop = document.createElementNS(svgns, 'rect');
         helpStop.id = helpStopId;    
         helpStop.setAttribute('data-dir', getDirName(intermediateDir));
-        helpStop.setAttribute('x', intermediateCoord[0]);
-        helpStop.setAttribute('y', intermediateCoord[1]);
+        setCoord(helpStop, intermediateCoord);
         helpStop.className.baseVal = 'helper';
         document.getElementById('stations').appendChild(helpStop);
     }
     return helpStop;
+}
+
+function setCoord(element, coord) {
+    element.setAttribute('x', coord[0]);
+    element.setAttribute('y', coord[1]);
 }
 
 function getPrecedingDir(precedingDir, precedingStop, oldCoord, newCoord) {
