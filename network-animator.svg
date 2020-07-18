@@ -9,8 +9,8 @@
     <g id="elements">
         <path data-line="ICE291" style="stroke:blue" data-stops="MM NN UE LHA BL" />
 
-        <path data-line="ICE10" style="stroke:#B41E8E" class="1h" data-stops="BGS BL HWOB HH EBIL EHM EDO EE EDG KD" />
-        <path data-line="ICE10" style="stroke:#B41E8E" class="1h" data-stops="+0 EHM EHG KK" />
+        <path data-line="ICE10" style="stroke:#B41E8E" class="e1h" data-stops="BGS BL HWOB HH EBIL EHM EDO EE EDG KD" />
+        <path data-line="ICE10" style="stroke:#B41E8E" class="e1h" data-stops="+0 EHM EHG KK" />
 
         <text data-station="KA" >Aachen</text>
         <text data-station="AH" data-from="2020 1">Hamburg</text>
@@ -18,41 +18,68 @@
         <text data-station="MM" data-from="2020 1">München</text>
         <text data-station="TS" data-from="2020 1">Stuttgart</text>
 
-        <path data-line="ICE11" style="stroke:#ED1C24" class="2h" data-stops="BHF BL HBS HG FKW FFU" data-to="2017 0 reverse" />
-        <path data-line="ICE11" style="stroke:#ED1C24" class="2h" data-stops="FFU FF RM TS TU MA MM" />
-        <path data-line="ICE11" style="stroke:#ED1C24" class="2h" data-stops="FFU UE LL BL BGS" data-from="2017 0" />
+        <path data-line="ICE11" style="stroke:#ED1C24" class="e2h" data-stops="BHF BL HBS HG FKW FFU" data-to="2017 0 reverse" />
+        <path data-line="ICE11" style="stroke:#ED1C24" class="e2h" data-stops="FFU FF RM TS TU MA MM" />
+        <path data-line="ICE11" style="stroke:#ED1C24" class="e2h" data-stops="FFU UE LL BL BGS" data-from="2017 0" />
 
-        <path data-line="ICE12" style="stroke:#8ED8F8" class="2h" data-stops="BHF BL HWOB HBS HG FKW FFU FF RM RK RO RF RB" />
+        <path data-line="ICE12" style="stroke:#8ED8F8" class="e2h" data-stops="BHF BL HWOB HBS HG FKW FFU FF RM RK RO RF RB hRB" />
 
-        <path data-line="ICE13" style="stroke:#007fcf" class="2h" data-stops="BHF BL HWOB HBS HG FKW FFU FFLF" data-from="2017 0" />
+        <path data-line="ICE13" style="stroke:#007fcf" class="e2h" data-stops="BHF BL HWOB HBS HG FKW FFU FFLF" data-from="2017 0" />
 
-        <path data-line="ICE15" style="stroke:#F8ABAD" class="2h" data-stops="BGS BL LHA UE FF" />
+        <path data-line="ICE15" style="stroke:#F8ABAD" class="e2h" data-stops="BGS BL LHA UE FF" />
 
-        <path data-line="ICE18" style="stroke:#A78B6B" class="2h" data-stops="AA AH BL LHA UE NN MIH MM" data-from="2017 0" />
+        <path data-line="ICE18" style="stroke:#A78B6B" class="e2h" data-stops="AA AH BL LHA UE NN MIH MM" data-from="2017 0" />
         <path data-line="ICE18" style="stroke:#A78B6B" class="some" data-stops="NN MA MM" data-from="2017 0" />
 
-        <path data-line="ICE20" style="stroke:#A78B6B" class="2h" data-stops="AA AH HH HG FKW FF RM RK RF RB" />
+        <path data-line="ICE20" style="stroke:#A78B6B" class="e2h" data-stops="AA AH HH HG FKW FF RM RK RF RB hRB" />
 
         <path data-line="ICE22" style="stroke:#BDD747" class="some" data-stops="AK AH" data-to="0 0" />
-        <path data-line="ICE22" style="stroke:#BDD747" class="2h" data-stops="AA AH HH HG FKW FF FFLF RM TS" />
+        <path data-line="ICE22" style="stroke:#BDD747" class="e2h" data-stops="AA AH HH HG FKW FF FFLF RM TS" />
 
-        <path data-line="ICE25" style="stroke:#9B95C9" class="1h" data-stops="AA AH HH HG FKW FFU NWH NN MIH MM" />
+        <path data-line="ICE25" style="stroke:#9B95C9" class="e1h" data-stops="AA AH HH HG FKW FFU NWH NN MIH MM" />
         <path data-line="ICE25" style="stroke:#9B95C9" class="some" data-stops="HOLD HB AH" />
 
-        <path data-line="ICE26" style="stroke:#231F20" class="2h" data-stops="AA AH HH HG FKW FF RH RK" /><!-- BINZ?, interstations -->
+        <path data-line="ICE26" style="stroke:#231F20" class="e2h" data-stops="AA AH HH HG FKW FF RH RK" /><!-- BINZ?, interstations -->
 
-        <path data-line="ICE28" style="stroke:#00A650" class="2h" data-stops="AA AH BL LL UE NN MM" />
+        <path data-line="ICE28" style="stroke:#00A650" class="e2h" data-stops="AA AH BL LL UE NN MM" />
         <path data-line="ICE28" style="stroke:#00A650" class="some" data-stops="LL UJP" data-from="2017 0" />
 
-        <path data-line="ICE29" style="stroke:#F58232" class="2h" data-stops="BL LHA UE NN MM" data-from="2017 0" />
+        <path data-line="ICE29" style="stroke:#F58232" class="e2h" data-stops="BL LHA UE NN MM" data-from="2017 0" />
 
         <path data-line="ICE30" style="stroke:#FF0000" class="some" data-stops="AA AH HB EMSW EE EDG KD KK" data-from="2019 0" />
         
-        <path data-line="ICE41" style="stroke:#A7A9AC" class="1h" data-stops="EE EDG KD KKDZ FFLF FF NWH NN MM" />
+        <path data-line="ICE41" style="stroke:#A7A9AC" class="e1h" data-stops="EE EDG KD KKDZ FFLF FF NWH NN MM" />
 
-        <path data-line="ICE42" style="stroke:#F8ABAD" class="2h" data-stops="EDO EE EDG KD KK FFLF RM TS TU MA MM" />
+        <path data-line="ICE42" style="stroke:#F8ABAD" class="e2h" data-stops="EDO EE EDG KD KK FFLF RM TS TU MA MM" />
 
-        <path data-line="ICE43" style="stroke:#00A650" class="2h" data-stops="EDO EHG KK FFLF RM RK RO RF RB" />
+        <path data-line="ICE43" style="stroke:#00A650" class="e2h" data-stops="EDO EHG KK FFLF RM RK RO RF RB hRB" />
+        
+        <path data-line="ICE45" style="stroke:#007fcf" class="some" data-stops="KK FW FMZ RM RH TS" />
+
+        <path data-line="ICE47" style="stroke:#B41E8E" class="some" data-stops="EDO EE EDG KD KKDZ FFLF RM TS" data-from="2014 0" data-to="2018 0 noanim" />
+        <path data-line="ICE47" style="stroke:#B41E8E" class="e2h" data-stops="EDO EE EDG KD KKDZ FFLF RM TS" data-from="2018 0 noanim" />
+        
+        <path data-line="ICE49" style="stroke:#B41E8E" class="some" data-stops="KK FFLF FF" />
+
+        <path data-line="ICE50" style="stroke:#231F20" class="e2h" data-stops="DDRE LL UE FFU FF FFLF FMZ FW" />
+
+        <path data-line="ICE78" style="stroke:#F58232" class="e2h" data-stops="hEOB EOB EDG KD KK FFLF FF" />
+
+        <path data-line="ICE79" style="stroke:#9B95C9" class="e4h" data-stops="hKA KA KK FFLF FF" data-to="2016 0 noanim" />
+        <path data-line="ICE79" style="stroke:#9B95C9" class="e2h" data-stops="hKA KA KK FFLF FF" data-from="2016 0 noanim" />
+
+        <path data-line="ICE82" style="stroke:#007fcf" class="e4h" data-stops="FF RM" data-to="2016 0 noanim" />
+        <path data-line="ICE82" style="stroke:#007fcf" class="e4h" data-stops="RM SKL SSH hSSH" />
+        <path data-line="ICE82" style="stroke:#007fcf" class="e2h" data-stops="FF RM" data-from="2016 0 noanim" />
+        <path data-line="ICE82" style="stroke:#007fcf" class="e4h" data-stops="RM RK hXFSTG" data-from="2016 0 noanim" />
+
+        <path data-line="ICE83" style="stroke:#A7A9AC" class="e4h" data-stops="TS RK hXFSTG" />
+
+        <path data-line="ICE90" style="stroke:#007fcf" class="e2h" data-stops="MM fXASB" />
+
+        <path data-line="ICE91" style="stroke:#8ED8F8" class="e2h" data-stops="FF NWH NN NRH NPA fNPA" />
+
+
         
       
     </g>
@@ -76,20 +103,24 @@
         <rect id="EDO" x="305" y="405" data-dir="n" />
         <rect id="EE" x="260" y="415" data-dir="ne" />
         <rect id="EDG" x="235" y="430" data-dir="ne" />
+        <rect id="EOB" x="225" y="395" data-dir="nw" />
         <rect id="KD" x="235" y="460" data-dir="n" />
         <rect id="KK" x="235" y="490" data-dir="n" />
-        <rect id="KKDZ" x="270" y="490" data-dir="n" />
+        <rect id="KKDZ" x="270" y="490" data-dir="nw" />
         <rect id="KA" x="185" y="500" data-dir="n" data-label-dir="n" />        
         <rect id="LHA" x="625" y="410" data-dir="ne" />
         <rect id="LL" x="645" y="440" data-dir="ne" />
         <rect id="UE" x="550" y="480" data-dir="n" />
         <rect id="UJP" x="590" y="495" data-dir="n" />
+        <rect id="DDRE" x="760" y="475" data-dir="nw" />
         <rect id="FKW" x="450" y="460" data-dir="n" />
         <rect id="FFU" x="445" y="530" data-dir="nw" data-label-dir="e" />
         <rect id="FF" x="395" y="555" data-dir="n" />
-        <rect id="FFLF" x="340" y="585" data-dir="ne" />
+        <rect id="FFLF" x="340" y="585" data-dir="nw" />
         <rect id="FMZ" x="305" y="605" data-dir="n" />
         <rect id="FW" x="305" y="585" data-dir="n" />
+        <rect id="SKL" x="305" y="670" data-dir="n" />
+        <rect id="SSH" x="250" y="695" data-dir="nw" />
         <rect id="RM" x="360" y="670" data-dir="n" />
         <rect id="RH" x="400" y="680" data-dir="nw" />
         <rect id="RK" x="355" y="720" data-dir="ne" />
@@ -98,6 +129,8 @@
         <rect id="RB" x="280" y="900" data-dir="n" />
         <rect id="NWH" x="485" y="625" data-dir="nw" />
         <rect id="NN" x="550" y="660" data-dir="n" />
+        <rect id="NRH" x="650" y="700" data-dir="ne" />
+        <rect id="NPA" x="735" y="760" data-dir="n" />
         <rect id="TS" x="420" y="735" data-dir="nw" data-label-dir="s" />
         <rect id="TU" x="485" y="780" data-dir="w" />
         <rect id="MIH" x="600" y="750" data-dir="nw" />
@@ -111,6 +144,15 @@
         <rect id="hBL" x="650" y="200" data-dir="nw" class="helper" />
         <rect id="hHH" x="570" y="310" data-dir="ne" class="helper" />
         <rect id="h_FFLF_RM" x="330" y="650" data-dir="n" class="helper" />
+
+        <rect id="hRB" x="280" y="950" data-dir="n" class="helper" />
+        <rect id="hEOB" x="185" y="330" data-dir="n" class="helper" />
+        <rect id="hKA" x="150" y="500" data-dir="n" class="helper" />
+        <rect id="hSSH" x="200" y="750" data-dir="nw" class="helper" />
+        <rect id="hXFSTG" x="200" y="770" data-dir="n" class="helper" />
+        <rect id="fXASB" x="720" y="850" data-dir="ne" class="helper" />
+        <rect id="fNPA" x="760" y="760" data-dir="n" class="helper" />
+
     </g>
     <script xlink:href="render.js" />
 </svg>
