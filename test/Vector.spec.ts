@@ -8,6 +8,13 @@ describe('Vector', () => {
         expect(new Vector(-1, 2).add(new Vector(3, 4))).eql(new Vector(2, 6));
         expect(Vector.UNIT.add(new Vector(-1, 4))).eql(new Vector(-1, 3));
     })
+    it('whenDelta', () => {
+        expect(new Vector(-1, 2).delta(new Vector(3, 4))).eql(new Vector(4, 2));
+        expect(Vector.UNIT.delta(new Vector(-1, 4))).eql(new Vector(-1, 5));
+    })
+    it('whenLength', () => {
+        expect(new Vector(-3, 4).length).eql(5);
+    })
     it('whenRotate_given45', () => {
         const v = Vector.UNIT.rotate(new Rotation(45));
         expect(Utils.equals(v.x, 0.7071067811865475)).to.be.true;

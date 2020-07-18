@@ -21,7 +21,7 @@
   "scripts": {
     "wp": "webpack",
     "wpw": "webpack --watch",
-    "test": "cross-env TS_NODE_COMPILER_OPTIONS='{ \"module\": \"commonjs\" }' mocha -r ts-node/register src/**/*.spec.ts"
+    "test": "cross-env TS_NODE_COMPILER_OPTIONS='{ \"module\": \"commonjs\" }' mocha -r ts-node/register test/**/*.spec.ts"
   },
   "author": "",
   "license": "ISC"
