@@ -1,3 +1,5 @@
+// TODO: ts refactor, labels, zoom, negative default tracks based on direction,
+
 const LINE_DISTANCE = 6;
 const DEFAULT_STOP_DIMEN = 10;
 const NODE_DISTANCE = 0;
@@ -555,7 +557,16 @@ function rerenderLine(line, path, animate) {
     const d = 'M' + path.join(' L');
     line.setAttribute('d', d);
 
-    line.style.strokeDasharray = length + ' ' + length;
+    let dashedPart = length;
+    const presetDash = getComputedStyle(line).strokeDasharray.replace(/[^0-9\s,]+/g, '');
+    if (presetDash.length > 0) {
+        let presetArray = presetDash.split(/[\s,]+/);
+        if (presetArray.length % 2 == 1)
+            presetArray = presetArray.concat(presetArray);
+        const presetLength = presetArray.map(a => parseInt(a) || 0).reduce((a, b) => a+b, 0);
+        dashedPart = new Array(Math.ceil(length / presetLength + 1)).join(presetArray.join(' ') + ' ') + '0';
+    }
+    line.style.strokeDasharray = dashedPart + ' ' + length;
     if (!animate) {
         length = 0;
     }

@@ -26,3 +26,15 @@
 svg {
     background-color: white;
 }
+
+.e2h {
+    stroke-dasharray: 12 4;
+}
+
+.e4h {
+    stroke-dasharray: 6 4;
+}
+
+.some {
+    stroke-dasharray: 1 4;
+}
