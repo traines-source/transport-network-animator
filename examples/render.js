@@ -423,14 +423,6 @@ function getStopBaseCoord(stop) {
     return [parseInt(stop.getAttribute('x')), parseInt(stop.getAttribute('y'))];
 }
 
-function ensureDefault(number, def) {
-    number = parseInt(number);
-    if (isNaN(number)) {
-        return def;
-    }
-    return number;
-}
-
 function getPosition(track, positionBoundariesAtStationAxis) {
     if (track.length > 1) {
         return parseInt(track);
