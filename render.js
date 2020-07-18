@@ -124,6 +124,9 @@ function drawLine(line, delay, animate) {
             continue;
         }
         const stop = document.getElementById(stops[j]);
+        if (stop == null) {
+            console.error(stops[j], 'is undefined');
+        }
         createConnection(stop, getNextStopBaseCoord(stops, j, getStopBaseCoord(stop)), track, path, line, delay, animate, true);
         track = track[0];
     }
