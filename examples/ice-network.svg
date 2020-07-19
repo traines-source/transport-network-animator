@@ -7,16 +7,32 @@
         </filter>
     </defs>
     <g id="elements">
-        <path data-line="ICE291" style="stroke:blue" data-stops="MM NN UE LHA BL" />
-
-        <path data-line="ICE10" style="stroke:#B41E8E" class="e1h" data-stops="BGS BL HWOB HH EBIL EHM EDO EE EDG KD" />
-        <path data-line="ICE10" style="stroke:#B41E8E" class="e1h" data-stops="+0 EHM EHG KK" />
-
         <text data-station="KA" >Aachen</text>
         <text data-station="AH" data-from="2020 1">Hamburg</text>
         <text data-station="FFU" data-from="2020 1">Fulda</text>
         <text data-station="MM" data-from="2020 1">München</text>
         <text data-station="TS" data-from="2020 1">Stuttgart</text>
+
+        <path data-line="ICE1" style="stroke:#FF0000" class="e2h" data-stops="KK KD EDG EE AH AA" />
+
+        <path data-line="ICE3" style="stroke:green" class="e1h" data-stops="AA AH HH HG FKW FF RM RK RF RB" data-from="1993 20"/>
+
+        <path data-line="ICE4" style="stroke:#FF0000" class="e2h" data-stops="AK AA HH FKW FF" />
+
+        <path data-line="ICE4" style="stroke:darkyellow" class="e2h" data-stops="HB HH" data-from="1992 10" />
+        <path data-line="ICE4" style="stroke:darkyellow" class="e2h" data-stops="AA AH HH" data-from="1992 10" />
+        <path data-line="ICE4" style="stroke:darkyellow" class="e1h" data-stops="HH HG FKW FFU NWH NN MA MM" data-from="1992 10" />
+
+        <path data-line="ICE6" style="stroke:darkorange" class="e1h" data-stops="AA AH HH HG" data-from="1991 10" data-to="1993 10 noanim"/>
+        <path data-line="ICE6" style="stroke:darkorange" class="e1h" data-stops="HG FKW FFU FF RM TS TU MA MM" data-from="1991 10" />
+        <path data-line="ICE6" style="stroke:darkorange" class="e2h" data-stops="HH HG" data-from="1993 10 noanim"/>
+        <path data-line="ICE6" style="stroke:darkorange" class="e4h" data-stops="AA AH HH" data-from="1993 10 noanim"/>
+        <path data-line="ICE6" style="stroke:darkorange" class="e4h" data-stops="HH HB" data-from="1993 10"/>
+        <path data-line="ICE6" style="stroke:darkorange" class="e2h" data-stops="HG HBS BL" data-from="1993 10"/>
+
+
+        <path data-line="ICE10" style="stroke:#B41E8E" class="e1h" data-stops="BGS BL HWOB HH EBIL EHM EDO EE EDG KD" />
+        <path data-line="ICE10" style="stroke:#B41E8E" class="e1h" data-stops="+0 EHM EHG KK" />
 
         <path data-line="ICE11" style="stroke:#ED1C24" class="e2h" data-stops="BHF BL HBS HG FKW FFU" data-to="2017 0 reverse" />
         <path data-line="ICE11" style="stroke:#ED1C24" class="e2h" data-stops="FFU FF RM TS TU MA MM" />
@@ -79,11 +95,8 @@
 
         <path data-line="ICE91" style="stroke:#8ED8F8" class="e2h" data-stops="FF NWH NN NRH NPA fNPA" />
 
-
-        
-      
     </g>
-    <g id="stations">
+        <g id="stations">
         <rect id="AK" x="490" y="100" data-dir="n" />
         <rect id="AA" x="490" y="160" data-dir="n" data-label-dir="sw" />
         <rect id="AH" x="490" y="190" data-dir="n" data-label-dir="sw" />

@@ -14,7 +14,7 @@ export interface LineAdapter extends Timed  {
 
 export class Line implements TimedDrawable {
     static NODE_DISTANCE = 0;
-    static SPEED = 180;
+    static SPEED = 100;
 
     constructor(private adapter: LineAdapter, private stationProvider: StationProvider) {
 
