@@ -1,24 +1,20 @@
 import { TimedDrawable, Timed } from "./Drawable";
-import { Instant } from "./Instant";
 import { Station, Stop } from "./Station";
 import { Vector } from "./Vector";
 import { StationProvider } from "./Network";
 import { Rotation } from "./Rotation";
 import { Utils } from "./Utils";
 
-
-
 export interface LineAdapter extends Timed  {
     stops: Stop[];
     name: string;
-    rerenderLine(path: Vector[], animate: boolean): void;
-    erase(animate: boolean, reverse: boolean): void;
+    draw(delaySeconds: number, animationDurationSeconds: number, path: Vector[]): void;
+    erase(delaySeconds: number, animationDurationSeconds: number, reverse: boolean): void;
 }
 
 export class Line implements TimedDrawable {
     static NODE_DISTANCE = 0;
-    static SPEED = 3;
-    static FPS = 60;
+    static SPEED = 180;
 
     constructor(private adapter: LineAdapter, private stationProvider: StationProvider) {
 
@@ -30,7 +26,6 @@ export class Line implements TimedDrawable {
     
     private precedingStop: Station | undefined = undefined;
     private precedingDir: Rotation | undefined = undefined;
-
 
     draw(delay: number, animate: boolean): number {
         const stops = this.adapter.stops;
@@ -47,8 +42,19 @@ export class Line implements TimedDrawable {
             track = track[0];
         }
         let duration = this.getAnimationDuration(path, animate);
-        this.rerenderLine(path, delay, animate);
+        this.adapter.draw(delay, duration, path);
         return duration;
+    }
+
+    erase(delay: number, animate: boolean, reverse: boolean): number {
+        this.adapter.erase(delay, 0, reverse);
+        const stops = this.adapter.stops;
+        for (let j=0; j<stops.length; j++) {
+            const stop = this.stationProvider.stationById(stops[j].stationId);
+            stop.removeLine(this);
+            stop.draw(delay);
+        }
+        return 0;
     }
 
     private nextStopBaseCoord(stops: Stop[], currentStopIndex: number, defaultCoords: Vector) {
@@ -58,7 +64,7 @@ export class Line implements TimedDrawable {
         return defaultCoords;
     }
 
-    private createConnection(station: Station, nextStopBaseCoord: Vector, track: string, path: Vector[], delay: number, animate: boolean, recurse: boolean) {
+    private createConnection(station: Station, nextStopBaseCoord: Vector, track: string, path: Vector[], delay: number, animate: boolean, recurse: boolean): void {
         const dir = station.rotation;
         const baseCoord = station.baseCoords;
         const newDir = this.getStopOrientationBasedOnThreeStops(baseCoord, nextStopBaseCoord, dir, path);
@@ -82,34 +88,18 @@ export class Line implements TimedDrawable {
                 this.createConnection(station, nextStopBaseCoord, track, path, delay, animate, false);
                 return;
             } else if (!found) {
-                console.log('path to fix on line', this.adapter.name, 'at station', station.id);
+                console.warn('path to fix on line', this.adapter.name, 'at station', station.id);
             }
             this.precedingDir = stationDir;
         }
         station.addLine(this, newDir.degrees % 180 == 0 ? 'x' : 'y', newPos);
         path.push(newCoord);
         delay = this.getAnimationDuration(path, animate) + delay;
-        station.rerenderStation(delay);    
+        station.draw(delay);
         this.precedingStop = station;
     }
 
-    erase(delay: number, animate: boolean, reverse: boolean): number {
-        if (delay > 0) {
-            const line = this;
-            window.setTimeout(function() { line.erase(0, animate, reverse); }, delay * 1000);
-            return 0;
-        }
-        this.adapter.erase(false, reverse);
-        const stops = this.adapter.stops;
-        for (let j=0; j<stops.length; j++) {
-            const stop = this.stationProvider.stationById(stops[j].stationId);
-            stop.removeLine(this);
-            stop.rerenderStation(0);
-        }
-        return 0;        
-    }
-
-    private getStopOrientationBasedOnThreeStops(baseCoord: Vector, nextStopBaseCoord: Vector, dir: Rotation, path: Vector[]) {
+    private getStopOrientationBasedOnThreeStops(baseCoord: Vector, nextStopBaseCoord: Vector, dir: Rotation, path: Vector[]): Rotation {
         let newDir;
         if (path.length != 0) {
             const oldCoord = path[path.length-1];
@@ -136,7 +126,6 @@ export class Line implements TimedDrawable {
         return precedingDir;
     }
 
-
     private insertNode(fromCoord: Vector, fromDir: Rotation, toCoord: Vector, toDir: Rotation, path: Vector[]): boolean {
         const delta: Vector = fromCoord.delta(toCoord);
         const oldDirV = Vector.UNIT.rotate(fromDir);
@@ -151,8 +140,6 @@ export class Line implements TimedDrawable {
         }
         return false;
     }
-
-
 
     private getOrCreateHelperStop(fromDir: Rotation, fromStop: Station, toStop: Station): Station {
         const helpStopId = 'h_' + Utils.alphabeticId(fromStop.id, toStop.id);
@@ -171,21 +158,17 @@ export class Line implements TimedDrawable {
         return helpStop;
     }
 
-    private getAnimationDuration(path: Vector[], animate: boolean) {
+    private getAnimationDuration(path: Vector[], animate: boolean): number {
         if (!animate)
             return 0;
-        return this.getTotalLength(path) / Line.SPEED / Line.FPS;
+        return this.getTotalLength(path) / Line.SPEED;
     }
-    private getTotalLength(path: Vector[]) {
+    
+    private getTotalLength(path: Vector[]): number {
         let length = 0;
         for (let i=0; i<path.length-1; i++) {
             length += path[i].delta(path[i+1]).length;
         }
         return length;
-    }
-
-    private rerenderLine(path: Vector[], delay: number, animate: boolean) {
-        const line = this;
-        window.setTimeout(function () { line.adapter.rerenderLine(path, animate); }, delay * 1000);
     }
 }

@@ -1,5 +1,3 @@
-import { TimedDrawable } from "./Drawable";
-import { LineAdapter } from "./Line";
 import { StationAdapter, Station } from "./Station";
 import { Vector } from "./Vector";
 import { Rotation } from "./Rotation";
@@ -21,7 +19,13 @@ export class SvgStation implements StationAdapter {
         return Rotation.from(this.element.dataset.labelDir || 'n');
     }
 
-    public rerenderStation(positionBoundaries: {[id: string]: [number, number]}) {
+    public draw(delaySeconds: number, getPositionBoundaries: () => {[id: string]: [number, number]}): void {
+        if (delaySeconds > 0) {
+            const station = this;
+            window.setTimeout(function() { station.draw(0, getPositionBoundaries); }, delaySeconds * 1000);
+            return;
+        }
+        const positionBoundaries = getPositionBoundaries();
         const baseCoord = this.baseCoords;
         const stopDimen = [Math.max(positionBoundaries.x[1] - positionBoundaries.x[0], 0), Math.max(positionBoundaries.y[1] - positionBoundaries.y[0], 0)];
         

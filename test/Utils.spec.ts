@@ -9,9 +9,9 @@ describe('Utils', () => {
     })
 
     it('whenTripleDecision', () => {
-        expect(Utils.tripleDecision(-50, ['a', 'b', 'c'])).eql('a');
-        expect(Utils.tripleDecision(0.0001, ['a', 'b', 'c'])).eql('b');
-        expect(Utils.tripleDecision(1, ['a', 'b', 'c'])).eql('c');
+        expect(Utils.trilemma(-50, ['a', 'b', 'c'])).eql('a');
+        expect(Utils.trilemma(0.0001, ['a', 'b', 'c'])).eql('b');
+        expect(Utils.trilemma(1, ['a', 'b', 'c'])).eql('c');
     })
 
     it('whenAlphabeticId', () => {

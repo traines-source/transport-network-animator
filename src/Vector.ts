@@ -38,7 +38,7 @@ export class Vector {
         return new Vector(this.x * Math.cos(rad) - this.y * Math.sin(rad), this.x * Math.sin(rad) + this.y * Math.cos(rad));
     }
 
-    dotProduct(that: Vector) {
+    dotProduct(that: Vector): number {
         return this.x*that.x+this.y*that.y;
     }
 
@@ -72,7 +72,4 @@ export class Vector {
         const adjacent = new Vector(0,-Math.abs(this.y));
         return new Rotation((Math.sign(this.x)*Math.acos(this.dotProduct(adjacent)/adjacent.length/this.length)*180/Math.PI));
     }
-
-   
-
 }

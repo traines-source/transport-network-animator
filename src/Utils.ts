@@ -5,7 +5,7 @@ export class Utils {
         return Math.abs(a - b) < Utils.IMPRECISION;
     }
 
-    static tripleDecision(int: number, options: [string, string, string]): string {
+    static trilemma(int: number, options: [string, string, string]): string {
         if (Utils.equals(int, 0)) {
             return options[1];
         } else if (int > 0) {
@@ -19,5 +19,4 @@ export class Utils {
             return a + '_' + b;
         return b + '_' + a;
     }
-    
 }

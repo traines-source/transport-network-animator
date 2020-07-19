@@ -5,7 +5,7 @@ import { Network } from "./Network";
 import { Instant } from "./Instant";
 import { TimedDrawable } from "./Drawable";
 
-// TODO: ts refactor, labels, zoom, negative default tracks based on direction,
+// TODO: erase anim, labels, zoom, negative default tracks based on direction,
 
 
 var precedingStop : Station | undefined = undefined;
@@ -26,7 +26,7 @@ function getStartEpoch(): number {
     return 0;
 }
 
-function slide(instant: Instant, animate: boolean) {
+function slide(instant: Instant, animate: boolean): void {
     if (instant.epoch == animateFromEpoch)
         animate = true;
 
@@ -59,7 +59,7 @@ function eraseElement(element: TimedDrawable, delay: number, animate: boolean): 
     return element.erase(delay, animate, false);
 }
 
-function shouldAnimate(instant: Instant, animate: boolean) {
+function shouldAnimate(instant: Instant, animate: boolean): boolean {
     if (!animate)
         return false;
     if (instant.flag == 'noanim')

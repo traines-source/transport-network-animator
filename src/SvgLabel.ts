@@ -1,9 +1,6 @@
-import { TimedDrawable, Timed } from "./Drawable";
-import { Station } from "./Station";
 import { Rotation } from "./Rotation";
 import { LabelAdapter } from "./Label";
 import { Instant } from "./Instant";
-import { StationProvider } from "./Network";
 import { Vector } from "./Vector";
 import { Utils } from "./Utils";
 
@@ -25,13 +22,22 @@ export class SvgLabel implements LabelAdapter {
         return this.element.dataset.station;
     }
 
-    draw(textCoords: Vector, labelDir: Rotation): void {
+    draw(delaySeconds: number, textCoords: Vector, labelDir: Rotation): void {
+        if (delaySeconds > 0) {
+            const label = this;
+            window.setTimeout(function() { label.draw(0, textCoords, labelDir); }, delaySeconds * 1000);
+            return;
+        }
         this.setCoord(this.element, textCoords);
         const labelunitv = Vector.UNIT.rotate(labelDir);
-        this.element.style.textAnchor = Utils.tripleDecision(labelunitv.x, ['end', 'middle', 'start']);
-        this.element.style.dominantBaseline = Utils.tripleDecision(labelunitv.y, ['baseline', 'middle', 'hanging']);
+        this.element.style.textAnchor = Utils.trilemma(labelunitv.x, ['end', 'middle', 'start']);
+        this.element.style.dominantBaseline = Utils.trilemma(labelunitv.y, ['baseline', 'middle', 'hanging']);
         this.element.style.visibility = 'visible';
         this.element.className.baseVal += ' station';
+    }
+
+    erase(delaySeconds: number): void {
+        throw new Error("Method not implemented.");
     }
 
     private getInstant(fromOrTo: string): Instant {
@@ -44,10 +50,9 @@ export class SvgLabel implements LabelAdapter {
         return Instant.BIG_BANG;
     }
 
-    private setCoord(element: any, coord: Vector) {
+    private setCoord(element: any, coord: Vector): void {
         element.setAttribute('x', coord.x);
         element.setAttribute('y', coord.y);
     }
-
 
 }

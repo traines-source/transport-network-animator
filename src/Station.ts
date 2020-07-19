@@ -1,6 +1,5 @@
 import { Vector } from "./Vector";
 import { Rotation } from "./Rotation";
-import { Drawable } from "./Drawable";
 import { Line } from "./Line";
 import { Utils } from "./Utils";
 
@@ -9,7 +8,7 @@ export interface StationAdapter {
     rotation: Rotation;
     labelDir: Rotation;
     id: string;
-    rerenderStation(positionBoundaries: {[id: string]: [number, number]}): void;
+    draw(delaySeconds: number, getPositionBoundaries: () => {[id: string]: [number, number]}): void;
 }
 
 export class Stop {
@@ -37,12 +36,12 @@ export class Station {
         this.existingLines[axis].push({line: line, track: track});
     }
 
-    removeLine(line: Line) {
+    removeLine(line: Line): void {
         this.removeLineAtAxis(line, this.existingLines.x);
         this.removeLineAtAxis(line, this.existingLines.y);
     }
 
-    private removeLineAtAxis(line: Line, existingLinesForAxis: {line: Line, track: number}[]) {
+    private removeLineAtAxis(line: Line, existingLinesForAxis: {line: Line, track: number}[]): void {
         let i = 0;
         while (i < existingLinesForAxis.length) {
             if (existingLinesForAxis[i].line == line) {
@@ -97,12 +96,12 @@ export class Station {
         return [left, right];
     }
 
-    rerenderStation(delay: number) {
+    draw(delaySeconds: number): void {
         const station = this;
-        window.setTimeout(function() { station.adapter.rerenderStation(station.positionBoundaries()); }, delay * 1000);        
+        this.adapter.draw(delaySeconds, function() { return station.positionBoundaries(); });
     }
 
-    stationSizeForAxis(axis: string, vector: number) {
+    stationSizeForAxis(axis: string, vector: number): number {
         if (Utils.equals(vector, 0))
             return 0;
         const size = this.positionBoundariesForAxis(this.existingLines[axis])[vector < 0 ? 0 : 1] * Station.LINE_DISTANCE;

@@ -6,7 +6,8 @@ import { Vector } from "./Vector";
 
 export interface LabelAdapter extends Timed {
     forStation: string | undefined;
-    draw(textCoords: Vector, labelDir: Rotation): void;
+    draw(delaySeconds: number, textCoords: Vector, labelDir: Rotation): void;
+    erase(delaySeconds: number): void;
 }
 
 export class Label implements TimedDrawable {
@@ -23,11 +24,6 @@ export class Label implements TimedDrawable {
     }
 
     draw(delay: number, animate: boolean): number {
-        if (delay > 0) {
-            const label = this;
-            window.setTimeout(function() { label.draw(0, animate); }, delay * 1000);
-            return 0;
-        }
         if (this.adapter.forStation != undefined) {
             const station = this.forStation;
             const baseCoord = station.baseCoords;
@@ -37,14 +33,12 @@ export class Label implements TimedDrawable {
             const unitv = Vector.UNIT.rotate(diffDir);
             const anchor = new Vector(station.stationSizeForAxis('x', unitv.x), station.stationSizeForAxis('y', unitv.y));
             const textCoords = baseCoord.add(anchor.rotate(stationDir));
-            this.adapter.draw(textCoords, labelDir);
+            this.adapter.draw(delay, textCoords, labelDir);
         }
         return 0;
     }
+
     erase(delay: number, animate: boolean, reverse: boolean): number {
         throw new Error("Method not implemented.");
     }
-    
-
-   
 }

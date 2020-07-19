@@ -34,6 +34,7 @@ export class Network implements StationProvider {
         }
         return this.stations[id];
     }
+
     createVirtualStop(id: string, baseCoords: Vector, rotation: Rotation): Station {
         const stop = this.adapter.createVirtualStop(id, baseCoords, rotation);
         this.stations[id] = stop;
@@ -43,17 +44,18 @@ export class Network implements StationProvider {
     timedDrawablesAt(now: Instant): TimedDrawable[] {
         return this.slideIndex[now.epoch][now.second];
     }
+
     isEpochExisting(epoch: string): boolean {
         return this.slideIndex[epoch] != undefined;
     }
 
-    public addToIndex(element: TimedDrawable) {
+    public addToIndex(element: TimedDrawable): void {
         this.setSlideIndexElement(element.from, element);
             if (!Instant.BIG_BANG.equals(element.to))
                 this.setSlideIndexElement(element.to, element);
     }
 
-    private setSlideIndexElement(instant: Instant, element: TimedDrawable) {
+    private setSlideIndexElement(instant: Instant, element: TimedDrawable): void {
         if (this.slideIndex[instant.epoch] == undefined)
             this.slideIndex[instant.epoch] = {};
         if (this.slideIndex[instant.epoch][instant.second] == undefined)

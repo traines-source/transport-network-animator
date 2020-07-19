@@ -1,10 +1,11 @@
-import { TimedDrawable } from "./Drawable";
 import { LineAdapter, Line } from "./Line";
 import { Vector } from "./Vector";
 import { Stop } from "./Station";
 import { Instant } from "./Instant";
 
 export class SvgLine implements LineAdapter {
+
+    private static FPS = 60;
     private _stops: Stop[] = [];
 
     constructor(private element: SVGPathElement) {
@@ -51,7 +52,12 @@ export class SvgLine implements LineAdapter {
         return this._stops;
     }
 
-    rerenderLine(path: Vector[], animate: boolean) {
+    draw(delaySeconds: number, animationDurationSeconds: number, path: Vector[]): void {
+        if (delaySeconds > 0) {
+            const line = this;
+            window.setTimeout(function () { line.draw(0, animationDurationSeconds, path); }, delaySeconds * 1000);
+            return;
+        }
         let length = this.getTotalLength(path);
     
         const d = 'M' + path.map(v => v.x+','+v.y).join(' L');
@@ -67,28 +73,33 @@ export class SvgLine implements LineAdapter {
             dashedPart = new Array(Math.ceil(length / presetLength + 1)).join(presetArray.join(' ') + ' ') + '0';
         }
         this.element.style.strokeDasharray = dashedPart + ' ' + length;
-        if (!animate) {
+        if (animationDurationSeconds == 0) {
             length = 0;
         }
-        this.animateFrame(length);
+        this.animateFrame(length, length/animationDurationSeconds/SvgLine.FPS);
     }
 
-    erase(animate: boolean, reverse: boolean) {
+    erase(delaySeconds: number, animationDurationSeconds: number, reverse: boolean): void {
+        if (delaySeconds > 0) {
+            const line = this;
+            window.setTimeout(function() { line.erase(0, animationDurationSeconds, reverse); }, delaySeconds * 1000);
+            return;
+        }
         this.element.setAttribute('d', '');
     }
     
-    private animateFrame(length: number) {
+    private animateFrame(length: number, animationPerFrame: number): void {
         if (length > 0) {
             this.element.style.strokeDashoffset = length + '';
-            length -= Line.SPEED;
+            length -= animationPerFrame;
             const line = this;
-            window.requestAnimationFrame(function() { line.animateFrame(length); });
+            window.requestAnimationFrame(function() { line.animateFrame(length, animationPerFrame); });
         } else {
             this.element.style.strokeDashoffset = '0';
         }
     }
 
-    private getTotalLength(path: Vector[]) {
+    private getTotalLength(path: Vector[]): number {
         let length = 0;
         for (let i=0; i<path.length-1; i++) {
             length += path[i].delta(path[i+1]).length;

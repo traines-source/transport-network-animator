@@ -1,6 +1,5 @@
 import { NetworkAdapter, Network, StationProvider } from "./Network";
-import { Drawable, TimedDrawable } from "./Drawable";
-import { Instant } from "./Instant";
+import { TimedDrawable } from "./Drawable";
 import { Vector } from "./Vector";
 import { Rotation } from "./Rotation";
 import { Station } from "./Station";
@@ -57,7 +56,7 @@ export class SvgNetwork implements NetworkAdapter {
         return new Station(new SvgStation(helpStop));  
     };
 
-    private setCoord(element: any, coord: Vector) {
+    private setCoord(element: any, coord: Vector): void {
         element.setAttribute('x', coord.x);
         element.setAttribute('y', coord.y);
     }

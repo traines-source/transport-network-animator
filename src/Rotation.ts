@@ -61,6 +61,4 @@ export class Rotation {
             dir -= 180;
         return new Rotation(dir);
     }
-    
-    
 }
