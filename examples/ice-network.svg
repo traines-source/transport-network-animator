@@ -68,10 +68,10 @@
         <path data-line="ICE79" style="stroke:#9B95C9" class="e4h" data-stops="hKA KA KK FFLF FF" data-to="2016 0 noanim" />
         <path data-line="ICE79" style="stroke:#9B95C9" class="e2h" data-stops="hKA KA KK FFLF FF" data-from="2016 0 noanim" />
 
-        <path data-line="ICE82" style="stroke:#007fcf" class="e4h" data-stops="FF RM" data-to="2016 0 noanim" />
-        <path data-line="ICE82" style="stroke:#007fcf" class="e4h" data-stops="RM SKL SSH hSSH" />
-        <path data-line="ICE82" style="stroke:#007fcf" class="e2h" data-stops="FF RM" data-from="2016 0 noanim" />
-        <path data-line="ICE82" style="stroke:#007fcf" class="e4h" data-stops="RM RK hXFSTG" data-from="2016 0 noanim" />
+        <path data-line="ICE82" style="stroke:#007fcf" class="e4h" data-stops="FF RM" data-from="2016 0 noanim" data-to="2016 3 noanim" />
+        <path data-line="ICE82" style="stroke:#007fcf" class="e4h" data-stops="RM SKL SSH hSSH"  data-from="2016 0 noanim" />
+        <path data-line="ICE82" style="stroke:#007fcf" class="e2h" data-stops="FF RM" data-from="2016 3 noanim" />
+        <path data-line="ICE82" style="stroke:#007fcf" class="e4h" data-stops="RM RK hXFSTG" data-from="2016 3 noanim" />
 
         <path data-line="ICE83" style="stroke:#A7A9AC" class="e4h" data-stops="TS RK hXFSTG" />
 

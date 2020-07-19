@@ -1,10 +1,10 @@
 import { TimedDrawable } from "./Drawable";
-import { LineProvider } from "./Line";
-import { StationProvider, Station } from "./Station";
+import { LineAdapter } from "./Line";
+import { StationAdapter, Station } from "./Station";
 import { Vector } from "./Vector";
 import { Rotation } from "./Rotation";
 
-export class SvgStation implements StationProvider {
+export class SvgStation implements StationAdapter {
     constructor(private element: SVGRectElement) {
 
     }
@@ -16,6 +16,9 @@ export class SvgStation implements StationProvider {
     }
     get rotation(): Rotation {
         return Rotation.from(this.element.dataset.dir || 'n');
+    }
+    get labelDir(): Rotation {
+        return Rotation.from(this.element.dataset.labelDir || 'n');
     }
 
     public rerenderStation(positionBoundaries: {[id: string]: [number, number]}) {

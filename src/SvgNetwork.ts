@@ -1,4 +1,4 @@
-import { NetworkProvider, Network, StationHolder } from "./Network";
+import { NetworkAdapter, Network, StationProvider } from "./Network";
 import { Drawable, TimedDrawable } from "./Drawable";
 import { Instant } from "./Instant";
 import { Vector } from "./Vector";
@@ -7,8 +7,10 @@ import { Station } from "./Station";
 import { Line } from "./Line";
 import { SvgLine } from "./SvgLine";
 import { SvgStation } from "./SvgStation";
+import { Label } from "./Label";
+import { SvgLabel } from "./SvgLabel";
 
-export class SvgNetwork implements NetworkProvider {
+export class SvgNetwork implements NetworkAdapter {
 
 
     private readonly svgns = "http://www.w3.org/2000/svg";
@@ -28,12 +30,12 @@ export class SvgNetwork implements NetworkProvider {
         }
     }
 
-    private mirrorElement(element: any, network: StationHolder): TimedDrawable | null {
+    private mirrorElement(element: any, network: StationProvider): TimedDrawable | null {
         if (element.localName == 'path') {
             return new Line(new SvgLine(element), network);
-        } /*else if (element.localName == 'text') {
-            return new Label(new SvgLabel(element));
-        }*/
+        } else if (element.localName == 'text') {
+            return new Label(new SvgLabel(element), network);
+        }
         return null;
     }
 

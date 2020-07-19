@@ -53,7 +53,7 @@ export class Rotation {
 
     normalize(): Rotation {
         let dir = this.degrees;
-        if (Utils.equals(dir, 90))
+        if (Utils.equals(dir, -90))
             dir = 0;
         else if (dir < -90)
             dir += 180;

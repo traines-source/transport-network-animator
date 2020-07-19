@@ -1,10 +1,10 @@
 import { TimedDrawable } from "./Drawable";
-import { LineProvider, Line } from "./Line";
+import { LineAdapter, Line } from "./Line";
 import { Vector } from "./Vector";
 import { Stop } from "./Station";
 import { Instant } from "./Instant";
 
-export class SvgLine implements LineProvider {
+export class SvgLine implements LineAdapter {
     private _stops: Stop[] = [];
 
     constructor(private element: SVGPathElement) {
@@ -71,6 +71,10 @@ export class SvgLine implements LineProvider {
             length = 0;
         }
         this.animateFrame(length);
+    }
+
+    erase(animate: boolean, reverse: boolean) {
+        this.element.setAttribute('d', '');
     }
     
     private animateFrame(length: number) {

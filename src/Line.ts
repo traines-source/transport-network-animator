@@ -2,16 +2,17 @@ import { TimedDrawable, Timed } from "./Drawable";
 import { Instant } from "./Instant";
 import { Station, Stop } from "./Station";
 import { Vector } from "./Vector";
-import { StationHolder } from "./Network";
+import { StationProvider } from "./Network";
 import { Rotation } from "./Rotation";
 import { Utils } from "./Utils";
 
 
 
-export interface LineProvider extends Timed  {
+export interface LineAdapter extends Timed  {
     stops: Stop[];
     name: string;
     rerenderLine(path: Vector[], animate: boolean): void;
+    erase(animate: boolean, reverse: boolean): void;
 }
 
 export class Line implements TimedDrawable {
@@ -19,19 +20,20 @@ export class Line implements TimedDrawable {
     static SPEED = 3;
     static FPS = 60;
 
-    constructor(private provider: LineProvider, private stationHolder: StationHolder) {
+    constructor(private adapter: LineAdapter, private stationProvider: StationProvider) {
 
     }
 
-    from = this.provider.from;
-    to = this.provider.to;
+    from = this.adapter.from;
+    to = this.adapter.to;
+    name = this.adapter.name;
     
     private precedingStop: Station | undefined = undefined;
     private precedingDir: Rotation | undefined = undefined;
 
 
     draw(delay: number, animate: boolean): number {
-        const stops = this.provider.stops;
+        const stops = this.adapter.stops;
         const path: Vector[] = [];
         
         let track = '+';
@@ -40,7 +42,7 @@ export class Line implements TimedDrawable {
             if (trackAssignment != '') {
                 track = trackAssignment;
             }
-            const stop = this.stationHolder.stationById(stops[j].stationId);
+            const stop = this.stationProvider.stationById(stops[j].stationId);
             this.createConnection(stop, this.nextStopBaseCoord(stops, j, stop.baseCoords), track, path, delay, animate, true);
             track = track[0];
         }
@@ -51,7 +53,7 @@ export class Line implements TimedDrawable {
 
     private nextStopBaseCoord(stops: Stop[], currentStopIndex: number, defaultCoords: Vector) {
         if (currentStopIndex+1 < stops.length) {
-            return this.stationHolder.stationById(stops[currentStopIndex+1].stationId).baseCoords;
+            return this.stationProvider.stationById(stops[currentStopIndex+1].stationId).baseCoords;
         }
         return defaultCoords;
     }
@@ -80,7 +82,7 @@ export class Line implements TimedDrawable {
                 this.createConnection(station, nextStopBaseCoord, track, path, delay, animate, false);
                 return;
             } else if (!found) {
-                console.log('path to fix on line', this.provider.name, 'at station', station.id);
+                console.log('path to fix on line', this.adapter.name, 'at station', station.id);
             }
             this.precedingDir = stationDir;
         }
@@ -92,7 +94,19 @@ export class Line implements TimedDrawable {
     }
 
     erase(delay: number, animate: boolean, reverse: boolean): number {
-        throw new Error("Method not implemented.");
+        if (delay > 0) {
+            const line = this;
+            window.setTimeout(function() { line.erase(0, animate, reverse); }, delay * 1000);
+            return 0;
+        }
+        this.adapter.erase(false, reverse);
+        const stops = this.adapter.stops;
+        for (let j=0; j<stops.length; j++) {
+            const stop = this.stationProvider.stationById(stops[j].stationId);
+            stop.removeLine(this);
+            stop.rerenderStation(0);
+        }
+        return 0;        
     }
 
     private getStopOrientationBasedOnThreeStops(baseCoord: Vector, nextStopBaseCoord: Vector, dir: Rotation, path: Vector[]) {
@@ -142,17 +156,17 @@ export class Line implements TimedDrawable {
 
     private getOrCreateHelperStop(fromDir: Rotation, fromStop: Station, toStop: Station): Station {
         const helpStopId = 'h_' + Utils.alphabeticId(fromStop.id, toStop.id);
-        let helpStop = this.stationHolder.stationById(helpStopId);
+        let helpStop = this.stationProvider.stationById(helpStopId);
         if (helpStop == undefined) {
             const oldCoord = fromStop.baseCoords;
             const newCoord = toStop.baseCoords;
             const delta = newCoord.delta(oldCoord);
             const deg = oldCoord.delta(newCoord).inclination();
             console.log(helpStopId, deg, fromDir);
-            const intermediateDir = new Rotation((deg.delta(fromDir).degrees >= 0 ? Math.floor(deg.degrees / 45) : Math.ceil(deg.degrees / 45)) * 45);
+            const intermediateDir = new Rotation((deg.delta(fromDir).degrees >= 0 ? Math.floor(deg.degrees / 45) : Math.ceil(deg.degrees / 45)) * 45).normalize();
             const intermediateCoord = delta.withLength(delta.length/2).add(newCoord);
 
-            helpStop = this.stationHolder.createVirtualStop(helpStopId, intermediateCoord, intermediateDir);
+            helpStop = this.stationProvider.createVirtualStop(helpStopId, intermediateCoord, intermediateDir);
         }
         return helpStop;
     }
@@ -172,6 +186,6 @@ export class Line implements TimedDrawable {
 
     private rerenderLine(path: Vector[], delay: number, animate: boolean) {
         const line = this;
-        window.setTimeout(function () { line.provider.rerenderLine(path, animate); }, delay * 1000);
+        window.setTimeout(function () { line.adapter.rerenderLine(path, animate); }, delay * 1000);
     }
 }

@@ -35,11 +35,13 @@ describe('Rotation', () => {
 
     it('whenNormalize', () => {
         expect(new Rotation(-135).normalize().degrees).eql(45);
-        //expect(new Rotation(-90).normalize().degrees).eql(0);
-        // TODO
+        expect(new Rotation(-90).normalize().degrees).eql(0);
         expect(new Rotation(-45).normalize().degrees).eql(-45);
         expect(new Rotation(0).normalize().degrees).eql(0);
         expect(new Rotation(45).normalize().degrees).eql(45);
+        expect(new Rotation(90).normalize().degrees).eql(90);
+        expect(new Rotation(135).normalize().degrees).eql(-45);
+        expect(new Rotation(180).normalize().degrees).eql(0);
     })
 
     it('whenName', () => {

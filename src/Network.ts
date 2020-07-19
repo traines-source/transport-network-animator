@@ -4,39 +4,40 @@ import { Station } from "./Station";
 import { Vector } from "./Vector";
 import { Rotation } from "./Rotation";
 
-export interface StationHolder {
+export interface StationProvider {
     stationById(id: string): Station;
     createVirtualStop(id: string, baseCoords: Vector, rotation: Rotation): Station;
 }
-export interface NetworkProvider {
+export interface NetworkAdapter {
     initialize(network: Network): void;
     stationById(id: string): Station | null;
     createVirtualStop(id: string, baseCoords: Vector, rotation: Rotation): Station;
 }
 
-export class Network implements StationHolder {
+export class Network implements StationProvider {
+    private slideIndex: {[id: string] : {[id: string]: TimedDrawable[]}} = {};
+    private stations: { [id: string] : Station } = {};
+
+    constructor(private adapter: NetworkAdapter) {
+
+    }
+
+    initialize(): void {
+        this.adapter.initialize(this);
+    }
+
     stationById(id: string): Station {
         if (this.stations[id] == undefined) {
-            const station = this.provider.stationById(id)
+            const station = this.adapter.stationById(id)
             if (station != null)
                 this.stations[id] = station;
         }
         return this.stations[id];
     }
     createVirtualStop(id: string, baseCoords: Vector, rotation: Rotation): Station {
-        const stop = this.provider.createVirtualStop(id, baseCoords, rotation);
+        const stop = this.adapter.createVirtualStop(id, baseCoords, rotation);
         this.stations[id] = stop;
         return stop;
-    }
-    private slideIndex: {[id: string] : {[id: string]: TimedDrawable[]}} = {};
-    private stations: { [id: string] : Station } = {};
-
-    constructor(private provider: NetworkProvider) {
-
-    }
-
-    initialize(): void {
-        this.provider.initialize(this);
     }
 
     timedDrawablesAt(now: Instant): TimedDrawable[] {
@@ -67,7 +68,7 @@ export class Network implements StationHolder {
             epoch = this.findSmallestAbove(now.epoch, this.slideIndex);
             if (epoch == undefined)
                 return null;
-            second = this.findSmallestAbove(-1, this.slideIndex[now.epoch]);
+            second = this.findSmallestAbove(-1, this.slideIndex[epoch]);
             if (second == undefined)
                 return null;
         }
