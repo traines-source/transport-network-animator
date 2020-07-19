@@ -1,3 +1,5 @@
+import { Utils } from "./Utils";
+
 export class Rotation {
     private static DIRS: { [id: string]: number } = {'sw': -135, 'w': -90, 'nw': -45, 'n': 0, 'ne': 45, 'e': 90, 'se': 135, 's': 180};
 
@@ -7,6 +9,15 @@ export class Rotation {
 
     static from(direction: string): Rotation {
         return new Rotation(Rotation.DIRS[direction])
+    }
+
+    get name(): string {
+        for (const [key, value] of Object.entries(Rotation.DIRS)) {
+            if (Utils.equals(value, this.degrees)) {
+                return key;
+            }
+        }
+        return 'n';
     }
 
     get degrees(): number {
@@ -39,4 +50,17 @@ export class Rotation {
         }
         return new Rotation(dist);
     }
+
+    normalize(): Rotation {
+        let dir = this.degrees;
+        if (Utils.equals(dir, 90))
+            dir = 0;
+        else if (dir < -90)
+            dir += 180;
+        else if (dir > 90)
+            dir -= 180;
+        return new Rotation(dir);
+    }
+    
+    
 }

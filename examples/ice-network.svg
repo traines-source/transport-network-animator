@@ -154,6 +154,6 @@
         <rect id="fNPA" x="760" y="760" data-dir="n" class="helper" />
 
     </g>
-    <script xlink:href="render.js" />
+    <!--<script xlink:href="render.js" />-->
     <script xlink:href="../dist/network-animator.js" />
 </svg>

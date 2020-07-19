@@ -64,7 +64,14 @@ export class Vector {
         return Utils.equals(n1, 0) && Utils.equals(n2, 0) && Utils.equals(n3, 0);
     }
 
-
+    inclination(): Rotation {
+        if (Utils.equals(this.x, 0))
+            return new Rotation(this.y > 0 ? 180 : 0);
+        if (Utils.equals(this.y, 0))
+            return new Rotation(this.x > 0 ? 90 : -90);
+        const adjacent = new Vector(0,-Math.abs(this.y));
+        return new Rotation((Math.sign(this.x)*Math.acos(this.dotProduct(adjacent)/adjacent.length/this.length)*180/Math.PI));
+    }
 
    
 

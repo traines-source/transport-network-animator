@@ -82,4 +82,11 @@ describe('Vector', () => {
         expect(new Vector(1, 0.0001).isDeltaMatchingParallel(new Vector(0.0001, 0.0001), new Vector(1, 0.00001))).is.true;
         expect(new Vector(7, -7).isDeltaMatchingParallel(new Vector(0, 1), new Vector(0, 2))).is.false;
     })
+
+    it('whenInclination', () => {
+        expect(new Vector(0.0001, -7).inclination().degrees).eql(0);
+        expect(new Vector(0.7, 0.7).inclination().degrees).eql(135);
+        expect(new Vector(-0.7, 0).inclination().degrees).eql(-90);
+        expect(new Vector(-0.7, 0.7).inclination().degrees).eql(-135);
+    })
 })

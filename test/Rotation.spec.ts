@@ -32,4 +32,19 @@ describe('Rotation', () => {
         expect(new Rotation(170).delta(new Rotation(-170)).degrees).eql(20);
         expect(new Rotation(150).delta(new Rotation(20)).degrees).eql(-130);
     })
+
+    it('whenNormalize', () => {
+        expect(new Rotation(-135).normalize().degrees).eql(45);
+        //expect(new Rotation(-90).normalize().degrees).eql(0);
+        // TODO
+        expect(new Rotation(-45).normalize().degrees).eql(-45);
+        expect(new Rotation(0).normalize().degrees).eql(0);
+        expect(new Rotation(45).normalize().degrees).eql(45);
+    })
+
+    it('whenName', () => {
+        expect(new Rotation(-135).name).eql('sw');
+        expect(new Rotation(99).name).eql('n');
+        expect(new Rotation(90).name).eql('e');
+    })
 })
