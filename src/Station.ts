@@ -2,6 +2,7 @@ import { Vector } from "./Vector";
 import { Rotation } from "./Rotation";
 import { Line } from "./Line";
 import { Utils } from "./Utils";
+import { PreferredTrack } from "./PreferredTrack";
 
 export interface StationAdapter {
     baseCoords: Vector;
@@ -52,12 +53,12 @@ export class Station {
         }
     }
 
-    assignTrack(axis: string, preferredTrack: string): number { 
+    assignTrack(axis: string, preferredTrack: PreferredTrack): number { 
         const positionBoundariesForAxis = this.positionBoundaries()[axis];
-        if (preferredTrack.length > 1) {
-            return parseInt(preferredTrack);
+        if (preferredTrack.hasTrackNumber()) {
+            return preferredTrack.trackNumber;
         }
-        return preferredTrack == '+' ? positionBoundariesForAxis[1] + 1 : positionBoundariesForAxis[0] - 1;
+        return preferredTrack.isPositive() ? positionBoundariesForAxis[1] + 1 : positionBoundariesForAxis[0] - 1;
     }
 
     rotatedTrackCoordinates(incomingDir: Rotation, assignedTrack: number): Vector { 

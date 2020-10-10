@@ -4,6 +4,7 @@ import { Vector } from "./Vector";
 import { StationProvider } from "./Network";
 import { Rotation } from "./Rotation";
 import { Utils } from "./Utils";
+import { PreferredTrack } from "./PreferredTrack";
 
 export interface LineAdapter extends Timed  {
     stops: Stop[];
@@ -31,15 +32,12 @@ export class Line implements TimedDrawable {
         const stops = this.adapter.stops;
         const path: Vector[] = [];
         
-        let track = '+';
+        let track = new PreferredTrack('+');
         for (let j=0; j<stops.length; j++) {
-            const trackAssignment = stops[j].preferredTrack;
-            if (trackAssignment != '') {
-                track = trackAssignment;
-            }
+            track = track.update(stops[j].preferredTrack);
             const stop = this.stationProvider.stationById(stops[j].stationId);
             this.createConnection(stop, this.nextStopBaseCoord(stops, j, stop.baseCoords), track, path, delay, animate, true);
-            track = track[0];
+            track = track.keepOnlySign();
         }
         let duration = this.getAnimationDuration(path, animate);
         this.adapter.draw(delay, duration, path);
@@ -64,7 +62,7 @@ export class Line implements TimedDrawable {
         return defaultCoords;
     }
 
-    private createConnection(station: Station, nextStopBaseCoord: Vector, track: string, path: Vector[], delay: number, animate: boolean, recurse: boolean): void {
+    private createConnection(station: Station, nextStopBaseCoord: Vector, track: PreferredTrack, path: Vector[], delay: number, animate: boolean, recurse: boolean): void {
         const dir = station.rotation;
         const baseCoord = station.baseCoords;
         const newDir = this.getStopOrientationBasedOnThreeStops(baseCoord, nextStopBaseCoord, dir, path);
@@ -84,7 +82,7 @@ export class Line implements TimedDrawable {
                 const helpStop = this.getOrCreateHelperStop(this.precedingDir, this.precedingStop, station);
                 
                 this.precedingDir = this.precedingDir.add(new Rotation(180));
-                this.createConnection(helpStop, baseCoord, track[0], path, delay, animate, false);
+                this.createConnection(helpStop, baseCoord, track.keepOnlySign(), path, delay, animate, false);
                 this.createConnection(station, nextStopBaseCoord, track, path, delay, animate, false);
                 return;
             } else if (!found) {

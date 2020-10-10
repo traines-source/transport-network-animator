@@ -68,7 +68,7 @@
 
         <path data-line="ICE42" style="stroke:#F8ABAD" class="e2h" data-stops="EDO EE EDG KD KK FFLF RM TS TU MA MM" />
 
-        <path data-line="ICE43" style="stroke:#00A650" class="e2h" data-stops="EDO EHG KK FFLF RM RK RO RF RB hRB" />
+        <path data-line="ICE43" style="stroke:#00A650" class="e2h" data-stops="EDO EHG KK FFLF - RM RK RO RF RB hRB" />
         
         <path data-line="ICE45" style="stroke:#007fcf" class="some" data-stops="KK FW FMZ RM RH TS" />
 
@@ -77,7 +77,7 @@
         
         <path data-line="ICE49" style="stroke:#B41E8E" class="some" data-stops="KK FFLF FF" />
 
-        <path data-line="ICE50" style="stroke:#231F20" class="e2h" data-stops="DDRE LL UE FFU FF FFLF FMZ FW" />
+        <path data-line="ICE50" style="stroke:#231F20" class="e2h" data-stops="DDRE LL UE FFU FF FFLF FMZ - FW" />
 
         <path data-line="ICE78" style="stroke:#F58232" class="e2h" data-stops="hEOB EOB EDG KD KK FFLF FF" />
 
@@ -89,7 +89,7 @@
         <path data-line="ICE82" style="stroke:#007fcf" class="e2h" data-stops="FF RM" data-from="2016 3 noanim" />
         <path data-line="ICE82" style="stroke:#007fcf" class="e4h" data-stops="RM RK hXFSTG" data-from="2016 3 noanim" />
 
-        <path data-line="ICE83" style="stroke:#A7A9AC" class="e4h" data-stops="TS RK hXFSTG" />
+        <path data-line="ICE83" style="stroke:#A7A9AC" class="e4h" data-stops="- TS + RK hXFSTG" />
 
         <path data-line="ICE90" style="stroke:#007fcf" class="e2h" data-stops="MM fXASB" />
 
