@@ -20,7 +20,11 @@ export class Label implements TimedDrawable {
     to = this.adapter.to;
 
     get forStation(): Station {
-        return this.stationProvider.stationById(this.adapter.forStation || '');
+        const s = this.stationProvider.stationById(this.adapter.forStation || '');
+        if (s == undefined) {
+            throw new Error('Station with ID ' + this.adapter.forStation + ' is undefined');
+        }
+        return s;
     }
 
     draw(delay: number, animate: boolean): number {

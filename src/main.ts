@@ -5,7 +5,7 @@ import { Network } from "./Network";
 import { Instant } from "./Instant";
 import { TimedDrawable } from "./Drawable";
 
-// TODO: erase anim, labels, zoom, negative default tracks based on direction,
+// TODO: erase anim, labels, zoom, negative default tracks based on direction, reuse track of just erased line?
 
 
 var precedingStop : Station | undefined = undefined;
@@ -29,6 +29,8 @@ function getStartEpoch(): number {
 function slide(instant: Instant, animate: boolean): void {
     if (instant.epoch == animateFromEpoch)
         animate = true;
+
+    network.setInstant(instant);
 
     const elements: TimedDrawable[] = network.timedDrawablesAt(instant);
     let delay = 0;

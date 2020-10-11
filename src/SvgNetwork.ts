@@ -60,5 +60,13 @@ export class SvgNetwork implements NetworkAdapter {
         element.setAttribute('x', coord.x);
         element.setAttribute('y', coord.y);
     }
+
+    drawEpoch(epoch: string): void {
+        let epochLabel;
+        if (document.getElementById('epoch-label') != undefined) {
+            epochLabel = <SVGTextElement> <unknown> document.getElementById('epoch-label');
+            epochLabel.textContent = epoch;       
+        }
+    }
    
 }

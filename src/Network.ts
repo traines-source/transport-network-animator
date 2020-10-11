@@ -12,6 +12,7 @@ export interface NetworkAdapter {
     initialize(network: Network): void;
     stationById(id: string): Station | null;
     createVirtualStop(id: string, baseCoords: Vector, rotation: Rotation): Station;
+    drawEpoch(epoch: string): void;
 }
 
 export class Network implements StationProvider {
@@ -39,6 +40,10 @@ export class Network implements StationProvider {
         const stop = this.adapter.createVirtualStop(id, baseCoords, rotation);
         this.stations[id] = stop;
         return stop;
+    }
+
+    setInstant(instant: Instant) {
+        this.adapter.drawEpoch(instant.epoch + '')
     }
 
     timedDrawablesAt(now: Instant): TimedDrawable[] {
