@@ -57,7 +57,11 @@ export class Line implements TimedDrawable {
 
     private nextStopBaseCoord(stops: Stop[], currentStopIndex: number, defaultCoords: Vector) {
         if (currentStopIndex+1 < stops.length) {
-            return this.stationProvider.stationById(stops[currentStopIndex+1].stationId).baseCoords;
+            const id = stops[currentStopIndex+1].stationId;
+            const stop = this.stationProvider.stationById(id);
+            if (stop == undefined)
+                console.error('Station with ID', id, 'is undefined');
+            return stop.baseCoords;            
         }
         return defaultCoords;
     }
