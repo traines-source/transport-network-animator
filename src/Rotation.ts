@@ -61,4 +61,31 @@ export class Rotation {
             dir -= 180;
         return new Rotation(dir);
     }
+
+    isVertical(): boolean {
+        return this.degrees % 180 == 0;
+    }
+
+    quarterDirection(relativeTo: Rotation) {
+        const deltaDir = relativeTo.delta(this).degrees;
+        const deg = deltaDir < 0 ? Math.ceil((deltaDir-45)/90) : Math.floor((deltaDir+45)/90);
+        return new Rotation(deg*90);
+    }
+
+    halfDirection(relativeTo: Rotation, splitAxis: Rotation) {
+        const deltaDir = relativeTo.delta(this).degrees;
+        let deg;
+        if (splitAxis.isVertical()) {
+            if (deltaDir < 0 && deltaDir >= -180)
+                deg = -90;
+            else
+                deg = 90;
+        } else {
+            if (deltaDir < 90 && deltaDir >= -90)
+                deg = 0;
+            else
+                deg = 180;
+        }
+        return new Rotation(deg);
+    }
 }

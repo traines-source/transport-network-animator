@@ -34,8 +34,11 @@ export class Line implements TimedDrawable {
         
         let track = new PreferredTrack('+');
         for (let j=0; j<stops.length; j++) {
-            track = track.update(stops[j].preferredTrack);
+            track = track.fromString(stops[j].preferredTrack);
             const stop = this.stationProvider.stationById(stops[j].stationId);
+            if (stop == undefined)
+                throw new Error('Station with ID ' + stops[j].stationId + ' is undefined');
+            track = track.fromExistingLineAtStation(stop.getAxisAndTrackForExistingLine(this.name));
             this.createConnection(stop, this.nextStopBaseCoord(stops, j, stop.baseCoords), track, path, delay, animate, true);
             track = track.keepOnlySign();
         }
@@ -49,6 +52,8 @@ export class Line implements TimedDrawable {
         const stops = this.adapter.stops;
         for (let j=0; j<stops.length; j++) {
             const stop = this.stationProvider.stationById(stops[j].stationId);
+            if (stop == undefined)
+                throw new Error('Station with ID ' + stops[j].stationId + ' is undefined');
             stop.removeLine(this);
             stop.draw(delay);
         }
@@ -60,7 +65,7 @@ export class Line implements TimedDrawable {
             const id = stops[currentStopIndex+1].stationId;
             const stop = this.stationProvider.stationById(id);
             if (stop == undefined)
-                console.error('Station with ID', id, 'is undefined');
+                throw new Error('Station with ID ' + id + ' is undefined');
             return stop.baseCoords;            
         }
         return defaultCoords;
@@ -69,8 +74,8 @@ export class Line implements TimedDrawable {
     private createConnection(station: Station, nextStopBaseCoord: Vector, track: PreferredTrack, path: Vector[], delay: number, animate: boolean, recurse: boolean): void {
         const dir = station.rotation;
         const baseCoord = station.baseCoords;
-        const newDir = this.getStopOrientationBasedOnThreeStops(baseCoord, nextStopBaseCoord, dir, path);
-        const newPos = station.assignTrack(newDir.degrees % 180 == 0 ? 'x' : 'y', track);
+        const newDir = this.getStopOrientationBasedOnThreeStops(station, nextStopBaseCoord, dir, path);
+        const newPos = station.assignTrack(newDir.isVertical() ? 'x' : 'y', track);
 
         const newCoord = station.rotatedTrackCoordinates(newDir, newPos);
     
@@ -94,34 +99,31 @@ export class Line implements TimedDrawable {
             }
             this.precedingDir = stationDir;
         }
-        station.addLine(this, newDir.degrees % 180 == 0 ? 'x' : 'y', newPos);
+        station.addLine(this, newDir.isVertical() ? 'x' : 'y', newPos);
         path.push(newCoord);
         delay = this.getAnimationDuration(path, animate) + delay;
         station.draw(delay);
         this.precedingStop = station;
     }
 
-    private getStopOrientationBasedOnThreeStops(baseCoord: Vector, nextStopBaseCoord: Vector, dir: Rotation, path: Vector[]): Rotation {
-        let newDir;
+    private getStopOrientationBasedOnThreeStops(station: Station, nextStopBaseCoord: Vector, dir: Rotation, path: Vector[]): Rotation {
         if (path.length != 0) {
             const oldCoord = path[path.length-1];
-            newDir = this.getStopOrientation(nextStopBaseCoord.delta(oldCoord), dir);
-        } else {
-            newDir = this.getStopOrientation(baseCoord.delta(nextStopBaseCoord), dir);
+            return nextStopBaseCoord.delta(oldCoord).inclination().quarterDirection(dir);
         }
-        return newDir;
+        const delta = station.baseCoords.delta(nextStopBaseCoord);
+        const existingAxis = station.getAxisAndTrackForExistingLine(this.name)?.axis;
+        if (existingAxis != undefined) {
+            return delta.inclination().halfDirection(dir, existingAxis == 'x' ? new Rotation(90) : new Rotation(0));           
+        }
+        return delta.inclination().quarterDirection(dir);
     }
-
-    private getStopOrientation(delta: Vector, dir: Rotation): Rotation {
-        const deltaDir = dir.delta(delta.inclination()).degrees;
-        const deg = deltaDir < 0 ? Math.ceil((deltaDir-45)/90) : Math.floor((deltaDir+45)/90);
-        return new Rotation(deg*90);
-    }
+    
 
     private getPrecedingDir(precedingDir: Rotation | undefined, precedingStop: Station | undefined, oldCoord: Vector, newCoord: Vector): Rotation {
         if (precedingDir == undefined) {
             const precedingStopRotation = precedingStop?.rotation ?? new Rotation(0);
-            precedingDir = this.getStopOrientation(oldCoord.delta(newCoord), precedingStopRotation).add(precedingStopRotation);
+            precedingDir = oldCoord.delta(newCoord).inclination().quarterDirection(precedingStopRotation).add(precedingStopRotation);
         } else {
             precedingDir = precedingDir.add(new Rotation(180));
         }

@@ -5,7 +5,7 @@ import { Vector } from "./Vector";
 import { Rotation } from "./Rotation";
 
 export interface StationProvider {
-    stationById(id: string): Station;
+    stationById(id: string): Station | undefined;
     createVirtualStop(id: string, baseCoords: Vector, rotation: Rotation): Station;
 }
 export interface NetworkAdapter {
@@ -26,7 +26,7 @@ export class Network implements StationProvider {
         this.adapter.initialize(this);
     }
 
-    stationById(id: string): Station {
+    stationById(id: string): Station | undefined {
         if (this.stations[id] == undefined) {
             const station = this.adapter.stationById(id)
             if (station != null)

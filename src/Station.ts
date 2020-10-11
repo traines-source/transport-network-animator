@@ -18,12 +18,18 @@ export class Stop {
     }
 }
 
+export interface LineAtStation {
+    line?: Line;
+    axis: string;
+    track: number;
+}
+
 export class Station {
     static LINE_DISTANCE = 6;
     static DEFAULT_STOP_DIMEN = 10;
     static LABEL_DISTANCE = 0;
 
-    existingLines: {[id: string]: {line: Line, track: number}[]} = {x: [], y: []};
+    private existingLines: {[id: string]: {line: Line, track: number}[]} = {x: [], y: []};
     baseCoords = this.adapter.baseCoords;
     rotation = this.adapter.rotation;
     labelDir = this.adapter.labelDir;
@@ -51,6 +57,31 @@ export class Station {
                 i++;
             }
         }
+    }
+
+    getAxisAndTrackForExistingLine(lineName: string): LineAtStation | undefined {
+        const x = this.getTrackForLineAtAxis(lineName, this.existingLines.x);
+        if (x != undefined) {
+            x.axis = 'x';
+            return x;
+        }
+        const y = this.getTrackForLineAtAxis(lineName, this.existingLines.y);
+        if (y != undefined) {
+            y.axis = 'y';
+            return y;
+        }
+        return undefined;
+    }
+
+    private getTrackForLineAtAxis(lineName: string, existingLinesForAxis: {line: Line, track: number}[]): LineAtStation | undefined {
+        let i = 0;
+        while (i < existingLinesForAxis.length) {
+            if (existingLinesForAxis[i].line.name == lineName) {
+                return {line: existingLinesForAxis[i].line, axis: '', track: existingLinesForAxis[i].track};
+            }
+            i++;
+        }
+        return undefined;
     }
 
     assignTrack(axis: string, preferredTrack: PreferredTrack): number { 

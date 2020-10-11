@@ -49,4 +49,94 @@ describe('Rotation', () => {
         expect(new Rotation(99).name).eql('n');
         expect(new Rotation(90).name).eql('e');
     })
+
+    it('whenQuarterDirection', () => {
+        expect(new Rotation( 180).quarterDirection(Rotation.from('n')).degrees).eql(180);
+        expect(new Rotation(-130).quarterDirection(Rotation.from('n')).degrees).eql(-90);
+        expect(new Rotation( -80).quarterDirection(Rotation.from('n')).degrees).eql(-90);
+        expect(new Rotation( -20).quarterDirection(Rotation.from('n')).degrees).eql(-0);
+        expect(new Rotation(  10).quarterDirection(Rotation.from('n')).degrees).eql(0);
+        expect(new Rotation( 100).quarterDirection(Rotation.from('n')).degrees).eql(90);
+
+        expect(new Rotation( 180).quarterDirection(Rotation.from('ne')).degrees).eql(180);
+        expect(new Rotation(-130).quarterDirection(Rotation.from('ne')).degrees).eql(-180);
+        expect(new Rotation( -80).quarterDirection(Rotation.from('ne')).degrees).eql(-90);
+        expect(new Rotation( -20).quarterDirection(Rotation.from('ne')).degrees).eql(-90);
+        expect(new Rotation(  10).quarterDirection(Rotation.from('ne')).degrees).eql(-0);
+        expect(new Rotation( 100).quarterDirection(Rotation.from('ne')).degrees).eql(90);
+
+        expect(new Rotation( 180).quarterDirection(Rotation.from('nw')).degrees).eql(-180);
+        expect(new Rotation(-130).quarterDirection(Rotation.from('nw')).degrees).eql(-90);
+        expect(new Rotation( -80).quarterDirection(Rotation.from('nw')).degrees).eql(-0);
+        expect(new Rotation( -20).quarterDirection(Rotation.from('nw')).degrees).eql(0);
+        expect(new Rotation(  10).quarterDirection(Rotation.from('nw')).degrees).eql(90);
+        expect(new Rotation( 100).quarterDirection(Rotation.from('nw')).degrees).eql(180);
+
+        expect(new Rotation( 180).quarterDirection(Rotation.from('w')).degrees).eql(-90);
+        expect(new Rotation(-130).quarterDirection(Rotation.from('w')).degrees).eql(-0);
+        expect(new Rotation( -80).quarterDirection(Rotation.from('w')).degrees).eql(0);
+        expect(new Rotation( -20).quarterDirection(Rotation.from('w')).degrees).eql(90);
+        expect(new Rotation(  10).quarterDirection(Rotation.from('w')).degrees).eql(90);
+        expect(new Rotation( 100).quarterDirection(Rotation.from('w')).degrees).eql(-180);
+    })
+
+    it('whenHalfDirection_givenVerticalSplit', () => {
+        expect(new Rotation( 180).halfDirection(Rotation.from('n'), Rotation.from('n')).degrees).eql(90);
+        expect(new Rotation(-130).halfDirection(Rotation.from('n'), Rotation.from('n')).degrees).eql(-90);
+        expect(new Rotation( -80).halfDirection(Rotation.from('n'), Rotation.from('n')).degrees).eql(-90);
+        expect(new Rotation( -20).halfDirection(Rotation.from('n'), Rotation.from('n')).degrees).eql(-90);
+        expect(new Rotation(  10).halfDirection(Rotation.from('n'), Rotation.from('n')).degrees).eql(90);
+        expect(new Rotation( 100).halfDirection(Rotation.from('n'), Rotation.from('n')).degrees).eql(90);
+
+        expect(new Rotation( 180).halfDirection(Rotation.from('ne'), Rotation.from('n')).degrees).eql(90);
+        expect(new Rotation(-130).halfDirection(Rotation.from('ne'), Rotation.from('n')).degrees).eql(-90);
+        expect(new Rotation( -80).halfDirection(Rotation.from('ne'), Rotation.from('n')).degrees).eql(-90);
+        expect(new Rotation( -20).halfDirection(Rotation.from('ne'), Rotation.from('n')).degrees).eql(-90);
+        expect(new Rotation(  10).halfDirection(Rotation.from('ne'), Rotation.from('n')).degrees).eql(-90);
+        expect(new Rotation( 100).halfDirection(Rotation.from('ne'), Rotation.from('n')).degrees).eql(90);
+
+        expect(new Rotation( 180).halfDirection(Rotation.from('nw'), Rotation.from('n')).degrees).eql(-90);
+        expect(new Rotation(-130).halfDirection(Rotation.from('nw'), Rotation.from('n')).degrees).eql(-90);
+        expect(new Rotation( -80).halfDirection(Rotation.from('nw'), Rotation.from('n')).degrees).eql(-90);
+        expect(new Rotation( -20).halfDirection(Rotation.from('nw'), Rotation.from('n')).degrees).eql(90);
+        expect(new Rotation(  10).halfDirection(Rotation.from('nw'), Rotation.from('n')).degrees).eql(90);
+        expect(new Rotation( 100).halfDirection(Rotation.from('nw'), Rotation.from('n')).degrees).eql(90);
+
+        expect(new Rotation( 180).halfDirection(Rotation.from('w'), Rotation.from('n')).degrees).eql(-90);
+        expect(new Rotation(-130).halfDirection(Rotation.from('w'), Rotation.from('n')).degrees).eql(-90);
+        expect(new Rotation( -80).halfDirection(Rotation.from('w'), Rotation.from('n')).degrees).eql(90);
+        expect(new Rotation( -20).halfDirection(Rotation.from('w'), Rotation.from('n')).degrees).eql(90);
+        expect(new Rotation(  10).halfDirection(Rotation.from('w'), Rotation.from('n')).degrees).eql(90);
+        expect(new Rotation( 100).halfDirection(Rotation.from('w'), Rotation.from('n')).degrees).eql(-90);
+    })
+
+    it('whenHalfDirection_givenHorizontalSplit', () => {
+        expect(new Rotation( 180).halfDirection(Rotation.from('n'), Rotation.from('w')).degrees).eql(180);
+        expect(new Rotation(-130).halfDirection(Rotation.from('n'), Rotation.from('w')).degrees).eql(180);
+        expect(new Rotation( -80).halfDirection(Rotation.from('n'), Rotation.from('w')).degrees).eql(0);
+        expect(new Rotation( -20).halfDirection(Rotation.from('n'), Rotation.from('w')).degrees).eql(0);
+        expect(new Rotation(  10).halfDirection(Rotation.from('n'), Rotation.from('w')).degrees).eql(0);
+        expect(new Rotation( 100).halfDirection(Rotation.from('n'), Rotation.from('w')).degrees).eql(180);
+
+        expect(new Rotation( 180).halfDirection(Rotation.from('ne'), Rotation.from('w')).degrees).eql(180);
+        expect(new Rotation(-130).halfDirection(Rotation.from('ne'), Rotation.from('w')).degrees).eql(180);
+        expect(new Rotation( -80).halfDirection(Rotation.from('ne'), Rotation.from('w')).degrees).eql(180);
+        expect(new Rotation( -20).halfDirection(Rotation.from('ne'), Rotation.from('w')).degrees).eql(0);
+        expect(new Rotation(  10).halfDirection(Rotation.from('ne'), Rotation.from('w')).degrees).eql(0);
+        expect(new Rotation( 100).halfDirection(Rotation.from('ne'), Rotation.from('w')).degrees).eql(0);
+
+        expect(new Rotation( 180).halfDirection(Rotation.from('nw'), Rotation.from('w')).degrees).eql(180);
+        expect(new Rotation(-130).halfDirection(Rotation.from('nw'), Rotation.from('w')).degrees).eql(0);
+        expect(new Rotation( -80).halfDirection(Rotation.from('nw'), Rotation.from('w')).degrees).eql(0);
+        expect(new Rotation( -20).halfDirection(Rotation.from('nw'), Rotation.from('w')).degrees).eql(0);
+        expect(new Rotation(  10).halfDirection(Rotation.from('nw'), Rotation.from('w')).degrees).eql(0);
+        expect(new Rotation( 100).halfDirection(Rotation.from('nw'), Rotation.from('w')).degrees).eql(180);
+
+        expect(new Rotation( 180).halfDirection(Rotation.from('w'), Rotation.from('w')).degrees).eql(0);
+        expect(new Rotation(-130).halfDirection(Rotation.from('w'), Rotation.from('w')).degrees).eql(0);
+        expect(new Rotation( -80).halfDirection(Rotation.from('w'), Rotation.from('w')).degrees).eql(0);
+        expect(new Rotation( -20).halfDirection(Rotation.from('w'), Rotation.from('w')).degrees).eql(0);
+        expect(new Rotation(  10).halfDirection(Rotation.from('w'), Rotation.from('w')).degrees).eql(180);
+        expect(new Rotation( 100).halfDirection(Rotation.from('w'), Rotation.from('w')).degrees).eql(180);
+    })
 })

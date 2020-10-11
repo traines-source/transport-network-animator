@@ -1,3 +1,5 @@
+import { LineAtStation } from "./Station";
+
 export class PreferredTrack {
     private value: string;
 
@@ -5,15 +7,32 @@ export class PreferredTrack {
         this.value = value;
     }
     
-    update(value: string): PreferredTrack {
+    fromString(value: string): PreferredTrack {
         if (value != '') {
             return new PreferredTrack(value);
         }
         return this;
     }
 
+    fromNumber(value: number): PreferredTrack {
+        const prefix = value >= 0 ? '+' : '';
+        return new PreferredTrack(prefix + value);
+    }
+
+    fromExistingLineAtStation(atStation: LineAtStation | undefined) {
+        if (atStation == undefined) {
+            console.log('no')
+            return this;
+        }
+        if(this.hasTrackNumber())
+            return this;
+        console.log('Using track from existing Line at station')
+        return this.fromNumber(atStation.track);        
+    }
+
     keepOnlySign(): PreferredTrack {
-        return new PreferredTrack(this.value[0]);
+        const v = this.value[0];
+        return new PreferredTrack(v == '+' || v == '-' ? v : '+');
     }
 
     hasTrackNumber(): boolean {
