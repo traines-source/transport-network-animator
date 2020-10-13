@@ -54,7 +54,7 @@ export class Network implements StationProvider {
         return this.slideIndex[epoch] != undefined;
     }
 
-    public addToIndex(element: TimedDrawable): void {
+    addToIndex(element: TimedDrawable): void {
         this.setSlideIndexElement(element.from, element);
         if (!Instant.BIG_BANG.equals(element.to))
             this.setSlideIndexElement(element.to, element);

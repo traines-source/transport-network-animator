@@ -21,12 +21,10 @@ export class PreferredTrack {
 
     fromExistingLineAtStation(atStation: LineAtStation | undefined) {
         if (atStation == undefined) {
-            console.log('no')
             return this;
         }
         if(this.hasTrackNumber())
             return this;
-        console.log('Using track from existing Line at station')
         return this.fromNumber(atStation.track);        
     }
 

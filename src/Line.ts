@@ -38,7 +38,7 @@ export class Line implements TimedDrawable {
             const stop = this.stationProvider.stationById(stops[j].stationId);
             if (stop == undefined)
                 throw new Error('Station with ID ' + stops[j].stationId + ' is undefined');
-            track = track.fromExistingLineAtStation(stop.getAxisAndTrackForExistingLine(this.name));
+            track = track.fromExistingLineAtStation(stop.axisAndTrackForExistingLine(this.name));
             this.createConnection(stop, this.nextStopBaseCoord(stops, j, stop.baseCoords), track, path, delay, animate, true);
             track = track.keepOnlySign();
         }
@@ -112,7 +112,7 @@ export class Line implements TimedDrawable {
             return nextStopBaseCoord.delta(oldCoord).inclination().quarterDirection(dir);
         }
         const delta = station.baseCoords.delta(nextStopBaseCoord);
-        const existingAxis = station.getAxisAndTrackForExistingLine(this.name)?.axis;
+        const existingAxis = station.axisAndTrackForExistingLine(this.name)?.axis;
         if (existingAxis != undefined) {
             return delta.inclination().halfDirection(dir, existingAxis == 'x' ? new Rotation(90) : new Rotation(0));           
         }

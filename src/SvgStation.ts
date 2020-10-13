@@ -19,7 +19,7 @@ export class SvgStation implements StationAdapter {
         return Rotation.from(this.element.dataset.labelDir || 'n');
     }
 
-    public draw(delaySeconds: number, getPositionBoundaries: () => {[id: string]: [number, number]}): void {
+    draw(delaySeconds: number, getPositionBoundaries: () => {[id: string]: [number, number]}): void {
         if (delaySeconds > 0) {
             const station = this;
             window.setTimeout(function() { station.draw(0, getPositionBoundaries); }, delaySeconds * 1000);
