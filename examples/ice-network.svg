@@ -6,6 +6,7 @@
             <feComposite in="SourceGraphic" in2="a" result="xx" operator="xor" />
         </filter>
     </defs>
+    <g id="zoomable">
     <g id="elements">
         <text data-station="KA" >Aachen</text>
         <text data-station="AH" data-from="2020 1">Hamburg</text>
@@ -94,7 +95,7 @@
         <path data-line="ICE41" style="stroke:#bcd646" class="e2h" data-stops="FFLF FF" data-from="2002 20" data-to="2003 10" />
 
         <path data-line="ICE45" style="stroke:#0095d9" class="e2h" data-stops="KK FW FMZ RM RH TS" data-from="2002 30"/>
-        <path data-line="ICE43" style="stroke:#a78b6b" class="e2h" data-stops="EDO EHG KK FFLF RM RK RF RB hRB" data-from="2002 45" />
+        <path data-line="ICE43" style="stroke:#a78b6b" class="e2h" data-stops="EDO EHG KK FFLF RM RK RF RB" data-from="2002 45" />
         <path data-line="ICE42" style="stroke:#f8abad" class="e2h" data-stops="EDO EE EDG KD KK FFLF RM TS TU MA MH" data-from="2002 45" />
         <path data-line="ICE12" style="stroke:#8dd7f7" class="e2h" data-stops="hRB RB RF RO RK RM FF FFU FKW HG HBS HWOB BL" data-from="2002 68" />
         <path data-line="ICE55" style="stroke:#39b97a" class="some" data-stops="BL LM HBS HH EBIL EDO EHG KK" data-from="2002 78" />
@@ -234,7 +235,7 @@
         <rect id="RF" x="310" y="830" data-comment="Freiburg" data-dir="ne" />
         <rect id="RSI" x="400" y="850" data-comment="Singen" data-dir="n" />
         <rect id="RB" x="280" y="900" data-comment="Basel" data-dir="n" />
-        <rect id="NWH" x="485" y="625" data-comment="Würzburg"  data-dir="nw" />
+        <rect id="NWH" x="485" y="625" data-comment="Würzburg"  data-dir="ne" />
         <rect id="NN" x="550" y="660" data-comment="Nürnberg" data-dir="n" />
         <rect id="NRH" x="650" y="700" data-comment="Regensburg" data-dir="w" />
         <rect id="NPA" x="735" y="760" data-comment="Passau" data-dir="w" />
@@ -263,6 +264,7 @@
         <rect id="fNPA" x="760" y="760" data-dir="w" class="helper" />
         <rect id="fXAI" x="650" y="900" data-dir="n" class="helper" />
 
+    </g>
     </g>
     <text id="epoch-label" x="900" y="50" style="font-size: 50px"></text>
     <script xlink:href="../dist/network-animator.js" />

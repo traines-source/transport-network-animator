@@ -6,6 +6,7 @@ import { Vector } from "./Vector";
 
 export interface LabelAdapter extends Timed {
     forStation: string | undefined;
+    boundingBox: {tl: Vector, br: Vector};
     draw(delaySeconds: number, textCoords: Vector, labelDir: Rotation): void;
     erase(delaySeconds: number): void;
 }
@@ -18,6 +19,7 @@ export class Label implements TimedDrawable {
 
     from = this.adapter.from;
     to = this.adapter.to;
+    boundingBox = this.adapter.boundingBox;
 
     get forStation(): Station {
         const s = this.stationProvider.stationById(this.adapter.forStation || '');

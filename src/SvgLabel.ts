@@ -22,6 +22,11 @@ export class SvgLabel implements LabelAdapter {
         return this.element.dataset.station;
     }
 
+    get boundingBox(): {tl: Vector, br: Vector} {
+        const rect = this.element.getBoundingClientRect();
+        return {tl: new Vector(rect.left, rect.top), br: new Vector(rect.right, rect.bottom)};
+    }
+
     draw(delaySeconds: number, textCoords: Vector, labelDir: Rotation): void {
         if (delaySeconds > 0) {
             const label = this;

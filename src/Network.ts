@@ -1,4 +1,4 @@
-import { TimedDrawable } from "./Drawable";
+import { TimedDrawable, Timed } from "./Drawable";
 import { Instant } from "./Instant";
 import { Station } from "./Station";
 import { Vector } from "./Vector";
@@ -18,6 +18,8 @@ export interface NetworkAdapter {
 export class Network implements StationProvider {
     private slideIndex: {[id: string] : {[id: string]: TimedDrawable[]}} = {};
     private stations: { [id: string] : Station } = {};
+    private currentZoomScale: number = 1;
+    private currentZoomCenter: Vector = Vector.NULL;
 
     constructor(private adapter: NetworkAdapter) {
 
@@ -42,14 +44,61 @@ export class Network implements StationProvider {
         return stop;
     }
 
-    setInstant(instant: Instant) {
+    private displayInstant(instant: Instant) {
         if (!instant.equals(Instant.BIG_BANG)) {
             this.adapter.drawEpoch(instant.epoch + '')
         }
     }
 
-    timedDrawablesAt(now: Instant): TimedDrawable[] {
+    private timedDrawablesAt(now: Instant): TimedDrawable[] {
         return this.slideIndex[now.epoch][now.second];
+    }
+
+    drawTimedDrawablesAt(now: Instant, animate: boolean): number {
+        const boundingBox = {tl: Vector.NULL, br: Vector.NULL};
+        this.displayInstant(now);
+        const elements: TimedDrawable[] = this.timedDrawablesAt(now);
+        let delay = 0;
+        for (let i=0; i<elements.length; i++) {
+            delay += this.drawOrEraseElement(elements[i], delay, animate, now, boundingBox);
+        }
+        //this.zoomTo(boundingBox);
+        return delay;
+    }
+
+    private drawOrEraseElement(element: TimedDrawable, delay: number, animate: boolean, instant: Instant, boundingBox: {tl: Vector, br: Vector}): number {
+        if (instant.equals(element.to) && !element.from.equals(element.to)) {
+            delay = this.eraseElement(element, delay, this.shouldAnimate(element.to, animate));
+            this.updateBoundingBox(boundingBox, element, element.to);
+            return delay;
+        }
+        delay = this.drawElement(element, delay, this.shouldAnimate(element.from, animate));
+        this.updateBoundingBox(boundingBox, element, element.from);
+        return delay;
+    }
+    
+    private drawElement(element: TimedDrawable, delay: number, animate: boolean): number {
+        return element.draw(delay, animate);
+    }
+    
+    private eraseElement(element: TimedDrawable, delay: number, animate: boolean): number {
+        return element.erase(delay, animate, false);
+    }
+    
+    private shouldAnimate(instant: Instant, animate: boolean): boolean {
+        if (!animate)
+            return false;
+        if (instant.flag == 'noanim')
+            return false;
+        return animate;
+    }
+
+    private updateBoundingBox(boundingBox: {tl: Vector, br: Vector}, element: TimedDrawable, now: Instant) {
+        if (now.flag != 'nozoom' && now.flag != 'noanim') {
+            const box = element.boundingBox;
+            boundingBox.tl.bothAxisMins(box.tl);
+            boundingBox.br.bothAxisMaxs(box.br);
+        }
     }
 
     isEpochExisting(epoch: string): boolean {

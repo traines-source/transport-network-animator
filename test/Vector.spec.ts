@@ -89,4 +89,22 @@ describe('Vector', () => {
         expect(new Vector(-0.7, 0).inclination().degrees).eql(-90);
         expect(new Vector(-0.7, 0.7).inclination().degrees).eql(-135);
     })
+
+    it('whenBothAxisMins', () => {
+        expect(new Vector(1, -7).bothAxisMins(new Vector(2, -8))).eql(new Vector(1, -8));
+        expect(new Vector(0.7, 7).bothAxisMins(new Vector(0, 8))).eql(new Vector(0, 7));
+        expect(new Vector(0.7, 0.8).bothAxisMins(new Vector(7, 8))).eql(new Vector(0.7, 0.8));
+        expect(new Vector(0.7, 0.8).bothAxisMins(new Vector(-1, -8))).eql(new Vector(-1, -8));
+        expect(Vector.NULL.bothAxisMaxs(new Vector(-1, -8))).eql(new Vector(-1, -8));
+        expect(new Vector(-1, -8).bothAxisMaxs(Vector.NULL)).eql(new Vector(-1, -8));
+    })
+
+    it('whenBothAxisMaxs', () => {
+        expect(new Vector(0.0001, -7).bothAxisMaxs(new Vector(1, -8))).eql(new Vector(1, -7));
+        expect(new Vector(0.7, 0.7).bothAxisMaxs(new Vector(0, 8))).eql(new Vector(0.7, 8));
+        expect(new Vector(0.7, 0.8).bothAxisMaxs(new Vector(7, 8))).eql(new Vector(7, 8));
+        expect(new Vector(0.7, 0.8).bothAxisMaxs(new Vector(-1, -8))).eql(new Vector(0.7, 0.8));
+        expect(Vector.NULL.bothAxisMaxs(new Vector(-1, -8))).eql(new Vector(-1, -8));
+        expect(new Vector(-1, -8).bothAxisMaxs(Vector.NULL)).eql(new Vector(-1, -8));
+    })
 })

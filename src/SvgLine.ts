@@ -24,6 +24,11 @@ export class SvgLine implements LineAdapter {
         return this.getInstant('to');
     }
 
+    get boundingBox(): {tl: Vector, br: Vector} {
+        const rect = this.element.getBoundingClientRect();
+        return {tl: new Vector(rect.left, rect.top), br: new Vector(rect.right, rect.bottom)};
+    }
+
     private getInstant(fromOrTo: string): Instant {
         if (this.element.dataset[fromOrTo] != undefined) {
             const arr = this.element.dataset[fromOrTo]?.split(/\s+/)

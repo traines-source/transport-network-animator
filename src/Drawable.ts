@@ -1,6 +1,8 @@
 import { Instant } from "./Instant";
+import { Vector } from "./Vector";
 
 export interface Drawable {
+    boundingBox: {tl: Vector, br: Vector};
     draw(delay: number, animate: boolean): number;
     erase(delay: number, animate: boolean, reverse: boolean): number;
 }

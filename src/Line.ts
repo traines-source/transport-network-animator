@@ -9,6 +9,7 @@ import { PreferredTrack } from "./PreferredTrack";
 export interface LineAdapter extends Timed  {
     stops: Stop[];
     name: string;
+    boundingBox: { tl: Vector; br: Vector; };
     draw(delaySeconds: number, animationDurationSeconds: number, path: Vector[]): void;
     erase(delaySeconds: number, animationDurationSeconds: number, reverse: boolean): void;
 }
@@ -24,6 +25,7 @@ export class Line implements TimedDrawable {
     from = this.adapter.from;
     to = this.adapter.to;
     name = this.adapter.name;
+    boundingBox = this.adapter.boundingBox;
     
     private precedingStop: Station | undefined = undefined;
     private precedingDir: Rotation | undefined = undefined;
@@ -114,7 +116,11 @@ export class Line implements TimedDrawable {
         const delta = station.baseCoords.delta(nextStopBaseCoord);
         const existingAxis = station.axisAndTrackForExistingLine(this.name)?.axis;
         if (existingAxis != undefined) {
-            return delta.inclination().halfDirection(dir, existingAxis == 'x' ? new Rotation(90) : new Rotation(0));
+            const existingStopOrientiation = delta.inclination().halfDirection(dir, existingAxis == 'x' ? new Rotation(90) : new Rotation(0));
+            if (this.precedingDir == undefined) {
+                this.precedingDir = existingStopOrientiation.add(dir).add(new Rotation(180));
+            }
+            return existingStopOrientiation;
         }
         return delta.inclination().quarterDirection(dir);
     }

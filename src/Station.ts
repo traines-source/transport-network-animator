@@ -41,6 +41,7 @@ export class Station {
     }
 
     addLine(line: Line, axis: string, track: number): void {
+        this.phantom = undefined;
         this.existingLines[axis].push({line: line, axis: axis, track: track});
     }
 

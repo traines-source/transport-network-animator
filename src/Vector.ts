@@ -3,6 +3,7 @@ import { Utils } from "./Utils";
 
 export class Vector {
     static UNIT: Vector = new Vector(0, -1);
+    static NULL: Vector = new Vector(0, 0);
 
     constructor(private _x: number, private _y: number) {
 
@@ -71,5 +72,21 @@ export class Vector {
             return new Rotation(this.x > 0 ? 90 : -90);
         const adjacent = new Vector(0,-Math.abs(this.y));
         return new Rotation((Math.sign(this.x)*Math.acos(this.dotProduct(adjacent)/adjacent.length/this.length)*180/Math.PI));
+    }
+
+    bothAxisMins(other: Vector) {
+        if (this == Vector.NULL)
+            return other;
+        if (other == Vector.NULL)
+            return this;
+        return new Vector(this.x < other.x ? this.x : other.x, this.y < other.y ? this.y : other.y)
+    }
+
+    bothAxisMaxs(other: Vector) {
+        if (this == Vector.NULL)
+            return other;
+        if (other == Vector.NULL)
+            return this;
+        return new Vector(this.x > other.x ? this.x : other.x, this.y > other.y ? this.y : other.y)
     }
 }
