@@ -75,7 +75,7 @@ export class Line implements TimedDrawable {
         const dir = station.rotation;
         const baseCoord = station.baseCoords;
         const newDir = this.getStopOrientationBasedOnThreeStops(station, nextStopBaseCoord, dir, path);
-        const newPos = station.assignTrack(newDir.isVertical() ? 'x' : 'y', track);
+        const newPos = station.assignTrack(newDir.isVertical() ? 'x' : 'y', track, this);
 
         const newCoord = station.rotatedTrackCoordinates(newDir, newPos);
     

@@ -101,11 +101,12 @@ describe('Station', () => {
 
     it('whenAssignTrack_givenLines', () => {
         const s = new Station(instance(stationAdapter));
+        const l = new Line(instance(lineAdapter), instance(stationProvider));
    
-        expect(s.assignTrack('x', new PreferredTrack('+'))).eql(0);
-        expect(s.assignTrack('x', new PreferredTrack('+1'))).eql(1);
-        expect(s.assignTrack('x', new PreferredTrack('-2'))).eql(-2);
-        expect(s.assignTrack('x', new PreferredTrack('-'))).eql(0);
+        expect(s.assignTrack('x', new PreferredTrack('+'), l)).eql(0);
+        expect(s.assignTrack('x', new PreferredTrack('+1'), l)).eql(1);
+        expect(s.assignTrack('x', new PreferredTrack('-2'), l)).eql(-2);
+        expect(s.assignTrack('x', new PreferredTrack('-'), l)).eql(0);
     })
 
     it('whenAssignTrack_givenSingleLine', () => {
@@ -113,11 +114,11 @@ describe('Station', () => {
         const l = new Line(instance(lineAdapter), instance(stationProvider));
    
         s.addLine(l, 'x', -1);
-        expect(s.assignTrack('x', new PreferredTrack('+'))).eql(1); //TODO
-        expect(s.assignTrack('x', new PreferredTrack('+1'))).eql(1);
-        expect(s.assignTrack('x', new PreferredTrack('-1'))).eql(-1);
-        expect(s.assignTrack('x', new PreferredTrack('-2'))).eql(-2);
-        expect(s.assignTrack('x', new PreferredTrack('-'))).eql(-2);
+        expect(s.assignTrack('x', new PreferredTrack('+'), l)).eql(1); //TODO
+        expect(s.assignTrack('x', new PreferredTrack('+1'), l)).eql(1);
+        expect(s.assignTrack('x', new PreferredTrack('-1'), l)).eql(-1);
+        expect(s.assignTrack('x', new PreferredTrack('-2'), l)).eql(-2);
+        expect(s.assignTrack('x', new PreferredTrack('-'), l)).eql(-2);
     })
 
     it('whenAssignTrack_givenSingleLineOnZero', () => {
@@ -126,10 +127,10 @@ describe('Station', () => {
         const l = new Line(instance(lineAdapter), instance(stationProvider));
    
         s.addLine(l, 'x', 0);
-        expect(s.assignTrack('x', new PreferredTrack('+'))).eql(1);
-        expect(s.assignTrack('x', new PreferredTrack('+0'))).eql(0);
-        expect(s.assignTrack('x', new PreferredTrack('-2'))).eql(-2);
-        expect(s.assignTrack('x', new PreferredTrack('-'))).eql(-1);
+        expect(s.assignTrack('x', new PreferredTrack('+'), l)).eql(1);
+        expect(s.assignTrack('x', new PreferredTrack('+0'), l)).eql(0);
+        expect(s.assignTrack('x', new PreferredTrack('-2'), l)).eql(-2);
+        expect(s.assignTrack('x', new PreferredTrack('-'), l)).eql(-1);
     })
 
     it('whenAssignTrack_givenMultipleLines', () => {
@@ -141,10 +142,27 @@ describe('Station', () => {
         s.addLine(l, 'y', -1);
         s.addLine(l, 'y', 0);
         s.addLine(l, 'y', 3);
-        expect(s.assignTrack('y', new PreferredTrack('+'))).eql(4);
-        expect(s.assignTrack('y', new PreferredTrack('+1'))).eql(1);
-        expect(s.assignTrack('y', new PreferredTrack('-2'))).eql(-2);
-        expect(s.assignTrack('y', new PreferredTrack('-'))).eql(-2);
+        expect(s.assignTrack('y', new PreferredTrack('+'), l)).eql(4);
+        expect(s.assignTrack('y', new PreferredTrack('+1'), l)).eql(1);
+        expect(s.assignTrack('y', new PreferredTrack('-2'), l)).eql(-2);
+        expect(s.assignTrack('y', new PreferredTrack('-'), l)).eql(-2);
+    })
+
+    it('whenAssignTrack_givenJustDeletedPhatonLine', () => {
+        const s = new Station(instance(stationAdapter));
+   
+        when(lineAdapter.name).thenReturn('name1');
+        const l = new Line(instance(lineAdapter), instance(stationProvider));
+
+        when(lineAdapter.name).thenReturn('name2');
+        const l2 = new Line(instance(lineAdapter), instance(stationProvider));
+
+        s.addLine(l, 'x', 1);   
+        s.addLine(l2, 'x', 2);   
+        s.removeLine(l);
+        expect(s.assignTrack('x', new PreferredTrack('+'), l2)).eql(3);
+        expect(s.assignTrack('x', new PreferredTrack('+'), l)).eql(1);
+        expect(s.assignTrack('x', new PreferredTrack('-1'), l)).eql(-1);
     })
 
     it('whenRotatedTrackCoordinates_givenNorthStation', () => {

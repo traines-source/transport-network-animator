@@ -29,7 +29,8 @@ export class Station {
     static DEFAULT_STOP_DIMEN = 10;
     static LABEL_DISTANCE = 0;
 
-    private existingLines: {[id: string]: {line: Line, track: number}[]} = {x: [], y: []};
+    private existingLines: {[id: string]: LineAtStation[]} = {x: [], y: []};
+    private phantom?: LineAtStation = undefined;
     baseCoords = this.adapter.baseCoords;
     rotation = this.adapter.rotation;
     labelDir = this.adapter.labelDir;
@@ -40,7 +41,7 @@ export class Station {
     }
 
     addLine(line: Line, axis: string, track: number): void {
-        this.existingLines[axis].push({line: line, track: track});
+        this.existingLines[axis].push({line: line, axis: axis, track: track});
     }
 
     removeLine(line: Line): void {
@@ -48,10 +49,11 @@ export class Station {
         this.removeLineAtAxis(line, this.existingLines.y);
     }
 
-    private removeLineAtAxis(line: Line, existingLinesForAxis: {line: Line, track: number}[]): void {
+    private removeLineAtAxis(line: Line, existingLinesForAxis: LineAtStation[]): void {
         let i = 0;
         while (i < existingLinesForAxis.length) {
             if (existingLinesForAxis[i].line == line) {
+                this.phantom = existingLinesForAxis[i];
                 existingLinesForAxis.splice(i, 1);
             } else {
                 i++;
@@ -62,31 +64,32 @@ export class Station {
     axisAndTrackForExistingLine(lineName: string): LineAtStation | undefined {
         const x = this.trackForLineAtAxis(lineName, this.existingLines.x);
         if (x != undefined) {
-            x.axis = 'x';
             return x;
         }
         const y = this.trackForLineAtAxis(lineName, this.existingLines.y);
         if (y != undefined) {
-            y.axis = 'y';
             return y;
         }
         return undefined;
     }
 
-    private trackForLineAtAxis(lineName: string, existingLinesForAxis: {line: Line, track: number}[]): LineAtStation | undefined {
+    private trackForLineAtAxis(lineName: string, existingLinesForAxis: LineAtStation[]): LineAtStation | undefined {
         let i = 0;
         while (i < existingLinesForAxis.length) {
-            if (existingLinesForAxis[i].line.name == lineName) {
-                return {line: existingLinesForAxis[i].line, axis: '', track: existingLinesForAxis[i].track};
+            if (existingLinesForAxis[i].line?.name == lineName) {
+                return existingLinesForAxis[i];
             }
             i++;
         }
         return undefined;
     }
 
-    assignTrack(axis: string, preferredTrack: PreferredTrack): number { 
+    assignTrack(axis: string, preferredTrack: PreferredTrack, line: Line): number { 
         if (preferredTrack.hasTrackNumber()) {
             return preferredTrack.trackNumber;
+        }
+        if (this.phantom?.line?.name == line.name && this.phantom?.axis == axis) {
+            return this.phantom?.track;
         }
         const positionBoundariesForAxis = this.positionBoundaries()[axis];
         return preferredTrack.isPositive() ? positionBoundariesForAxis[1] + 1 : positionBoundariesForAxis[0] - 1;
@@ -111,7 +114,7 @@ export class Station {
         };
     }
     
-    private positionBoundariesForAxis(existingLinesForAxis: {line: Line, track: number}[]): [number, number] {
+    private positionBoundariesForAxis(existingLinesForAxis: LineAtStation[]): [number, number] {
         if (existingLinesForAxis.length == 0) {
             return [1, -1];
         }
