@@ -7,10 +7,6 @@ import { TimedDrawable } from "./Drawable";
 
 // TODO: erase anim, labels, zoom, negative default tracks based on direction, reuse track of just erased line?
 
-
-var precedingStop : Station | undefined = undefined;
-var precedingDir : Rotation | undefined = undefined;
-
 const network: Network = new Network(new SvgNetwork());
 network.initialize();
 

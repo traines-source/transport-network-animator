@@ -43,7 +43,9 @@ export class Network implements StationProvider {
     }
 
     setInstant(instant: Instant) {
-        this.adapter.drawEpoch(instant.epoch + '')
+        if (!instant.equals(Instant.BIG_BANG)) {
+            this.adapter.drawEpoch(instant.epoch + '')
+        }
     }
 
     timedDrawablesAt(now: Instant): TimedDrawable[] {

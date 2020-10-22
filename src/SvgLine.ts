@@ -63,20 +63,25 @@ export class SvgLine implements LineAdapter {
         const d = 'M' + path.map(v => v.x+','+v.y).join(' L');
         this.element.setAttribute('d', d);
     
+        let dashedPart = this.createDashedPart(length);
+        this.element.style.strokeDasharray = dashedPart + ' ' + length;
+        if (animationDurationSeconds == 0) {
+            length = 0;
+        }
+        this.animateFrame(length, length/animationDurationSeconds/SvgLine.FPS);
+    }
+
+    private createDashedPart(length: number): string {
         let dashedPart = length + '';
         const presetDash = getComputedStyle(this.element).strokeDasharray.replace(/[^0-9\s,]+/g, '');
         if (presetDash.length > 0) {
             let presetArray = presetDash.split(/[\s,]+/);
             if (presetArray.length % 2 == 1)
                 presetArray = presetArray.concat(presetArray);
-            const presetLength = presetArray.map(a => parseInt(a) || 0).reduce((a, b) => a+b, 0);
+            const presetLength = presetArray.map(a => parseInt(a) || 0).reduce((a, b) => a + b, 0);
             dashedPart = new Array(Math.ceil(length / presetLength + 1)).join(presetArray.join(' ') + ' ') + '0';
         }
-        this.element.style.strokeDasharray = dashedPart + ' ' + length;
-        if (animationDurationSeconds == 0) {
-            length = 0;
-        }
-        this.animateFrame(length, length/animationDurationSeconds/SvgLine.FPS);
+        return dashedPart;
     }
 
     erase(delaySeconds: number, animationDurationSeconds: number, reverse: boolean): void {

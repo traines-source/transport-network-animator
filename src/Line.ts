@@ -114,7 +114,7 @@ export class Line implements TimedDrawable {
         const delta = station.baseCoords.delta(nextStopBaseCoord);
         const existingAxis = station.axisAndTrackForExistingLine(this.name)?.axis;
         if (existingAxis != undefined) {
-            return delta.inclination().halfDirection(dir, existingAxis == 'x' ? new Rotation(90) : new Rotation(0));           
+            return delta.inclination().halfDirection(dir, existingAxis == 'x' ? new Rotation(90) : new Rotation(0));
         }
         return delta.inclination().quarterDirection(dir);
     }
