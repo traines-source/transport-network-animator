@@ -40,7 +40,9 @@ export class Line implements TimedDrawable {
             const stop = this.stationProvider.stationById(stops[j].stationId);
             if (stop == undefined)
                 throw new Error('Station with ID ' + stops[j].stationId + ' is undefined');
-            track = track.fromExistingLineAtStation(stop.axisAndTrackForExistingLine(this.name));
+            if (path.length == 0)
+                track = track.fromExistingLineAtStation(stop.axisAndTrackForExistingLine(this.name));
+            
             this.createConnection(stop, this.nextStopBaseCoord(stops, j, stop.baseCoords), track, path, delay, animate, true);
             track = track.keepOnlySign();
         }

@@ -2,11 +2,12 @@ import { LineAdapter, Line } from "./Line";
 import { Vector } from "./Vector";
 import { Stop } from "./Station";
 import { Instant } from "./Instant";
+import { SvgNetwork } from "./SvgNetwork";
 
 export class SvgLine implements LineAdapter {
 
-    private static FPS = 60;
     private _stops: Stop[] = [];
+    boundingBox = {tl: Vector.NULL, br: Vector.NULL};
 
     constructor(private element: SVGPathElement) {
 
@@ -24,9 +25,11 @@ export class SvgLine implements LineAdapter {
         return this.getInstant('to');
     }
 
-    get boundingBox(): {tl: Vector, br: Vector} {
-        const rect = this.element.getBoundingClientRect();
-        return {tl: new Vector(rect.left, rect.top), br: new Vector(rect.right, rect.bottom)};
+    private updateBoundingBox(path: Vector[]): void {
+        for(let i=0;i<path.length;i++) {
+            this.boundingBox.tl = this.boundingBox.tl.bothAxisMins(path[i]);
+            this.boundingBox.br = this.boundingBox.br.bothAxisMaxs(path[i]);
+        }
     }
 
     private getInstant(fromOrTo: string): Instant {
@@ -58,6 +61,7 @@ export class SvgLine implements LineAdapter {
     }
 
     draw(delaySeconds: number, animationDurationSeconds: number, path: Vector[]): void {
+        this.updateBoundingBox(path);
         if (delaySeconds > 0) {
             const line = this;
             window.setTimeout(function () { line.draw(0, animationDurationSeconds, path); }, delaySeconds * 1000);
@@ -73,7 +77,7 @@ export class SvgLine implements LineAdapter {
         if (animationDurationSeconds == 0) {
             length = 0;
         }
-        this.animateFrame(length, length/animationDurationSeconds/SvgLine.FPS);
+        this.animateFrame(length, length/animationDurationSeconds/SvgNetwork.FPS);
     }
 
     private createDashedPart(length: number): string {

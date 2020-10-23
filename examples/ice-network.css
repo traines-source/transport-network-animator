@@ -2,7 +2,7 @@
 
 #stations rect {
     stroke: black;
-    fill: white;
+    fill: transparent;
     rx: 3;
     stroke-width: 1;
 }

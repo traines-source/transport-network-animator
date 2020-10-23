@@ -23,8 +23,7 @@ export class SvgLabel implements LabelAdapter {
     }
 
     get boundingBox(): {tl: Vector, br: Vector} {
-        const rect = this.element.getBoundingClientRect();
-        return {tl: new Vector(rect.left, rect.top), br: new Vector(rect.right, rect.bottom)};
+        return {tl: Vector.NULL, br: Vector.NULL};
     }
 
     draw(delaySeconds: number, textCoords: Vector, labelDir: Rotation): void {

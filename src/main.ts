@@ -2,7 +2,7 @@ import { SvgNetwork } from "./SvgNetwork";
 import { Network } from "./Network";
 import { Instant } from "./Instant";
 
-// TODO: erase anim, labels, zoom, negative default tracks based on direction, reuse track of just erased line?
+// TODO: erase anim, labels, negative default tracks based on direction, rejoin lines track selection
 
 const network: Network = new Network(new SvgNetwork());
 network.initialize();

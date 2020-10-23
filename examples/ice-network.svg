@@ -92,22 +92,22 @@
         <path data-line="ICE79" style="stroke:#b0abd4" class="e2h" data-stops="hKA KA KK FFLF FF" data-from="2002 20" />
         <path data-line="ICE40" style="stroke:#0095d9" class="e2h" data-stops="EMST EE EDG KD KKDZ FFLF FF" data-from="2002 20" />
         <path data-line="ICE41" style="stroke:#bcd646" class="e2h" data-stops="EDO EE EDG KD KKDZ FFLF FF" data-from="2002 20" />
-        <path data-line="ICE41" style="stroke:#bcd646" class="e2h" data-stops="FFLF FF" data-from="2002 20" data-to="2003 10" />
+        <path data-line="ICE41" style="stroke:#bcd646" class="e2h" data-stops="FFLF FF" data-from="2002 20" data-to="2003 10 noanim" />
 
         <path data-line="ICE45" style="stroke:#0095d9" class="e2h" data-stops="KK FW FMZ RM RH TS" data-from="2002 30"/>
         <path data-line="ICE43" style="stroke:#a78b6b" class="e2h" data-stops="EDO EHG KK FFLF RM RK RF RB" data-from="2002 45" />
         <path data-line="ICE42" style="stroke:#f8abad" class="e2h" data-stops="EDO EE EDG KD KK FFLF RM TS TU MA MH" data-from="2002 45" />
         <path data-line="ICE12" style="stroke:#8dd7f7" class="e2h" data-stops="hRB RB RF RO RK RM FF FFU FKW HG HBS HWOB BL" data-from="2002 68" />
         <path data-line="ICE55" style="stroke:#39b97a" class="some" data-stops="BL LM HBS HH EBIL EDO EHG KK" data-from="2002 78" />
-        <path data-line="ICE55" style="stroke:#39b97a" class="some" data-stops="HB HH FKW FF" data-from="2002 78" />
-        <path data-line="ICE55" style="stroke:#39b97a" class="some" data-stops="FF RH TS" data-from="2002 78" data-to="2003 10 noanim" />
+        <path data-line="ICE21" style="stroke:#39b97a" class="some" data-stops="HB HH FKW FF" data-from="2002 78" />
+        <path data-line="ICE21" style="stroke:#39b97a" class="some" data-stops="FF RH TS" data-from="2002 78" data-to="2003 10 noanim" />
         <path data-line="ICE51" style="stroke:#fff101" class="some" data-stops="LHA UE FKW EPD EHG EDO EDG KD" data-from="2002 78" />
         
         <path data-line="ICE51" style="stroke:#ee1d23" class="some" data-stops="AH HB EMST EDO EE EDG KD KK KB FMZ FFLF FF NWH NN NRH NPA fNPA" data-from="2003 10 noanim" />
-        <path data-line="ICE10" style="stroke:#bcd646" class="e2h" data-stops="FFLF NWH NN" data-from="2003 10 noanim" />
-        <path data-line="ICE10" style="stroke:#bcd646" class="some" data-stops="NN MIH MH" data-from="2003 10 noanim" />
-        <path data-line="ICE10" style="stroke:#bcd646" class="some" data-stops="NN MA MH" data-from="2003 10 noanim" />
-        <path data-line="ICE55" style="stroke:#39b97a" class="some" data-stops="FF RM SKL SSH" data-from="2003 10 noanim" />
+        <path data-line="ICE41" style="stroke:#bcd646" class="e2h" data-stops="FFLF NWH NN" data-from="2003 10 noanim" />
+        <path data-line="ICE41" style="stroke:#bcd646" class="some" data-stops="NN MIH MH" data-from="2003 10 noanim" />
+        <path data-line="ICE41" style="stroke:#bcd646" class="some" data-stops="NN MA MH" data-from="2003 10 noanim" />
+        <path data-line="ICE21" style="stroke:#39b97a" class="some" data-stops="FF RM SKL SSH" data-from="2003 10 noanim" />
 
 
         
@@ -265,6 +265,7 @@
         <rect id="fXAI" x="650" y="900" data-dir="n" class="helper" />
 
     </g>
+    <rect id="tmp" style="stroke: red" width="5" height="5"></rect>
     </g>
     <text id="epoch-label" x="900" y="50" style="font-size: 50px"></text>
     <script xlink:href="../dist/network-animator.js" />

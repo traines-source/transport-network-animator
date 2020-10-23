@@ -3,23 +3,24 @@ import { Instant } from "./Instant";
 import { Station } from "./Station";
 import { Vector } from "./Vector";
 import { Rotation } from "./Rotation";
+import { Zoomer } from "./Zoomer";
 
 export interface StationProvider {
     stationById(id: string): Station | undefined;
     createVirtualStop(id: string, baseCoords: Vector, rotation: Rotation): Station;
 }
 export interface NetworkAdapter {
+    canvasSize: Vector;
     initialize(network: Network): void;
     stationById(id: string): Station | null;
     createVirtualStop(id: string, baseCoords: Vector, rotation: Rotation): Station;
     drawEpoch(epoch: string): void;
+    zoomTo(zoomCenter: Vector, zoomScale: number, animationDurationSeconds: number): void;
 }
 
 export class Network implements StationProvider {
     private slideIndex: {[id: string] : {[id: string]: TimedDrawable[]}} = {};
     private stations: { [id: string] : Station } = {};
-    private currentZoomScale: number = 1;
-    private currentZoomCenter: Vector = Vector.NULL;
 
     constructor(private adapter: NetworkAdapter) {
 
@@ -55,25 +56,27 @@ export class Network implements StationProvider {
     }
 
     drawTimedDrawablesAt(now: Instant, animate: boolean): number {
-        const boundingBox = {tl: Vector.NULL, br: Vector.NULL};
+        const zoomer = new Zoomer(this.adapter.canvasSize);
         this.displayInstant(now);
         const elements: TimedDrawable[] = this.timedDrawablesAt(now);
-        let delay = 0;
+        let delay = Zoomer.ZOOM_DURATION;
         for (let i=0; i<elements.length; i++) {
-            delay += this.drawOrEraseElement(elements[i], delay, animate, now, boundingBox);
+            delay += this.drawOrEraseElement(elements[i], delay, animate, now, zoomer);
         }
-        //this.zoomTo(boundingBox);
+        this.adapter.zoomTo(zoomer.center, zoomer.scale, Zoomer.ZOOM_DURATION);
         return delay;
     }
 
-    private drawOrEraseElement(element: TimedDrawable, delay: number, animate: boolean, instant: Instant, boundingBox: {tl: Vector, br: Vector}): number {
+    private drawOrEraseElement(element: TimedDrawable, delay: number, animate: boolean, instant: Instant, zoomer: Zoomer): number {
         if (instant.equals(element.to) && !element.from.equals(element.to)) {
-            delay = this.eraseElement(element, delay, this.shouldAnimate(element.to, animate));
-            this.updateBoundingBox(boundingBox, element, element.to);
+            const shouldAnimate = this.shouldAnimate(element.to, animate);
+            delay = this.eraseElement(element, delay, shouldAnimate);
+            zoomer.include(element.boundingBox, element.to, shouldAnimate);
             return delay;
         }
-        delay = this.drawElement(element, delay, this.shouldAnimate(element.from, animate));
-        this.updateBoundingBox(boundingBox, element, element.from);
+        const shouldAnimate = this.shouldAnimate(element.from, animate);
+        delay = this.drawElement(element, delay, shouldAnimate);
+        zoomer.include(element.boundingBox, element.from, shouldAnimate);
         return delay;
     }
     
@@ -91,14 +94,6 @@ export class Network implements StationProvider {
         if (instant.flag == 'noanim')
             return false;
         return animate;
-    }
-
-    private updateBoundingBox(boundingBox: {tl: Vector, br: Vector}, element: TimedDrawable, now: Instant) {
-        if (now.flag != 'nozoom' && now.flag != 'noanim') {
-            const box = element.boundingBox;
-            boundingBox.tl.bothAxisMins(box.tl);
-            boundingBox.br.bothAxisMaxs(box.br);
-        }
     }
 
     isEpochExisting(epoch: string): boolean {
