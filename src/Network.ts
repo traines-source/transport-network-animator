@@ -21,6 +21,7 @@ export interface NetworkAdapter {
 export class Network implements StationProvider {
     private slideIndex: {[id: string] : {[id: string]: TimedDrawable[]}} = {};
     private stations: { [id: string] : Station } = {};
+    private eraseBuffer: TimedDrawable[] = [];
 
     constructor(private adapter: NetworkAdapter) {
 
@@ -67,13 +68,23 @@ export class Network implements StationProvider {
         return delay;
     }
 
+    private flushEraseBuffer(delay: number, animate: boolean, zoomer: Zoomer): number {
+        for (let i=this.eraseBuffer.length-1; i>=0; i--) {
+            const element = this.eraseBuffer[i];
+            const shouldAnimate = this.shouldAnimate(element.to, animate);
+            delay += this.eraseElement(element, delay, shouldAnimate);
+            zoomer.include(element.boundingBox, element.to, shouldAnimate);
+        }
+        this.eraseBuffer = [];
+        return delay;
+    }
+
     private drawOrEraseElement(element: TimedDrawable, delay: number, animate: boolean, instant: Instant, zoomer: Zoomer): number {
         if (instant.equals(element.to) && !element.from.equals(element.to)) {
-            const shouldAnimate = this.shouldAnimate(element.to, animate);
-            delay = this.eraseElement(element, delay, shouldAnimate);
-            zoomer.include(element.boundingBox, element.to, shouldAnimate);
-            return delay;
+            this.eraseBuffer.push(element);
+            return 0;
         }
+        delay += this.flushEraseBuffer(delay, animate, zoomer);
         const shouldAnimate = this.shouldAnimate(element.from, animate);
         delay = this.drawElement(element, delay, shouldAnimate);
         zoomer.include(element.boundingBox, element.from, shouldAnimate);
@@ -85,7 +96,7 @@ export class Network implements StationProvider {
     }
     
     private eraseElement(element: TimedDrawable, delay: number, animate: boolean): number {
-        return element.erase(delay, animate, false);
+        return element.erase(delay, animate, element.to.flag == 'reverse');
     }
     
     private shouldAnimate(instant: Instant, animate: boolean): boolean {

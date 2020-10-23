@@ -82,7 +82,6 @@ export class SvgNetwork implements NetworkAdapter {
     }
    
     zoomTo(zoomCenter: Vector, zoomScale: number, animationDurationSeconds: number) {
-        this.setCoord(document.getElementById('tmp'), zoomCenter);
         this.animateFrame(0, animationDurationSeconds/SvgNetwork.FPS, this.currentZoomCenter, zoomCenter, this.currentZoomScale, zoomScale);
         this.currentZoomCenter = zoomCenter;
         this.currentZoomScale = zoomScale;
@@ -110,8 +109,6 @@ export class SvgNetwork implements NetworkAdapter {
     private updateZoom(center: Vector, scale: number) {
         const zoomable = document.getElementById('zoomable');
         if (zoomable != undefined) {
-            console.log('zoom', center, scale);
-
             zoomable.style.transformOrigin = '500px 500px';
             zoomable.style.transform = 'scale(' + scale + ') translate(' + (this.canvasSize.x / 2 - center.x) + 'px,' + (this.canvasSize.y / 2 - center.y) + 'px)';
         }

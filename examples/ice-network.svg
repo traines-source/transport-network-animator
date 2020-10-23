@@ -265,7 +265,6 @@
         <rect id="fXAI" x="650" y="900" data-dir="n" class="helper" />
 
     </g>
-    <rect id="tmp" style="stroke: red" width="5" height="5"></rect>
     </g>
     <text id="epoch-label" x="900" y="50" style="font-size: 50px"></text>
     <script xlink:href="../dist/network-animator.js" />
