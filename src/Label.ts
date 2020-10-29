@@ -32,6 +32,7 @@ export class Label implements TimedDrawable {
     draw(delay: number, animate: boolean): number {
         if (this.adapter.forStation != undefined) {
             const station = this.forStation;
+            station.addLabel(this);
             const baseCoord = station.baseCoords;
             const labelDir = station.labelDir;
             const stationDir = station.rotation;
@@ -39,12 +40,15 @@ export class Label implements TimedDrawable {
             const unitv = Vector.UNIT.rotate(diffDir);
             const anchor = new Vector(station.stationSizeForAxis('x', unitv.x), station.stationSizeForAxis('y', unitv.y));
             const textCoords = baseCoord.add(anchor.rotate(stationDir));
+        
             this.adapter.draw(delay, textCoords, labelDir);
         }
         return 0;
     }
 
     erase(delay: number, animate: boolean, reverse: boolean): number {
-        throw new Error("Method not implemented.");
+        this.forStation.removeLabel(this);
+        this.adapter.erase(delay);
+        return 0;
     }
 }

@@ -86,7 +86,7 @@ export class Network implements StationProvider {
         }
         delay += this.flushEraseBuffer(delay, animate, zoomer);
         const shouldAnimate = this.shouldAnimate(element.from, animate);
-        delay = this.drawElement(element, delay, shouldAnimate);
+        delay += this.drawElement(element, delay, shouldAnimate);
         zoomer.include(element.boundingBox, element.from, shouldAnimate);
         return delay;
     }
