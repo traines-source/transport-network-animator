@@ -161,7 +161,6 @@ export class Line implements TimedDrawable {
             const newCoord = toStop.baseCoords;
             const delta = newCoord.delta(oldCoord);
             const deg = oldCoord.delta(newCoord).inclination();
-            console.log(helpStopId, deg, fromDir);
             const intermediateDir = new Rotation((deg.delta(fromDir).degrees >= 0 ? Math.floor(deg.degrees / 45) : Math.ceil(deg.degrees / 45)) * 45).normalize();
             const intermediateCoord = delta.withLength(delta.length/2).add(newCoord);
 
