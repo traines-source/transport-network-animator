@@ -64,14 +64,14 @@ describe('Network', () => {
         when(timedDrawable.from).thenReturn(new Instant(1, 1, ''));
         when(timedDrawable.to).thenReturn(new Instant(2, 3, 'reverse'));
         when(timedDrawable.draw(1, false)).thenReturn(0);
-        when(timedDrawable.erase(1, false, false)).thenReturn(0);
+        when(timedDrawable.erase(1, false, true)).thenReturn(0);
         underTest.addToIndex(instance(timedDrawable));
 
         expect(underTest.drawTimedDrawablesAt(new Instant(1, 1, ''), false)).eql(1);
         expect(underTest.drawTimedDrawablesAt(new Instant(2, 3, ''), false)).eql(1);
 
         verify(timedDrawable.draw(1, false)).called();
-        verify(timedDrawable.erase(1, false, false)).called();
+        verify(timedDrawable.erase(1, false, true)).called();
     })
 
     it('whenDrawTimedDrawableAt_givenDrawableAtBigBang_thenDrawForever', () => {
@@ -114,17 +114,43 @@ describe('Network', () => {
         verify(timedDrawable1.draw(3, true)).called();
         verify(timedDrawable.erase(1, true, false)).called();
         verify(timedDrawable1.erase(1, false, false)).called();
-
     })
 
-    it('whenDrawTimedDrawableAt_givenDrawAnEraseForSameInstant_thenObeyOrder', () => {
+    it('whenDrawTimedDrawableAt_givenDrawAndEraseForSameInstant_thenObeyOrder', () => {
+        const underTest = new Network(instance(networkAdapter));
+
+        when(timedDrawable.from).thenReturn(new Instant(2, 3, ''));
+        when(timedDrawable.to).thenReturn(new Instant(2, 4, ''));
+        when(timedDrawable.boundingBox).thenReturn({tl: new Vector(50, 50), br: new Vector(450, 850)});
+        when(timedDrawable.draw(1, true)).thenReturn(3);
+        when(timedDrawable.erase(1, true, false)).thenReturn(5);
+        underTest.addToIndex(instance(timedDrawable));
+
+        const timedDrawable1: TimedDrawable = mock();
+        when(timedDrawable1.from).thenReturn(new Instant(1, 2, ''));
+        when(timedDrawable1.to).thenReturn(new Instant(2, 3, ''));
+        when(timedDrawable1.boundingBox).thenReturn({tl: new Vector(500, 400), br: new Vector(450, 850)});
+        when(timedDrawable1.draw(1, true)).thenReturn(2);
+        when(timedDrawable1.erase(4, true, false)).thenReturn(4);
+        underTest.addToIndex(instance(timedDrawable1));
+
+        expect(underTest.drawTimedDrawablesAt(new Instant(1, 2, ''), true)).eql(3);
+        expect(underTest.drawTimedDrawablesAt(new Instant(2, 3, ''), true)).eql(8);
+
+        verify(timedDrawable1.draw(1, true)).called();
+        verify(timedDrawable.draw(1, true)).called();
+        verify(timedDrawable1.erase(4, true, false)).called();
+        verify(timedDrawable.erase(anything(), anything(), anything())).never();
+    })
+
+    it('whenDrawTimedDrawableAt_givenMultipleDrawAndEraseForSameInstant_thenObeyOrder', () => {
         const underTest = new Network(instance(networkAdapter));
 
         when(timedDrawable.from).thenReturn(new Instant(1, 1, ''));
         when(timedDrawable.to).thenReturn(new Instant(2, 3, ''));
         when(timedDrawable.boundingBox).thenReturn({tl: new Vector(50, 50), br: new Vector(450, 850)});
         when(timedDrawable.draw(1, true)).thenReturn(2);
-        when(timedDrawable.erase(1, true, false)).thenReturn(5);
+        when(timedDrawable.erase(6, true, false)).thenReturn(6);
         underTest.addToIndex(instance(timedDrawable));
 
         const timedDrawable1: TimedDrawable = mock();
@@ -132,7 +158,7 @@ describe('Network', () => {
         when(timedDrawable1.to).thenReturn(new Instant(2, 3, 'noanim'));
         when(timedDrawable1.boundingBox).thenReturn({tl: new Vector(500, 400), br: new Vector(450, 850)});
         when(timedDrawable1.draw(1, true)).thenReturn(3);
-        when(timedDrawable1.erase(6, false, false)).thenReturn(6);
+        when(timedDrawable1.erase(1, false, false)).thenReturn(5);
         underTest.addToIndex(instance(timedDrawable1));
 
         const timedDrawable2: TimedDrawable = mock();
@@ -157,8 +183,8 @@ describe('Network', () => {
         verify(timedDrawable.draw(1, true)).called();
         verify(timedDrawable1.draw(1, true)).called();
         verify(timedDrawable3.draw(4, true)).called();
-        verify(timedDrawable.erase(1, true, false)).called();
-        verify(timedDrawable1.erase(6, false, false)).called();
+        verify(timedDrawable1.erase(1, false, false)).called();
+        verify(timedDrawable.erase(6, true, false)).called();
         verify(timedDrawable2.draw(12, true)).called();
         verify(timedDrawable3.erase(19, true, false)).called();
     })

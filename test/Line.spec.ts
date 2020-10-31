@@ -34,7 +34,7 @@ describe('Line', () => {
     
     it('givenSimpleLineWithoutAnimation_thenNoDuration', () => {
         when(lineAdapter.stops).thenReturn([new Stop('a', ''), new Stop('b', '')]);
-        when(lineAdapter.draw(2, anyNumber(), anything())).thenCall((delay: number, duration: number, path: Vector[]) => {
+        when(lineAdapter.draw(2, anyNumber(), anything(), anything())).thenCall((delay: number, duration: number, path: Vector[]) => {
             expect(duration).eql(0);
             expect(path).eql([new Vector(10, 0), new Vector(10, 50)]);
         })
@@ -46,7 +46,7 @@ describe('Line', () => {
 
     it('givenSimpleLineWithAnimation_thenDuration', () => {
         when(lineAdapter.stops).thenReturn([new Stop('a', ''), new Stop('b', '')]);
-        when(lineAdapter.draw(2, anyNumber(), anything())).thenCall((delay: number, duration: number, path: Vector[]) => {
+        when(lineAdapter.draw(2, anyNumber(), anything(), anything())).thenCall((delay: number, duration: number, path: Vector[]) => {
             expect(duration).approximately(50 / Line.SPEED, 0.1);
             expect(path).eql([new Vector(0, 10), new Vector(50, 10)]);
         })
@@ -58,7 +58,7 @@ describe('Line', () => {
 
     it('givenFourStopLineWithAnimation_thenCreateNodes', () => {
         when(lineAdapter.stops).thenReturn([new Stop('a', ''), new Stop('b', ''), new Stop('c', ''), new Stop('d', '')]);
-        when(lineAdapter.draw(2, anyNumber(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
+        when(lineAdapter.draw(2, anyNumber(), anything(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
             const path = [...p];
             expect(path.shift()).eql(new Vector(0, 0));
             expect(path.shift()?.delta(new Vector(0, 50)).length).lessThan(0.1);
@@ -77,7 +77,7 @@ describe('Line', () => {
 
     it('givenFourStopLineWithHelperStopNecessary_thenCreateHelperStop', () => {
         when(lineAdapter.stops).thenReturn([new Stop('a', ''), new Stop('b', ''), new Stop('c', ''), new Stop('d', '')]);
-        when(lineAdapter.draw(2, anyNumber(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
+        when(lineAdapter.draw(2, anyNumber(), anything(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
             const path = [...p];
             expect(path.shift()).eql(new Vector(500, 500));
             expect(path.shift()?.delta(new Vector(450, 500)).length).lessThan(0.1);
@@ -104,7 +104,7 @@ describe('Line', () => {
 
     it('givenFourStopLineWithRightAngle', () => {
         when(lineAdapter.stops).thenReturn([new Stop('d', ''), new Stop('c', ''), new Stop('b', ''), new Stop('a', '')]);
-        when(lineAdapter.draw(2, anyNumber(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
+        when(lineAdapter.draw(2, anyNumber(), anything(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
             const path = [...p];
             expect(path.shift()).eql(new Vector(500, 500));
             expect(path.shift()?.delta(new Vector(500, 475)).length).lessThan(0.1);
@@ -153,7 +153,7 @@ describe('Line', () => {
 
         when(lineAdapter.stops).thenReturn([new Stop('b', ''), new Stop('d', '')]);
         when(lineAdapter.name).thenReturn('l1');
-        when(lineAdapter.draw(2, anyNumber(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
+        when(lineAdapter.draw(2, anyNumber(), anything(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
             const path = [...p];
             expect(path.shift()).eql(new Vector(500, 400));
             expect(path.shift()?.delta(new Vector(500, 300)).length).lessThan(0.1);
@@ -175,7 +175,7 @@ describe('Line', () => {
 
         when(lineAdapter.stops).thenReturn([new Stop('a', ''), new Stop('b', ''), new Stop('d', '')]);
         when(lineAdapter.name).thenReturn('l1');
-        when(lineAdapter.draw(2, anyNumber(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
+        when(lineAdapter.draw(2, anyNumber(), anything(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
             const path = [...p];
             expect(path.shift()).eql(new Vector(500, 500));
             expect(path.shift()).eql(new Vector(500, 450));
@@ -205,7 +205,7 @@ describe('Line', () => {
 
         when(lineAdapter.stops).thenReturn([new Stop('b', ''), new Stop('d', '')]);
         when(lineAdapter.name).thenReturn('l1');
-        when(lineAdapter.draw(2, anyNumber(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
+        when(lineAdapter.draw(2, anyNumber(), anything(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
             const path = [...p];
             expect(path.shift()).eql(new Vector(500, 400));
             expect(path.shift()).eql(new Vector(500, 375));
@@ -234,7 +234,7 @@ describe('Line', () => {
 
         when(lineAdapter.stops).thenReturn([new Stop('d', ''), new Stop('b', '')]);
         when(lineAdapter.name).thenReturn('l1');
-        when(lineAdapter.draw(2, anyNumber(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
+        when(lineAdapter.draw(2, anyNumber(), anything(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
             const path = [...p];
             expect(path.shift()).eql(new Vector(600, 350));
             expect(path.shift()).eql(new Vector(550, 400));
@@ -256,7 +256,7 @@ describe('Line', () => {
 
         when(lineAdapter.stops).thenReturn([new Stop('b', ''), new Stop('d', '')]);
         when(lineAdapter.name).thenReturn('l2');
-        when(lineAdapter.draw(2, anyNumber(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
+        when(lineAdapter.draw(2, anyNumber(), anything(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
             const path = [...p];
             expect(path.shift()).eql(new Vector(500+Station.LINE_DISTANCE, 400));
             expect(path.shift()?.delta(new Vector(500+Station.LINE_DISTANCE, 300-Station.LINE_DISTANCE)).length).lessThan(0.1);
@@ -278,7 +278,7 @@ describe('Line', () => {
 
         when(lineAdapter.stops).thenReturn([new Stop('d', ''), new Stop('b', '')]);
         when(lineAdapter.name).thenReturn('l1');
-        when(lineAdapter.draw(2, anyNumber(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
+        when(lineAdapter.draw(2, anyNumber(), anything(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
             const path = [...p];
             expect(path.shift()).eql(new Vector(600, 200));
             expect(path.shift()?.delta(new Vector(500+Station.LINE_DISTANCE, 300-Station.LINE_DISTANCE)).length).lessThan(0.1);
@@ -300,7 +300,7 @@ describe('Line', () => {
 
         when(lineAdapter.stops).thenReturn([new Stop('d', ''), new Stop('b', ''), new Stop('c', '')]);
         when(lineAdapter.name).thenReturn('l2');
-        when(lineAdapter.draw(2, anyNumber(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
+        when(lineAdapter.draw(2, anyNumber(), anything(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
             const path = [...p];
             expect(path.shift()).eql(new Vector(600, 350));
             expect(path.shift()).eql(new Vector(550, 400));
@@ -332,7 +332,7 @@ describe('Line', () => {
 
         when(lineAdapter.stops).thenReturn([new Stop('d', '-'), new Stop('b', ''), new Stop('c', '')]);
         when(lineAdapter.name).thenReturn('l2');
-        when(lineAdapter.draw(2, anyNumber(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
+        when(lineAdapter.draw(2, anyNumber(), anything(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
             const path = [...p];
             expect(path.shift()).eql(new Vector(600, 350));
             expect(path.shift()).eql(new Vector(550, 400));
@@ -360,7 +360,7 @@ describe('Line', () => {
 
         when(lineAdapter.stops).thenReturn([new Stop('d', ''), new Stop('b', '-1'), new Stop('a', '+1')]);
         when(lineAdapter.name).thenReturn('l2');
-        when(lineAdapter.draw(2, anyNumber(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
+        when(lineAdapter.draw(2, anyNumber(), anything(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
             const path = [...p];
             expect(path.shift()).eql(new Vector(600, 200));
             expect(path.shift()).eql(new Vector(500+Station.LINE_DISTANCE, 300-Station.LINE_DISTANCE));
@@ -378,7 +378,7 @@ describe('Line', () => {
         stationProvider = mock();
         when(lineAdapter.stops).thenReturn([new Stop('d', '+1'), new Stop('b', '-2')]);
         when(lineAdapter.name).thenReturn('l3');
-        when(lineAdapter.draw(4, anyNumber(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
+        when(lineAdapter.draw(4, anyNumber(), anything(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
             const path = [...p];
             expect(path.shift()).eql(new Vector(600+Station.LINE_DISTANCE/Math.sqrt(2), 200+Station.LINE_DISTANCE/Math.sqrt(2)));
             expect(path.shift()?.delta(new Vector(500+2*Station.LINE_DISTANCE, 296)).length).lessThan(0.5);
@@ -400,7 +400,7 @@ describe('Line', () => {
 
         when(lineAdapter.stops).thenReturn([new Stop('d', ''), new Stop('b', ''), new Stop('a', '')]);
         when(lineAdapter.name).thenReturn('l2');
-        when(lineAdapter.draw(2, anyNumber(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
+        when(lineAdapter.draw(2, anyNumber(), anything(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
             const path = [...p];
             expect(path.shift()).eql(new Vector(600, 200));
             expect(path.shift()).eql(new Vector(500+Station.LINE_DISTANCE, 300-Station.LINE_DISTANCE));
@@ -417,7 +417,7 @@ describe('Line', () => {
         stationProvider = mock();
         when(lineAdapter.stops).thenReturn([new Stop('d', ''), new Stop('b', '')]);
         when(lineAdapter.name).thenReturn('l3');
-        when(lineAdapter.draw(4, anyNumber(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
+        when(lineAdapter.draw(4, anyNumber(), anything(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
             const path = [...p];
             expect(path.shift()).eql(new Vector(600+Station.LINE_DISTANCE/Math.sqrt(2), 200+Station.LINE_DISTANCE/Math.sqrt(2)));
             expect(path.shift()?.delta(new Vector(500+2*Station.LINE_DISTANCE, 296)).length).lessThan(0.5);
@@ -439,7 +439,7 @@ describe('Line', () => {
 
         when(lineAdapter.stops).thenReturn([new Stop('d', ''), new Stop('b', ''), new Stop('a', '')]);
         when(lineAdapter.name).thenReturn('l2');
-        when(lineAdapter.draw(2, anyNumber(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
+        when(lineAdapter.draw(2, anyNumber(), anything(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
             const path = [...p];
             expect(path.shift()).eql(new Vector(600, 200));
             expect(path.shift()).eql(new Vector(500-Station.LINE_DISTANCE, 300+Station.LINE_DISTANCE));
@@ -470,7 +470,7 @@ describe('Line', () => {
 
         when(lineAdapter.stops).thenReturn([new Stop('d', ''), new Stop('b', ''), new Stop('a', '')]);
         when(lineAdapter.name).thenReturn('l2');
-        when(lineAdapter.draw(2, anyNumber(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
+        when(lineAdapter.draw(2, anyNumber(), anything(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
             const path = [...p];
             expect(path.shift()).eql(new Vector(600, 200));
             expect(path.shift()?.delta(new Vector(500+Station.LINE_DISTANCE, 300-Station.LINE_DISTANCE)).length).lessThan(0.1);
@@ -489,7 +489,7 @@ describe('Line', () => {
         stationProvider = mock();
         when(lineAdapter.stops).thenReturn([new Stop('d', ''), new Stop('b', ''), new Stop('a', '')]);
         when(lineAdapter.name).thenReturn('l1');
-        when(lineAdapter.draw(2, anyNumber(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
+        when(lineAdapter.draw(2, anyNumber(), anything(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
             const path = [...p];
             expect(path.shift()?.delta(new Vector(600+Station.LINE_DISTANCE/Math.sqrt(2), 200+Station.LINE_DISTANCE/Math.sqrt(2))).length).lessThan(0.1);
             expect(path.shift()?.delta(new Vector(500, 300+Station.LINE_DISTANCE/Math.sqrt(2)*2)).length).lessThan(0.1);
@@ -513,7 +513,7 @@ describe('Line', () => {
         
         when(lineAdapter.stops).thenReturn([new Stop('d', ''), new Stop('b', ''), new Stop('a', '')]);
         when(lineAdapter.name).thenReturn('l2');
-        when(lineAdapter.draw(2, anyNumber(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
+        when(lineAdapter.draw(2, anyNumber(), anything(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
             const path = [...p];
             expect(path.shift()).eql(new Vector(600, 200));
             expect(path.shift()?.delta(new Vector(500+Station.LINE_DISTANCE, 300-Station.LINE_DISTANCE)).length).lessThan(0.1);
@@ -532,7 +532,7 @@ describe('Line', () => {
         stationProvider = mock();
         when(lineAdapter.stops).thenReturn([new Stop('d', ''), new Stop('b', ''), new Stop('a', '')]);
         when(lineAdapter.name).thenReturn('l3');
-        when(lineAdapter.draw(2, anyNumber(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
+        when(lineAdapter.draw(2, anyNumber(), anything(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
             const path = [...p];
             expect(path.shift()?.delta(new Vector(600+Station.LINE_DISTANCE/Math.sqrt(2), 200+Station.LINE_DISTANCE/Math.sqrt(2))).length).lessThan(0.1);
             expect(path.shift()?.delta(new Vector(500+2*Station.LINE_DISTANCE, 300+Station.LINE_DISTANCE/Math.sqrt(2)*2-2*Station.LINE_DISTANCE)).length).lessThan(0.1);
@@ -561,7 +561,7 @@ function createAndAssertStandardLine(a: Station, b: Station, c: Station): Line {
 
     when(lineAdapter.stops).thenReturn([new Stop('a', ''), new Stop('b', ''), new Stop('c', '')]);
     when(lineAdapter.name).thenReturn('l1');
-    when(lineAdapter.draw(0, anyNumber(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
+    when(lineAdapter.draw(0, anyNumber(), anything(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
         const path = [...p];
         expect(path.shift()).eql(new Vector(500, 500));
         expect(path.shift()).eql(new Vector(500, 400));

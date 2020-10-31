@@ -64,8 +64,9 @@ export class Network implements StationProvider {
         const elements: TimedDrawable[] = this.timedDrawablesAt(now);
         let delay = Zoomer.ZOOM_DURATION;
         for (let i=0; i<elements.length; i++) {
-            delay += this.drawOrEraseElement(elements[i], delay, animate, now, zoomer);
+            delay = this.drawOrEraseElement(elements[i], delay, animate, now, zoomer);
         }
+        delay = this.flushEraseBuffer(delay, animate, zoomer);
         this.adapter.zoomTo(zoomer.center, zoomer.scale, Zoomer.ZOOM_DURATION);
         return delay;
     }
@@ -84,11 +85,11 @@ export class Network implements StationProvider {
     private drawOrEraseElement(element: TimedDrawable, delay: number, animate: boolean, instant: Instant, zoomer: Zoomer): number {
         if (instant.equals(element.to) && !element.from.equals(element.to)) {
             this.eraseBuffer.push(element);
-            return 0;
+            return delay;
         }
-        delay += this.flushEraseBuffer(delay, animate, zoomer);
+        delay = this.flushEraseBuffer(delay, animate, zoomer);
         const shouldAnimate = this.shouldAnimate(element.from, animate);
-        delay = this.drawElement(element, delay, shouldAnimate);
+        delay += this.drawElement(element, delay, shouldAnimate);
         zoomer.include(element.boundingBox, element.from, shouldAnimate);
         return delay;
     }
