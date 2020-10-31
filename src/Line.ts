@@ -166,6 +166,9 @@ export class Line implements TimedDrawable {
 
             helpStop = this.stationProvider.createVirtualStop(helpStopId, intermediateCoord, intermediateDir);
         }
+        if (helpStop == undefined) {
+            throw new Error(helpStopId + ' was not created');
+        }
         return helpStop;
     }
 

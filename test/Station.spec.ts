@@ -148,7 +148,7 @@ describe('Station', () => {
         expect(s.assignTrack('y', new PreferredTrack('-'), l)).eql(-2);
     })
 
-    it('whenAssignTrack_givenJustDeletedPhatonLine', () => {
+    it('whenAssignTrack_givenJustDeletedPathOnLine', () => {
         const s = new Station(instance(stationAdapter));
    
         when(lineAdapter.name).thenReturn('name1');
