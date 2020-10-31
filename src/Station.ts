@@ -3,6 +3,7 @@ import { Rotation } from "./Rotation";
 import { Line } from "./Line";
 import { Utils } from "./Utils";
 import { PreferredTrack } from "./PreferredTrack";
+import { Label } from "./Label";
 
 export interface StationAdapter {
     baseCoords: Vector;
@@ -30,6 +31,7 @@ export class Station {
     static LABEL_DISTANCE = 0;
 
     private existingLines: {[id: string]: LineAtStation[]} = {x: [], y: []};
+    private existingLabels: Label[] = [];
     private phantom?: LineAtStation = undefined;
     baseCoords = this.adapter.baseCoords;
     rotation = this.adapter.rotation;
@@ -48,6 +50,21 @@ export class Station {
     removeLine(line: Line): void {
         this.removeLineAtAxis(line, this.existingLines.x);
         this.removeLineAtAxis(line, this.existingLines.y);
+    }
+
+    addLabel(label: Label): void {
+        this.existingLabels.push(label);
+    }
+
+    removeLabel(label: Label): void {
+        let i = 0;
+        while (i < this.existingLabels.length) {
+            if (this.existingLabels[i] == label) {
+                this.existingLabels.splice(i, 1);
+            } else {
+                i++;
+            }
+        }
     }
 
     private removeLineAtAxis(line: Line, existingLinesForAxis: LineAtStation[]): void {
@@ -142,5 +159,12 @@ export class Station {
             return 0;
         const size = this.positionBoundariesForAxis(this.existingLines[axis])[vector < 0 ? 0 : 1] * Station.LINE_DISTANCE;
         return size + Math.sign(vector) * (Station.DEFAULT_STOP_DIMEN + Station.LABEL_DISTANCE);
+    }
+
+    linesExisting(): boolean {
+        if (this.existingLines.x.length > 0 || this.existingLines.y.length > 0) {
+            return true;
+        }
+        return false;
     }
 }

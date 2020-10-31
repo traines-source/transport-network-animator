@@ -8,11 +8,12 @@
     </defs>
     <g id="zoomable">
     <g id="elements">
-        <text data-station="KA" >Aachen</text>
-        <text data-station="AH" data-from="2020 1">Hamburg</text>
-        <text data-station="FFU" data-from="2020 1">Fulda</text>
-        <text data-station="MH" data-from="2020 1">München</text>
-        <text data-station="TS" data-from="2020 1">Stuttgart</text>
+        <text data-station="KK">Köln</text>
+        <text data-station="AH">Hamburg</text>
+        <text data-station="FF">Frankfurt</text>
+        <text data-station="MH">München</text>
+        <text data-station="TS">Stuttgart</text>
+        <text data-station="BL">Berlin</text>
 
         <path data-line="ICE6A" style="stroke:#ee1d23" class="some" data-stops="FF HH HB" data-from="1996 15" data-to="1999 18"/>
 

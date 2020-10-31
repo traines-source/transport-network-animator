@@ -41,7 +41,7 @@ export class SvgLabel implements LabelAdapter {
     }
 
     erase(delaySeconds: number): void {
-        throw new Error("Method not implemented.");
+        this.element.style.display = 'none';
     }
 
     private getInstant(fromOrTo: string): Instant {
