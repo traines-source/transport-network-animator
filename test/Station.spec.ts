@@ -4,7 +4,7 @@ import { Station, StationAdapter } from '../src/Station';
 import { Vector } from '../src/Vector';
 import { Rotation } from '../src/Rotation';
 import { Line, LineAdapter } from '../src/Line';
-import {instance, mock, when} from 'ts-mockito';
+import { instance, mock, when } from 'ts-mockito';
 import { Utils } from '../src/Utils';
 import { PreferredTrack } from '../src/PreferredTrack';
 
@@ -45,7 +45,6 @@ describe('Station', () => {
 
     it('whenStationSizeForAxis_givenNoLines', () => {
         const s = new Station(instance(stationAdapter));
-        const l = new Line(instance(lineAdapter), instance(stationProvider));
 
         expect(s.stationSizeForAxis('x', 1)).eql(-Station.LINE_DISTANCE+Station.DEFAULT_STOP_DIMEN+Station.LABEL_DISTANCE);
         expect(s.stationSizeForAxis('x', -1)).eql(-(-Station.LINE_DISTANCE+Station.DEFAULT_STOP_DIMEN+Station.LABEL_DISTANCE));
@@ -160,6 +159,7 @@ describe('Station', () => {
         when(lineAdapter.name).thenReturn('name1');
         const l = new Line(instance(lineAdapter), instance(stationProvider));
 
+        lineAdapter = mock();
         when(lineAdapter.name).thenReturn('name2');
         const l2 = new Line(instance(lineAdapter), instance(stationProvider));
 
@@ -175,7 +175,6 @@ describe('Station', () => {
         when(stationAdapter.baseCoords).thenReturn(new Vector(50, 60));
         when(stationAdapter.rotation).thenReturn(Rotation.from('n'));
         const s = new Station(instance(stationAdapter));
-        const l = new Line(instance(lineAdapter), instance(stationProvider));
         
         expect(s.rotatedTrackCoordinates(new Rotation(0), 3)).eql(new Vector(50+3*Station.LINE_DISTANCE, 60));
         expect(s.rotatedTrackCoordinates(new Rotation(90), 0)).eql(new Vector(50, 60));
@@ -187,7 +186,6 @@ describe('Station', () => {
         when(stationAdapter.baseCoords).thenReturn(base);
         when(stationAdapter.rotation).thenReturn(Rotation.from('nw'));
         const s = new Station(instance(stationAdapter));
-        const l = new Line(instance(lineAdapter), instance(stationProvider));
         
         const v1 = s.rotatedTrackCoordinates(new Rotation(0), -5);
         expect(Utils.equals(v1.delta(base).length, 5*Station.LINE_DISTANCE)).eql(true);
@@ -215,7 +213,6 @@ describe('Station', () => {
         when(stationAdapter.baseCoords).thenReturn(base);
         when(stationAdapter.rotation).thenReturn(Rotation.from('ne'));
         const s = new Station(instance(stationAdapter));
-        const l = new Line(instance(lineAdapter), instance(stationProvider));
         
         const v1 = s.rotatedTrackCoordinates(new Rotation(0), -5);
         expect(Utils.equals(v1.delta(base).length, 5*Station.LINE_DISTANCE)).eql(true);
@@ -243,7 +240,6 @@ describe('Station', () => {
         when(stationAdapter.baseCoords).thenReturn(base);
         when(stationAdapter.rotation).thenReturn(Rotation.from('w'));
         const s = new Station(instance(stationAdapter));
-        const l = new Line(instance(lineAdapter), instance(stationProvider));
         
         const v1 = s.rotatedTrackCoordinates(new Rotation(0), -5);
         expect(Utils.equals(v1.delta(base).length, 5*Station.LINE_DISTANCE)).eql(true);

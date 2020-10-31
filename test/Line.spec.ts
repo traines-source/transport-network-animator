@@ -4,7 +4,7 @@ import { Station, StationAdapter, Stop } from '../src/Station';
 import { Vector } from '../src/Vector';
 import { Rotation } from '../src/Rotation';
 import { Line, LineAdapter } from '../src/Line';
-import {instance, mock, when, verify, anyString, anyNumber, anything, between} from 'ts-mockito';
+import { instance, mock, when, anyNumber, anything } from 'ts-mockito';
 
 describe('Line', () => {
     let stationAdapter: StationAdapter;
@@ -149,7 +149,7 @@ describe('Line', () => {
         const c = mockStation(stationAdapter, 'c', new Vector(400, 200), Rotation.from('nw'));
         const d = mockStation(stationAdapter, 'd', new Vector(600, 200), Rotation.from('nw'));
 
-        createAndAssertStandardLine(lineAdapter, stationProvider, a, b, c);
+        createAndAssertStandardLine(a, b, c);
 
         when(lineAdapter.stops).thenReturn([new Stop('b', ''), new Stop('d', '')]);
         when(lineAdapter.name).thenReturn('l1');
@@ -159,7 +159,6 @@ describe('Line', () => {
             expect(path.shift()?.delta(new Vector(500, 300)).length).lessThan(0.1);
             expect(path.shift()).eql(new Vector(600, 200));
         })
-        when(stationProvider.stationById('a')).thenReturn(a);
         when(stationProvider.stationById('b')).thenReturn(b);
         when(stationProvider.stationById('d')).thenReturn(d);
         const l2 = new Line(instance(lineAdapter), instance(stationProvider));
@@ -172,7 +171,7 @@ describe('Line', () => {
         const c = mockStation(stationAdapter, 'c', new Vector(400, 200), Rotation.from('nw'));
         const d = mockStation(stationAdapter, 'd', new Vector(600, 200), Rotation.from('nw'));
 
-        createAndAssertStandardLine(lineAdapter, stationProvider, a, b, c);
+        createAndAssertStandardLine(a, b, c);
 
         when(lineAdapter.stops).thenReturn([new Stop('a', ''), new Stop('b', ''), new Stop('d', '')]);
         when(lineAdapter.name).thenReturn('l1');
@@ -202,7 +201,7 @@ describe('Line', () => {
         const c = mockStation(stationAdapter, 'c', new Vector(400, 200), Rotation.from('nw'));
         const d = mockStation(stationAdapter, 'd', new Vector(600, 350), Rotation.from('ne'));
 
-        createAndAssertStandardLine(lineAdapter, stationProvider, a, b, c);
+        createAndAssertStandardLine(a, b, c);
 
         when(lineAdapter.stops).thenReturn([new Stop('b', ''), new Stop('d', '')]);
         when(lineAdapter.name).thenReturn('l1');
@@ -231,7 +230,7 @@ describe('Line', () => {
         const c = mockStation(stationAdapter, 'c', new Vector(400, 200), Rotation.from('nw'));
         const d = mockStation(stationAdapter, 'd', new Vector(600, 350), Rotation.from('ne'));
 
-        createAndAssertStandardLine(lineAdapter, stationProvider, a, b, c);
+        createAndAssertStandardLine(a, b, c);
 
         when(lineAdapter.stops).thenReturn([new Stop('d', ''), new Stop('b', '')]);
         when(lineAdapter.name).thenReturn('l1');
@@ -253,7 +252,7 @@ describe('Line', () => {
         const c = mockStation(stationAdapter, 'c', new Vector(400, 200), Rotation.from('nw'));
         const d = mockStation(stationAdapter, 'd', new Vector(600, 200), Rotation.from('nw'));
 
-        createAndAssertStandardLine(lineAdapter, stationProvider, a, b, c);
+        createAndAssertStandardLine(a, b, c);
 
         when(lineAdapter.stops).thenReturn([new Stop('b', ''), new Stop('d', '')]);
         when(lineAdapter.name).thenReturn('l2');
@@ -263,7 +262,6 @@ describe('Line', () => {
             expect(path.shift()?.delta(new Vector(500+Station.LINE_DISTANCE, 300-Station.LINE_DISTANCE)).length).lessThan(0.1);
             expect(path.shift()).eql(new Vector(600, 200));
         })
-        when(stationProvider.stationById('a')).thenReturn(a);
         when(stationProvider.stationById('b')).thenReturn(b);
         when(stationProvider.stationById('d')).thenReturn(d);
         const l2 = new Line(instance(lineAdapter), instance(stationProvider));
@@ -276,7 +274,7 @@ describe('Line', () => {
         const c = mockStation(stationAdapter, 'c', new Vector(400, 200), Rotation.from('nw'));
         const d = mockStation(stationAdapter, 'd', new Vector(600, 200), Rotation.from('nw'));
 
-        createAndAssertStandardLine(lineAdapter, stationProvider, a, b, c);
+        createAndAssertStandardLine(a, b, c);
 
         when(lineAdapter.stops).thenReturn([new Stop('d', ''), new Stop('b', '')]);
         when(lineAdapter.name).thenReturn('l1');
@@ -286,7 +284,6 @@ describe('Line', () => {
             expect(path.shift()?.delta(new Vector(500+Station.LINE_DISTANCE, 300-Station.LINE_DISTANCE)).length).lessThan(0.1);
             expect(path.shift()).eql(new Vector(500+Station.LINE_DISTANCE, 400));
         })
-        when(stationProvider.stationById('a')).thenReturn(a);
         when(stationProvider.stationById('b')).thenReturn(b);
         when(stationProvider.stationById('d')).thenReturn(d);
         const l2 = new Line(instance(lineAdapter), instance(stationProvider));
@@ -299,7 +296,7 @@ describe('Line', () => {
         const c = mockStation(stationAdapter, 'c', new Vector(400, 200), Rotation.from('nw'));
         const d = mockStation(stationAdapter, 'd', new Vector(600, 350), Rotation.from('nw'));
 
-        createAndAssertStandardLine(lineAdapter, stationProvider, a, b, c);
+        createAndAssertStandardLine(a, b, c);
 
         when(lineAdapter.stops).thenReturn([new Stop('d', ''), new Stop('b', ''), new Stop('c', '')]);
         when(lineAdapter.name).thenReturn('l2');
@@ -313,8 +310,8 @@ describe('Line', () => {
             expect(path.shift()?.delta(new Vector(450, 242)).length).lessThan(0.5);
             expect(path.shift()).eql(new Vector(400+Station.LINE_DISTANCE/Math.sqrt(2), 200-Station.LINE_DISTANCE/Math.sqrt(2)));
         })
-        when(stationProvider.stationById('a')).thenReturn(a);
         when(stationProvider.stationById('b')).thenReturn(b);
+        when(stationProvider.stationById('c')).thenReturn(c);
         when(stationProvider.stationById('d')).thenReturn(d);
         when(stationProvider.createVirtualStop('h_b_c', anything(), anything())).thenCall((id: string, v: Vector, r: Rotation) => {
             expect(r).eql(new Rotation(-0));
@@ -331,7 +328,7 @@ describe('Line', () => {
         const c = mockStation(stationAdapter, 'c', new Vector(400, 200), Rotation.from('nw'));
         const d = mockStation(stationAdapter, 'd', new Vector(600, 350), Rotation.from('nw'));
 
-        createAndAssertStandardLine(lineAdapter, stationProvider, a, b, c);
+        createAndAssertStandardLine(a, b, c);
 
         when(lineAdapter.stops).thenReturn([new Stop('d', '-'), new Stop('b', ''), new Stop('c', '')]);
         when(lineAdapter.name).thenReturn('l2');
@@ -345,9 +342,8 @@ describe('Line', () => {
             expect(path.shift()?.delta(new Vector(450, 258)).length).lessThan(0.5);
             expect(path.shift()).eql(new Vector(400-Station.LINE_DISTANCE/Math.sqrt(2), 200+Station.LINE_DISTANCE/Math.sqrt(2)));
         })
-        when(stationProvider.stationById('a')).thenReturn(a);
         when(stationProvider.stationById('b')).thenReturn(b);
-        when(stationProvider.stationById('d')).thenReturn(d);
+        when(stationProvider.stationById('c')).thenReturn(c);
         when(stationProvider.stationById('d')).thenReturn(d);
         when(stationProvider.stationById('h_b_c')).thenReturn(mockStation(stationAdapter, 'h_b_c', new Vector(450, 300), new Rotation(-0)));
         const l2 = new Line(instance(lineAdapter), instance(stationProvider));
@@ -360,7 +356,7 @@ describe('Line', () => {
         const c = mockStation(stationAdapter, 'c', new Vector(400, 200), Rotation.from('nw'));
         const d = mockStation(stationAdapter, 'd', new Vector(600, 200), Rotation.from('nw'));
         
-        createAndAssertStandardLine(lineAdapter, stationProvider, a, b, c);
+        createAndAssertStandardLine(a, b, c);
 
         when(lineAdapter.stops).thenReturn([new Stop('d', ''), new Stop('b', '-1'), new Stop('a', '+1')]);
         when(lineAdapter.name).thenReturn('l2');
@@ -378,6 +374,8 @@ describe('Line', () => {
         const l2 = new Line(instance(lineAdapter), instance(stationProvider));
         expect(l2.draw(2, true)).approximately(340 / Line.SPEED, 0.1);
 
+        lineAdapter = mock();
+        stationProvider = mock();
         when(lineAdapter.stops).thenReturn([new Stop('d', '+1'), new Stop('b', '-2')]);
         when(lineAdapter.name).thenReturn('l3');
         when(lineAdapter.draw(4, anyNumber(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
@@ -386,7 +384,6 @@ describe('Line', () => {
             expect(path.shift()?.delta(new Vector(500+2*Station.LINE_DISTANCE, 296)).length).lessThan(0.5);
             expect(path.shift()).eql(new Vector(500+2*Station.LINE_DISTANCE, 400));
         })
-        when(stationProvider.stationById('a')).thenReturn(mockStation(stationAdapter, 'a', new Vector(500, 500), Rotation.from('n')));
         when(stationProvider.stationById('b')).thenReturn(mockStation(stationAdapter, 'b', new Vector(500, 400), Rotation.from('e')));
         when(stationProvider.stationById('d')).thenReturn(mockStation(stationAdapter, 'd', new Vector(600, 200), Rotation.from('nw')));
         const l3 = new Line(instance(lineAdapter), instance(stationProvider));
@@ -399,7 +396,7 @@ describe('Line', () => {
         const c = mockStation(stationAdapter, 'c', new Vector(400, 200), Rotation.from('nw'));
         const d = mockStation(stationAdapter, 'd', new Vector(600, 200), Rotation.from('nw'));
 
-        createAndAssertStandardLine(lineAdapter, stationProvider, a, b, c);
+        createAndAssertStandardLine(a, b, c);
 
         when(lineAdapter.stops).thenReturn([new Stop('d', ''), new Stop('b', ''), new Stop('a', '')]);
         when(lineAdapter.name).thenReturn('l2');
@@ -416,6 +413,8 @@ describe('Line', () => {
         const l2 = new Line(instance(lineAdapter), instance(stationProvider));
         expect(l2.draw(2, true)).approximately(340 / Line.SPEED, 0.1);
 
+        lineAdapter = mock();
+        stationProvider = mock();
         when(lineAdapter.stops).thenReturn([new Stop('d', ''), new Stop('b', '')]);
         when(lineAdapter.name).thenReturn('l3');
         when(lineAdapter.draw(4, anyNumber(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
@@ -424,7 +423,6 @@ describe('Line', () => {
             expect(path.shift()?.delta(new Vector(500+2*Station.LINE_DISTANCE, 296)).length).lessThan(0.5);
             expect(path.shift()).eql(new Vector(500+2*Station.LINE_DISTANCE, 400));
         })
-        when(stationProvider.stationById('a')).thenReturn(a);
         when(stationProvider.stationById('b')).thenReturn(b);
         when(stationProvider.stationById('d')).thenReturn(d);
         const l3 = new Line(instance(lineAdapter), instance(stationProvider));
@@ -437,7 +435,7 @@ describe('Line', () => {
         const c = mockStation(stationAdapter, 'c', new Vector(400, 200), Rotation.from('nw'));
         const d = mockStation(stationAdapter, 'd', new Vector(600, 200), Rotation.from('nw'));
 
-        createAndAssertStandardLine(lineAdapter, stationProvider, a, b, c);
+        createAndAssertStandardLine(a, b, c);
 
         when(lineAdapter.stops).thenReturn([new Stop('d', ''), new Stop('b', ''), new Stop('a', '')]);
         when(lineAdapter.name).thenReturn('l2');
@@ -468,7 +466,7 @@ describe('Line', () => {
         const c = mockStation(stationAdapter, 'c', new Vector(400, 200), Rotation.from('nw'));
         const d = mockStation(stationAdapter, 'd', new Vector(600, 200), Rotation.from('nw'));
 
-        const l1 = createAndAssertStandardLine(lineAdapter, stationProvider, a, b, c);
+        const l1 = createAndAssertStandardLine(a, b, c);
 
         when(lineAdapter.stops).thenReturn([new Stop('d', ''), new Stop('b', ''), new Stop('a', '')]);
         when(lineAdapter.name).thenReturn('l2');
@@ -487,6 +485,8 @@ describe('Line', () => {
 
         expect(l1.erase(0, false, false)).approximately(0, 0.1);
 
+        lineAdapter = mock();
+        stationProvider = mock();
         when(lineAdapter.stops).thenReturn([new Stop('d', ''), new Stop('b', ''), new Stop('a', '')]);
         when(lineAdapter.name).thenReturn('l1');
         when(lineAdapter.draw(2, anyNumber(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
@@ -509,7 +509,7 @@ describe('Line', () => {
         const c = mockStation(stationAdapter, 'c', new Vector(400, 200), Rotation.from('nw'));
         const d = mockStation(stationAdapter, 'd', new Vector(600, 200), Rotation.from('nw'));
 
-        const l1 = createAndAssertStandardLine(lineAdapter, stationProvider, a, b, c);
+        const l1 = createAndAssertStandardLine(a, b, c);
         
         when(lineAdapter.stops).thenReturn([new Stop('d', ''), new Stop('b', ''), new Stop('a', '')]);
         when(lineAdapter.name).thenReturn('l2');
@@ -528,6 +528,8 @@ describe('Line', () => {
 
         expect(l1.erase(0, false, false)).approximately(0, 0.1);
 
+        lineAdapter = mock();
+        stationProvider = mock();
         when(lineAdapter.stops).thenReturn([new Stop('d', ''), new Stop('b', ''), new Stop('a', '')]);
         when(lineAdapter.name).thenReturn('l3');
         when(lineAdapter.draw(2, anyNumber(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
@@ -553,7 +555,10 @@ function mockStation(stationAdapter: StationAdapter, id: string, baseCoords: Vec
     return new Station(instance(stationAdapter));
 }
 
-function createAndAssertStandardLine(lineAdapter: LineAdapter, stationProvider: StationProvider, a: Station, b: Station, c: Station): Line {
+function createAndAssertStandardLine(a: Station, b: Station, c: Station): Line {
+    const lineAdapter: LineAdapter = mock();
+    const stationProvider: StationProvider = mock();
+
     when(lineAdapter.stops).thenReturn([new Stop('a', ''), new Stop('b', ''), new Stop('c', '')]);
     when(lineAdapter.name).thenReturn('l1');
     when(lineAdapter.draw(0, anyNumber(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {

@@ -1,4 +1,4 @@
-import { TimedDrawable, Timed } from "./Drawable";
+import { TimedDrawable } from "./Drawable";
 import { Instant } from "./Instant";
 import { Station } from "./Station";
 import { Vector } from "./Vector";
@@ -52,6 +52,8 @@ export class Network implements StationProvider {
     }
 
     private timedDrawablesAt(now: Instant): TimedDrawable[] {
+        if (!this.isEpochExisting(now.epoch + ''))
+            return [];
         return this.slideIndex[now.epoch][now.second];
     }
 
@@ -129,9 +131,11 @@ export class Network implements StationProvider {
     }
     
     private findSmallestAbove(threshold: number, dict: {[id: number]: any}): number | null {
+        if (dict == undefined)
+            return null;
         let smallest = null;
         for (const [key, value] of Object.entries(dict)) {
-            if (parseInt(key) > threshold && (smallest == undefined || parseInt(key) < smallest)) {
+            if (parseInt(key) > threshold && (smallest == null || parseInt(key) < smallest)) {
                 smallest = parseInt(key);
             }
         }
