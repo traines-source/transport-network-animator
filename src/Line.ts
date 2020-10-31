@@ -10,8 +10,8 @@ export interface LineAdapter extends Timed  {
     stops: Stop[];
     name: string;
     boundingBox: { tl: Vector; br: Vector; };
-    draw(delaySeconds: number, animationDurationSeconds: number, path: Vector[]): void;
-    erase(delaySeconds: number, animationDurationSeconds: number, reverse: boolean): void;
+    draw(delaySeconds: number, animationDurationSeconds: number, path: Vector[], length: number): void;
+    erase(delaySeconds: number, animationDurationSeconds: number, reverse: boolean, length: number): void;
 }
 
 export class Line implements TimedDrawable {
@@ -29,10 +29,11 @@ export class Line implements TimedDrawable {
     
     private precedingStop: Station | undefined = undefined;
     private precedingDir: Rotation | undefined = undefined;
+    private path: Vector[] = [];
 
     draw(delay: number, animate: boolean): number {
         const stops = this.adapter.stops;
-        const path: Vector[] = [];
+        const path = this.path;
         
         let track = new PreferredTrack('+');
         for (let j=0; j<stops.length; j++) {
@@ -47,12 +48,13 @@ export class Line implements TimedDrawable {
             track = track.keepOnlySign();
         }
         let duration = this.getAnimationDuration(path, animate);
-        this.adapter.draw(delay, duration, path);
+        this.adapter.draw(delay, duration, path, this.getTotalLength(path));
         return duration;
     }
 
     erase(delay: number, animate: boolean, reverse: boolean): number {
-        this.adapter.erase(delay, 0, reverse);
+        let duration = this.getAnimationDuration(this.path, animate);
+        this.adapter.erase(delay, duration, reverse, this.getTotalLength(this.path));
         const stops = this.adapter.stops;
         for (let j=0; j<stops.length; j++) {
             const stop = this.stationProvider.stationById(stops[j].stationId);
@@ -61,7 +63,7 @@ export class Line implements TimedDrawable {
             stop.removeLine(this);
             stop.draw(delay);
         }
-        return 0;
+        return duration;
     }
 
     private nextStopBaseCoord(stops: Stop[], currentStopIndex: number, defaultCoords: Vector) {

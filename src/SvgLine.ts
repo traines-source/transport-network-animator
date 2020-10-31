@@ -60,14 +60,13 @@ export class SvgLine implements LineAdapter {
         return this._stops;
     }
 
-    draw(delaySeconds: number, animationDurationSeconds: number, path: Vector[]): void {
+    draw(delaySeconds: number, animationDurationSeconds: number, path: Vector[], length: number): void {
         this.updateBoundingBox(path);
         if (delaySeconds > 0) {
             const line = this;
-            window.setTimeout(function () { line.draw(0, animationDurationSeconds, path); }, delaySeconds * 1000);
+            window.setTimeout(function () { line.draw(0, animationDurationSeconds, path, length); }, delaySeconds * 1000);
             return;
         }
-        let length = this.getTotalLength(path);
     
         const d = 'M' + path.map(v => v.x+','+v.y).join(' L');
         this.element.setAttribute('d', d);
@@ -77,7 +76,7 @@ export class SvgLine implements LineAdapter {
         if (animationDurationSeconds == 0) {
             length = 0;
         }
-        this.animateFrame(length, length/animationDurationSeconds/SvgNetwork.FPS);
+        this.animateFrame(length, 0, -length/animationDurationSeconds/SvgNetwork.FPS);
     }
 
     private createDashedPart(length: number): string {
@@ -93,32 +92,31 @@ export class SvgLine implements LineAdapter {
         return dashedPart;
     }
 
-    erase(delaySeconds: number, animationDurationSeconds: number, reverse: boolean): void {
+    erase(delaySeconds: number, animationDurationSeconds: number, reverse: boolean, length: number): void {
         if (delaySeconds > 0) {
             const line = this;
-            window.setTimeout(function() { line.erase(0, animationDurationSeconds, reverse); }, delaySeconds * 1000);
+            window.setTimeout(function() { line.erase(0, animationDurationSeconds, reverse, length); }, delaySeconds * 1000);
             return;
         }
-        this.element.setAttribute('d', '');
+        let from = 0;
+        if (animationDurationSeconds == 0) {
+            from = length;
+        }        
+        this.animateFrame(from, length, length/animationDurationSeconds/SvgNetwork.FPS);
     }
     
-    private animateFrame(length: number, animationPerFrame: number): void {
-        if (length > 0) {
-            this.element.style.strokeDashoffset = length + '';
-            length -= animationPerFrame;
+    private animateFrame(from: number, to: number, animationPerFrame: number): void {
+        if (animationPerFrame < 0 && from > to || animationPerFrame > 0 && from < to) {
+            this.element.style.strokeDashoffset = from + '';
+            from += animationPerFrame;
             const line = this;
-            window.requestAnimationFrame(function() { line.animateFrame(length, animationPerFrame); });
+            window.requestAnimationFrame(function() { line.animateFrame(from, to, animationPerFrame); });
         } else {
-            this.element.style.strokeDashoffset = '0';
+            this.element.style.strokeDashoffset = to + '';
+            if (to != 0) {
+                this.element.setAttribute('d', '');
+            }
         }
-    }
-
-    private getTotalLength(path: Vector[]): number {
-        let length = 0;
-        for (let i=0; i<path.length-1; i++) {
-            length += path[i].delta(path[i+1]).length;
-        }
-        return length;
     }
     
 }
