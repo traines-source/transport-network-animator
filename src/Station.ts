@@ -53,7 +53,8 @@ export class Station {
     }
 
     addLabel(label: Label): void {
-        this.existingLabels.push(label);
+        if (!this.existingLabels.includes(label))
+            this.existingLabels.push(label);
     }
 
     removeLabel(label: Label): void {
@@ -151,14 +152,19 @@ export class Station {
 
     draw(delaySeconds: number): void {
         const station = this;
+        this.existingLabels.forEach(l => l.draw(delaySeconds, false));
         this.adapter.draw(delaySeconds, function() { return station.positionBoundaries(); });
     }
 
     stationSizeForAxis(axis: string, vector: number): number {
         if (Utils.equals(vector, 0))
             return 0;
-        const size = this.positionBoundariesForAxis(this.existingLines[axis])[vector < 0 ? 0 : 1] * Station.LINE_DISTANCE;
-        return size + Math.sign(vector) * (Station.DEFAULT_STOP_DIMEN + Station.LABEL_DISTANCE);
+        const dir = Math.sign(vector);
+        let dimen = this.positionBoundariesForAxis(this.existingLines[axis])[vector < 0 ? 0 : 1];
+        if (dir*dimen < 0) {
+            dimen = 0;
+        }
+        return dimen * Station.LINE_DISTANCE + dir * (Station.DEFAULT_STOP_DIMEN + Station.LABEL_DISTANCE);
     }
 
     linesExisting(): boolean {

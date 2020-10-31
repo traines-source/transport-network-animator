@@ -27,10 +27,12 @@ export class SvgStation implements StationAdapter {
         }
         const positionBoundaries = getPositionBoundaries();
         const baseCoord = this.baseCoords;
-        const stopDimen = [Math.max(positionBoundaries.x[1] - positionBoundaries.x[0], 0), Math.max(positionBoundaries.y[1] - positionBoundaries.y[0], 0)];
+        const stopDimen = [positionBoundaries.x[1] - positionBoundaries.x[0], positionBoundaries.y[1] - positionBoundaries.y[0]];
         
-        this.element.setAttribute('width', (stopDimen[0] * Station.LINE_DISTANCE + Station.DEFAULT_STOP_DIMEN) + '');
-        this.element.setAttribute('height', (stopDimen[1] * Station.LINE_DISTANCE + Station.DEFAULT_STOP_DIMEN) + '');
+        this.element.style.visibility = stopDimen[0] < 0 && stopDimen[1] < 0 ? 'hidden' : 'visible';
+
+        this.element.setAttribute('width', (Math.max(stopDimen[0], 0) * Station.LINE_DISTANCE + Station.DEFAULT_STOP_DIMEN) + '');
+        this.element.setAttribute('height', (Math.max(stopDimen[1], 0) * Station.LINE_DISTANCE + Station.DEFAULT_STOP_DIMEN) + '');
         this.element.setAttribute('transform','rotate(' + this.rotation.degrees + ' ' + baseCoord.x + ' ' + baseCoord.y + ') translate(' + (Math.min(positionBoundaries.x[0], 0) * Station.LINE_DISTANCE - Station.DEFAULT_STOP_DIMEN / 2) + ',' + (Math.min(positionBoundaries.y[0], 0) * Station.LINE_DISTANCE - Station.DEFAULT_STOP_DIMEN / 2) + ')');
     }
     

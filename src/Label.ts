@@ -6,6 +6,7 @@ import { Vector } from "./Vector";
 
 export interface LabelAdapter extends Timed {
     forStation: string | undefined;
+    forLine: string | undefined;
     boundingBox: {tl: Vector, br: Vector};
     draw(delaySeconds: number, textCoords: Vector, labelDir: Rotation): void;
     erase(delaySeconds: number): void;
@@ -33,17 +34,32 @@ export class Label implements TimedDrawable {
         if (this.adapter.forStation != undefined) {
             const station = this.forStation;
             station.addLabel(this);
-            const baseCoord = station.baseCoords;
-            const labelDir = station.labelDir;
-            const stationDir = station.rotation;
-            const diffDir = labelDir.add(new Rotation(-stationDir.degrees));
-            const unitv = Vector.UNIT.rotate(diffDir);
-            const anchor = new Vector(station.stationSizeForAxis('x', unitv.x), station.stationSizeForAxis('y', unitv.y));
-            const textCoords = baseCoord.add(anchor.rotate(stationDir));
-        
-            this.adapter.draw(delay, textCoords, labelDir);
+            if (station.linesExisting()) {
+                this.drawForStation(delay, station, false);
+            } else {
+                this.adapter.erase(delay);
+            }
+        } else if (this.adapter.forLine != undefined) {
+            /*const termini = this.stationProvider.lineGroupById(this.adapter.forLine).termini;
+            termini.forEach(t => {
+                const s = this.stationProvider.stationById(t.stationId);
+                if (s != undefined)
+                    this.drawForStation(delay, s, true);
+            });*/
         }
         return 0;
+    }
+
+    private drawForStation(delaySeconds: number, station: Station, forLine: boolean) {
+        const baseCoord = station.baseCoords;
+        const labelDir = station.labelDir;
+        const stationDir = station.rotation;
+        const diffDir = labelDir.add(new Rotation(-stationDir.degrees));
+        const unitv = Vector.UNIT.rotate(diffDir);
+        const anchor = new Vector(station.stationSizeForAxis('x', unitv.x), station.stationSizeForAxis('y', unitv.y));
+        const textCoords = baseCoord.add(anchor.rotate(stationDir));
+    
+        this.adapter.draw(delaySeconds, textCoords, labelDir);
     }
 
     erase(delay: number, animate: boolean, reverse: boolean): number {

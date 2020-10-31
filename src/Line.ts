@@ -48,12 +48,14 @@ export class Line implements TimedDrawable {
             track = track.keepOnlySign();
         }
         let duration = this.getAnimationDuration(path, animate);
+        this.stationProvider.lineGroupById(this.name).addLine(this);
         this.adapter.draw(delay, duration, path, this.getTotalLength(path));
         return duration;
     }
 
     erase(delay: number, animate: boolean, reverse: boolean): number {
         let duration = this.getAnimationDuration(this.path, animate);
+        this.stationProvider.lineGroupById(this.name).removeLine(this);
         this.adapter.erase(delay, duration, reverse, this.getTotalLength(this.path));
         const stops = this.adapter.stops;
         for (let j=0; j<stops.length; j++) {
@@ -184,5 +186,12 @@ export class Line implements TimedDrawable {
             length += path[i].delta(path[i+1]).length;
         }
         return length;
+    }
+
+    get termini(): Stop[] {
+        const stops = this.adapter.stops;
+        if (stops.length == 0) 
+            return [];
+        return [stops[0], stops[stops.length-1]];
     }
 }

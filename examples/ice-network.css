@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap');
 
 #stations rect {
     stroke: black;
@@ -39,4 +39,11 @@ svg {
 
 .some {
     stroke-dasharray: 1 4;
+}
+
+#epoch-label {
+    font-size: 50px;
+    font-weight: bold;
+    text-anchor: end;
+    dominant-baseline: hanging;
 }

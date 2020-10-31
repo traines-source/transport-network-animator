@@ -3,8 +3,8 @@ import { Vector } from "./Vector";
 
 export interface Drawable {
     boundingBox: {tl: Vector, br: Vector};
-    draw(delay: number, animate: boolean): number;
-    erase(delay: number, animate: boolean, reverse: boolean): number;
+    draw(delaySeconds: number, animate: boolean): number;
+    erase(delaySeconds: number, animate: boolean, reverse: boolean): number;
 }
 
 export interface Timed {

@@ -46,10 +46,10 @@ describe('Station', () => {
     it('whenStationSizeForAxis_givenNoLines', () => {
         const s = new Station(instance(stationAdapter));
 
-        expect(s.stationSizeForAxis('x', 1)).eql(-Station.LINE_DISTANCE+Station.DEFAULT_STOP_DIMEN+Station.LABEL_DISTANCE);
-        expect(s.stationSizeForAxis('x', -1)).eql(-(-Station.LINE_DISTANCE+Station.DEFAULT_STOP_DIMEN+Station.LABEL_DISTANCE));
-        expect(s.stationSizeForAxis('y', 1)).eql(-Station.LINE_DISTANCE+Station.DEFAULT_STOP_DIMEN+Station.LABEL_DISTANCE);
-        expect(s.stationSizeForAxis('y', -1)).eql(-(-Station.LINE_DISTANCE+Station.DEFAULT_STOP_DIMEN+Station.LABEL_DISTANCE));
+        expect(s.stationSizeForAxis('x', 1)).eql(Station.DEFAULT_STOP_DIMEN+Station.LABEL_DISTANCE);
+        expect(s.stationSizeForAxis('x', -1)).eql(-(Station.DEFAULT_STOP_DIMEN+Station.LABEL_DISTANCE));
+        expect(s.stationSizeForAxis('y', 1)).eql(Station.DEFAULT_STOP_DIMEN+Station.LABEL_DISTANCE);
+        expect(s.stationSizeForAxis('y', -1)).eql(-(Station.DEFAULT_STOP_DIMEN+Station.LABEL_DISTANCE));
     })
 
     it('whenStationSizeForAxis_givenOnlyLinesOnXAxis', () => {
@@ -61,8 +61,8 @@ describe('Station', () => {
         expect(s.stationSizeForAxis('x', 1)).eql(4*Station.LINE_DISTANCE+Station.DEFAULT_STOP_DIMEN+Station.LABEL_DISTANCE);
         expect(s.stationSizeForAxis('x', -1)).eql(-(Station.LINE_DISTANCE+Station.DEFAULT_STOP_DIMEN+Station.LABEL_DISTANCE));
         expect(s.stationSizeForAxis('x', 0.00001)).eql(0);
-        expect(s.stationSizeForAxis('y', 1)).eql(-Station.LINE_DISTANCE+Station.DEFAULT_STOP_DIMEN+Station.LABEL_DISTANCE);
-        expect(s.stationSizeForAxis('y', -1)).eql(-(-Station.LINE_DISTANCE+Station.DEFAULT_STOP_DIMEN+Station.LABEL_DISTANCE));
+        expect(s.stationSizeForAxis('y', 1)).eql(Station.DEFAULT_STOP_DIMEN+Station.LABEL_DISTANCE);
+        expect(s.stationSizeForAxis('y', -1)).eql(-(Station.DEFAULT_STOP_DIMEN+Station.LABEL_DISTANCE));
     })
 
     it('whenStationSizeForAxis_givenSingleLineOnZero', () => {
@@ -98,8 +98,8 @@ describe('Station', () => {
         s.addLine(l, 'y', 0);        
         s.addLine(l2, 'y', -2);
         s.removeLine(l);
-        expect(s.stationSizeForAxis('x', 1)).eql(-Station.LINE_DISTANCE+Station.DEFAULT_STOP_DIMEN+Station.LABEL_DISTANCE);
-        expect(s.stationSizeForAxis('x', -1)).eql(-(-Station.LINE_DISTANCE+Station.DEFAULT_STOP_DIMEN+Station.LABEL_DISTANCE));
+        expect(s.stationSizeForAxis('x', 1)).eql(Station.DEFAULT_STOP_DIMEN+Station.LABEL_DISTANCE);
+        expect(s.stationSizeForAxis('x', -1)).eql(-(Station.DEFAULT_STOP_DIMEN+Station.LABEL_DISTANCE));
         expect(s.stationSizeForAxis('y', 5)).eql(Station.DEFAULT_STOP_DIMEN+Station.LABEL_DISTANCE);
         expect(s.stationSizeForAxis('y', -1)).eql(-(2*Station.LINE_DISTANCE+Station.DEFAULT_STOP_DIMEN+Station.LABEL_DISTANCE));
     })

@@ -546,6 +546,18 @@ describe('Line', () => {
         expect(l1_1.draw(2, true)).approximately(340 / Line.SPEED, 0.1);
     })
 
+    it('whenTermini_givenNoStops', () => { 
+        when(lineAdapter.stops).thenReturn([]);
+        const l = new Line(instance(lineAdapter), instance(stationProvider));
+        expect(l.termini).eql([]);
+    })
+
+    it('whenTermini_givenStops', () => { 
+        when(lineAdapter.stops).thenReturn([new Stop('d', ''), new Stop('b', ''), new Stop('a', '')]);
+        const l = new Line(instance(lineAdapter), instance(stationProvider));
+        expect(l.termini).eql([new Stop('d', ''), new Stop('a', '')]);
+    })
+
 })
 
 function mockStation(stationAdapter: StationAdapter, id: string, baseCoords: Vector, rotation: Rotation): Station {

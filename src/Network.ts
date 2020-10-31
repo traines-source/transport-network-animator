@@ -4,9 +4,11 @@ import { Station } from "./Station";
 import { Vector } from "./Vector";
 import { Rotation } from "./Rotation";
 import { Zoomer } from "./Zoomer";
+import { LineGroup } from "./LineGroup";
 
 export interface StationProvider {
     stationById(id: string): Station | undefined;
+    lineGroupById(id: string): LineGroup;
     createVirtualStop(id: string, baseCoords: Vector, rotation: Rotation): Station;
 }
 export interface NetworkAdapter {
@@ -21,6 +23,7 @@ export interface NetworkAdapter {
 export class Network implements StationProvider {
     private slideIndex: {[id: string] : {[id: string]: TimedDrawable[]}} = {};
     private stations: { [id: string] : Station } = {};
+    private lineGroups: { [id: string] : LineGroup } = {};
     private eraseBuffer: TimedDrawable[] = [];
 
     constructor(private adapter: NetworkAdapter) {
@@ -38,6 +41,13 @@ export class Network implements StationProvider {
                 this.stations[id] = station;
         }
         return this.stations[id];
+    }
+
+    lineGroupById(id: string): LineGroup {
+        if (this.lineGroups[id] == undefined) {
+            this.lineGroups[id] = new LineGroup();
+        }
+        return this.lineGroups[id];
     }
 
     createVirtualStop(id: string, baseCoords: Vector, rotation: Rotation): Station {

@@ -22,6 +22,10 @@ export class SvgLabel implements LabelAdapter {
         return this.element.dataset.station;
     }
 
+    get forLine(): string | undefined {
+        return this.element.dataset.line;
+    }
+
     get boundingBox(): {tl: Vector, br: Vector} {
         return {tl: Vector.NULL, br: Vector.NULL};
     }
@@ -41,7 +45,12 @@ export class SvgLabel implements LabelAdapter {
     }
 
     erase(delaySeconds: number): void {
-        this.element.style.display = 'none';
+        if (delaySeconds > 0) {
+            const label = this;
+            window.setTimeout(function() { label.erase(0); }, delaySeconds * 1000);
+            return;
+        }
+        this.element.style.visibility = 'hidden';
     }
 
     private getInstant(fromOrTo: string): Instant {
