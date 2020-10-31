@@ -26,11 +26,17 @@ describe('Station', () => {
         
         expect(s.axisAndTrackForExistingLine(l.name)).eql(undefined);
 
-        s.addLine(l, 'x', 4);
+        s.addLine(l, 'y', 4);
+
+        const result2 = s.axisAndTrackForExistingLine('name');
+        expect(result2?.axis).eql('y');
+        expect(result2?.track).eql(4);
+
+        s.addLine(l, 'x', 0);
 
         const result = s.axisAndTrackForExistingLine('name');
         expect(result?.axis).eql('x');
-        expect(result?.track).eql(4);
+        expect(result?.track).eql(0);        
 
         s.removeLine(l);
 

@@ -95,8 +95,8 @@ describe('Vector', () => {
         expect(new Vector(0.7, 7).bothAxisMins(new Vector(0, 8))).eql(new Vector(0, 7));
         expect(new Vector(0.7, 0.8).bothAxisMins(new Vector(7, 8))).eql(new Vector(0.7, 0.8));
         expect(new Vector(0.7, 0.8).bothAxisMins(new Vector(-1, -8))).eql(new Vector(-1, -8));
-        expect(Vector.NULL.bothAxisMaxs(new Vector(-1, -8))).eql(new Vector(-1, -8));
-        expect(new Vector(-1, -8).bothAxisMaxs(Vector.NULL)).eql(new Vector(-1, -8));
+        expect(Vector.NULL.bothAxisMins(new Vector(-1, -8))).eql(new Vector(-1, -8));
+        expect(new Vector(-1, -8).bothAxisMins(Vector.NULL)).eql(new Vector(-1, -8));
     })
 
     it('whenBothAxisMaxs', () => {

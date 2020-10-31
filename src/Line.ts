@@ -157,6 +157,7 @@ export class Line implements TimedDrawable {
         const helpStopId = 'h_' + Utils.alphabeticId(fromStop.id, toStop.id);
         let helpStop = this.stationProvider.stationById(helpStopId);
         if (helpStop == undefined) {
+            console.log('Creating', helpStopId);
             const oldCoord = fromStop.baseCoords;
             const newCoord = toStop.baseCoords;
             const delta = newCoord.delta(oldCoord);
@@ -165,9 +166,6 @@ export class Line implements TimedDrawable {
             const intermediateCoord = delta.withLength(delta.length/2).add(newCoord);
 
             helpStop = this.stationProvider.createVirtualStop(helpStopId, intermediateCoord, intermediateDir);
-        }
-        if (helpStop == undefined) {
-            throw new Error(helpStopId + ' was not created');
         }
         return helpStop;
     }
