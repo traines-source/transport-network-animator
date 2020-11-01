@@ -68,6 +68,7 @@ export class SvgLine implements LineAdapter {
             return;
         }
     
+        this.element.className.baseVal += ' ' + this.name;
         const d = 'M' + path.map(v => v.x+','+v.y).join(' L');
         this.element.setAttribute('d', d);
     

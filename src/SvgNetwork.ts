@@ -12,7 +12,7 @@ import { SvgLabel } from "./SvgLabel";
 export class SvgNetwork implements NetworkAdapter {
 
     static FPS = 60;
-    private readonly svgns = "http://www.w3.org/2000/svg";
+    static SVGNS = "http://www.w3.org/2000/svg";
 
     private currentZoomCenter: Vector = Vector.NULL;
     private currentZoomScale: number = 1;
@@ -59,7 +59,7 @@ export class SvgNetwork implements NetworkAdapter {
     }
 
     createVirtualStop(id: string, baseCoords: Vector, rotation: Rotation): Station {
-        const helpStop = document.createElementNS(this.svgns, 'rect');
+        const helpStop = document.createElementNS(SvgNetwork.SVGNS, 'rect');
         helpStop.id = id;    
         helpStop.setAttribute('data-dir', rotation.name);
         this.setCoord(helpStop, baseCoords);

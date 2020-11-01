@@ -12,7 +12,7 @@
     fill: none;
 }
 
-#elements path {
+path {
     stroke: black;
     stroke-width: 3;
     fill: none;
@@ -27,6 +27,8 @@
 svg {
     background-color: white;
     font-family: 'Roboto Condensed', sans-serif;
+    font-size: 16px;
+    line-height: 16px;
 }
 
 .e2h {
@@ -46,4 +48,41 @@ svg {
     font-weight: bold;
     text-anchor: end;
     dominant-baseline: hanging;
+}
+
+.for-line {
+    overflow: visible;
+    white-space: nowrap;
+    color: white;
+    font-weight: bold;
+}
+
+.for-line * {
+    display: inline-block;
+}
+
+.for-line div * {
+    border-radius: 50%;
+    width: 12px;
+    font-size: 12px;
+    line-height: 12px;
+    padding: 2px;
+    margin-right: 2px;
+}
+
+.ICE11 {
+    stroke:#ee1d23;
+    background-color: #ee1d23;    
+}
+
+.ICE25 {
+    stroke:#b0abd4;
+    background-color: #b0abd4;
+    color: black;    
+}
+
+.ICE21 {
+    stroke:#39b97a;
+    background-color: #39b97a;
+    color: black;    
 }

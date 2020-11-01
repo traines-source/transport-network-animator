@@ -68,6 +68,10 @@ export class Station {
         }
     }
 
+    get labels(): Label[] {
+        return this.existingLabels;
+    }
+
     private removeLineAtAxis(line: Line, existingLinesForAxis: LineAtStation[]): void {
         let i = 0;
         while (i < existingLinesForAxis.length) {
