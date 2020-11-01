@@ -59,7 +59,7 @@ export class SvgNetwork implements NetworkAdapter {
     }
 
     createVirtualStop(id: string, baseCoords: Vector, rotation: Rotation): Station {
-        const helpStop = document.createElementNS(SvgNetwork.SVGNS, 'rect');
+        const helpStop = <SVGRectElement> document.createElementNS(SvgNetwork.SVGNS, 'rect');
         helpStop.id = id;    
         helpStop.setAttribute('data-dir', rotation.name);
         this.setCoord(helpStop, baseCoords);
@@ -82,6 +82,7 @@ export class SvgNetwork implements NetworkAdapter {
     }
    
     zoomTo(zoomCenter: Vector, zoomScale: number, animationDurationSeconds: number) {
+        console.log(zoomCenter, zoomScale);
         this.animateFrame(0, animationDurationSeconds/SvgNetwork.FPS, this.currentZoomCenter, zoomCenter, this.currentZoomScale, zoomScale);
         this.currentZoomCenter = zoomCenter;
         this.currentZoomScale = zoomScale;

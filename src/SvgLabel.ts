@@ -28,11 +28,11 @@ export class SvgLabel implements LabelAdapter {
     }
 
     get boundingBox(): {tl: Vector, br: Vector} {
-        //if (this.element.style.visibility == 'visible') {
+        if (this.element.style.visibility == 'visible') {
             const r = this.element.getBBox();
             return {tl: new Vector(r.left, r.top), br: new Vector(r.right, r.bottom)};
-        //}
-        //return {tl: Vector.NULL, br: Vector.NULL};
+        }
+        return {tl: Vector.NULL, br: Vector.NULL};
     }
 
     draw(delaySeconds: number, textCoords: Vector, labelDir: Rotation, children: LabelAdapter[]): void {

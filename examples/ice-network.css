@@ -43,17 +43,22 @@ svg {
     stroke-dasharray: 1 4;
 }
 
+#epoch-label-bg {
+    fill:white;
+    stroke: black;
+    stroke-width: 5px;
+}
+
 #epoch-label {
     font-size: 50px;
     font-weight: bold;
-    text-anchor: end;
-    dominant-baseline: hanging;
+    text-anchor: middle;
+    dominant-baseline: middle;
 }
 
 .for-line {
     overflow: visible;
     white-space: nowrap;
-    color: white;
     font-weight: bold;
 }
 
@@ -68,21 +73,65 @@ svg {
     line-height: 12px;
     padding: 2px;
     margin-right: 2px;
+    text-align: center;
 }
 
 .ICE11 {
     stroke:#ee1d23;
-    background-color: #ee1d23;    
+    background-color: #ee1d23;
+    color: white;
+
 }
 
 .ICE25 {
     stroke:#b0abd4;
     background-color: #b0abd4;
-    color: black;    
 }
 
 .ICE21 {
     stroke:#39b97a;
-    background-color: #39b97a;
-    color: black;    
+    background-color: #39b97a; 
+}
+
+.ICE20 {
+    stroke:#fff101;
+    background-color: #fff101;
+}
+
+.ICE1 {
+    stroke:#ee1d23;
+    background-color: #ee1d23;
+    color: white;
+}
+
+.ICE7 {
+    stroke:#8dd7f7;
+    background-color: #8dd7f7;
+}
+
+.ICE5, .ICE87, .ICE78 {
+    stroke:#f48232;
+    background-color: #f48232;
+}
+
+.ICE10 {
+    stroke:#b41e8d;
+    background-color: #b41e8d;
+    color: white;
+}
+
+.ICE28 {
+    stroke:#8dd7f7;
+    background-color: #8dd7f7;
+}
+
+.ICE50 {
+    stroke:#a8a9ad;
+    background-color: #a8a9ad;
+}
+
+.ICE65 {
+    stroke:#ee1d23;
+    background-color: #ee1d23;
+    color: white;
 }

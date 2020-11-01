@@ -64,6 +64,13 @@ export class Line implements TimedDrawable {
                 throw new Error('Station with ID ' + stops[j].stationId + ' is undefined');
             stop.removeLine(this);
             stop.draw(delay);
+            if (j > 0) {
+                const helpStopId = 'h_' + Utils.alphabeticId(stops[j-1].stationId, stops[j].stationId);
+                let helpStop = this.stationProvider.stationById(helpStopId);
+                if (helpStop != undefined) {
+                    helpStop.removeLine(this);
+                }
+            }
         }
         return duration;
     }

@@ -56,7 +56,7 @@ export class Label implements TimedDrawable {
                         if (l.hasChildren()) {
                             found = true;
                             l.children.push(this);
-                            l.draw(delay, animate);
+                            l.draw(delay, animate);                            
                         }
                     });
                     if (!found) {
@@ -64,6 +64,7 @@ export class Label implements TimedDrawable {
                         newLabelForStation.children.push(this);
                         s.addLabel(newLabelForStation);
                         newLabelForStation.draw(delay, animate);
+                        this.children.push(newLabelForStation);
                     }
                 }
             
@@ -92,8 +93,14 @@ export class Label implements TimedDrawable {
     }
 
     erase(delay: number, animate: boolean, reverse: boolean): number {
-        this.forStation.removeLabel(this);
-        this.adapter.erase(delay);
+        if (this.adapter.forStation != undefined) {
+            this.forStation.removeLabel(this);
+            this.adapter.erase(delay);
+        } else if (this.adapter.forLine != undefined) {
+            this.children.forEach(c => {
+                c.erase(delay, animate, reverse);
+            });
+        }
         return 0;
     }
 }
