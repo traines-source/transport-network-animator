@@ -22,92 +22,100 @@
         <text data-station="SSH">Saarbrücken</text>
         <text data-station="TS">Stuttgart</text>
         <text data-station="UE">Erfurt</text>
+        <text data-station="LM" data-from="1998 40" data-to="1999 17">Magdeburg</text>
 
 
 
 
 
-        <path data-line="ICE6A" class="ICE11 some" data-stops="FF HH HB" data-from="1996 15" data-to="1999 18"/>
+        <path data-line="ICE6A" class="ICE11 some" data-stops="- FF HH HB" data-from="1996 20" data-to="1999 22"/>
 
         <path data-line="ICE11" class="e1h" data-stops="AH HH HG" data-from="1991 5" data-to="1993 23 noanim"/>
         <path data-line="ICE11" class="e1h" data-stops="HG FKW FFU FF RM TS TU MA MH" data-from="1991 5" data-to="2003 60 noanim" />
         <path data-line="ICE11" class="e2h" data-stops="HH HG" data-from="1993 23 noanim" data-to="2003 75" />
-        <path data-line="ICE11" class="e4h" data-stops="HH AH" data-from="1993 23 noanim" data-to="1999 18 noanim"/>
+        <path data-line="ICE11" class="e4h" data-stops="HH AH" data-from="1993 23 noanim" data-to="1999 22 noanim"/>
         <path data-line="ICE11" class="e4h" data-stops="HH HB" data-from="1993 23" data-to="1997 5 noanim"/>
-        <path data-line="ICE11" class="e2h" data-stops="HG HBS LM BL" data-from="1993 23" data-to="1996 15 noanim"/>
+        <path data-line="ICE11" class="e2h" data-stops="HG HBS LM BL" data-from="1993 23" data-to="1996 25 noanim"/>
         <path data-line="ICE11" class="some" data-stops="HB HBH" data-from="1993 50" data-to="1997 5" />
-        <path data-line="ICE11" class="e1h" data-stops="HG HBS LM BL" data-from="1996 15 noanim" data-to="1998 20 noanim"/>
+        <path data-line="ICE11" class="e1h" data-stops="HG HBS LM BL" data-from="1996 25 noanim" data-to="1998 40 noanim"/>
         <path data-line="ICE11" class="some" data-stops="HH HB" data-from="1997 5 noanim" data-to="2003 75" />
-        <path data-line="ICE11" class="e1h" data-stops="HG HBS" data-from="1998 20 noanim" data-to="2003 60 noanim" />
-        <path data-line="ICE11" class="some" data-stops="HBS LM BL" data-from="1998 20 noanim" data-to="2003 75" />
-        <path data-line="ICE11" class="e1h" data-stops="HBS HWOB BL" data-from="1998 20" data-to="2003 60 noanim" />
+        <path data-line="ICE11" class="e1h" data-stops="HG HBS" data-from="1998 40 noanim" data-to="2003 60 noanim" />
+        <path data-line="ICE11" class="some" data-stops="HBS LM BL" data-from="1998 40 noanim" data-to="2003 75" />
+        <path data-line="ICE11" class="e1h" data-stops="HBS HWOB +0 BL" data-from="1998 40" data-to="2003 60 noanim" />
         <path data-line="ICE11" class="e2h" data-stops="HG FKW FFU FF RM TS TU MA MH" data-from="2003 60 noanim" />
         <path data-line="ICE11" class="e2h" data-stops="HG HBS" data-from="2003 60 noanim" />
         <path data-line="ICE11" class="e2h" data-stops="HBS HWOB BL" data-from="2003 60 noanim" />
         <path data-line="ICE11" class="some" data-stops="MH fXAI" data-from="2003 60" />
         <text data-line="ICE11" data-from="1991 5" data-to="1992 45">6</text>
+        <text data-line="ICE11" data-from="1997 5" data-to="1998 15">6</text>
+        <text data-line="ICE11" data-from="2000 10" data-to="2001 15">6</text>
         
         <path data-line="ICE25" class="e2h" data-stops="HB HH" data-from="1992 45" />
-        <path data-line="ICE25" class="e2h" data-stops="AH HH" data-from="1992 45" data-to="1999 18 noanim" />
-        <path data-line="ICE25" class="e1h" data-stops="AH HH" data-from="1999 18 noanim" />
+        <path data-line="ICE25" class="e2h" data-stops="AH +1 HH" data-from="1992 45" data-to="1999 22 noanim" />
+        <path data-line="ICE25" class="e1h" data-stops="HH - AH" data-from="1999 22 noanim" />
         <path data-line="ICE25" class="e1h" data-stops="HH HG FKW FFU NWH" data-from="1992 45" />
-        <path data-line="ICE25" class="e1h" data-stops="NWH NN MA" data-from="1992 45" data-to="1994 20 noanim" />
+        <path data-line="ICE25" class="e1h" data-stops="NWH NN MA" data-from="1992 45" data-to="1994 24 noanim" />
         <path data-line="ICE25" class="e1h" data-stops="MA MH" data-from="1992 45" />
         <path data-line="ICE25" class="some" data-stops="MH MGP" data-from="1993 50"/>
-        <path data-line="ICE25" class="e2h" data-stops="NWH NN MA" data-from="1994 20 noanim" />
-        <path data-line="ICE25" class="e2h" data-stops="NWH MA" data-from="1994 20" />
-        <path data-line="ICE25" class="some" data-stops="HB HOLD" data-from="1996 10" />
-        <path data-line="ICE25" class="some" data-stops="NN NRH NPA fNPA" data-from="1998 15" />
+        <path data-line="ICE25" class="e2h" data-stops="NWH NN MA" data-from="1994 24 noanim" />
+        <path data-line="ICE25" class="e2h" data-stops="NWH +0 MA" data-from="1994 24 nozoom" />
+        <path data-line="ICE25" class="some" data-stops="HB HOLD" data-from="1996 10 nozoom" />
+        <path data-line="ICE25" class="some" data-stops="NN NRH NPA fNPA" data-from="1998 25" />
         <path data-line="ICE25" class="some" data-stops="HB HBH" data-from="1997 5"/>
         <text data-line="ICE25" data-from="1992 45" data-to="1993 20">4</text>
+        <text data-line="ICE25" data-from="1997 5" data-to="1998 15">4</text>
 
-        <path data-line="ICE20" class="some" data-stops="AH HH HG FKW FF RM RK" data-from="1992 45" data-to="1993 20 noanim" />
-        <path data-line="ICE20" class="some" data-stops="RK RO RF RB hRB" data-from="1992 45" data-to="1995 10 noanim" />
-        <path data-line="ICE20" class="e1h" data-stops="AH HH HG FKW FF" data-from="1993 20 noanim" />
-        <path data-line="ICE20" class="e1h" data-stops="FF RM RK" data-from="1993 20 noanim" data-to="1995 10 noanim" />
-        <path data-line="ICE20" class="e2h" data-stops="FF RM RK RO RF RB hRB" data-from="1995 10 noanim" />
-        <path data-line="ICE20" class="some" data-stops="FKW HBS LM BL" data-from="1995 10" data-to="1998 20" />
-        <path data-line="ICE20" class="some" data-stops="AH AK" data-from="1995 10" />
-        <path data-line="ICE20" class="e2h" data-stops="FF RH TS" data-from="1995 10" data-to="1999 25 nonanim" />
-        <path data-line="ICE20" class="some" data-stops="FF RH TS" data-from="1999 25 noanim" data-to="2003 78" />
-        <path data-line="ICE20" class="e2h" data-stops="FF FFLF RM TS" data-from="1999 25" />
+        <path data-line="ICE20" class="some" data-stops="- AH HH HG FKW FF + RM RK" data-from="1992 45" data-to="1993 20 noanim" />
+        <path data-line="ICE20" class="some" data-stops="RK RO RF RB hRB" data-from="1992 45" data-to="1995 8 noanim" />
+        <path data-line="ICE20" class="e1h" data-stops="- AH HH HG FKW FF" data-from="1993 20 noanim" />
+        <path data-line="ICE20" class="e1h" data-stops="FF RM RK" data-from="1993 20 noanim" data-to="1995 8 noanim" />
+        <path data-line="ICE20" class="e2h" data-stops="FF RM RK RO RF RB hRB" data-from="1995 8 noanim" />
+        <path data-line="ICE20" class="some" data-stops="FKW + HBS LM BL" data-from="1995 8" data-to="1998 40" />
+        <path data-line="ICE20" class="e2h" data-stops="FF RH +1 TS" data-from="1995 8" data-to="1999 28 noanim" />
+        <path data-line="ICE20" class="some" data-stops="AH AK" data-from="1995 8" />
+        <path data-line="ICE20" class="some" data-stops="FF RH +1 TS" data-from="1999 28 noanim" data-to="2003 78" />
+        <path data-line="ICE20" class="e2h" data-stops="FF FFLF +1 RM +1 TS" data-from="1999 28 nozoom" />
         <text data-line="ICE20" data-from="1992 45" data-to="1993 20">3</text>
+        <text data-line="ICE20" data-from="1995 8" data-to="1996 10">3</text>
+        <text data-line="ICE20" data-from="1999 28" data-to="2000 10">3</text>
 
-        <path data-line="ICE1" class="some" data-stops="KK KD EDG EE EMST AH" data-from="1994 8" data-to="1999 18"  />
-        <path data-line="ICE1" class="some" data-stops="KK KB FF NWH MIH MH" data-from="1995 10" data-to="1999 18" />
-        <text data-line="ICE1" data-from="1994 8" data-to="1995 10">1</text>
 
-        <path data-line="ICE7" class="some" data-stops="DH BL" data-from="1994 8" data-to="2001 20 noanim" />
-        <path data-line="ICE7" class="some" data-stops="BL AH" data-from="1997 10" data-to="2001 20 noanim" />
-        <text data-line="ICE7" data-from="1994 8" data-to="1995 10">7</text>
+        <path data-line="ICE5" class="some" data-stops="- KK KD EDG EE EDO EHM EBIL HH BL" data-from="1994 10" data-to="1997 25 noanim" />
+        <path data-line="ICE78" class="e2h" data-stops="- KK KD EDG EOB hEOB" data-from="2000 37" />
+        <path data-line="ICE87" class="e2h" data-stops="TS RSI fXSZH" data-from="1999 50" />
+        <text data-line="ICE5" data-from="1994 10" data-to="1995 7">5</text>
+        <text data-line="ICE78" data-from="2000 37" data-to="2001 15">5</text>
+        <text data-line="ICE87" data-from="1999 50" data-to="2000 10">2</text>
 
-        <path data-line="ICE5" class="some" data-stops="KK KD EDG EE EDO EHM EBIL HH BL" data-from="1994 8" data-to="1997 10 noanim" />
-        <path data-line="ICE78" class="e2h" data-stops="KK KD EDG EOB hEOB" data-from="2000 25" />
-        <path data-line="ICE87" class="e2h" data-stops="TS RSI fXSZH" data-from="1999 32" />
-        <text data-line="ICE5" data-from="1994 8" data-to="1995 10">5</text>
-        <text data-line="ICE78" data-from="2000 25" data-to="2001 10">5</text>
-        <text data-line="ICE87" data-from="1999 32" data-to="2000 10">2</text>
+        <path data-line="ICE1" class="some" data-stops="KK KD EDG EE EMST AH" data-from="1994 10" data-to="1999 22"  />
+        <path data-line="ICE1" class="some" data-stops="KK KB FF NWH MIH MH" data-from="1995 26" data-to="1999 22" />
+        <text data-line="ICE1" data-from="1994 10" data-to="1995 7">1</text>
+        <text data-line="ICE1" data-from="1995 26" data-to="1996 10">1</text>
 
-        <path data-line="ICE10" class="e1h" data-stops="BL LM HBS HH" data-from="1997 10" data-to="1998 20 reverse"/>
-        <path data-line="ICE10" class="e1h" data-stops="HH EBIL EHM EDO EE EDG KD" data-from="1997 10"/>
-        <path data-line="ICE10" class="e1h" data-stops="KD KK" data-from="1997 10" data-to="1998 10" />
-        <path data-line="ICE10" class="e1h" data-stops="EHM EHG KK KB" data-from="1998 10" />
-        <path data-line="ICE10" class="e1h" data-stops="HH HWOB BL" data-from="1998 20" />
-        <path data-line="ICE10" class="e1h" data-stops="KD KK KB" data-from="1999 10" />
-        <path data-line="ICE10" class="e2h" data-stops="KB FMZ FFLF FF NWH NN" data-from="1999 10" data-to="2003 30" />
-        <path data-line="ICE10" class="some" data-stops="NN MIH MH" data-from="1999 10" data-to="2003 30" />
-        <path data-line="ICE10" class="some" data-stops="NN MA MH" data-from="1999 10" data-to="2003 30" />
-        <text data-line="ICE10" data-from="1997 10" data-to="1998 10">10</text>
+        <path data-line="ICE7" class="some" data-stops="DH BL" data-from="1994 10" data-to="2001 25" />
+        <path data-line="ICE7" class="some" data-stops="BL h_AH_BL AH" data-from="1997 14" data-to="2001 25" />
+        <text data-line="ICE7" data-from="1994 10" data-to="1995 7">7</text>
 
-        <path data-line="ICE28" class="e2h" data-stops="BL LL UJP NN MA MH" data-from="2000 10" />
-        <path data-line="ICE28" class="e2h" data-stops="BL AH" data-from="2001 20" />
-        <text data-line="ICE28" data-from="2000 10" data-to="2001 10">8</text>
+        <path data-line="ICE10" class="e1h" data-stops="BL LM HBS HH" data-from="1997 27" data-to="1998 40 reverse"/>
+        <path data-line="ICE10" class="e1h" data-stops="HH EBIL EHM EDO EE +0 EDG +0 KD" data-from="1997 27"/>
+        <path data-line="ICE10" class="e1h" data-stops="+0 KD +0 KK" data-from="1997 27" data-to="1998 12" />
+        <path data-line="ICE10" class="e1h" data-stops="EHM EHG KK hKB KB" data-from="1998 12" />
+        <path data-line="ICE10" class="e1h" data-stops="HH HWOB BL" data-from="1998 40" />
+        <path data-line="ICE10" class="e1h" data-stops="KD +0 KK +0 KB" data-from="1999 17" />
+        <path data-line="ICE10" class="e2h" data-stops="KB FMZ FFLF FF NWH NN" data-from="1999 17" data-to="2003 30" />
+        <path data-line="ICE10" class="some" data-stops="NN MIH MH" data-from="1999 17" data-to="2003 30" />
+        <path data-line="ICE10" class="some" data-stops="NN MA MH" data-from="1999 17" data-to="2003 30" />
+        <text data-line="ICE10" data-from="1997 27" data-to="1998 12">10</text>
+
+        <path data-line="ICE28" class="e2h" data-stops="BL LL UJP +2 NN MA MH" data-from="2000 10" />
+        <path data-line="ICE28" class="e2h" data-stops="BL h_AH_BL AH" data-from="2001 25" />
+        <text data-line="ICE28" data-from="2000 10" data-to="2001 15">8</text>
         
-        <path data-line="ICE50" class="e2h" data-stops="SSH SKL RM FF FFU UE LL DH" data-from="2000 10" />
-        <text data-line="ICE50" data-from="2000 10" data-to="2001 10">9</text>
+        <path data-line="ICE50" class="e2h" data-stops="SSH SKL RM FF FFU UE LL DH" data-from="2000 27" />
+        <text data-line="ICE50" data-from="2000 27" data-to="2001 15">9</text>
 
-        <path data-line="ICE65" style="stroke:#ee1d23" class="e2h" data-stops="NN DC DH" data-from="2001 10" data-to="2004 15" />
-        <text data-line="ICE65" data-from="2001 10" data-to="2002 0">17</text>
+        <path data-line="ICE65" style="stroke:#ee1d23" class="e2h" data-stops="NN DC DH" data-from="2001 15" data-to="2004 15" />
+        <text data-line="ICE65" data-from="2001 15" data-to="2002 0">17</text>
         
         
         <path data-line="ICE78" style="stroke:#f48232" class="e2h" data-stops="KK FFLF FF" data-from="2003 10" />
@@ -136,9 +144,9 @@
 
         
 
-        <path data-line="last" style="stroke:transparent" data-stops="hRB hEOB" data-from="2020 0 noanim" />
-        <path data-line="2001" style="stroke:transparent" data-stops="hRB hEOB" data-from="2001 30 noanim" />
-        <path data-line="2001" style="stroke:transparent" data-stops="hRB hEOB" data-from="2002 30 noanim" />
+        <path data-line="dummy" style="stroke:transparent" data-stops="hRB hEOB" data-from="2020 0 noanim" />
+        <path data-line="dummy" style="stroke:transparent" data-stops="hRB hEOB" data-from="2001 50 noanim" />
+        <path data-line="dummy" style="stroke:transparent" data-stops="hRB hEOB" data-from="2002 30 noanim" />
 
 
         <text data-line="ICE11" data-from="2002 0" data-to="2002 10">6</text>
@@ -233,50 +241,50 @@
 
     </g>
     <g id="stations">
-        <rect id="AK" x="490" y="100" data-comment="Kiel" data-dir="n" />
+        <rect id="AK" x="490" y="100" data-comment="Kiel" data-dir="nw" />
         <rect id="AA" x="490" y="160" data-comment="Altona" data-dir="n" />
         <rect id="AH" x="490" y="190" data-comment="Hamburg" data-dir="n" data-label-dir="ne" />
         <rect id="BGS" x="720" y="255" data-comment="Gesundbrunnen" data-dir="n" />
         <rect id="BHF" x="790" y="295" data-comment="Berlin Ost" data-dir="n" />
         <rect id="BL" x="720" y="295" data-comment="Berlin Hbf" data-dir="n" data-label-dir="e" />
-        <rect id="HOLD" x="390" y="240" data-comment="Oldenburg" data-dir="n" />
+        <rect id="HOLD" x="390" y="230" data-comment="Oldenburg" data-dir="n" />
         <rect id="HWOB" x="540" y="295" data-comment="Wolfsburg" data-dir="n" />
         <rect id="HBH" x="375" y="190" data-comment="Bremerhaven" data-dir="n" data-label-dir="e" />
-        <rect id="HB" x="435" y="240" data-comment="Bremen" data-dir="ne" />
+        <rect id="HB" x="435" y="240" data-comment="Bremen" data-dir="nw" />
         <rect id="HH" x="450" y="315" data-comment="Hannover" data-dir="n" data-label-dir="nw" />
-        <rect id="HBS" x="515" y="340" data-comment="Braunschweig" data-dir="ne" />
-        <rect id="HG" x="450" y="415" data-comment="Göttingen" data-dir="n" />
-        <rect id="EBIL" x="370" y="360" data-comment="Bielefeld" data-dir="ne" />
+        <rect id="HBS" x="505" y="350" data-comment="Braunschweig" data-dir="ne" />
+        <rect id="HG" x="450" y="420" data-comment="Göttingen" data-dir="n" />
+        <rect id="EBIL" x="380" y="350" data-comment="Bielefeld" data-dir="ne" />
         <rect id="EPD" x="390" y="405" data-comment="Paderborn" data-dir="w" />
-        <rect id="EMST" x="310" y="360" data-comment="Münster Westf" data-dir="ne" />
-        <rect id="EHM" x="345" y="390" data-comment="Hamm" data-dir="ne" />
-        <rect id="EHG" x="310" y="440" data-comment="Hagen" data-dir="n" />
-        <rect id="EDO" x="305" y="405" data-comment="Dortmund" data-dir="n" />
-        <rect id="EE" x="260" y="405" data-comment="Essen" data-dir="n" data-label-dir="" />
-        <rect id="EDG" x="235" y="430" data-comment="Duisburg" data-dir="ne" />
-        <rect id="EOB" x="225" y="395" data-comment="Oberhausen" data-dir="nw" />
-        <rect id="KD" x="235" y="460" data-comment="Düsseldorf" data-dir="n" />
-        <rect id="KK" x="235" y="490" data-comment="Köln" data-dir="n" data-label-dir="nw" />
-        <rect id="KKDZ" x="270" y="490" data-comment="Deutz" data-dir="nw" />
-        <rect id="KA" x="185" y="500" data-comment="Aachen" data-dir="n" />
-        <rect id="KB" x="240" y="530" data-comment="Bonn" data-dir="nw" />
+        <rect id="EMST" x="320" y="325" data-comment="Münster Westf" data-dir="ne" />
+        <rect id="EHM" x="355" y="380" data-comment="Hamm" data-dir="ne" />
+        <rect id="EHG" x="330" y="440" data-comment="Hagen" data-dir="ne" />
+        <rect id="EDO" x="305" y="400" data-comment="Dortmund" data-dir="n" />
+        <rect id="EE" x="270" y="400" data-comment="Essen" data-dir="n" data-label-dir="" />
+        <rect id="EDG" x="230" y="410" data-comment="Duisburg" data-dir="ne" />
+        <rect id="EOB" x="220" y="385" data-comment="Oberhausen" data-dir="nw" />
+        <rect id="KD" x="210" y="450" data-comment="Düsseldorf" data-dir="n" />
+        <rect id="KK" x="235" y="490" data-comment="Köln" data-dir="nw" data-label-dir="nw" />
+        <rect id="KKDZ" x="280" y="490" data-comment="Deutz" data-dir="n" />
+        <rect id="KA" x="175" y="500" data-comment="Aachen" data-dir="nw" />
+        <rect id="KB" x="250" y="550" data-comment="Bonn" data-dir="n" />
         <rect id="LHA" x="625" y="410" data-comment="Halle" data-dir="ne" />
         <rect id="LM" x="590" y="320" data-comment="Magdeburg" data-dir="n" />
         <rect id="LL" x="645" y="440" data-comment="Leipzig" data-dir="ne" data-label-dir="se" />
         <rect id="UE" x="550" y="480" data-comment="Erfurt" data-dir="n" />
-        <rect id="UJP" x="590" y="495" data-comment="Jena" data-dir="n" />
+        <rect id="UJP" x="590" y="510" data-comment="Jena" data-dir="n" />
         <rect id="DH" x="760" y="475" data-comment="Dresden" data-dir="nw" data-label-dir="se" />
         <rect id="DC" x="660" y="525" data-comment="Chemnitz" data-dir="ne" />
         <rect id="FKW" x="450" y="460" data-comment="Kassel" data-dir="n" />
         <rect id="FFU" x="445" y="530" data-comment="Fulda" data-dir="nw" />
         <rect id="FF" x="395" y="555" data-comment="Frankfurt" data-dir="n" data-label-dir="nw" />
-        <rect id="FFLF" x="340" y="585" data-comment="FFM Flughafen" data-dir="nw" />
+        <rect id="FFLF" x="330" y="575" data-comment="FFM Flughafen" data-dir="nw" />
         <rect id="FMZ" x="305" y="605" data-comment="Mainz" data-dir="n" />
         <rect id="FW" x="305" y="585" data-comment="Wiesbaden" data-dir="n" />
         <rect id="SKL" x="295" y="670" data-comment="Kaiserslautern" data-dir="n" />
         <rect id="SSH" x="250" y="695" data-comment="Saarbrücken" data-dir="nw" data-label-dir="sw" />
         <rect id="RM" x="360" y="670" data-comment="Mannheim" data-dir="n" />
-        <rect id="RH" x="400" y="680" data-comment="Heidelberg" data-dir="nw" />
+        <rect id="RH" x="410" y="690" data-comment="Heidelberg" data-dir="nw" />
         <rect id="RK" x="355" y="720" data-comment="Karlsruhe" data-dir="ne" data-label-dir="nw" />
         <rect id="RO" x="320" y="790" data-comment="Offenburg" data-dir="n" />
         <rect id="RF" x="310" y="830" data-comment="Freiburg" data-dir="ne" />
@@ -286,12 +294,12 @@
         <rect id="NN" x="550" y="660" data-comment="Nürnberg" data-dir="n" data-label-dir="ne" />
         <rect id="NRH" x="650" y="700" data-comment="Regensburg" data-dir="w" />
         <rect id="NPA" x="735" y="760" data-comment="Passau" data-dir="w" />
-        <rect id="TS" x="420" y="735" data-comment="Stuttgart" data-dir="nw" data-label-dir="e" />
+        <rect id="TS" x="420" y="745" data-comment="Stuttgart" data-dir="nw" data-label-dir="e" />
         <rect id="TU" x="485" y="780" data-comment="Ulm" data-dir="w" />
-        <rect id="MIH" x="600" y="750" data-comment="Ingolstadt" data-dir="nw" />
-        <rect id="MA" x="545" y="780" data-comment="Augsburg" data-dir="w" />
+        <rect id="MIH" x="600" y="760" data-comment="Ingolstadt" data-dir="nw" />
+        <rect id="MA" x="550" y="790" data-comment="Augsburg" data-dir="n" />
         <rect id="MP" x="570" y="800" data-comment="Pasing" data-dir="nw" />
-        <rect id="MH" x="606" y="815" data-comment="München" data-dir="n" data-label-dir="e" />
+        <rect id="MH" x="620" y="815" data-comment="München" data-dir="n" data-label-dir="ne" />
         <rect id="MGP" x="590" y="890" data-comment="Garmisch" data-dir="ne" />
         
         
@@ -301,10 +309,13 @@
         <rect id="hHH" x="570" y="310" data-dir="ne" class="helper" />
         <rect id="h_FFLF_RM" x="330" y="650" data-dir="n" class="helper" />
         <rect id="h_MGP_MH" x="630" y="820" data-dir="n" class="helper" />
+        <rect id="h_AH_BL" x="680" y="230" data-dir="nw" class="helper" />
 
+
+        <rect id="hKB" x="235" y="520" data-dir="nw" class="helper" />
         <rect id="hRB" x="280" y="950" data-dir="n" class="helper" />
         <rect id="hEOB" x="185" y="330" data-dir="n" class="helper" />
-        <rect id="hKA" x="150" y="500" data-dir="n" class="helper" />
+        <rect id="hKA" x="150" y="510" data-dir="n" class="helper" />
         <rect id="hSSH" x="200" y="750" data-dir="nw" class="helper" />
         <rect id="hXFSTG" x="200" y="770" data-dir="n" class="helper" />
         <rect id="fXASB" x="720" y="850" data-dir="ne" class="helper" />
