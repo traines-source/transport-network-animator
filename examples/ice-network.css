@@ -2,7 +2,7 @@
 
 #stations rect {
     stroke: black;
-    fill: transparent;
+    fill: white;
     rx: 3;
     stroke-width: 1;
 }
@@ -80,7 +80,6 @@ svg {
     stroke:#ee1d23;
     background-color: #ee1d23;
     color: white;
-
 }
 
 .ICE25 {
@@ -91,6 +90,7 @@ svg {
 .ICE21 {
     stroke:#39b97a;
     background-color: #39b97a; 
+    color: white;
 }
 
 .ICE20 {
@@ -99,8 +99,8 @@ svg {
 }
 
 .ICE1 {
-    stroke:#ee1d23;
-    background-color: #ee1d23;
+    stroke:#39b97a;
+    background-color: #39b97a;
     color: white;
 }
 
@@ -109,9 +109,16 @@ svg {
     background-color: #8dd7f7;
 }
 
-.ICE5, .ICE87, .ICE78 {
+.ICE5 {
+    stroke:#0095da;
+    background-color: #0095da;
+    color: white;
+}
+
+.ICE87, .ICE78 {
     stroke:#f48232;
     background-color: #f48232;
+    color: white;
 }
 
 .ICE10 {
@@ -128,6 +135,7 @@ svg {
 .ICE50 {
     stroke:#a8a9ad;
     background-color: #a8a9ad;
+    color: white;
 }
 
 .ICE65 {

@@ -25,7 +25,7 @@ describe('LineGroup', () => {
         expect(g.termini).eql([new Stop('a', ''), new Stop('c', '')]);
 
         m = mock();
-        when(m.termini).thenReturn([new Stop('b', ''), new Stop('a', '')]);
+        when(m.termini).thenReturn([new Stop('b', ''), new Stop('a', ''), new Stop('g', 'g*')]);
         const l3 = instance(m);
         g.addLine(l3);
         
@@ -38,5 +38,21 @@ describe('LineGroup', () => {
         g.removeLine(l1);
 
         expect(g.termini).eql([new Stop('b', ''), new Stop('c', '')]);
+    })
+
+    it('whenTerminiWithFork', () => {
+        const g = new LineGroup();
+
+        let m: Line = mock();
+        when(m.termini).thenReturn([new Stop('a', ''), new Stop('b', ''), new Stop('c', '')]);
+        const l1 = instance(m);
+        g.addLine(l1);
+
+        m = mock();
+        when(m.termini).thenReturn([new Stop('b', ''), new Stop('d', '')]);
+        const l2 = instance(m);
+        g.addLine(l2);
+        
+        expect(g.termini).eql([new Stop('a', ''), new Stop('c', ''), new Stop('d', '')]);
     })
 })

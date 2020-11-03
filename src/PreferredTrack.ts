@@ -30,7 +30,7 @@ export class PreferredTrack {
 
     keepOnlySign(): PreferredTrack {
         const v = this.value[0];
-        return new PreferredTrack(v == '+' || v == '-' ? v : '+');
+        return new PreferredTrack(v == '-' ? v : '+');
     }
 
     hasTrackNumber(): boolean {
@@ -38,11 +38,11 @@ export class PreferredTrack {
     }
 
     get trackNumber(): number {
-        return parseInt(this.value)
+        return parseInt(this.value.replace('*', ''))
     }
 
     isPositive(): boolean {
-        return this.value[0] == '+';
+        return this.value[0] != '-';
     }
 
 }

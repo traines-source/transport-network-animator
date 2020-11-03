@@ -32,10 +32,12 @@ export class LineGroup {
         this.lines.forEach(l => {
             const lineTermini = l.termini;
             lineTermini.forEach(t => {
-                if (candidates[t.stationId] == undefined) {
-                    candidates[t.stationId] = 1;
-                } else {
-                    candidates[t.stationId]++;
+                if (!t.preferredTrack.includes('*')) {
+                    if (candidates[t.stationId] == undefined) {
+                        candidates[t.stationId] = 1;
+                    } else {
+                        candidates[t.stationId]++;
+                    }
                 }
             });
         });

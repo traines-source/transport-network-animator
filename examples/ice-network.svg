@@ -41,7 +41,7 @@
         <path data-line="ICE11" class="some" data-stops="HH HB" data-from="1997 5 noanim" data-to="2003 75" />
         <path data-line="ICE11" class="e1h" data-stops="HG HBS" data-from="1998 40 noanim" data-to="2003 60 noanim" />
         <path data-line="ICE11" class="some" data-stops="HBS LM BL" data-from="1998 40 noanim" data-to="2003 75" />
-        <path data-line="ICE11" class="e1h" data-stops="HBS HWOB +0 BL" data-from="1998 40" data-to="2003 60 noanim" />
+        <path data-line="ICE11" class="e1h" data-stops="HBS HWOB +0* BL" data-from="1998 40" data-to="2003 60 noanim" />
         <path data-line="ICE11" class="e2h" data-stops="HG FKW FFU FF RM TS TU MA MH" data-from="2003 60 noanim" />
         <path data-line="ICE11" class="e2h" data-stops="HG HBS" data-from="2003 60 noanim" />
         <path data-line="ICE11" class="e2h" data-stops="HBS HWOB BL" data-from="2003 60 noanim" />
@@ -70,17 +70,17 @@
         <path data-line="ICE20" class="e1h" data-stops="- AH HH HG FKW FF" data-from="1993 20 noanim" />
         <path data-line="ICE20" class="e1h" data-stops="FF RM RK" data-from="1993 20 noanim" data-to="1995 8 noanim" />
         <path data-line="ICE20" class="e2h" data-stops="FF RM RK RO RF RB hRB" data-from="1995 8 noanim" />
-        <path data-line="ICE20" class="some" data-stops="FKW + HBS LM BL" data-from="1995 8" data-to="1998 40" />
+        <path data-line="ICE20" class="some" data-stops="* FKW + HBS LM BL" data-from="1995 8" data-to="1998 40" />
         <path data-line="ICE20" class="e2h" data-stops="FF RH +1 TS" data-from="1995 8" data-to="1999 28 noanim" />
         <path data-line="ICE20" class="some" data-stops="AH AK" data-from="1995 8" />
-        <path data-line="ICE20" class="some" data-stops="FF RH +1 TS" data-from="1999 28 noanim" data-to="2003 78" />
+        <path data-line="ICE20" class="some" data-stops="FF RH +1* TS" data-from="1999 28 noanim" data-to="2003 78" />
         <path data-line="ICE20" class="e2h" data-stops="FF FFLF +1 RM +1 TS" data-from="1999 28 nozoom" />
         <text data-line="ICE20" data-from="1992 45" data-to="1993 20">3</text>
         <text data-line="ICE20" data-from="1995 8" data-to="1996 10">3</text>
         <text data-line="ICE20" data-from="1999 28" data-to="2000 10">3</text>
 
 
-        <path data-line="ICE5" class="some" data-stops="- KK KD EDG EE EDO EHM EBIL HH BL" data-from="1994 10" data-to="1997 25 noanim" />
+        <path data-line="ICE5" class="some" data-stops="- KK KD EDG EE EDO EHM EBIL HH BL" data-from="1994 10" data-to="1997 25" />
         <path data-line="ICE78" class="e2h" data-stops="- KK KD EDG EOB hEOB" data-from="2000 37" />
         <path data-line="ICE87" class="e2h" data-stops="TS RSI fXSZH" data-from="1999 50" />
         <text data-line="ICE5" data-from="1994 10" data-to="1995 7">5</text>
@@ -99,23 +99,23 @@
         <path data-line="ICE10" class="e1h" data-stops="BL LM HBS HH" data-from="1997 27" data-to="1998 40 reverse"/>
         <path data-line="ICE10" class="e1h" data-stops="HH EBIL EHM EDO EE +0 EDG +0 KD" data-from="1997 27"/>
         <path data-line="ICE10" class="e1h" data-stops="+0 KD +0 KK" data-from="1997 27" data-to="1998 12" />
-        <path data-line="ICE10" class="e1h" data-stops="EHM EHG KK hKB KB" data-from="1998 12" />
+        <path data-line="ICE10" class="e1h" data-stops="* EHM EHG h_EHG_KK KK KB" data-from="1998 12" />
         <path data-line="ICE10" class="e1h" data-stops="HH HWOB BL" data-from="1998 40" />
-        <path data-line="ICE10" class="e1h" data-stops="KD +0 KK +0 KB" data-from="1999 17" />
+        <path data-line="ICE10" class="e1h" data-stops="KD +0* KK" data-from="1999 17" />
         <path data-line="ICE10" class="e2h" data-stops="KB FMZ FFLF FF NWH NN" data-from="1999 17" data-to="2003 30" />
         <path data-line="ICE10" class="some" data-stops="NN MIH MH" data-from="1999 17" data-to="2003 30" />
-        <path data-line="ICE10" class="some" data-stops="NN MA MH" data-from="1999 17" data-to="2003 30" />
+        <path data-line="ICE10" class="some" data-stops="NN +2 MA -1* MH" data-from="1999 17" data-to="2003 30" />
         <text data-line="ICE10" data-from="1997 27" data-to="1998 12">10</text>
 
-        <path data-line="ICE28" class="e2h" data-stops="BL LL UJP +2 NN MA MH" data-from="2000 10" />
+        <path data-line="ICE28" class="e2h" data-stops="BL LL UJP NN +1 MA MH" data-from="2000 10" />
         <path data-line="ICE28" class="e2h" data-stops="BL h_AH_BL AH" data-from="2001 25" />
         <text data-line="ICE28" data-from="2000 10" data-to="2001 15">8</text>
         
-        <path data-line="ICE50" class="e2h" data-stops="SSH SKL RM FF FFU UE LL DH" data-from="2000 27" />
+        <path data-line="ICE50" class="e2h" data-stops="SSH SKL RM +1 hRM FF FFU UE LL DH" data-from="2000 27" />
         <text data-line="ICE50" data-from="2000 27" data-to="2001 15">9</text>
 
         <path data-line="ICE65" style="stroke:#ee1d23" class="e2h" data-stops="NN DC DH" data-from="2001 15" data-to="2004 15" />
-        <text data-line="ICE65" data-from="2001 15" data-to="2002 0">17</text>
+        <text data-line="ICE65" data-from="2001 15" data-to="2002 1">17</text>
         
         
         <path data-line="ICE78" style="stroke:#f48232" class="e2h" data-stops="KK FFLF FF" data-from="2003 10" />
@@ -126,10 +126,10 @@
         <path data-line="ICE41" style="stroke:#bcd646" class="e2h" data-stops="FFLF FF" data-from="2003 20" data-to="2004 10 noanim" />
 
         <path data-line="ICE45" style="stroke:#0095d9" class="e2h" data-stops="KK FW FMZ RM RH TS" data-from="2003 30"/>
-        <path data-line="ICE43" style="stroke:#a78b6b" class="e2h" data-stops="EDO EHG KK FFLF RM RK RF RB" data-from="2003 45" />
-        <path data-line="ICE42" style="stroke:#f8abad" class="e2h" data-stops="EDO EE EDG KD KK FFLF RM TS TU MA MH" data-from="2003 45" />
+        <path data-line="ICE43" style="stroke:#a78b6b" class="e2h" data-stops="EDO EHG h_EHG_KK KK FFLF RM RK RF RB" data-from="2003 45" />
+        <path data-line="ICE42" style="stroke:#f8abad" class="e2h" data-stops="EDO EE EDG KD KK FFLF RM TS -1 TU MA MH" data-from="2003 45" />
         <path data-line="ICE12" style="stroke:#8dd7f7" class="e2h" data-stops="hRB RB RF RO RK RM FF FFU FKW HG HBS HWOB BL" data-from="2003 68" />
-        <path data-line="ICE55" style="stroke:#39b97a" class="some" data-stops="BL LM HBS HH EBIL EDO EHG KK" data-from="2003 78" />
+        <path data-line="ICE55" style="stroke:#39b97a" class="some" data-stops="BL LM HBS HH EBIL EDO EHG h_EHG_KK KK" data-from="2003 78" />
         <path data-line="ICE21" style="stroke:#39b97a" class="some" data-stops="HB HH FKW FF" data-from="2003 78" />
         <path data-line="ICE21" style="stroke:#39b97a" class="some" data-stops="FF RH TS" data-from="2003 78" data-to="2004 10 noanim" />
         <text data-line="ICE21" data-from="2003 78">21</text>
@@ -149,15 +149,15 @@
         <path data-line="dummy" style="stroke:transparent" data-stops="hRB hEOB" data-from="2002 30 noanim" />
 
 
-        <text data-line="ICE11" data-from="2002 0" data-to="2002 10">6</text>
-        <text data-line="ICE25" data-from="2002 0" data-to="2002 10">4</text>
-        <text data-line="ICE20" data-from="2002 0" data-to="2002 10">3</text>
-        <text data-line="ICE78" data-from="2002 0" data-to="2002 10">5</text>
-        <text data-line="ICE87" data-from="2002 0" data-to="2002 10">2</text>
-        <text data-line="ICE10" data-from="2002 0" data-to="2002 10">10</text>
-        <text data-line="ICE28" data-from="2002 0" data-to="2002 10">8</text>
-        <text data-line="ICE50" data-from="2002 0" data-to="2002 10">9</text>
-        <text data-line="ICE65" data-from="2002 0" data-to="2002 10">17</text>
+        <text data-line="ICE11" data-from="2002 1" data-to="2002 10">6</text>
+        <text data-line="ICE25" data-from="2002 1" data-to="2002 10">4</text>
+        <text data-line="ICE20" data-from="2002 1" data-to="2002 10">3</text>
+        <text data-line="ICE78" data-from="2002 1" data-to="2002 10">5</text>
+        <text data-line="ICE87" data-from="2002 1" data-to="2002 10">2</text>
+        <text data-line="ICE10" data-from="2002 1" data-to="2002 10">10</text>
+        <text data-line="ICE28" data-from="2002 1" data-to="2002 10">8</text>
+        <text data-line="ICE50" data-from="2002 1" data-to="2002 10">9</text>
+        <text data-line="ICE65" data-from="2002 1" data-to="2002 10">17</text>
 
         <text data-line="ICE11" data-from="2002 10" data-to="2002 30">11</text>
         <text data-line="ICE25" data-from="2002 10" data-to="2002 30">25</text>
@@ -249,7 +249,7 @@
         <rect id="BL" x="720" y="295" data-comment="Berlin Hbf" data-dir="n" data-label-dir="e" />
         <rect id="HOLD" x="390" y="230" data-comment="Oldenburg" data-dir="n" />
         <rect id="HWOB" x="540" y="295" data-comment="Wolfsburg" data-dir="n" />
-        <rect id="HBH" x="375" y="190" data-comment="Bremerhaven" data-dir="n" data-label-dir="e" />
+        <rect id="HBH" x="375" y="190" data-comment="Bremerhaven" data-dir="n" />
         <rect id="HB" x="435" y="240" data-comment="Bremen" data-dir="nw" />
         <rect id="HH" x="450" y="315" data-comment="Hannover" data-dir="n" data-label-dir="nw" />
         <rect id="HBS" x="505" y="350" data-comment="Braunschweig" data-dir="ne" />
@@ -264,12 +264,12 @@
         <rect id="EDG" x="230" y="410" data-comment="Duisburg" data-dir="ne" />
         <rect id="EOB" x="220" y="385" data-comment="Oberhausen" data-dir="nw" />
         <rect id="KD" x="210" y="450" data-comment="Düsseldorf" data-dir="n" />
-        <rect id="KK" x="235" y="490" data-comment="Köln" data-dir="nw" data-label-dir="nw" />
+        <rect id="KK" x="210" y="490" data-comment="Köln" data-dir="n" data-label-dir="nw" />
         <rect id="KKDZ" x="280" y="490" data-comment="Deutz" data-dir="n" />
-        <rect id="KA" x="175" y="500" data-comment="Aachen" data-dir="nw" />
-        <rect id="KB" x="250" y="550" data-comment="Bonn" data-dir="n" />
+        <rect id="KA" x="165" y="500" data-comment="Aachen" data-dir="nw" />
+        <rect id="KB" x="230" y="550" data-comment="Bonn" data-dir="nw" />
         <rect id="LHA" x="625" y="410" data-comment="Halle" data-dir="ne" />
-        <rect id="LM" x="590" y="320" data-comment="Magdeburg" data-dir="n" />
+        <rect id="LM" x="590" y="320" data-comment="Magdeburg" data-dir="n" data-label-dir="s" />
         <rect id="LL" x="645" y="440" data-comment="Leipzig" data-dir="ne" data-label-dir="se" />
         <rect id="UE" x="550" y="480" data-comment="Erfurt" data-dir="n" />
         <rect id="UJP" x="590" y="510" data-comment="Jena" data-dir="n" />
@@ -295,7 +295,7 @@
         <rect id="NRH" x="650" y="700" data-comment="Regensburg" data-dir="w" />
         <rect id="NPA" x="735" y="760" data-comment="Passau" data-dir="w" />
         <rect id="TS" x="420" y="745" data-comment="Stuttgart" data-dir="nw" data-label-dir="e" />
-        <rect id="TU" x="485" y="780" data-comment="Ulm" data-dir="w" />
+        <rect id="TU" x="490" y="790" data-comment="Ulm" data-dir="n" />
         <rect id="MIH" x="600" y="760" data-comment="Ingolstadt" data-dir="nw" />
         <rect id="MA" x="550" y="790" data-comment="Augsburg" data-dir="n" />
         <rect id="MP" x="570" y="800" data-comment="Pasing" data-dir="nw" />
@@ -307,9 +307,10 @@
         <rect id="hFF" x="370" y="570" data-dir="ne" class="helper" />
         <rect id="hBL" x="650" y="200" data-dir="nw" class="helper" />
         <rect id="hHH" x="570" y="310" data-dir="ne" class="helper" />
-        <rect id="h_FFLF_RM" x="330" y="650" data-dir="n" class="helper" />
-        <rect id="h_MGP_MH" x="630" y="820" data-dir="n" class="helper" />
+        
+        <rect id="h_MGP_MH" x="640" y="821" data-dir="n" class="helper" />
         <rect id="h_AH_BL" x="680" y="230" data-dir="nw" class="helper" />
+        <rect id="h_EHG_KK" x="225" y="470" data-dir="n" class="helper" />
 
 
         <rect id="hKB" x="235" y="520" data-dir="nw" class="helper" />
@@ -317,6 +318,7 @@
         <rect id="hEOB" x="185" y="330" data-dir="n" class="helper" />
         <rect id="hKA" x="150" y="510" data-dir="n" class="helper" />
         <rect id="hSSH" x="200" y="750" data-dir="nw" class="helper" />
+        <rect id="hRM" x="395" y="660" data-dir="n" class="helper" />
         <rect id="hXFSTG" x="200" y="770" data-dir="n" class="helper" />
         <rect id="fXASB" x="720" y="850" data-dir="ne" class="helper" />
         <rect id="fXSZH" x="400" y="950" data-dir="n" class="helper" />

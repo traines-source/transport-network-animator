@@ -48,7 +48,7 @@ export class SvgLine implements LineAdapter {
             const tokens = this.element.dataset.stops?.split(/\s+/) || [];
             let nextStop = new Stop('', '');
             for(var i=0;i<tokens?.length;i++) {                
-                if (tokens[i][0] != '-' && tokens[i][0] != '+') {
+                if (tokens[i][0] != '-' && tokens[i][0] != '+' && tokens[i][0] != '*') {
                     nextStop.stationId = tokens[i];
                     this._stops.push(nextStop);
                     nextStop = new Stop('', '');
