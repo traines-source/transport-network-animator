@@ -22,7 +22,6 @@
         <text data-station="SSH">Saarbrücken</text>
         <text data-station="TS">Stuttgart</text>
         <text data-station="UE">Erfurt</text>
-        <text data-station="LM" data-from="1998 40" data-to="1999 17">Magdeburg</text>
 
 
 
@@ -47,6 +46,7 @@
         <path data-line="ICE11" class="e2h" data-stops="HBS HWOB BL" data-from="2003 60 noanim" />
         <path data-line="ICE11" class="some" data-stops="MH fXAI" data-from="2003 60" />
         <text data-line="ICE11" data-from="1991 5" data-to="1992 45">6</text>
+        <text data-line="ICE11" data-from="1993 23" data-to="1994 10">6</text>
         <text data-line="ICE11" data-from="1997 5" data-to="1998 15">6</text>
         <text data-line="ICE11" data-from="2000 10" data-to="2001 15">6</text>
         
@@ -87,7 +87,7 @@
         <text data-line="ICE78" data-from="2000 37" data-to="2001 15">5</text>
         <text data-line="ICE87" data-from="1999 50" data-to="2000 10">2</text>
 
-        <path data-line="ICE1" class="some" data-stops="KK KD EDG EE EMST AH" data-from="1994 10" data-to="1999 22"  />
+        <path data-line="ICE1" class="some" data-stops="KK KD EDG EE EMST AH" data-from="1994 10" data-to="1999 22 reverse"  />
         <path data-line="ICE1" class="some" data-stops="KK KB FF NWH MIH MH" data-from="1995 26" data-to="1999 22" />
         <text data-line="ICE1" data-from="1994 10" data-to="1995 7">1</text>
         <text data-line="ICE1" data-from="1995 26" data-to="1996 10">1</text>
@@ -96,11 +96,11 @@
         <path data-line="ICE7" class="some" data-stops="BL h_AH_BL AH" data-from="1997 14" data-to="2001 25" />
         <text data-line="ICE7" data-from="1994 10" data-to="1995 7">7</text>
 
-        <path data-line="ICE10" class="e1h" data-stops="BL LM HBS HH" data-from="1997 27" data-to="1998 40 reverse"/>
+        <path data-line="ICE10" class="e1h" data-stops="BL LM HBS HH" data-from="1997 27" data-to="1998 50 reverse"/>
         <path data-line="ICE10" class="e1h" data-stops="HH EBIL EHM EDO EE +0 EDG +0 KD" data-from="1997 27"/>
         <path data-line="ICE10" class="e1h" data-stops="+0 KD +0 KK" data-from="1997 27" data-to="1998 12" />
         <path data-line="ICE10" class="e1h" data-stops="* EHM EHG h_EHG_KK KK KB" data-from="1998 12" />
-        <path data-line="ICE10" class="e1h" data-stops="HH HWOB BL" data-from="1998 40" />
+        <path data-line="ICE10" class="e1h" data-stops="HH HWOB +1 BL" data-from="1998 50" />
         <path data-line="ICE10" class="e1h" data-stops="KD +0* KK" data-from="1999 17" />
         <path data-line="ICE10" class="e2h" data-stops="KB FMZ FFLF FF NWH NN" data-from="1999 17" data-to="2003 30" />
         <path data-line="ICE10" class="some" data-stops="NN MIH MH" data-from="1999 17" data-to="2003 30" />
@@ -110,6 +110,8 @@
         <path data-line="ICE28" class="e2h" data-stops="BL LL UJP NN +1 MA MH" data-from="2000 10" />
         <path data-line="ICE28" class="e2h" data-stops="BL h_AH_BL AH" data-from="2001 25" />
         <text data-line="ICE28" data-from="2000 10" data-to="2001 15">8</text>
+        <text data-line="ICE28" data-from="2001 25" data-to="2002 1">8</text>
+
         
         <path data-line="ICE50" class="e2h" data-stops="SSH SKL RM +1 hRM FF FFU UE LL DH" data-from="2000 27" />
         <text data-line="ICE50" data-from="2000 27" data-to="2001 15">9</text>
@@ -168,6 +170,9 @@
         <text data-line="ICE28" data-from="2002 10" data-to="2002 30">28</text>
         <text data-line="ICE50" data-from="2002 10" data-to="2002 30">50</text>
         <text data-line="ICE65" data-from="2002 10" data-to="2002 30">65</text>
+
+        <text data-station="LM" data-from="1998 25" data-to="1998 40">Magdeburg</text>
+
         <!--
 
         <path data-line="ICE1" style="stroke:#FF0000" class="e2h" data-stops="KK KD EDG EE AH AA" />
@@ -254,7 +259,7 @@
         <rect id="HH" x="450" y="315" data-comment="Hannover" data-dir="n" data-label-dir="nw" />
         <rect id="HBS" x="505" y="350" data-comment="Braunschweig" data-dir="ne" />
         <rect id="HG" x="450" y="420" data-comment="Göttingen" data-dir="n" />
-        <rect id="EBIL" x="380" y="350" data-comment="Bielefeld" data-dir="ne" />
+        <rect id="EBIL" x="380" y="345" data-comment="Bielefeld" data-dir="ne" />
         <rect id="EPD" x="390" y="405" data-comment="Paderborn" data-dir="w" />
         <rect id="EMST" x="320" y="325" data-comment="Münster Westf" data-dir="ne" />
         <rect id="EHM" x="355" y="380" data-comment="Hamm" data-dir="ne" />
@@ -264,7 +269,7 @@
         <rect id="EDG" x="230" y="410" data-comment="Duisburg" data-dir="ne" />
         <rect id="EOB" x="220" y="385" data-comment="Oberhausen" data-dir="nw" />
         <rect id="KD" x="210" y="450" data-comment="Düsseldorf" data-dir="n" />
-        <rect id="KK" x="210" y="490" data-comment="Köln" data-dir="n" data-label-dir="nw" />
+        <rect id="KK" x="210" y="500" data-comment="Köln" data-dir="n" data-label-dir="nw" />
         <rect id="KKDZ" x="280" y="490" data-comment="Deutz" data-dir="n" />
         <rect id="KA" x="165" y="500" data-comment="Aachen" data-dir="nw" />
         <rect id="KB" x="230" y="550" data-comment="Bonn" data-dir="nw" />

@@ -102,8 +102,9 @@ export class SvgLine implements LineAdapter {
         let from = 0;
         if (animationDurationSeconds == 0) {
             from = length;
-        }        
-        this.animateFrame(from, length, length/animationDurationSeconds/SvgNetwork.FPS);
+        }
+        const direction = reverse ? -1 : 1;
+        this.animateFrame(from, length * direction, length/animationDurationSeconds/SvgNetwork.FPS * direction);
     }
     
     private animateFrame(from: number, to: number, animationPerFrame: number): void {

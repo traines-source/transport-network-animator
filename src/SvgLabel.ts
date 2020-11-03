@@ -67,7 +67,9 @@ export class SvgLabel implements LabelAdapter {
                 this.drawLineLabel(c);
             }
         })
-        this.translate(new Vector(this.element.children[0].getBoundingClientRect().width, this.element.children[0].getBoundingClientRect().height), labelDir);
+        const scale = this.element.getBoundingClientRect().width/Math.max(this.element.getBBox().width, 1);
+        const bbox = this.element.children[0].getBoundingClientRect();
+        this.translate(new Vector(bbox.width/scale, bbox.height/scale), labelDir);
     }
 
     private drawLineLabel(label: SvgLabel) {
@@ -119,6 +121,7 @@ export class SvgLabel implements LabelAdapter {
         const lineLabel: SVGGraphicsElement = <SVGGraphicsElement>document.createElementNS(SvgNetwork.SVGNS, 'foreignObject');
         lineLabel.className.baseVal += ' for-line';
         lineLabel.dataset.station = stationId;
+        lineLabel.setAttribute('width', '1');
         const container = document.createElementNS('http://www.w3.org/1999/xhtml', 'div');
         lineLabel.appendChild(container);
        

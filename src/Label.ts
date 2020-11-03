@@ -83,11 +83,13 @@ export class Label implements TimedDrawable {
             yOffset += Label.LABEL_HEIGHT*1.5;
         }
         const labelDir = station.labelDir;
+
+        yOffset = Math.sign(Vector.UNIT.rotate(labelDir).y)*yOffset - (yOffset>0 ? 2 : 0); //TODO magic numbers
         const stationDir = station.rotation;
         const diffDir = labelDir.add(new Rotation(-stationDir.degrees));
         const unitv = Vector.UNIT.rotate(diffDir);
         const anchor = new Vector(station.stationSizeForAxis('x', unitv.x), station.stationSizeForAxis('y', unitv.y));
-        const textCoords = baseCoord.add(anchor.rotate(stationDir)).add(new Vector(0, Math.sign(Vector.UNIT.rotate(labelDir).y)*yOffset));
+        const textCoords = baseCoord.add(anchor.rotate(stationDir)).add(new Vector(0, yOffset));
     
         this.adapter.draw(delaySeconds, textCoords, labelDir, this.children.map(c => c.adapter));
     }
