@@ -157,7 +157,8 @@ export class Station {
     draw(delaySeconds: number): void {
         const station = this;
         this.existingLabels.forEach(l => l.draw(delaySeconds, false));
-        this.adapter.draw(delaySeconds, function() { return station.positionBoundaries(); });
+        const t = station.positionBoundaries();
+        this.adapter.draw(delaySeconds, function() { return t; });
     }
 
     stationSizeForAxis(axis: string, vector: number): number {
