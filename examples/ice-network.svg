@@ -24,6 +24,7 @@
         <text data-station="UE">Erfurt</text>
 
         <text data-station="AK" data-from="1995 8" data-to="1995 26">Kiel</text>
+        <text data-station="RM" data-from="1991 5" data-to="1993 23">Mannheim</text>
 
 
 
@@ -293,7 +294,7 @@
         <rect id="FW" x="305" y="585" data-comment="Wiesbaden" data-dir="n" />
         <rect id="SKL" x="295" y="670" data-comment="Kaiserslautern" data-dir="n" />
         <rect id="SSH" x="250" y="695" data-comment="Saarbrücken" data-dir="nw" data-label-dir="sw" />
-        <rect id="RM" x="360" y="670" data-comment="Mannheim" data-dir="n" />
+        <rect id="RM" x="360" y="670" data-comment="Mannheim" data-dir="n" data-label-dir="e" />
         <rect id="RH" x="410" y="690" data-comment="Heidelberg" data-dir="nw" />
         <rect id="RK" x="355" y="720" data-comment="Karlsruhe" data-dir="ne" data-label-dir="nw" />
         <rect id="RO" x="320" y="790" data-comment="Offenburg" data-dir="n" />
@@ -337,7 +338,7 @@
 
     </g>
     </g>
-    <rect id="epoch-label-bg" x="1125" y="50" width="150" height="70" />
-    <text id="epoch-label" x="1200" y="90"></text>
+    <rect id="epoch-label-bg" x="1130" y="50" width="180" height="90" />
+    <text id="epoch-label" x="1220" y="100"></text>
     <script xlink:href="../dist/network-animator.js" />
 </svg>

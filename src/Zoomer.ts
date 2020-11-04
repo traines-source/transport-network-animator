@@ -7,7 +7,7 @@ import { Rotation } from "./Rotation";
 export class Zoomer {
     static ZOOM_DURATION = 1;
     static ZOOM_MAX_SCALE = 3;
-    static PADDING_FACTOR = 40;
+    static PADDING_FACTOR = 25;
     
     private boundingBox = {tl: Vector.NULL, br: Vector.NULL};
     
