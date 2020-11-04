@@ -29,6 +29,10 @@ export class Label implements TimedDrawable {
         return this.children.length > 0;
     }
 
+    get name(): string {
+        return this.adapter.forStation || this.adapter.forLine || '';
+    }
+    
     get forStation(): Station {
         const s = this.stationProvider.stationById(this.adapter.forStation || '');
         if (s == undefined) {

@@ -94,6 +94,9 @@ export class Network implements StationProvider {
 
     private drawOrEraseElement(element: TimedDrawable, delay: number, animate: boolean, instant: Instant, zoomer: Zoomer): number {
         if (instant.equals(element.to) && !element.from.equals(element.to)) {
+            if (this.eraseBuffer.length > 0 && this.eraseBuffer[this.eraseBuffer.length-1].name != element.name) {
+                delay = this.flushEraseBuffer(delay, animate, zoomer);
+            }
             this.eraseBuffer.push(element);
             return delay;
         }
