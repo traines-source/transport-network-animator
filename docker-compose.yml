@@ -5,10 +5,9 @@ services:
     build: ./
     container_name: network-animator-render
     volumes:
-      - ./render.js:/app/render.js
-      - ./styles.css:/app/styles.css
-      - ./network-animator.svg:/app/network-animator.svg
+      - ./dist/:/app/dist/
+      - ./examples/:/app/examples/
       - ./output/:/app/output/
     shm_size: 1G
-    entrypoint: "timecut network-animator.svg --duration=5 --viewport=2000,2000 --fps=60 --pipe-mode --launch-arguments='--no-sandbox --disable-setuid-sandbox' --pix-fmt=yuv420p --output=output/video.mp4"
+    entrypoint: "timecut examples/ice-network.svg --start 5 --duration=450 --viewport=3840,2160 --fps=60 --pipe-mode --launch-arguments='--no-sandbox --disable-setuid-sandbox' --pix-fmt=yuv420p --output=output/out_3.mp4"
 
