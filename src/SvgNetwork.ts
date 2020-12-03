@@ -110,7 +110,7 @@ export class SvgNetwork implements NetworkAdapter {
     private updateZoom(center: Vector, scale: number) {
         const zoomable = document.getElementById('zoomable');
         if (zoomable != undefined) {
-            zoomable.style.transformOrigin = '500px 500px';
+            zoomable.style.transformOrigin = 'center';
             zoomable.style.transform = 'scale(' + scale + ') translate(' + (this.canvasSize.x / 2 - center.x) + 'px,' + (this.canvasSize.y / 2 - center.y) + 'px)';
         }
     }

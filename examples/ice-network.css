@@ -76,7 +76,7 @@ svg {
     text-align: center;
 }
 
-.ICE11 {
+.ICE11, .ICE31 {
     stroke:#ee1d23;
     background-color: #ee1d23;
     color: white;
@@ -87,13 +87,13 @@ svg {
     background-color: #b0abd4;
 }
 
-.ICE21 {
+.ICE21, .ICE55, .ICE88 {
     stroke:#39b97a;
     background-color: #39b97a; 
     color: white;
 }
 
-.ICE20 {
+.ICE20, .ICE51 {
     stroke:#f5c700;
     background-color: #f5c700;
 }
@@ -127,7 +127,7 @@ svg {
     color: white;
 }
 
-.ICE28 {
+.ICE28, .ICE12 {
     stroke:#8dd7f7;
     background-color: #8dd7f7;
 }
@@ -143,3 +143,43 @@ svg {
     background-color: #ee1d23;
     color: white;
 }
+
+.ICE79 {
+    stroke:#b0abd4;
+    background-color: #b0abd4;
+}
+
+
+.ICE40, .ICE45 {
+    stroke:#0095d9;
+    background-color: #0095d9;
+    color: white;
+}
+
+.ICE41 {
+    stroke:#bcd646;
+    background-color: #bcd646;
+}
+
+.ICE43 {
+    stroke:#a78b6b;
+    background-color: #a78b6b;
+    color: white;
+}
+
+.ICE42 {
+    stroke:#f8abad;
+    background-color: #f8abad;
+}
+
+.ICE15 {
+    stroke:#231f20;
+    background-color: #231f20;
+    color: white;    
+}
+
+/**
+#epoch-label, #epoch-label-bg, text, foreignObject {
+    display: none !important;
+}
+**/
