@@ -87,7 +87,7 @@ svg {
     background-color: #b0abd4;
 }
 
-.ICE21, .ICE55, .ICE88 {
+.ICE88, .ICE43 {
     stroke:#39b97a;
     background-color: #39b97a; 
     color: white;
@@ -150,7 +150,7 @@ svg {
 }
 
 
-.ICE40, .ICE45 {
+.ICE45 {
     stroke:#0095d9;
     background-color: #0095d9;
     color: white;
@@ -161,7 +161,7 @@ svg {
     background-color: #bcd646;
 }
 
-.ICE43 {
+.ICE21, .ICE55, .ICE40 {
     stroke:#a78b6b;
     background-color: #a78b6b;
     color: white;

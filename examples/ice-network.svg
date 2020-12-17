@@ -81,7 +81,9 @@
 
         <path data-line="ICE5" class="some" data-stops="- KK KD EDG EE EDO EHM EBIL HH BL" data-from="1994 10" data-to="1997 25" />
         <path data-line="ICE78" class="e2h" data-stops="- KK KD EDG EOB hEOB" data-from="2000 37" />
+        <path data-line="ICE78" class="e2h" data-stops="KK - FFLF + FF" data-from="2003 25" />
         <path data-line="ICE87" class="e2h" data-stops="TS RSI fXSZH" data-from="1999 50" />
+        <path data-line="ICE87" class="some" data-stops="TS RH FF" data-from="2003 25" />
         <text data-line="ICE5" data-from="1994 10" data-to="1995 8">5</text>
         <text data-line="ICE78" data-from="2000 37" data-to="2001 17">5</text>
         <text data-line="ICE87" data-from="1999 50" data-to="2000 12">2</text>
@@ -106,14 +108,15 @@
         <path data-line="ICE10" class="e2h" data-stops="KB FMZ FFLF FF NWH NN" data-from="1999 17" data-to="2003 45" />
         <path data-line="ICE10" class="some" data-stops="NN MIH MH" data-from="1999 17" data-to="2003 45" />
         <path data-line="ICE10" class="some" data-stops="NN +2 MA -1* MH" data-from="1999 17" data-to="2003 45" />
+        <path data-line="ICE10" class="some" data-stops="KB STR" data-from="2006 33"/>
         <text data-line="ICE10" data-from="1997 27" data-to="1998 12">10</text>
         <text data-station="KB" data-from="1998 12" data-to="1998 50" >Bonn</text>
 
         <path data-line="ICE28" class="e2h" data-stops="BL LL UJP NN +1 MA MH" data-from="2000 12" />
-        <path data-line="ICE28" class="e2h" data-stops="BL h_AH_BL AH" data-from="2001 29" />
+        <path data-line="ICE28" class="e2h" data-stops="BL h_AH_BL AH" data-from="2001 29" data-to="2006 43 noanim" />
+        <path data-line="ICE28" class="e1h" data-stops="BL h_AH_BL AH" data-from="2006 43 noanim" />
         <text data-line="ICE28" data-from="2000 12" data-to="2001 17">8</text>
         <text data-line="ICE28" data-from="2001 29" data-to="2002 1">8</text>
-
         
         <path data-line="ICE50" class="e2h" data-stops="SSH SKL RM +1 hRM FF FFU UE UWM LL DH" data-from="2000 27" />
         <text data-line="ICE50" data-from="2000 27" data-to="2001 17">9</text>
@@ -124,35 +127,37 @@
         <path data-line="ICE40" class="e2h" data-stops="EMST EE EDG KD KKDZ - FFLF + FF" data-from="2003 10" />
         <path data-line="ICE41" class="e2h" data-stops="+2 EDO EE EDG KD KKDZ - FFLF" data-from="2003 10" />
         <path data-line="ICE41" class="e2h" data-stops="FFLF + FF" data-from="2003 10" data-to="2004 25" />
-        <path data-line="ICE78" class="e2h" data-stops="KK - FFLF + FF" data-from="2003 25" />
-        <path data-line="ICE87" class="some" data-stops="TS RH FF" data-from="2003 25" />
+        <path data-line="ICE41" class="e2h" data-stops="FFLF NWH NN MIH MH" data-from="2004 25" />
+
         <path data-line="ICE79" class="e2h" data-stops="hKA KA KK - FFLF + FF" data-from="2003 37" />
-       
 
         <path data-line="ICE45" class="e2h" data-stops="KK FW FMZ RM RH TS" data-from="2003 45"/>
         <path data-line="ICE43" class="e2h" data-stops="EDO EHG h_EHG_KK KK FFLF RM RK RF RB" data-from="2003 60" />
         <path data-line="ICE42" class="e2h" data-stops="- EDO EE EDG KD KK + FFLF RM TS -1 TU MA MH" data-from="2003 60" />
         <path data-line="ICE12" class="e2h" data-stops="hRB RB RF RO RK RM FF FFU FKW HG HBS HWOB BL" data-from="2003 88" />
-        <path data-line="ICE55" class="some" data-stops="- BL LM HBS HH EBIL EDO EHG h_EHG_KK KK" data-from="2003 98" />
-        <path data-line="ICE21" class="some" data-stops="- HB HH FKW + FF" data-from="2003 98" />
-        <path data-line="ICE21" class="some" data-stops="FF RH TS" data-from="2003 98" data-to="2004 35" />
-        <path data-line="ICE21" class="some" data-stops="FF - RM SKL SSH" data-from="2004 35" />
+
+        <path data-line="ICE21" class="some" data-stops="- HB HH FKW + FF" data-from="2003 98" data-to="2006 10"/>
+        <path data-line="ICE21" class="some" data-stops="FF RH TS" data-from="2003 98" data-to="2004 45" />
+        <path data-line="ICE21" class="some" data-stops="FF - RM SKL SSH" data-from="2004 45" data-to="2006 10" />
+        <path data-line="ICE55" class="some" data-stops="- BL LM HBS HH EBIL EDO EHG h_EHG_KK KK" data-from="2003 98" data-to="2006 10 reverse" />
         <text data-line="ICE21" data-from="2003 98">21</text>
 
         <path data-line="ICE51" class="some" data-stops="KD EDG EE EDO EHM EPD FKW UE UWM" data-from="2003 115" />
-        <path data-line="ICE51" class="some" data-stops="UWM LHA" data-from="2003 115" data-to="2004 45" />
-        <path data-line="ICE51" class="some" data-stops="UWM LL DH" data-from="2004 45" />
+        <path data-line="ICE51" class="some" data-stops="UWM LHA" data-from="2003 115" data-to="2004 50" />
+        <path data-line="ICE51" class="some" data-stops="UWM LL DH" data-from="2004 50" />
         <path data-line="ICE88" class="some" data-stops="MH MLI fXSZH" data-from="2003 125" data-to="2004 10" />
 
-        <path data-line="ICE31" class="some" data-stops="AH HB EMST EDO EE EDG KD KK KB FMZ FFLF - FF NWH NN NRH NPA fNPA" data-from="2004 35" />
-        <path data-line="ICE41" class="e2h" data-stops="FFLF NWH NN" data-from="2004 25" />
-        <path data-line="ICE41" class="some" data-stops="NN MIH MH" data-from="2004 25" />
-        <path data-line="ICE41" class="some" data-stops="NN MA MH" data-from="2004 25" />
-      
+        <path data-line="ICE31" class="some" data-stops="AH HB EMST EDO EE EDG KD KK - KB FMZ + FFLF - FF NWH NN NRH NPA fNPA" data-from="2004 30" />
         
-        <path data-line="ICE15" class="some" data-stops="FF FFU - UE UWM LHA BL" data-from="2004 45" />
+        <path data-line="ICE15" class="some" data-stops="FF FFU - UE UWM LHA BL" data-from="2004 50" data-to="2006 25 noanim" />
+        <path data-line="ICE50" class="some" data-stops="FF FFU - UE UWM LHA BL" data-from="2006 25 noanim" />
+        <path data-line="ICE50a" class="ICE50 some" data-stops="LL LHA LM" data-from="2006 25" />
 
-        <!-- Flugh Köln Bonn -->
+
+        <!-- Flugh Köln Bonn 
+        Metropolitan Express Train
+        
+        -->
 
         
 
@@ -297,6 +302,7 @@
         <rect id="FMZ" x="305" y="605" data-comment="Mainz" data-dir="n" data-label-dir="s" />
         <rect id="FW" x="305" y="585" data-comment="Wiesbaden" data-dir="n" />
         <rect id="SKL" x="295" y="670" data-comment="Kaiserslautern" data-dir="n" />
+        <rect id="STR" x="250" y="640" data-comment="Trier" data-dir="n" data-label-dir="sw" />
         <rect id="SSH" x="250" y="695" data-comment="Saarbrücken" data-dir="nw" data-label-dir="sw" />
         <rect id="RM" x="360" y="670" data-comment="Mannheim" data-dir="n" data-label-dir="e" />
         <rect id="RH" x="410" y="690" data-comment="Heidelberg" data-dir="nw" />
