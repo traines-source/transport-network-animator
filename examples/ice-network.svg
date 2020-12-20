@@ -17,6 +17,8 @@
         <text data-station="TS">Stuttgart</text>
         <text data-station="UE">Erfurt</text>
 
+        <text data-station="FD">Darmstadt</text>
+
         <text data-station="AK" data-from="1995 8" data-to="1995 26">Kiel</text>
         <text data-station="RM" data-from="1991 5" data-to="1993 23">Mannheim</text>
 
@@ -61,7 +63,7 @@
         <path data-line="ICE25" class="some" data-stops="NN NRH NPA fNPA" data-from="1998 25" />
         <path data-line="ICE25" class="some" data-stops="HB HBH" data-from="1997 5" data-to="2001 29 noanim" />
         <path data-line="ICE25" class="some" data-stops="NWH MA MH" data-from="2007 20 noanim" />
-        <path data-line="ICE25" class="some" data-stops="NWH NN - MIH MH" data-from="2007 21" />
+        <path data-line="ICE25" class="e1h" data-stops="NWH NN - MIH MH" data-from="2007 21" />
 
         <text data-line="ICE25" data-from="1992 43" data-to="1993 20">4</text>
         <text data-line="ICE25" data-from="1997 5" data-to="1998 12">4</text>
@@ -139,7 +141,10 @@
         <path data-line="ICE65" style="stroke:#ee1d23" class="e2h" data-stops="NN DC DH" data-from="2001 17" data-to="2004 15" />
         <text data-line="ICE65" data-from="2001 17" data-to="2002 1">17</text>
         
-        <path data-line="ICE40" class="e2h" data-stops="EMST EE EDG KD KKDZ - FFLF + FF" data-from="2003 10" />
+        <path data-line="ICE40" class="e2h" data-stops="EMST EG EE EDG KD KKDZ - FFLF" data-from="2003 10" data-to="2007 64 reverse" />
+        <path data-line="ICE40" class="e2h" data-stops="FFLF + FF" data-from="2003 10" data-to="2007 64 noanim" />
+        <path data-line="ICE40" class="some" data-stops="FFLF + FF" data-from="2007 64 noanim" />
+        <path data-line="ICE40" class="some" data-stops="FFLF KK" data-from="2007 64" />
         <path data-line="ICE41" class="e2h" data-stops="+2 EDO EE EDG KD KKDZ - FFLF" data-from="2003 10" />
         <path data-line="ICE41" class="e2h" data-stops="FFLF + FF" data-from="2003 10" data-to="2004 25" />
         <path data-line="ICE41" class="e2h" data-stops="FFLF NWH" data-from="2004 25" data-to="2007 32 reverse" />
@@ -152,7 +157,9 @@
         <path data-line="ICE79" class="e2h" data-stops="hKA KA KK - FFLF + FF" data-from="2003 37" />
 
         <path data-line="ICE45" class="e2h" data-stops="KK FW FMZ" data-from="2003 45"/>
-        <path data-line="ICE45" class="e2h" data-stops="FMZ RM RH TS" data-from="2003 45" data-to="2007 53" />
+        <path data-line="ICE45" class="e2h" data-stops="FMZ RM RH TS" data-from="2003 45" data-to="2007 53 noanim" />
+        <path data-line="ICE45" class="some" data-stops="FMZ RM RH TS" data-from="2007 53 noanim" />
+        <path data-line="ICE45" class="some" data-stops="FMZ FD" data-from="2007 56" data-to="2007 59" />
         <path data-line="ICE43" class="e2h" data-stops="EDO EHG h_EHG_KK KK FFLF RM RK RF RB" data-from="2003 60" />
         <path data-line="ICE42" class="e2h" data-stops="- EDO EE EDG KD KK + FFLF RM TS -1 TU MA MH" data-from="2003 60" />
         <path data-line="ICE12" class="e2h" data-stops="hRB RB RF RO RK RM FF FFU FKW HG HBS HWOB BL" data-from="2003 88" />
@@ -301,6 +308,7 @@
         <rect id="EMST" x="720" y="325" data-comment="Münster Westf" data-dir="ne" />
         <rect id="EHM" x="755" y="380" data-comment="Hamm" data-dir="ne" />
         <rect id="EHG" x="730" y="440" data-comment="Hagen" data-dir="ne" />
+        <rect id="EG" x="685" y="370" data-comment="Gelsenkirchen" data-dir="n" />
         <rect id="EDO" x="705" y="400" data-comment="Dortmund" data-dir="n" />
         <rect id="EE" x="670" y="400" data-comment="Essen" data-dir="n" data-label-dir="n" />
         <rect id="EDG" x="630" y="410" data-comment="Duisburg" data-dir="ne" />
@@ -324,6 +332,7 @@
         <rect id="FFLF" x="740" y="580" data-comment="FFM Flughafen" data-dir="ne" />
         <rect id="FMZ" x="705" y="605" data-comment="Mainz" data-dir="n" data-label-dir="s" />
         <rect id="FW" x="705" y="585" data-comment="Wiesbaden" data-dir="n" />
+        <rect id="FD" x="807" y="620" data-comment="Darmstadt" data-dir="n" />
         <rect id="SKL" x="695" y="670" data-comment="Kaiserslautern" data-dir="n" />
         <rect id="STR" x="650" y="640" data-comment="Trier" data-dir="n" data-label-dir="sw" />
         <rect id="SSH" x="650" y="695" data-comment="Saarbrücken" data-dir="nw" data-label-dir="sw" />
