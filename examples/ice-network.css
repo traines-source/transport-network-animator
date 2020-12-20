@@ -98,7 +98,7 @@ svg {
     background-color: #f5c700;
 }
 
-.ICE22 {
+.ICE22, .ICE90 {
     stroke: #abe546;
     background-color: #abe546;
 }
@@ -120,7 +120,7 @@ svg {
     color: white;
 }
 
-.ICE87, .ICE78 {
+.ICE87, .ICE78, .ICE75 {
     stroke:#f48232;
     background-color: #f48232;
     color: white;
@@ -132,7 +132,7 @@ svg {
     color: white;
 }
 
-.ICE28, .ICE12 {
+.ICE28, .ICE12, .ICE91 {
     stroke:#8dd7f7;
     background-color: #8dd7f7;
 }
@@ -155,7 +155,7 @@ svg {
 }
 
 
-.ICE45 {
+.ICE45, .ICE82 {
     stroke:#0095d9;
     background-color: #0095d9;
     color: white;
@@ -166,7 +166,7 @@ svg {
     background-color: #bcd646;
 }
 
-.ICE21, .ICE55, .ICE40 {
+.ICE21, .ICE55, .ICE40, .ICE76 {
     stroke:#a78b6b;
     background-color: #a78b6b;
     color: white;
