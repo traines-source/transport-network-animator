@@ -40,10 +40,15 @@
         <path data-line="ICE11" class="e1h" data-stops="HG HBS" data-from="1998 40 noanim" data-to="2003 60 noanim" />
         <path data-line="ICE11" class="some" data-stops="HBS LM BL" data-from="1998 40 noanim" data-to="2003 98" />
         <path data-line="ICE11" class="e1h" data-stops="HBS HWOB +0* BL" data-from="1998 40" data-to="2003 60 noanim" />
-        <path data-line="ICE11" class="e2h" data-stops="HG FKW FFU FF RM TS TU MA MH" data-from="2003 60 noanim" />
-        <path data-line="ICE11" class="e2h" data-stops="HG HBS" data-from="2003 60 noanim" />
-        <path data-line="ICE11" class="e2h" data-stops="HBS HWOB BL" data-from="2003 60 noanim" />
+        <path data-line="ICE11" class="e2h" data-stops="HG FKW FFU" data-from="2003 60 noanim" data-to="2018 40 reverse" />
+        <path data-line="ICE11" class="e2h" data-stops="FFU FF RM TS TU MA MH" data-from="2003 60 noanim" />
+        <path data-line="ICE11" class="e2h" data-stops="HG HBS" data-from="2003 60 noanim" data-to="2018 40" />
+        <path data-line="ICE11" class="e2h" data-stops="HBS HWOB BL" data-from="2003 60 noanim" data-to="2018 40" />
         <path data-line="ICE11" class="some" data-stops="MH fXAI" data-from="2003 125" data-to="2009 15" />
+        <path data-line="ICE11" class="e2h" data-stops="FFU UE LL BL" data-from="2018 40" />
+        <path data-line="ICE11" class="some" data-stops="BL h_AH_BL AH" data-from="2018 40" />
+        <path data-line="ICE11" class="some" data-stops="UE UWM LL" data-from="2018 55" />
+
         <text data-line="ICE11" data-from="1991 5" data-to="1992 43">6</text>
         <text data-line="ICE11" data-from="1993 23" data-to="1994 10">6</text>
         <text data-line="ICE11" data-from="1997 5" data-to="1998 12">6</text>
@@ -93,8 +98,8 @@
         <path data-line="ICE5" class="some" data-stops="- KK KD EDG EE EDO EHM EBIL HH BL" data-from="1994 10" data-to="1997 25" />
         <path data-line="ICE78" class="e2h" data-stops="- KK KD EDG EOB hEOB" data-from="2000 37" />
         <path data-line="ICE78" class="e2h" data-stops="KK - FFLF + FF" data-from="2003 25" />
-        <path data-line="ICE87" class="e2h" data-stops="TS RSI fXSZH" data-from="1999 50" />
-        <path data-line="ICE87" class="some" data-stops="TS RH FF" data-from="2003 25" />
+        <path data-line="ICE87" class="some" data-stops="TS RH FF" data-from="2003 25" data-to="2011 30 reverse" />
+        <path data-line="ICE87" class="e2h" data-stops="TS RSI fXSZH" data-from="1999 50" data-to="2011 30" />
         <text data-line="ICE5" data-from="1994 10" data-to="1995 8">5</text>
         <text data-line="ICE78" data-from="2000 37" data-to="2001 17">5</text>
         <text data-line="ICE87" data-from="1999 50" data-to="2000 12">2</text>
@@ -119,46 +124,58 @@
         <path data-line="ICE10" class="e2h" data-stops="KB FMZ FFLF FF NWH NN" data-from="1999 17" data-to="2003 45" />
         <path data-line="ICE10" class="some" data-stops="NN MIH MH" data-from="1999 17" data-to="2003 45" />
         <path data-line="ICE10" class="some" data-stops="NN +2 MA -1* MH" data-from="1999 17" data-to="2003 45" />
-        <path data-line="ICE10" class="some" data-stops="KB STR" data-from="2006 38"/>
+        <path data-line="ICE10" class="some" data-stops="KB STR" data-from="2006 38" data-to="2012 10"/>
         <text data-line="ICE10" data-from="1997 27" data-to="1998 12">10</text>
         <text data-station="KB" data-from="1998 12" data-to="1998 50" >Bonn</text>
 
         <path data-line="ICE28" class="e2h" data-stops="BL LL UJP NN +1 MA MH" data-from="2000 12" data-to="2007 14 noanim" />
         <path data-line="ICE28" class="e2h" data-stops="BL h_AH_BL AH" data-from="2001 29" data-to="2006 48 noanim" />
-        <path data-line="ICE28" class="e1h" data-stops="BL h_AH_BL AH" data-from="2006 48 noanim" />
-        <path data-line="ICE28" class="some" data-stops="BL WR" data-from="2007 10" />
-        <path data-line="ICE28" class="e1h" data-stops="BL LL UJP NN" data-from="2007 14 noanim" />
-        <path data-line="ICE28" class="e2h" data-stops="NN +1 MA MH" data-from="2007 14 noanim" />
-        <path data-line="ICE28" class="e2h" data-stops="NN MIH MH" data-from="2007 14" />
+        <path data-line="ICE28" class="e1h" data-stops="BL h_AH_BL AH" data-from="2006 48 noanim" data-to="2018 5 noanim" />
+        <path data-line="ICE28" class="some" data-stops="BL WR" data-from="2007 10" data-to="2016 35" />
+        <path data-line="ICE28" class="e1h" data-stops="BL LL" data-from="2007 14 noanim" data-to="2018 5 noanim" />
+        <path data-line="ICE28" class="e1h" data-stops="LL UJP NN" data-from="2007 14 noanim" data-to="2018 5 reverse" />
+        <path data-line="ICE28" class="e2h" data-stops="NN +1 MA MH" data-from="2007 14 noanim" data-to="2018 5 noanim" />
+        <path data-line="ICE28" class="e2h" data-stops="NN MIH MH" data-from="2007 14" data-to="2018 5 noanim" />
         <path data-line="ICE28" class="some" data-stops="MH fXAI" data-from="2009 15" />
         <path data-line="ICE28" class="some" data-stops="MH MGP fXAI2" data-from="2010 3" />
+        <path data-line="ICE28" class="some" data-stops="BL WSR" data-from="2012 5"  />
+        <path data-line="ICE28" class="some" data-stops="WSR WBI" data-from="2013 0 nozoom" />
+        <path data-line="ICE28" class="e2h" data-stops="AH h_AH_BL BL LL" data-from="2018 5 noanim" />
+        <path data-line="ICE28" class="e4h" data-stops="NN +1 MA MH" data-from="2018 5 noanim" />
+        <path data-line="ICE28" class="e4h" data-stops="NN MIH MH" data-from="2018 5 noanim" />
+        <path data-line="ICE28" class="e2h" data-stops="NN UE LL" data-from="2018 5" />
+        <path data-line="ICE28" class="some" data-stops="LL UJP" data-from="2018 5" />
 
         <text data-line="ICE28" data-from="2000 12" data-to="2001 17">8</text>
         <text data-line="ICE28" data-from="2001 29" data-to="2002 1">8</text>
         
         <path data-line="ICE50" class="e2h" data-stops="SSH SKL RM +1 hRM FF" data-from="2000 27" data-to="2006 25 noanim" />
         <path data-line="ICE50" class="some" data-stops="SSH SKL RM +1 hRM FF" data-from="2006 25 noanim" />
-        <path data-line="ICE50" class="e2h" data-stops="FF FFU UE UWM LL DH" data-from="2000 27" />
+        <path data-line="ICE50" class="e2h" data-stops="FF FFU UE UWM LL DH" data-from="2000 27" data-to="2016 20 noanim" />
         <text data-line="ICE50" data-from="2000 27" data-to="2001 17">9</text>
 
-        <path data-line="ICE65" style="stroke:#ee1d23" class="e2h" data-stops="NN DC DH" data-from="2001 17" data-to="2004 15" />
+        <path data-line="ICE65" class="e2h" data-stops="NN DC DH" data-from="2001 17" data-to="2004 15" />
         <text data-line="ICE65" data-from="2001 17" data-to="2002 1">17</text>
         
-        <path data-line="ICE40" class="e2h" data-stops="EMST EG EE EDG KD KKDZ - FFLF" data-from="2003 10" data-to="2007 64 reverse" />
-        <path data-line="ICE40" class="e2h" data-stops="FFLF + FF" data-from="2003 10" data-to="2007 64 noanim" />
-        <path data-line="ICE40" class="some" data-stops="FFLF + FF" data-from="2007 64 noanim" />
-        <path data-line="ICE40" class="some" data-stops="FFLF KK" data-from="2007 64" />
-        <path data-line="ICE41" class="e2h" data-stops="+2 EDO EE EDG KD KKDZ - FFLF" data-from="2003 10" />
+        <path data-line="ICE49" class="e2h" data-stops="EMST EG EE EDG KD KKDZ - FFLF" data-from="2003 10" data-to="2007 64 reverse" />
+        <path data-line="ICE49" class="e2h" data-stops="FFLF + FF" data-from="2003 10" data-to="2007 64 noanim" />
+        <path data-line="ICE49" class="some" data-stops="FFLF + FF" data-from="2007 64 noanim" />
+        <path data-line="ICE49" class="some" data-stops="FFLF KK" data-from="2007 64" />
+        <path data-line="ICE41" class="e2h" data-stops="+2 EDO EE EDG KD KKDZ - FFLF" data-from="2003 10" data-to="2007 27 noanim" />
+        <path data-line="ICE41" class="some" data-stops="+2 EDO EE" data-from="2007 27 noanim" />
+        <path data-line="ICE41" class="e1h" data-stops="EE EDG KD KKDZ - FFLF" data-from="2007 27 noanim" />
         <path data-line="ICE41" class="e2h" data-stops="FFLF + FF" data-from="2003 10" data-to="2004 25" />
         <path data-line="ICE41" class="e2h" data-stops="FFLF NWH" data-from="2004 25" data-to="2007 32 reverse" />
-        <path data-line="ICE41" class="e2h" data-stops="NWH NN" data-from="2004 25" />
+        <path data-line="ICE41" class="e2h" data-stops="NWH NN" data-from="2004 25" data-to="2007 27 noanim" />
+        <path data-line="ICE41" class="e1h" data-stops="NWH NN" data-from="2007 27 noanim" />
         <path data-line="ICE41" class="e2h" data-stops="NN MIH MH" data-from="2004 25" data-to="2007 27" />
-        <path data-line="ICE41" class="e2h" data-stops="NN MH" data-from="2007 27" />
-        <path data-line="ICE41" class="e2h" data-stops="NWH FF +0 FFLF" data-from="2007 32" />
-        <path data-line="ICE41" class="some" data-stops="NWH FFU FKW EPD EHM" data-from="2011 10" />
+        <path data-line="ICE41" class="e1h" data-stops="NN MH" data-from="2007 27" />
+        <path data-line="ICE41" class="e1h" data-stops="NWH FF +0 FFLF" data-from="2007 32" />
+        <path data-line="ICE41" class="some" data-stops="NWH FFU FKW EPD EHM" data-from="2011 20" />
 
 
-        <path data-line="ICE79" class="e2h" data-stops="hKA KA KK - FFLF + FF" data-from="2003 37" />
+        <path data-line="ICE79" class="e2h" data-stops="hKA KA KK - FFLF + FF" data-from="2003 37" data-to="2007 27" />
+        <path data-line="ICE79" class="some" data-stops="hKA KA KK - FFLF + FF" data-from="2007 27" />
 
         <path data-line="ICE45" class="e2h" data-stops="KK FW FMZ" data-from="2003 45"/>
         <path data-line="ICE45" class="e2h" data-stops="FMZ RM RH TS" data-from="2003 45" data-to="2007 53 noanim" />
@@ -179,24 +196,48 @@
         <path data-line="ICE51" class="some" data-stops="UWM LL DH" data-from="2004 50" data-to="2008 22" />
         <path data-line="ICE88" class="some" data-stops="MH MLI fXSZH" data-from="2003 125" data-to="2004 10" />
 
-        <path data-line="ICE31" class="some" data-stops="AH HB EMST EDO EE EDG KD KK - KB FMZ + FFLF - FF NWH NN NRH" data-from="2004 30" />
-        <path data-line="ICE31" class="some" data-stops="NRH NPA fNPA" data-from="2004 30" data-to="2008 28" />
+        <path data-line="ICE31" class="some" data-stops="AH HB EMST EDO EE EDG KD KK - KB FMZ + FFLF - FF NWH NN" data-from="2004 30" />
+        <path data-line="ICE31" class="some" data-stops="NN NRH NPA fNPA" data-from="2004 30" data-to="2008 28" />
 
         <path data-line="ICE50" class="e2h" data-stops="FF FFLF FMZ - FW" data-from="2006 25" />
         <path data-line="ICE15" class="some" data-stops="FF FFU - UE UWM LHA BL" data-from="2004 50" data-to="2006 25 reverse" />
-        <path data-line="ICE50" class="some" data-stops="UWM LHA" data-from="2006 30" />
+        <path data-line="ICE50" class="some" data-stops="UWM LHA" data-from="2006 30" data-to="2016 10" />
         <path data-line="ICE50" class="some" data-stops="LHA -0 BL" data-from="2006 30" data-to="2007 77" />
-        <path data-line="ICE50a" class="ICE50 some" data-stops="LL LHA LM" data-from="2006 30" />
-        <path data-line="ICE50" class="some" data-stops="UE FKW EPD EHM +3 EDO +3 EE +3 EDG KD" data-from="2011 5" />
+        <path data-line="ICE50a" class="ICE50 some" data-stops="LL LHA hLM LM" data-from="2006 30" data-to="2016 10" />
+        <path data-line="ICE50a" class="ICE50 some" data-stops="LM HBS HH HB HOLD" data-from="2011 5" data-to="2014 5" />
+        <path data-line="ICE50a" class="ICE50 some" data-stops="LM HBS HH EBIL EHM" data-from="2014 5" data-to="2016 10" />
+        <path data-line="ICE50" class="some" data-stops="UE FKW EPD EHM +3 EDO +3 EE +3 EDG KD" data-from="2011 13" data-to="2016 10" />
+        <path data-line="ICE50" class="e1h" data-stops="FF FFU UE LL" data-from="2016 20 noanim" data-to="2018 40 noanim" />
+        <path data-line="ICE50" class="e2h" data-stops="LL DH" data-from="2016 20 noanim" />
+        <path data-line="ICE50" class="e2h" data-stops="FF FFU UE LL" data-from="2018 40 noanim" />
 
-        <path data-line="ICE90" class="some" data-stops="MH fXASB" data-from="2007 69" />
+
+        <path data-line="ICE15" class="e2h" data-stops="FF UE LHA BL" data-from="2016 27" />
+
+
+
+        <path data-line="ICE90" class="some" data-stops="MH fXASB" data-from="2007 69" data-to="2011 35" />
 
         <path data-line="ICE82" class="e4h" data-stops="FF RM SKL SSH hSSH"  data-from="2007 75" />
+        <path data-line="ICE82" class="some" data-stops="RM RK hXFSTG" data-from="2016 40" />
+        <path data-line="ICE83" class="some" data-stops="TS RK hXFSTG" data-from="2016 40" />
 
-        <path data-line="ICE75" class="some" data-stops="- BL h_AH_BL h_AH_BL_2 + AH AL fXDKH"  data-from="2008 11" />
-        <path data-line="ICE76" class="some" data-stops="- BL h_AH_BL h_AH_BL_2 +0 AH AF fXDAR"  data-from="2008 11" />
+        <path data-line="ICE75" class="some" data-stops="- BL h_AH_BL h_AH_BL_2 + AH AL fXDKH"  data-from="2008 11" data-to="2018 0 reverse" />
+        <path data-line="ICE76" class="some" data-stops="- BL h_AH_BL h_AH_BL_2 +0 AH AF fXDAR"  data-from="2008 11" data-to="2017 5 reverse" />
 
-        <path data-line="ICE91" class="e2h" data-stops="fNPA NPA +0 NRH NN NWH FF FFLF FMZ KB KK +1 KD +1 EDG +1 EE +1 EDO" data-from="2008 32" />
+        <path data-line="ICE91" class="e2h" data-stops="fNPA NPA +0 NRH NN NWH FF" data-from="2008 32" />
+        <path data-line="ICE91" class="e2h" data-stops="FF FFLF FMZ KB KK +1 KD +1 EDG +1 EE +1 EDO" data-from="2008 32" />
+
+        <path data-line="ICE47" class="some" data-stops="EDO EE EDG KD KKDZ FFLF RM TS" data-from="2015 5" />
+       
+        <path data-line="ICE18" class="some" data-stops="AH h_AH_BL BL" data-from="2018 13" />
+        <path data-line="ICE18" class="e2h" data-stops="BL LHA UE NN" data-from="2018 13" />
+        <path data-line="ICE18" class="e4h" data-stops="NN MA MH" data-from="2018 13" />
+        <path data-line="ICE18" class="e4h" data-stops="NN MIH MH" data-from="2018 13" />
+
+        <path data-line="ICE29" class="e2h" data-stops="MH +3 hMIH NN UE LHA BL" data-from="2018 26" />
+        <path data-line="ICE29" class="some" data-stops="BL WR" data-from="2018 26" />
+        <path data-line="ICE13" class="e2h" data-stops="BL HWOB HBS HG FKW FFU FFLF" data-from="2018 50" />
 
 
         <!-- Flugh Köln Bonn 
@@ -306,6 +347,8 @@
     </g>
     <g id="stations">
         <rect id="WR" x="1000" y="110" data-comment="Rostock" data-dir="nw" />
+        <rect id="WSR" x="1080" y="100" data-comment="Stralsund" data-dir="nw" />
+        <rect id="WBI" x="1090" y="80" data-comment="Binz" data-dir="nw" />
         <rect id="AK" x="890" y="100" data-comment="Kiel" data-dir="nw" />
         <rect id="AL" x="920" y="140" data-comment="Lübeck" data-dir="nw" />
         <rect id="AF" x="840" y="80" data-comment="Flensburg" data-dir="nw" />
@@ -392,6 +435,10 @@
         <rect id="hRB" x="680" y="950" data-dir="n" class="helper" />
         <rect id="hEOB" x="585" y="330" data-dir="n" class="helper" />
         <rect id="hKA" x="550" y="510" data-dir="n" class="helper" />
+        <rect id="hLM" x="1010" y="320" data-dir="n" class="helper" />
+        <rect id="hMIH" x="1000" y="760" data-dir="nw" class="helper" />
+
+
         <rect id="hSSH" x="600" y="750" data-dir="nw" class="helper" />
         <rect id="hRM" x="795" y="660" data-dir="n" class="helper" />
         <rect id="hXFSTG" x="600" y="770" data-dir="n" class="helper" />
