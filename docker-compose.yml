@@ -9,5 +9,5 @@ services:
       - ./examples/:/app/examples/
       - ./output/:/app/output/
     shm_size: 1G
-    entrypoint: "timecut examples/ice-network.svg --start 5 --duration=450 --viewport=3840,2160 --fps=60 --pipe-mode --launch-arguments='--no-sandbox --disable-setuid-sandbox' --pix-fmt=yuv420p --output=output/out_3.mp4"
+    entrypoint: "timecut examples/ice-network.svg --start 5 --duration=450 --viewport=3840,2160 --fps=60 --pipe-mode --launch-arguments='--no-sandbox --disable-setuid-sandbox' --pix-fmt=yuv420p --output=output/out.mp4"
 

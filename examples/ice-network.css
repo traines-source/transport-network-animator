@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap');
 
+/*#stations rect {
+    stroke: black;
+    fill: white;
+    rx: 5;
+    stroke-width: 2;
+}*/
+
 #stations rect {
     stroke: black;
     fill: white;
@@ -189,13 +196,7 @@ svg {
 }
 
 /*
-.ICE15 {
-    stroke:#231f20;
-    background-color: #231f20;
-    color: white;    
-}*/
-/**
 #epoch-label, #epoch-label-bg, text, foreignObject {
     display: none !important;
 }
-**/
+*/

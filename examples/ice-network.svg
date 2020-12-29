@@ -1,15 +1,10 @@
 <?xml-stylesheet type="text/css" href="ice-network.css" ?>
 <svg viewBox="0 0 1778 1000" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <g id="zoomable">
-    <g id="elements">
-        
+    <g id="elements">        
 
         <text data-station="AK" data-from="1995 8" data-to="1995 26">Kiel</text>
         <text data-station="RM" data-from="1991 5" data-to="1993 23">Mannheim</text>
-
-
-
-
 
         <path data-line="ICE6A" class="ICE11 some" data-stops="- FF HH HB" data-from="1996 20" data-to="1999 28 nozoom"/>
 
@@ -302,7 +297,7 @@
 
 
 
-<text data-station="AH">Hamburg</text>
+        <text data-station="AH">Hamburg</text>
         <text data-station="BL">Berlin</text>
         <text data-station="DH">Dresden</text>
         <text data-station="EE">Essen</text>
@@ -317,11 +312,6 @@
         <text data-station="TS">Stuttgart</text>
         <text data-station="UE">Erfurt</text>
         <text data-station="FD">Darmstadt</text>
-        <!-- Flugh Köln Bonn 
-        Metropolitan Express Train
-        
-        -->
-
         
 
         <path data-line="dummy" style="stroke:transparent" data-stops="hRB hEOB" data-from="2001 48 noanim" />
