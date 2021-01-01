@@ -25,6 +25,13 @@ export class SvgLine implements LineAdapter {
         return this.getInstant('to');
     }
 
+    get length(): number | undefined {
+        if (this.element.dataset.length == undefined) {
+            return undefined;
+        }
+        return parseInt(this.element.dataset.length);
+    }
+
     private updateBoundingBox(path: Vector[]): void {
         for(let i=0;i<path.length;i++) {
             this.boundingBox.tl = this.boundingBox.tl.bothAxisMins(path[i]);

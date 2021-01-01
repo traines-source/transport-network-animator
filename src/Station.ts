@@ -33,13 +33,20 @@ export class Station {
     private existingLines: {[id: string]: LineAtStation[]} = {x: [], y: []};
     private existingLabels: Label[] = [];
     private phantom?: LineAtStation = undefined;
-    baseCoords = this.adapter.baseCoords;
     rotation = this.adapter.rotation;
     labelDir = this.adapter.labelDir;
     id = this.adapter.id;
 
     constructor(private adapter: StationAdapter) {
 
+    }
+
+    get baseCoords() {
+        return this.adapter.baseCoords;
+    }
+
+    set baseCoords(baseCoords: Vector) {
+        this.adapter.baseCoords = baseCoords;
     }
 
     addLine(line: Line, axis: string, track: number): void {

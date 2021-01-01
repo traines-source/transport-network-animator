@@ -1,0 +1,117 @@
+<?xml-stylesheet type="text/css" href="ice-network.css" ?>
+<svg viewBox="0 0 1778 1000" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" data-beck-style="false">
+<g id="">
+    <g id="elements">
+
+        <path data-line="BL_HH" data-stops="+0 BL +0 HH" data-length="200" data-from="2000 12" />
+        <path data-line="FKW_HH" data-stops="+0 FKW +0 HH" data-length="100" data-from="2000 12" />
+        <path data-line="BL_FKW" data-stops="+0 BL +0 FKW" data-length="230" data-from="2000 12" data-to="2007 14" />
+        <path data-line="BL_FKW" data-stops="+0 BL +0 FKW" data-length="150" data-from="2007 14" />
+        <path data-line="FKW_LL" data-stops="+0 LL +0 FKW" data-length="300" data-from="2000 12" />
+        <path data-line="FKW_EHM" data-stops="+0 FKW +0 EHM" data-length="300" data-from="2000 12" />
+        <path data-line="FKW_FF" data-stops="+0 FKW +0 FF" data-length="200" data-from="2000 12" />
+        <path data-line="RM_FF" data-stops="+0 RM +0 FF" data-length="200" data-from="2000 12" />
+        <path data-line="EHM_HH" data-stops="+0 EHM +0 HH" data-length="100" data-from="2000 12" />
+        <path data-line="EHM_HH" data-stops="+0 LL +0 BL" data-length="150" data-from="2000 12" />
+
+
+
+        <text data-station="AH">Hamburg</text>
+        <text data-station="BL">Berlin</text>
+        <text data-station="DH">Dresden</text>
+        <text data-station="EE">Essen</text>
+        <text data-station="FF">Frankfurt</text>
+        <text data-station="HH">Hannover</text>
+        <text data-station="KK">Köln</text>
+        <text data-station="LL">Leipzig</text>
+        <text data-station="MH">München</text>
+        <text data-station="NN">Nürnberg</text>
+        <text data-station="RK">Karlsruhe</text>
+        <text data-station="SSH">Saarbrücken</text>
+        <text data-station="TS">Stuttgart</text>
+        <text data-station="UE">Erfurt</text>
+        <text data-station="FD">Darmstadt</text>
+        
+        
+
+    </g>
+    <g id="stations">
+        <rect id="WR" x="1000" y="110" data-comment="Rostock" data-dir="nw" />
+        <rect id="WSR" x="1080" y="100" data-comment="Stralsund" data-dir="nw" />
+        <rect id="WBI" x="1090" y="80" data-comment="Binz" data-dir="nw" />
+        <rect id="WS" x="950" y="150" data-comment="Schwerin" data-dir="nw" />
+        <rect id="AK" x="890" y="100" data-comment="Kiel" data-dir="nw" />
+        <rect id="AL" x="920" y="140" data-comment="Lübeck" data-dir="nw" />
+        <rect id="AF" x="840" y="80" data-comment="Flensburg" data-dir="nw" />
+        <rect id="AA" x="890" y="160" data-comment="Altona" data-dir="n" />
+        <rect id="AH" x="890" y="190" data-comment="Hamburg" data-dir="n" data-label-dir="ne" />
+        <rect id="BGS" x="1120" y="255" data-comment="Gesundbrunnen" data-dir="n" />
+        <rect id="BHF" x="1190" y="295" data-comment="Berlin Ost" data-dir="n" />
+        <rect id="BL" x="1120" y="295" data-comment="Berlin Hbf" data-dir="n" data-label-dir="e" />
+        <rect id="HOLD" x="790" y="230" data-comment="Oldenburg" data-dir="n" />
+        <rect id="HWOB" x="940" y="295" data-comment="Wolfsburg" data-dir="n" />
+        <rect id="HBH" x="775" y="190" data-comment="Bremerhaven" data-dir="n" />
+        <rect id="HB" x="835" y="240" data-comment="Bremen" data-dir="nw" />
+        <rect id="HH" x="850" y="315" data-comment="Hannover" data-dir="n" data-label-dir="nw" />
+        <rect id="HBS" x="905" y="350" data-comment="Braunschweig" data-dir="ne" />
+        <rect id="HG" x="850" y="420" data-comment="Göttingen" data-dir="n" />
+        <rect id="EBIL" x="780" y="345" data-comment="Bielefeld" data-dir="ne" />
+        <rect id="EPD" x="790" y="405" data-comment="Paderborn" data-dir="w" data-label-dir="s" />
+        <rect id="EMST" x="720" y="325" data-comment="Münster Westf" data-dir="ne" />
+        <rect id="EHM" x="755" y="380" data-comment="Hamm" data-dir="ne" />
+        <rect id="EHG" x="730" y="440" data-comment="Hagen" data-dir="ne" />
+        <rect id="EG" x="685" y="370" data-comment="Gelsenkirchen" data-dir="n" />
+        <rect id="EDO" x="705" y="400" data-comment="Dortmund" data-dir="n" />
+        <rect id="EE" x="670" y="400" data-comment="Essen" data-dir="n" data-label-dir="s" />
+        <rect id="EDG" x="630" y="410" data-comment="Duisburg" data-dir="ne" />
+        <rect id="EOB" x="620" y="375" data-comment="Oberhausen" data-dir="nw" />
+        <rect id="KD" x="610" y="450" data-comment="Düsseldorf" data-dir="n" />
+        <rect id="KK" x="610" y="500" data-comment="Köln" data-dir="n" data-label-dir="nw" />
+        <rect id="KKDZ" x="645" y="490" data-comment="Deutz" data-dir="n" data-label-dir="e" />
+        <rect id="KA" x="565" y="510" data-comment="Aachen" data-dir="nw" />
+        <rect id="KB" x="630" y="550" data-comment="Bonn" data-dir="nw" data-label-dir="sw" />
+        <rect id="LHA" x="1025" y="420" data-comment="Halle" data-dir="ne" />
+        <rect id="LM" x="990" y="320" data-comment="Magdeburg" data-dir="n" data-label-dir="n" />
+        <rect id="LL" x="1045" y="460" data-comment="Leipzig" data-dir="ne" data-label-dir="se" />
+        <rect id="UE" x="950" y="480" data-comment="Erfurt" data-dir="n" data-label-dir="nw" />
+        <rect id="UJP" x="990" y="530" data-comment="Jena" data-dir="n" />
+        <rect id="UWM" x="980" y="480" data-comment="Weimar" data-dir="n" />
+        <rect id="UWM2" x="980" y="486" data-comment="Weimar" data-dir="n" />
+        <rect id="DH" x="1160" y="475" data-comment="Dresden" data-dir="nw" data-label-dir="se" />
+        <rect id="DC" x="1060" y="525" data-comment="Chemnitz" data-dir="ne" data-label-dir="se" />
+        <rect id="FKW" x="850" y="460" data-comment="Kassel" data-dir="n" />
+        <rect id="FFU" x="845" y="530" data-comment="Fulda" data-dir="nw" />
+        <rect id="FG" x="810" y="500" data-comment="Gießen" data-dir="ne" />
+        <rect id="FF" x="795" y="555" data-comment="Frankfurt" data-dir="n" data-label-dir="nw" />
+        <rect id="FFLF" x="740" y="580" data-comment="FFM Flughafen" data-dir="ne" />
+        <rect id="FMZ" x="705" y="605" data-comment="Mainz" data-dir="n" data-label-dir="s" />
+        <rect id="FW" x="705" y="585" data-comment="Wiesbaden" data-dir="n" data-label-dir="w" />
+        <rect id="FD" x="807" y="620" data-comment="Darmstadt" data-dir="n" />
+        <rect id="SKL" x="695" y="670" data-comment="Kaiserslautern" data-dir="n" />
+        <rect id="STR" x="650" y="640" data-comment="Trier" data-dir="n" data-label-dir="w" />
+        <rect id="SSH" x="650" y="695" data-comment="Saarbrücken" data-dir="nw" data-label-dir="sw" />
+        <rect id="RM" x="760" y="670" data-comment="Mannheim" data-dir="n" data-label-dir="e" />
+        <rect id="RH" x="810" y="690" data-comment="Heidelberg" data-dir="nw" />
+        <rect id="RK" x="755" y="720" data-comment="Karlsruhe" data-dir="ne" data-label-dir="nw" />
+        <rect id="RO" x="720" y="790" data-comment="Offenburg" data-dir="n" />
+        <rect id="RF" x="710" y="830" data-comment="Freiburg" data-dir="ne" />
+        <rect id="RSI" x="800" y="850" data-comment="Singen" data-dir="n" />
+        <rect id="RB" x="680" y="900" data-comment="Basel" data-dir="n" data-label-dir="e" />
+        <rect id="NWH" x="885" y="625" data-comment="Würzburg"  data-dir="ne" />
+        <rect id="NN" x="950" y="660" data-comment="Nürnberg" data-dir="n" data-label-dir="ne" />
+        <rect id="NRH" x="1050" y="700" data-comment="Regensburg" data-dir="w" />
+        <rect id="NPA" x="1135" y="760" data-comment="Passau" data-dir="w" />
+        <rect id="TS" x="820" y="745" data-comment="Stuttgart" data-dir="nw" data-label-dir="e" />
+        <rect id="TU" x="890" y="790" data-comment="Ulm" data-dir="n" />
+        <rect id="MIH" x="1000" y="760" data-comment="Ingolstadt" data-dir="nw" data-label-dir="ne" />
+        <rect id="MA" x="950" y="790" data-comment="Augsburg" data-dir="n" />
+        <rect id="MP" x="970" y="800" data-comment="Pasing" data-dir="nw" />
+        <rect id="MH" x="1020" y="815" data-comment="München" data-dir="n" data-label-dir="ne" />
+        <rect id="MGP" x="990" y="890" data-comment="Garmisch" data-dir="ne" />
+        <rect id="MLI" x="860" y="880" data-comment="Lindau" data-dir="ne" />
+    </g>
+</g>
+<rect id="epoch-label-bg" x="1519" y="50" width="180" height="90" />
+<text id="epoch-label" x="1609" y="100"></text>
+<script xlink:href="../dist/network-animator.js" />
+</svg>

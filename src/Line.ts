@@ -10,6 +10,7 @@ export interface LineAdapter extends Timed  {
     stops: Stop[];
     name: string;
     boundingBox: { tl: Vector; br: Vector; };
+    length: number | undefined;
     draw(delaySeconds: number, animationDurationSeconds: number, path: Vector[], length: number): void;
     erase(delaySeconds: number, animationDurationSeconds: number, reverse: boolean, length: number): void;
 }
@@ -18,7 +19,7 @@ export class Line implements TimedDrawable {
     static NODE_DISTANCE = 0;
     static SPEED = 100;
 
-    constructor(private adapter: LineAdapter, private stationProvider: StationProvider) {
+    constructor(private adapter: LineAdapter, private stationProvider: StationProvider, private beckStyle: boolean = true) {
 
     }
 
@@ -26,6 +27,7 @@ export class Line implements TimedDrawable {
     to = this.adapter.to;
     name = this.adapter.name;
     boundingBox = this.adapter.boundingBox;
+    length = this.adapter.length;
     
     private precedingStop: Station | undefined = undefined;
     private precedingDir: Rotation | undefined = undefined;
@@ -150,6 +152,9 @@ export class Line implements TimedDrawable {
     }
 
     private insertNode(fromCoord: Vector, fromDir: Rotation, toCoord: Vector, toDir: Rotation, path: Vector[]): boolean {
+        if (!this.beckStyle) {
+            return true;
+        }
         const delta: Vector = fromCoord.delta(toCoord);
         const oldDirV = Vector.UNIT.rotate(fromDir);
         const newDirV = Vector.UNIT.rotate(toDir);

@@ -5,6 +5,8 @@ import { Vector } from "./Vector";
 import { Rotation } from "./Rotation";
 import { Zoomer } from "./Zoomer";
 import { LineGroup } from "./LineGroup";
+import { Gravitator } from "./Gravitator";
+import { Line } from "./Line";
 
 export interface StationProvider {
     stationById(id: string): Station | undefined;
@@ -25,9 +27,10 @@ export class Network implements StationProvider {
     private stations: { [id: string] : Station } = {};
     private lineGroups: { [id: string] : LineGroup } = {};
     private eraseBuffer: TimedDrawable[] = [];
+    private gravitator: Gravitator;
 
     constructor(private adapter: NetworkAdapter) {
-
+        this.gravitator = new Gravitator(this);
     }
 
     initialize(): void {
@@ -77,6 +80,7 @@ export class Network implements StationProvider {
             delay = this.drawOrEraseElement(elements[i], delay, animate, now, zoomer);
         }
         delay = this.flushEraseBuffer(delay, animate, zoomer);
+        this.gravitator.gravitate();
         this.adapter.zoomTo(zoomer.center, zoomer.scale, Zoomer.ZOOM_DURATION);
         return delay;
     }
@@ -108,6 +112,9 @@ export class Network implements StationProvider {
     }
     
     private drawElement(element: TimedDrawable, delay: number, animate: boolean): number {
+        if (element instanceof Line) {
+            this.gravitator.addEdge(element);
+        }
         return element.draw(delay, animate);
     }
     

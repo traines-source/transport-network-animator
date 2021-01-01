@@ -26,6 +26,11 @@ export class SvgNetwork implements NetworkAdapter {
         return Vector.NULL;        
     }
 
+    get beckStyle(): boolean {
+        const svg = document.querySelector('svg');
+        return svg?.dataset.beckStyle != 'false';
+    }
+
     initialize(network: Network): void {
         let elements = document.getElementById('elements')?.children;
         if (elements == undefined)
@@ -43,7 +48,7 @@ export class SvgNetwork implements NetworkAdapter {
 
     private mirrorElement(element: any, network: StationProvider): TimedDrawable | null {
         if (element.localName == 'path') {
-            return new Line(new SvgLine(element), network);
+            return new Line(new SvgLine(element), network, this.beckStyle);
         } else if (element.localName == 'text') {
             return new Label(new SvgLabel(element), network);
         }

@@ -12,6 +12,11 @@ export class SvgStation implements StationAdapter {
     get baseCoords(): Vector {        
         return new Vector(parseInt(this.element.getAttribute('x') || '') || 0, parseInt(this.element.getAttribute('y') || '') || 0);
     }
+    set baseCoords(baseCoords: Vector) {
+        this.element.setAttribute('x', baseCoords.x + ''); 
+        this.element.setAttribute('y', baseCoords.y + ''); 
+    }
+
     get rotation(): Rotation {
         return Rotation.from(this.element.dataset.dir || 'n');
     }
