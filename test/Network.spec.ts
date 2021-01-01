@@ -146,6 +146,7 @@ describe('Network', () => {
     it('whenDrawTimedDrawableAt_givenMultipleDrawAndEraseForSameInstant_thenObeyOrder', () => {
         const underTest = new Network(instance(networkAdapter));
 
+        when(timedDrawable.name).thenReturn("01");
         when(timedDrawable.from).thenReturn(new Instant(1, 1, ''));
         when(timedDrawable.to).thenReturn(new Instant(2, 3, ''));
         when(timedDrawable.boundingBox).thenReturn({tl: new Vector(50, 50), br: new Vector(450, 850)});
@@ -154,6 +155,7 @@ describe('Network', () => {
         underTest.addToIndex(instance(timedDrawable));
 
         const timedDrawable1: TimedDrawable = mock();
+        when(timedDrawable1.name).thenReturn("01");
         when(timedDrawable1.from).thenReturn(new Instant(1, 2, ''));
         when(timedDrawable1.to).thenReturn(new Instant(2, 3, 'noanim'));
         when(timedDrawable1.boundingBox).thenReturn({tl: new Vector(500, 400), br: new Vector(450, 850)});
@@ -162,6 +164,7 @@ describe('Network', () => {
         underTest.addToIndex(instance(timedDrawable1));
 
         const timedDrawable2: TimedDrawable = mock();
+        when(timedDrawable2.name).thenReturn("2");
         when(timedDrawable2.from).thenReturn(new Instant(2, 3, ''));
         when(timedDrawable2.to).thenReturn(Instant.BIG_BANG);
         when(timedDrawable2.boundingBox).thenReturn({tl: new Vector(900, 400), br: new Vector(1000, 1000)});
@@ -169,6 +172,7 @@ describe('Network', () => {
         underTest.addToIndex(instance(timedDrawable2));
 
         const timedDrawable3: TimedDrawable = mock();
+        when(timedDrawable3.name).thenReturn("3");
         when(timedDrawable3.from).thenReturn(new Instant(1, 2, ''));
         when(timedDrawable3.to).thenReturn(new Instant(2, 3, ''));
         when(timedDrawable3.boundingBox).thenReturn({tl: new Vector(500, 400), br: new Vector(450, 850)});
