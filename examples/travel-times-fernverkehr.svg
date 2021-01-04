@@ -9,7 +9,8 @@
         <path data-line="BL_FKW" data-stops="+0 BL +0 FKW" data-length="150" data-from="2007 14" />
         <path data-line="FKW_LL" data-stops="+0 LL +0 FKW" data-length="300" data-from="2000 12" />
         <path data-line="FKW_EHM" data-stops="+0 FKW +0 EHM" data-length="300" data-from="2000 12" />
-        <path data-line="FKW_FF" data-stops="+0 FKW +0 FF" data-length="200" data-from="2000 12" />
+        <path data-line="FKW_FF" data-stops="+0 FKW +0 FF" data-length="200" data-from="2000 12" data-to="2007 14"/>
+        <path data-line="FKW_FF" data-stops="+0 FKW +0 FF" data-length="200" data-from="2007 14"/>
         <path data-line="RM_FF" data-stops="+0 RM +0 FF" data-length="200" data-from="2000 12" />
         <path data-line="EHM_HH" data-stops="+0 EHM +0 HH" data-length="100" data-from="2000 12" />
         <path data-line="EHM_HH" data-stops="+0 LL +0 BL" data-length="150" data-from="2000 12" />
