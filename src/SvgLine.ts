@@ -76,8 +76,7 @@ export class SvgLine implements LineAdapter {
         }
     
         this.element.className.baseVal += ' ' + this.name;
-        const d = 'M' + path.map(v => v.x+','+v.y).join(' L');
-        this.element.setAttribute('d', d);
+        this.createPath(path);
     
         let dashedPart = this.createDashedPart(length);
         this.element.style.strokeDasharray = dashedPart + ' ' + length;
@@ -87,17 +86,14 @@ export class SvgLine implements LineAdapter {
         this.animateFrame(length, 0, -length/animationDurationSeconds/SvgNetwork.FPS);
     }
 
-    private createDashedPart(length: number): string {
-        let dashedPart = length + '';
-        const presetDash = getComputedStyle(this.element).strokeDasharray.replace(/[^0-9\s,]+/g, '');
-        if (presetDash.length > 0) {
-            let presetArray = presetDash.split(/[\s,]+/);
-            if (presetArray.length % 2 == 1)
-                presetArray = presetArray.concat(presetArray);
-            const presetLength = presetArray.map(a => parseInt(a) || 0).reduce((a, b) => a + b, 0);
-            dashedPart = new Array(Math.ceil(length / presetLength + 1)).join(presetArray.join(' ') + ' ') + '0';
+    move(delaySeconds: number, animationDurationSeconds: number, from: Vector[], to: Vector[]) {
+        this.updateBoundingBox(to);
+        if (delaySeconds > 0) {
+            const line = this;
+            window.setTimeout(function () { line.move(0, animationDurationSeconds, from, to); }, delaySeconds * 1000);
+            return;
         }
-        return dashedPart;
+        this.animateFrameVector(from, to, 1, animationDurationSeconds/SvgNetwork.FPS);
     }
 
     erase(delaySeconds: number, animationDurationSeconds: number, reverse: boolean, length: number): void {
@@ -113,6 +109,24 @@ export class SvgLine implements LineAdapter {
         const direction = reverse ? -1 : 1;
         this.animateFrame(from, length * direction, length/animationDurationSeconds/SvgNetwork.FPS * direction);
     }
+
+    private createPath(path: Vector[]) {
+        const d = 'M' + path.map(v => v.x+','+v.y).join(' L');
+        this.element.setAttribute('d', d);
+    }
+
+    private createDashedPart(length: number): string {
+        let dashedPart = length + '';
+        const presetDash = getComputedStyle(this.element).strokeDasharray.replace(/[^0-9\s,]+/g, '');
+        if (presetDash.length > 0) {
+            let presetArray = presetDash.split(/[\s,]+/);
+            if (presetArray.length % 2 == 1)
+                presetArray = presetArray.concat(presetArray);
+            const presetLength = presetArray.map(a => parseInt(a) || 0).reduce((a, b) => a + b, 0);
+            dashedPart = new Array(Math.ceil(length / presetLength + 1)).join(presetArray.join(' ') + ' ') + '0';
+        }
+        return dashedPart;
+    }
     
     private animateFrame(from: number, to: number, animationPerFrame: number): void {
         if (animationPerFrame < 0 && from > to || animationPerFrame > 0 && from < to) {
@@ -127,5 +141,20 @@ export class SvgLine implements LineAdapter {
             }
         }
     }
-    
+
+    private animateFrameVector(from: Vector[], to: Vector[], x: number, animationPerFrame: number): void {
+        if (x < 1) {
+            const interpolated = [];
+            for (let i=0; i<from.length; i++) {
+                interpolated.push(from[i].between(to[i], x));
+            }
+            this.createPath(interpolated);
+
+            x += animationPerFrame;
+            const line = this;
+            window.requestAnimationFrame(function() { line.animateFrameVector(from, to, x, animationPerFrame); });
+        } else {
+            this.createPath(to);
+        }
+    }
 }

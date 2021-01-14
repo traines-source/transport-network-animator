@@ -20,7 +20,7 @@ export class Gravitator {
         
     }
 
-    gravitate() {
+    gravitate(delay: number, animate: boolean): number {
         this.obtainStations();
         const solution = this.minimizeLoss();
         console.log('solution:', solution);
@@ -28,7 +28,7 @@ export class Gravitator {
         console.log(this.initialWeightFactors);
         console.log(this.edges);
         this.assertDistances(solution);
-        this.updateStations(solution);
+        return this.moveStationsAndLines(solution, delay, animate);
     }
 
     private obtainStations() {
@@ -122,10 +122,20 @@ export class Gravitator {
         }
     } 
 
-    private updateStations(solution: number[]) {
+    private moveStationsAndLines(solution: number[], delay: number, animate: boolean): number {
+        const animationDurationSeconds = animate ? 3 : 0;
         for (const vertex of Object.values(this.vertices)) {
-            vertex.station.baseCoords = new Vector(solution[vertex.index.x], solution[vertex.index.y]);
+            vertex.station.move(delay, animationDurationSeconds, new Vector(solution[vertex.index.x], solution[vertex.index.y]));
         }
+        for (const edge of Object.values(this.edges)) {
+            edge.move(delay, animationDurationSeconds, [this.getNewStationPosition(edge.termini[0].stationId, solution), this.getNewStationPosition(edge.termini[1].stationId, solution)]);
+        }
+        delay += animationDurationSeconds;
+        return delay;
+    }
+
+    private getNewStationPosition(stationId: string, solution: number[]): Vector {
+        return new Vector(solution[this.vertices[stationId].index.x], solution[this.vertices[stationId].index.y]);
     }
 
     private addVertex(vertexId: string) {

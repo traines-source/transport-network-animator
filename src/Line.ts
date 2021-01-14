@@ -12,6 +12,7 @@ export interface LineAdapter extends Timed  {
     boundingBox: { tl: Vector; br: Vector; };
     length: number | undefined;
     draw(delaySeconds: number, animationDurationSeconds: number, path: Vector[], length: number): void;
+    move(delaySeconds: number, animationDurationSeconds: number, from: Vector[], to: Vector[]): void;
     erase(delaySeconds: number, animationDurationSeconds: number, reverse: boolean, length: number): void;
 }
 
@@ -53,6 +54,19 @@ export class Line implements TimedDrawable {
         this.stationProvider.lineGroupById(this.name).addLine(this);
         this.adapter.draw(delay, duration, path, this.getTotalLength(path));
         return duration;
+    }
+
+    move(delay: number, animationDurationSeconds: number, path: Vector[]) {
+        let oldPath = this.path;
+        if (oldPath.length < 2 || path.length < 2) {
+            console.warn('Trying to move a non existing line');
+            return;
+        }
+        if (oldPath.length != path.length) {
+            oldPath = [oldPath[0], oldPath[oldPath.length-1]];
+            path = [path[0], path[path.length-1]];
+        }
+        this.adapter.move(delay, animationDurationSeconds, this.path, path);
     }
 
     erase(delay: number, animate: boolean, reverse: boolean): number {

@@ -89,4 +89,9 @@ export class Vector {
             return this;
         return new Vector(this.x > other.x ? this.x : other.x, this.y > other.y ? this.y : other.y)
     }
+
+    between(other: Vector, x: number) {
+        const delta = this.delta(other);
+        return this.add(delta.withLength(delta.length*x));
+    }
 }

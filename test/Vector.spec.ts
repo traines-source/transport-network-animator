@@ -107,4 +107,9 @@ describe('Vector', () => {
         expect(Vector.NULL.bothAxisMaxs(new Vector(-1, -8))).eql(new Vector(-1, -8));
         expect(new Vector(-1, -8).bothAxisMaxs(Vector.NULL)).eql(new Vector(-1, -8));
     })
+
+    it('whenBetween', () => {
+        expect(new Vector(1, 0).between(new Vector(5, 0), 0.75)).eql(new Vector(4, 0));
+        expect(new Vector(1, 5).between(new Vector(5, 13), 0.75)).eql(new Vector(4, 11));
+    })
 })
