@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap');
+
+#stations rect {
+    stroke: black;
+    fill: white;
+    rx: 5;
+    stroke-width: 2;
+}
+
+#stations rect.helper {
+    stroke: none;
+    fill: none;
+}
+
+path {
+    stroke: black;
+    stroke-width: 3;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+#elements text {
+    visibility: hidden;
+}
+
+svg {
+    background-color: white;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 16px;
+    line-height: 16px;
+}
+
+
+.e12h {
+    stroke-width: 10;
+}
+
+.e1h {
+    stroke-width: 8;
+}
+
+.e2h {
+    stroke-width: 6;
+}
+
+.e4h {
+    stroke-width: 4;
+}
+
+.some {
+    stroke-width: 2;
+}
+
+#epoch-label-bg {
+    fill:white;
+    stroke: black;
+    stroke-width: 5px;
+}
+
+#epoch-label {
+    font-size: 70px;
+    font-weight: bold;
+    text-anchor: middle;
+    dominant-baseline: middle;
+}
+
+.for-line {
+    overflow: visible;
+    white-space: nowrap;
+    font-weight: bold;
+}
+
+.for-line * {
+    display: inline-block;
+}
+
+.for-line div * {
+    border-radius: 50%;
+    width: 12px;
+    font-size: 12px;
+    line-height: 12px;
+    padding: 2px;
+    margin-right: 2px;
+    text-align: center;
+}
+
+/*
+#epoch-label, #epoch-label-bg, text, foreignObject {
+    display: none !important;
+}
+*/
