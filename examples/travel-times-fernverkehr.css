@@ -33,19 +33,19 @@ svg {
 
 
 .e12h {
-    stroke-width: 10;
-}
-
-.e1h {
     stroke-width: 8;
 }
 
-.e2h {
+.e1h {
     stroke-width: 6;
 }
 
-.e4h {
+.e2h {
     stroke-width: 4;
+}
+
+.e4h {
+    stroke-width: 2;
 }
 
 .some {
