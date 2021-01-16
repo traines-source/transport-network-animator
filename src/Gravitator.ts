@@ -8,7 +8,7 @@ const fmin = require('fmin');
 
 
 export class Gravitator {
-    static INERTNESS = 10;
+    static INERTNESS = 100;
     static GRADIENT_SCALE = 0.000000001;
     static DEVIATION_WARNING = 0.1;
 
