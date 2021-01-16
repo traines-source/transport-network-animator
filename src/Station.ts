@@ -171,6 +171,7 @@ export class Station {
 
     move(delaySeconds: number, animationDurationSeconds: number, to: Vector) {
         this.adapter.move(delaySeconds, animationDurationSeconds, this.baseCoords, to);
+        this.existingLabels.forEach(l => l.draw(delaySeconds, false));
     }
 
     stationSizeForAxis(axis: string, vector: number): number {

@@ -22,7 +22,7 @@ export class Vector {
     }
 
     withLength(length: number): Vector {
-        const ratio = length/this.length;
+        const ratio = this.length != 0 ? length/this.length : 0;
         return new Vector(this.x*ratio, this.y*ratio);
     }
 

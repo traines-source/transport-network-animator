@@ -22,7 +22,7 @@ describe('Vector', () => {
         expect(new Vector(-15, 20).withLength(1)).eql(new Vector(-0.6, 0.8));
     })
     it('whenWithLength_givenZeroVector', () => {
-        expect(new Vector(0, 0).withLength(1)).eql(new Vector(NaN, NaN));
+        expect(new Vector(0, 0).withLength(1)).eql(new Vector(0, 0));
     })
     it('whenWithLength_givenZeroLength', () => {
         expect(new Vector(-15, 20).withLength(0)).eql(new Vector(-0, 0));
@@ -111,5 +111,6 @@ describe('Vector', () => {
     it('whenBetween', () => {
         expect(new Vector(1, 0).between(new Vector(5, 0), 0.75)).eql(new Vector(4, 0));
         expect(new Vector(1, 5).between(new Vector(5, 13), 0.75)).eql(new Vector(4, 11));
+        expect(new Vector(1, 5).between(new Vector(1, 5), 0.75)).eql(new Vector(1, 5));
     })
 })

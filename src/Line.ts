@@ -10,7 +10,7 @@ export interface LineAdapter extends Timed  {
     stops: Stop[];
     name: string;
     boundingBox: { tl: Vector; br: Vector; };
-    length: number | undefined;
+    weight: number | undefined;
     draw(delaySeconds: number, animationDurationSeconds: number, path: Vector[], length: number): void;
     move(delaySeconds: number, animationDurationSeconds: number, from: Vector[], to: Vector[]): void;
     erase(delaySeconds: number, animationDurationSeconds: number, reverse: boolean, length: number): void;
@@ -28,7 +28,7 @@ export class Line implements TimedDrawable {
     to = this.adapter.to;
     name = this.adapter.name;
     boundingBox = this.adapter.boundingBox;
-    length = this.adapter.length;
+    weight = this.adapter.weight;
     
     private precedingStop: Station | undefined = undefined;
     private precedingDir: Rotation | undefined = undefined;
@@ -67,6 +67,7 @@ export class Line implements TimedDrawable {
             path = [path[0], path[path.length-1]];
         }
         this.adapter.move(delay, animationDurationSeconds, this.path, path);
+        this.path = path;
     }
 
     erase(delay: number, animate: boolean, reverse: boolean): number {

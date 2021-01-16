@@ -32,7 +32,6 @@ export class SvgStation implements StationAdapter {
             return;
         }
         const positionBoundaries = getPositionBoundaries();
-        const baseCoord = this.baseCoords;
         const stopDimen = [positionBoundaries.x[1] - positionBoundaries.x[0], positionBoundaries.y[1] - positionBoundaries.y[0]];
         
         this.element.style.visibility = stopDimen[0] < 0 && stopDimen[1] < 0 ? 'hidden' : 'visible';
@@ -53,11 +52,11 @@ export class SvgStation implements StationAdapter {
             window.setTimeout(function() { station.move(0, animationDurationSeconds, from, to); }, delaySeconds * 1000);
             return;
         }
-        this.animateFrameVector(from, to, 1, animationDurationSeconds/SvgNetwork.FPS);
+        this.animateFrameVector(from, to, 0, 1/animationDurationSeconds/SvgNetwork.FPS);
     }
 
     private animateFrameVector(from: Vector, to: Vector, x: number, animationPerFrame: number): void {
-        if (x < 1) {            
+        if (x < 1) {
             this.baseCoords = from.between(to, x);
             this.updateTransformOrigin();
 

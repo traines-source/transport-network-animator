@@ -25,7 +25,7 @@ export class SvgLine implements LineAdapter {
         return this.getInstant('to');
     }
 
-    get length(): number | undefined {
+    get weight(): number | undefined {
         if (this.element.dataset.length == undefined) {
             return undefined;
         }
@@ -78,8 +78,7 @@ export class SvgLine implements LineAdapter {
         this.element.className.baseVal += ' ' + this.name;
         this.createPath(path);
     
-        let dashedPart = this.createDashedPart(length);
-        this.element.style.strokeDasharray = dashedPart + ' ' + length;
+        this.updateDasharray(length);        
         if (animationDurationSeconds == 0) {
             length = 0;
         }
@@ -93,7 +92,7 @@ export class SvgLine implements LineAdapter {
             window.setTimeout(function () { line.move(0, animationDurationSeconds, from, to); }, delaySeconds * 1000);
             return;
         }
-        this.animateFrameVector(from, to, 1, animationDurationSeconds/SvgNetwork.FPS);
+        this.animateFrameVector(from, to, 0, 1/animationDurationSeconds/SvgNetwork.FPS);
     }
 
     erase(delaySeconds: number, animationDurationSeconds: number, reverse: boolean, length: number): void {
@@ -115,17 +114,19 @@ export class SvgLine implements LineAdapter {
         this.element.setAttribute('d', d);
     }
 
-    private createDashedPart(length: number): string {
+    private updateDasharray(length: number) {
         let dashedPart = length + '';
-        const presetDash = getComputedStyle(this.element).strokeDasharray.replace(/[^0-9\s,]+/g, '');
-        if (presetDash.length > 0) {
-            let presetArray = presetDash.split(/[\s,]+/);
+        if (this.element.dataset.dashInitial == undefined) {
+            this.element.dataset.dashInitial = getComputedStyle(this.element).strokeDasharray.replace(/[^0-9\s,]+/g, '');
+        }
+        if (this.element.dataset.dashInitial.length > 0) {
+            let presetArray = this.element.dataset.dashInitial.split(/[\s,]+/);
             if (presetArray.length % 2 == 1)
                 presetArray = presetArray.concat(presetArray);
             const presetLength = presetArray.map(a => parseInt(a) || 0).reduce((a, b) => a + b, 0);
             dashedPart = new Array(Math.ceil(length / presetLength + 1)).join(presetArray.join(' ') + ' ') + '0';
         }
-        return dashedPart;
+        this.element.style.strokeDasharray = dashedPart + ' ' + length;
     }
     
     private animateFrame(from: number, to: number, animationPerFrame: number): void {
@@ -137,7 +138,7 @@ export class SvgLine implements LineAdapter {
         } else {
             this.element.style.strokeDashoffset = to + '';
             if (to != 0) {
-                this.element.setAttribute('d', '');
+                this.element.style.visibility = 'hidden';
             }
         }
     }
@@ -148,12 +149,14 @@ export class SvgLine implements LineAdapter {
             for (let i=0; i<from.length; i++) {
                 interpolated.push(from[i].between(to[i], x));
             }
+            this.updateDasharray(interpolated[0].delta(interpolated[interpolated.length-1]).length); // TODO arbitrary node count
             this.createPath(interpolated);
 
             x += animationPerFrame;
             const line = this;
             window.requestAnimationFrame(function() { line.animateFrameVector(from, to, x, animationPerFrame); });
         } else {
+            this.updateDasharray(to[0].delta(to[to.length-1]).length);
             this.createPath(to);
         }
     }

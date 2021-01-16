@@ -126,7 +126,8 @@
         <path data-line="FF_FG" class="e1h 33" data-stops="+0 FF +0 FG" data-length="40" data-from="1987 0 noanim" data-to="2001 0 noanim" />
         <path data-line="FF_FG" class="e2h 9" data-stops="+0 FF +0 FG" data-length="40" data-from="2001 0 noanim" />
 
-        <path data-line="FG_FKW" class="e2h 9" data-stops="+0 FG +0 FKW" data-length="40" data-from="1987 0 noanim" />
+        <path data-line="FG_FKW" class="e1h 20" data-stops="+0 FG +0 FKW" data-length="80" data-from="1987 0 noanim" data-to="1988 0 noanim" />
+        <path data-line="FG_FKW" class="e2h 14" data-stops="+0 FG +0 FKW" data-length="80" data-from="1988 0 noanim" />
 
         <path data-line="FMZ_RM" class="e1h 32" data-stops="+0 FMZ +0 RM" data-length="40" data-from="1987 0 noanim" data-to="1988 0 noanim" />
         <path data-line="FMZ_RM" class="e12h 40" data-stops="+0 FMZ +0 RM" data-length="40" data-from="1988 0 noanim" data-to="1993 0 noanim" />
@@ -181,6 +182,7 @@
         <path data-line="MGP_MH" class="some 4" data-stops="+0 MGP +0 MH" data-length="90" data-from="2005 0 noanim" data-to="2030 0 noanim" />
         <path data-line="MGP_MH" class="some 4" data-stops="+0 MGP +0 MH" data-length="75" data-from="2030 0 noanim" />
 
+        <!-- wrong -->
         <path data-line="MH_NN" class="e1h 23" data-stops="+0 MH +0 NN" data-length="100" data-from="1987 0 noanim" data-to="2006 0 noanim" />
         <path data-line="MH_NN" class="e12h 65" data-stops="+0 MH +0 NN" data-length="80" data-from="2006 0 noanim" data-to="2007 0 noanim" />
         <path data-line="MH_NN" class="e12h 65" data-stops="+0 MH +0 NN" data-length="60" data-from="2007 0 noanim" />

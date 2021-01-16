@@ -11,8 +11,10 @@ export class Gravitator {
     static INERTNESS = 100;
     static GRADIENT_SCALE = 0.000000001;
     static DEVIATION_WARNING = 0.1;
+    static INITIALIZE_RELATIVE_TO_EUCLIDIAN_DISTANCE = true;
 
     private initialWeightFactors: {[id: string] : number} = {};
+    private averageEuclidianLengthRatio: number = -1;
     private edges: {[id: string]: Line} = {};
     private vertices: {[id: string] : {station: Station, index: Vector, startCoords: Vector}} = {};
 
@@ -21,23 +23,46 @@ export class Gravitator {
     }
 
     gravitate(delay: number, animate: boolean): number {
+        this.initialize();
         this.obtainStations();
         const solution = this.minimizeLoss();
-        console.log('solution:', solution);
-        console.log(this.vertices);
-        console.log(this.initialWeightFactors);
         console.log(this.edges);
         this.assertDistances(solution);
         return this.moveStationsAndLines(solution, delay, animate);
     }
 
+    private initialize() {
+        if (this.averageEuclidianLengthRatio == -1 && Object.values(this.edges).length > 0) {
+            this.averageEuclidianLengthRatio = this.getWeightsSum() / this.getEuclidianDistanceSum();
+        }
+    }
+
+    private getWeightsSum() {
+        let sum = 0;
+        for (const edge of Object.values(this.edges)) {
+            sum += edge.weight || 0;
+        }
+        return sum;
+    }
+
+    private getEuclidianDistanceSum() {
+        let sum = 0;
+        for (const edge of Object.values(this.edges)) {
+            sum += this.euclidianDistance(edge);
+        }
+        return sum;
+    }
+
+    private euclidianDistance(edge: Line) {
+        return this.vertices[edge.termini[0].stationId].station.baseCoords.delta(this.vertices[edge.termini[1].stationId].station.baseCoords).length;
+    }
+
     private obtainStations() {
         for (const [key, edge] of Object.entries(this.edges)) {
-            this.addVertex(edge.termini[0].stationId);
-            this.addVertex(edge.termini[1].stationId);
             if (this.initialWeightFactors[key] == undefined) {
-                const lengthInPixels = this.vertices[edge.termini[0].stationId].station.baseCoords.delta(this.vertices[edge.termini[1].stationId].station.baseCoords).length;
-                this.initialWeightFactors[key] = lengthInPixels / (edge.length || 0);
+                this.initialWeightFactors[key] = Gravitator.INITIALIZE_RELATIVE_TO_EUCLIDIAN_DISTANCE
+                    ? 1 / this.averageEuclidianLengthRatio
+                    : this.euclidianDistance(edge) / (edge.weight || 0);
             }
         }
         let i = 0;
@@ -50,7 +75,7 @@ export class Gravitator {
     private minimizeLoss(): number[] {
         const gravitator = this;
         const params = {history: []};
-        const initial: number[] = this.initializeWithStartStationPositions();
+        const start: number[] = this.startStationPositions();
         const solution = fmin.conjugateGradient((A: number[], fxprime: number[]) => {
             fxprime = fxprime || A.slice();
             let fx = 0;
@@ -58,17 +83,17 @@ export class Gravitator {
             fx = this.deltaToNewDistancesToEnsureAccuracy(fx, A, fxprime, gravitator);
             this.scaleGradientToEnsureWorkingStepSize(fxprime);
             return fx;
-        }, initial, params);
+        }, start, params);
         return solution.x;
     }
 
-    private initializeWithStartStationPositions(): number[] {
-        const initial: number[] = [];
+    private startStationPositions(): number[] {
+        const start: number[] = [];
         for (const vertex of Object.values(this.vertices)) {
-            initial[vertex.index.x] = vertex.startCoords.x;
-            initial[vertex.index.y] = vertex.startCoords.y;
+            start[vertex.index.x] = vertex.startCoords.x;
+            start[vertex.index.y] = vertex.startCoords.y;
         }
-        return initial;
+        return start;
     }
 
     private deltaX(A: number[], vertices: {[id: string] : {station: Station, index: Vector}}, termini: Stop[]): number {
@@ -95,7 +120,7 @@ export class Gravitator {
         for (const [key, edge] of Object.entries(gravitator.edges)) {                
             const v = Math.pow(this.deltaX(A, gravitator.vertices, edge.termini), 2)
                         + Math.pow(this.deltaY(A, gravitator.vertices, edge.termini), 2)
-                        - Math.pow(gravitator.initialWeightFactors[key] * (edge.length || 0), 2);
+                        - Math.pow(gravitator.initialWeightFactors[key] * (edge.weight || 0), 2);
             fx += Math.pow(v, 2);
             fxprime[gravitator.vertices[edge.termini[0].stationId].index.x] += +4 * v * this.deltaX(A, gravitator.vertices, edge.termini);
             fxprime[gravitator.vertices[edge.termini[0].stationId].index.y] += +4 * v * this.deltaY(A, gravitator.vertices, edge.termini);
@@ -116,7 +141,7 @@ export class Gravitator {
             const deviation = Math.abs(1 - Math.sqrt(
                 Math.pow(this.deltaX(solution, this.vertices, edge.termini), 2) +
                 Math.pow(this.deltaY(solution, this.vertices, edge.termini), 2)
-            ) / (this.initialWeightFactors[key] * (edge.length || 0)));
+            ) / (this.initialWeightFactors[key] * (edge.weight || 0)));
             if (deviation > Gravitator.DEVIATION_WARNING) {
                 console.warn(edge.name, 'diverges by ', deviation);
             }
@@ -149,10 +174,12 @@ export class Gravitator {
     }
 
     addEdge(line: Line) {
-        if (line.length == undefined) 
+        if (line.weight == undefined) 
             return;
         const id = this.getIdentifier(line);
         this.edges[id] = line;
+        this.addVertex(line.termini[0].stationId);
+        this.addVertex(line.termini[1].stationId);
     }
 
     private getIdentifier(line: Line) {
