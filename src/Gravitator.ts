@@ -10,11 +10,11 @@ const fmin = require('fmin');
 export class Gravitator {
     static INERTNESS = 10;
     static GRADIENT_SCALE = 0.000000001;
-    static DEVIATION_WARNING = 0.05;
+    static DEVIATION_WARNING = 0.1;
 
     private initialWeightFactors: {[id: string] : number} = {};
     private edges: {[id: string]: Line} = {};
-    private vertices: {[id: string] : {station: Station, index: Vector}} = {};
+    private vertices: {[id: string] : {station: Station, index: Vector, startCoords: Vector}} = {};
 
     constructor(private stationProvider: StationProvider) {
         
@@ -50,11 +50,11 @@ export class Gravitator {
     private minimizeLoss(): number[] {
         const gravitator = this;
         const params = {history: []};
-        const initial: number[] = this.initializeWithPreviousStationPositions();
+        const initial: number[] = this.initializeWithStartStationPositions();
         const solution = fmin.conjugateGradient((A: number[], fxprime: number[]) => {
             fxprime = fxprime || A.slice();
             let fx = 0;
-            fx = this.deltaToPreviousStationPositionsToEnsureInertness(fx, A, fxprime, gravitator);
+            fx = this.deltaToStartStationPositionsToEnsureInertness(fx, A, fxprime, gravitator);
             fx = this.deltaToNewDistancesToEnsureAccuracy(fx, A, fxprime, gravitator);
             this.scaleGradientToEnsureWorkingStepSize(fxprime);
             return fx;
@@ -62,11 +62,11 @@ export class Gravitator {
         return solution.x;
     }
 
-    private initializeWithPreviousStationPositions(): number[] {
+    private initializeWithStartStationPositions(): number[] {
         const initial: number[] = [];
         for (const vertex of Object.values(this.vertices)) {
-            initial[vertex.index.x] = vertex.station.baseCoords.x;
-            initial[vertex.index.y] = vertex.station.baseCoords.y;
+            initial[vertex.index.x] = vertex.startCoords.x;
+            initial[vertex.index.y] = vertex.startCoords.y;
         }
         return initial;
     }
@@ -79,14 +79,14 @@ export class Gravitator {
         return A[vertices[termini[0].stationId].index.y] - A[vertices[termini[1].stationId].index.y];
     }
 
-    private deltaToPreviousStationPositionsToEnsureInertness(fx: number, A: number[], fxprime: number[], gravitator: Gravitator): number {
+    private deltaToStartStationPositionsToEnsureInertness(fx: number, A: number[], fxprime: number[], gravitator: Gravitator): number {
         for (const vertex of Object.values(gravitator.vertices)) {
             fx += (
-                    Math.pow(A[vertex.index.x]-vertex.station.baseCoords.x, 2) +
-                    Math.pow(A[vertex.index.y]-vertex.station.baseCoords.y, 2)
+                    Math.pow(A[vertex.index.x]-vertex.startCoords.x, 2) +
+                    Math.pow(A[vertex.index.y]-vertex.startCoords.y, 2)
                 ) * Gravitator.INERTNESS;
-            fxprime[vertex.index.x] = 2 * (A[vertex.index.x]-vertex.station.baseCoords.x) * Gravitator.INERTNESS;
-            fxprime[vertex.index.y] = 2 * (A[vertex.index.y]-vertex.station.baseCoords.y) * Gravitator.INERTNESS;
+            fxprime[vertex.index.x] = 2 * (A[vertex.index.x]-vertex.startCoords.x) * Gravitator.INERTNESS;
+            fxprime[vertex.index.y] = 2 * (A[vertex.index.y]-vertex.startCoords.y) * Gravitator.INERTNESS;
         }
         return fx;
     }
@@ -113,11 +113,12 @@ export class Gravitator {
 
     private assertDistances(solution: number[]) {
         for (const [key, edge] of Object.entries(this.edges)) {
-            if (Math.abs(1 - Math.sqrt(
+            const deviation = Math.abs(1 - Math.sqrt(
                 Math.pow(this.deltaX(solution, this.vertices, edge.termini), 2) +
                 Math.pow(this.deltaY(solution, this.vertices, edge.termini), 2)
-            ) / (this.initialWeightFactors[key] * (edge.length || 0))) > Gravitator.DEVIATION_WARNING) {
-                console.warn(edge.name, 'diverges by more than', Gravitator.DEVIATION_WARNING )
+            ) / (this.initialWeightFactors[key] * (edge.length || 0)));
+            if (deviation > Gravitator.DEVIATION_WARNING) {
+                console.warn(edge.name, 'diverges by ', deviation);
             }
         }
     } 
@@ -143,7 +144,7 @@ export class Gravitator {
             const station = this.stationProvider.stationById(vertexId);
             if (station == undefined)
                 throw new Error('Station with ID ' + vertexId + ' is undefined');
-            this.vertices[vertexId] = {station: station, index: Vector.NULL};
+            this.vertices[vertexId] = {station: station, index: Vector.NULL, startCoords: station.baseCoords};
         }
     }
 
