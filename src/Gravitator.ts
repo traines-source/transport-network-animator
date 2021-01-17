@@ -109,10 +109,12 @@ export class Gravitator {
         for (const vertex of Object.values(gravitator.vertices)) {
             fx += (
                     Math.pow(A[vertex.index.x]-vertex.startCoords.x, 2) +
-                    Math.pow(A[vertex.index.y]-vertex.startCoords.y, 2)
+                    Math.pow(A[vertex.index.y]-vertex.startCoords.y, 2) +
+                    Math.pow(A[vertex.index.x]-vertex.station.baseCoords.x, 2) +
+                    Math.pow(A[vertex.index.y]-vertex.station.baseCoords.y, 2)
                 ) * Gravitator.INERTNESS;
-            fxprime[vertex.index.x] = 2 * (A[vertex.index.x]-vertex.startCoords.x) * Gravitator.INERTNESS;
-            fxprime[vertex.index.y] = 2 * (A[vertex.index.y]-vertex.startCoords.y) * Gravitator.INERTNESS;
+            fxprime[vertex.index.x] = 2 * (2*A[vertex.index.x]-vertex.startCoords.x-vertex.station.baseCoords.x) * Gravitator.INERTNESS;
+            fxprime[vertex.index.y] = 2 * (2*A[vertex.index.y]-vertex.startCoords.y-vertex.station.baseCoords.y) * Gravitator.INERTNESS;
         }
         return fx;
     }

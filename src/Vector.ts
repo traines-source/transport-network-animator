@@ -71,7 +71,11 @@ export class Vector {
         if (Utils.equals(this.y, 0))
             return new Rotation(this.x > 0 ? 90 : -90);
         const adjacent = new Vector(0,-Math.abs(this.y));
-        return new Rotation((Math.sign(this.x)*Math.acos(this.dotProduct(adjacent)/adjacent.length/this.length)*180/Math.PI));
+        return new Rotation(Math.sign(this.x)*Math.acos(this.dotProduct(adjacent)/adjacent.length/this.length)*180/Math.PI);
+    }
+
+    angle(other: Vector): Rotation {
+        return this.inclination().delta(other.inclination());
     }
 
     bothAxisMins(other: Vector) {
