@@ -80,7 +80,8 @@ export class SvgLabel implements LabelAdapter {
     }
 
     private drawStationLabel(labelDir: Rotation) {
-        this.element.className.baseVal += ' for-station';
+        if (!this.element.className.baseVal.includes('for-station'))
+            this.element.className.baseVal += ' for-station';
         this.element.style.dominantBaseline = 'hanging';
         this.translate(new Vector(this.element.getBBox().width, this.element.getBBox().height), labelDir);
     }

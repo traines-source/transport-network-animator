@@ -46,26 +46,28 @@ export class SvgStation implements StationAdapter {
         this.element.setAttribute('transform-origin', this.baseCoords.x + ' ' + this.baseCoords.y);
     }
 
-    move(delaySeconds: number, animationDurationSeconds: number, from: Vector, to: Vector): void {
+    move(delaySeconds: number, animationDurationSeconds: number, from: Vector, to: Vector, callback: () => void): void {
         if (delaySeconds > 0) {
             const station = this;
-            window.setTimeout(function() { station.move(0, animationDurationSeconds, from, to); }, delaySeconds * 1000);
+            window.setTimeout(function() { station.move(0, animationDurationSeconds, from, to, callback); }, delaySeconds * 1000);
             return;
         }
-        this.animateFrameVector(from, to, 0, 1/animationDurationSeconds/SvgNetwork.FPS);
+        this.animateFrameVector(from, to, 0, 1/animationDurationSeconds/SvgNetwork.FPS, callback);
     }
 
-    private animateFrameVector(from: Vector, to: Vector, x: number, animationPerFrame: number): void {
+    private animateFrameVector(from: Vector, to: Vector, x: number, animationPerFrame: number, callback: () => void): void {
         if (x < 1) {
             this.baseCoords = from.between(to, x);
             this.updateTransformOrigin();
-
+            callback();
+            
             x += animationPerFrame;
             const line = this;
-            window.requestAnimationFrame(function() { line.animateFrameVector(from, to, x, animationPerFrame); });
+            window.requestAnimationFrame(function() { line.animateFrameVector(from, to, x, animationPerFrame, callback); });
         } else {
             this.baseCoords = to;
             this.updateTransformOrigin();
+            callback();
         }
     }
     

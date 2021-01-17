@@ -11,7 +11,7 @@ export interface StationAdapter {
     labelDir: Rotation;
     id: string;
     draw(delaySeconds: number, getPositionBoundaries: () => {[id: string]: [number, number]}): void;
-    move(delaySeconds: number, animationDurationSeconds: number, from: Vector, to: Vector): void;
+    move(delaySeconds: number, animationDurationSeconds: number, from: Vector, to: Vector, callback: () => void): void;
 }
 
 export class Stop {
@@ -170,8 +170,8 @@ export class Station {
     }
 
     move(delaySeconds: number, animationDurationSeconds: number, to: Vector) {
-        this.adapter.move(delaySeconds, animationDurationSeconds, this.baseCoords, to);
-        this.existingLabels.forEach(l => l.draw(delaySeconds, false));
+        const station = this;
+        this.adapter.move(delaySeconds, animationDurationSeconds, this.baseCoords, to, () => station.existingLabels.forEach(l => l.draw(0, false)));
     }
 
     stationSizeForAxis(axis: string, vector: number): number {

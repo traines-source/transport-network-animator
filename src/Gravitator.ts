@@ -34,6 +34,7 @@ export class Gravitator {
     private initialize() {
         if (this.averageEuclidianLengthRatio == -1 && Object.values(this.edges).length > 0) {
             this.averageEuclidianLengthRatio = this.getWeightsSum() / this.getEuclidianDistanceSum();
+            console.log('averageEuclidianLengthRatio^-1', 1/this.averageEuclidianLengthRatio);
         }
     }
 
