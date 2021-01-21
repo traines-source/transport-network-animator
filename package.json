@@ -5,8 +5,10 @@
   "main": "network-animator.js",
   "directories": {},
   "dependencies": {
+    "@types/mathjs": "^6.0.11",
     "@types/node": "^14.14.19",
-    "fmin": "0.0.2"
+    "fmin": "0.0.2",
+    "mathjs": "^9.0.0"
   },
   "devDependencies": {
     "@types/chai": "^4.2.13",
