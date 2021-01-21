@@ -121,5 +121,7 @@ describe('Vector', () => {
         expect(new Vector(-1, 1).angle(new Vector(1, 1)).degrees).approximately(-90, 1);
         expect(new Vector(0, 1).angle(new Vector(0, -1)).degrees).approximately(-180, 1);
         expect(new Vector(0, 0).angle(new Vector(0, -1)).degrees).approximately(0, 1);
+        expect(new Vector(0, -1).angle(new Vector(1, -1)).degrees).approximately(45, 1);
+        expect(new Vector(0, -1).angle(new Vector(-1, 0)).degrees).approximately(-90, 1);
     })
 })

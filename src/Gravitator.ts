@@ -14,6 +14,7 @@ export class Gravitator {
     static INITIALIZE_RELATIVE_TO_EUCLIDIAN_DISTANCE = true;
 
     private initialWeightFactors: {[id: string] : number} = {};
+    private initialAngles: {aStation: string, commonStation: string, bStation: string, angle: number}[] = []; 
     private averageEuclidianLengthRatio: number = -1;
     private edges: {[id: string]: Line} = {};
     private vertices: {[id: string] : {station: Station, index: Vector, startCoords: Vector}} = {};
@@ -24,7 +25,7 @@ export class Gravitator {
 
     gravitate(delay: number, animate: boolean): number {
         this.initialize();
-        this.obtainStations();
+        this.initializeGraph();
         const solution = this.minimizeLoss();
         console.log(this.edges);
         this.assertDistances(solution);
@@ -49,21 +50,22 @@ export class Gravitator {
     private getEuclidianDistanceSum() {
         let sum = 0;
         for (const edge of Object.values(this.edges)) {
-            sum += this.euclidianDistance(edge);
+            sum += this.edgeVector(edge).length;
         }
         return sum;
     }
 
-    private euclidianDistance(edge: Line) {
-        return this.vertices[edge.termini[0].stationId].station.baseCoords.delta(this.vertices[edge.termini[1].stationId].station.baseCoords).length;
+    private edgeVector(edge: Line): Vector {
+        return this.vertices[edge.termini[1].stationId].station.baseCoords.delta(this.vertices[edge.termini[0].stationId].station.baseCoords);
     }
 
-    private obtainStations() {
+    private initializeGraph() {
         for (const [key, edge] of Object.entries(this.edges)) {
             if (this.initialWeightFactors[key] == undefined) {
                 this.initialWeightFactors[key] = Gravitator.INITIALIZE_RELATIVE_TO_EUCLIDIAN_DISTANCE
                     ? 1 / this.averageEuclidianLengthRatio
-                    : this.euclidianDistance(edge) / (edge.weight || 0);
+                    : this.edgeVector(edge).length / (edge.weight || 0);
+                this.addInitialAngles(edge);
             }
         }
         let i = 0;
@@ -73,6 +75,41 @@ export class Gravitator {
         }
     }
 
+    private addInitialAngles(edge: Line) {
+        for (const adjacent of Object.values(this.edges)) {
+            for (let i=0; i<2; i++) {
+                for (let j=0; j<2; j++) {
+                    if (edge.termini[i].stationId == adjacent.termini[j].stationId) {
+                        this.initialAngles.push({
+                            aStation: edge.termini[i^1].stationId,
+                            commonStation: edge.termini[i].stationId,
+                            bStation: edge.termini[j^1].stationId,
+                            angle: this.threeDotAngleLoss(
+                                this.vertices[edge.termini[i^1].stationId].station.baseCoords,
+                                this.vertices[edge.termini[i].stationId].station.baseCoords,
+                                this.vertices[edge.termini[j^1].stationId].station.baseCoords
+                            )
+                        });
+                    }
+                }
+            }
+        }
+        //derive arccos(((a-c)*(e-g)+(b-d)*(f-h))/(sqrt((a-c)^2+(b-d)^2)*sqrt((e-g)^2+(f-h)^2)))*((f-h)*(a-c)-(b-d)*(e-g))/|((f-h)*(a-c)-(b-d)*(e-g))|
+    }
+
+    private threeDotAngleLoss(d1: Vector, d2: Vector, d3: Vector) {
+        return this.threeDotProduct(d1, d2, d3)*this.threeDotSign(d1,d2,d3);
+    }
+
+    private threeDotProduct(d1: Vector, d2: Vector, d3: Vector): number {
+        return (d2.x-d1.x)*(d2.x-d3.x)+(d2.y-d1.y)*(d2.y-d3.y);
+    }
+
+    private threeDotSign(d1: Vector, d2: Vector, d3: Vector): number {
+        return (d2.y-d3.y)*(d2.x-d1.x)+(d2.y-d1.y)*(d2.x-d3.x);
+    }
+
+
     private minimizeLoss(): number[] {
         const gravitator = this;
         const params = {history: []};
@@ -81,6 +118,7 @@ export class Gravitator {
             fxprime = fxprime || A.slice();
             let fx = 0;
             fx = this.deltaToStartStationPositionsToEnsureInertness(fx, A, fxprime, gravitator);
+            //fx = this.deltaToAnglesToEnsureInertness(fx, A, fxprime, gravitator);
             fx = this.deltaToNewDistancesToEnsureAccuracy(fx, A, fxprime, gravitator);
             this.scaleGradientToEnsureWorkingStepSize(fxprime);
             return fx;
@@ -117,6 +155,25 @@ export class Gravitator {
             fxprime[vertex.index.y] = 2 * (2*A[vertex.index.y]-vertex.startCoords.y-vertex.station.baseCoords.y) * Gravitator.INERTNESS;
         }
         return fx;
+    }
+
+    private deltaToAnglesToEnsureInertness(fx: number, A: number[], fxprime: number[], gravitator: Gravitator): number {
+        for (const pair of Object.values(gravitator.initialAngles)) {
+            const v = this.threeDotAngleLoss(
+                new Vector(A[gravitator.vertices[pair.aStation].index.x], A[gravitator.vertices[pair.aStation].index.y]),
+                new Vector(A[gravitator.vertices[pair.commonStation].index.x], A[gravitator.vertices[pair.commonStation].index.y]),
+                new Vector(A[gravitator.vertices[pair.bStation].index.x], A[gravitator.vertices[pair.bStation].index.y])
+            ) - pair.angle;
+            fx += Math.pow(v, 2);
+        }        
+        return fx;
+
+        /*
+        Math.pow(
+                new Vector(this.deltaX(A, gravitator.vertices, pair.edgeA.termini), this.deltaY(A, gravitator.vertices, pair.edgeA.termini)).angle(
+                    new Vector(this.deltaX(A, gravitator.vertices, pair.edgeB.termini), this.deltaY(A, gravitator.vertices, pair.edgeB.termini))
+                ).degrees - pair.angle.degrees
+                */
     }
 
     private deltaToNewDistancesToEnsureAccuracy(fx: number, A: number[], fxprime: number[], gravitator: Gravitator): number {
