@@ -21,12 +21,16 @@ export class Gravitator {
     private averageEuclidianLengthRatio: number = -1;
     private edges: {[id: string]: Line} = {};
     private vertices: {[id: string] : {station: Station, index: Vector, startCoords: Vector}} = {};
+    private dirty = false;
 
     constructor(private stationProvider: StationProvider) {
         
     }
 
     gravitate(delay: number, animate: boolean): number {
+        if (!this.dirty)
+            return 0;
+        this.dirty = false;
         this.initialize();
         this.initializeGraph();
         const solution = this.minimizeLoss();
@@ -134,7 +138,6 @@ export class Gravitator {
         const gravitator = this;
         const params = {history: []};
         const start: number[] = this.startStationPositions();
-        let i = 0;
         const solution = fmin.conjugateGradient((A: number[], fxprime: number[]) => {
             fxprime = fxprime || A.slice();
             for (let i=0; i<fxprime.length; i++) {
@@ -142,10 +145,10 @@ export class Gravitator {
             }
             let fx = 0;
             fx = this.deltaToStartStationPositionsToEnsureInertness(fx, A, fxprime, gravitator);
+            fx = this.deltaToCurrentStationPositionsToEnsureInertness(fx, A, fxprime, gravitator);
             //fx = this.deltaToAnglesToEnsureInertness(fx, A, fxprime, gravitator);
             fx = this.deltaToNewDistancesToEnsureAccuracy(fx, A, fxprime, gravitator);
             this.scaleGradientToEnsureWorkingStepSize(fxprime);
-            console.log(i++);
             return fx;
         }, start, params);
         return solution.x;
@@ -172,12 +175,22 @@ export class Gravitator {
         for (const vertex of Object.values(gravitator.vertices)) {
             fx += (
                     Math.pow(A[vertex.index.x]-vertex.startCoords.x, 2) +
-                    Math.pow(A[vertex.index.y]-vertex.startCoords.y, 2) +
+                    Math.pow(A[vertex.index.y]-vertex.startCoords.y, 2)
+                ) * Gravitator.INERTNESS;
+            fxprime[vertex.index.x] += 2 * (A[vertex.index.x]-vertex.startCoords.x) * Gravitator.INERTNESS;
+            fxprime[vertex.index.y] += 2 * (A[vertex.index.y]-vertex.startCoords.y) * Gravitator.INERTNESS;
+        }
+        return fx;
+    }
+
+    private deltaToCurrentStationPositionsToEnsureInertness(fx: number, A: number[], fxprime: number[], gravitator: Gravitator): number {
+        for (const vertex of Object.values(gravitator.vertices)) {
+            fx += (
                     Math.pow(A[vertex.index.x]-vertex.station.baseCoords.x, 2) +
                     Math.pow(A[vertex.index.y]-vertex.station.baseCoords.y, 2)
                 ) * Gravitator.INERTNESS;
-            fxprime[vertex.index.x] = 2 * (2*A[vertex.index.x]-vertex.startCoords.x-vertex.station.baseCoords.x) * Gravitator.INERTNESS;
-            fxprime[vertex.index.y] = 2 * (2*A[vertex.index.y]-vertex.startCoords.y-vertex.station.baseCoords.y) * Gravitator.INERTNESS;
+            fxprime[vertex.index.x] += 2 * (A[vertex.index.x]-vertex.station.baseCoords.x) * Gravitator.INERTNESS;
+            fxprime[vertex.index.y] += 2 * (A[vertex.index.y]-vertex.station.baseCoords.y) * Gravitator.INERTNESS;
         }
         return fx;
     }
@@ -235,7 +248,7 @@ export class Gravitator {
     } 
 
     private moveStationsAndLines(solution: number[], delay: number, animate: boolean): number {
-        const animationDurationSeconds = animate ? 3 : 0;
+        const animationDurationSeconds = animate ? this.getTotalDistanceToMove(solution) / Line.SPEED / 5 : 0;
         for (const vertex of Object.values(this.vertices)) {
             vertex.station.move(delay, animationDurationSeconds, new Vector(solution[vertex.index.x], solution[vertex.index.y]));
         }
@@ -244,6 +257,14 @@ export class Gravitator {
         }
         delay += animationDurationSeconds;
         return delay;
+    }
+
+    private getTotalDistanceToMove(solution: number[]) {
+        let sum = 0;
+        for (const vertex of Object.values(this.vertices)) {
+            sum += new Vector(solution[vertex.index.x], solution[vertex.index.y]).delta(vertex.station.baseCoords).length;
+        }
+        return sum;
     }
 
     private getNewStationPosition(stationId: string, solution: number[]): Vector {
@@ -262,6 +283,7 @@ export class Gravitator {
     addEdge(line: Line) {
         if (line.weight == undefined) 
             return;
+        this.dirty = true;
         const id = this.getIdentifier(line);
         this.edges[id] = line;
         this.addVertex(line.termini[0].stationId);
