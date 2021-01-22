@@ -440,7 +440,7 @@
 
 
 
-        <path data-line="dummy" class="helper" data-stops="+0 h1 +0 h2" data-from="1987 12 noanim" />
+        <path data-line="dummy" class="helper" data-stops="+0 h1 +0 h2" data-from="1987 20 noanim" />
         <path data-line="dummy" class="helper" data-stops="+0 h1 +0 h2" data-from="1988 12 noanim" />
         <path data-line="dummy" class="helper" data-stops="+0 h1 +0 h2" data-from="1989 12 noanim" />
         <path data-line="dummy" class="helper" data-stops="+0 h1 +0 h2" data-from="1990 12 noanim" />

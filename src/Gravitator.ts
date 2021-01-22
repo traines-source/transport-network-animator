@@ -13,6 +13,7 @@ export class Gravitator {
     static GRADIENT_SCALE = 0.000000001;
     static DEVIATION_WARNING = 0.1;
     static INITIALIZE_RELATIVE_TO_EUCLIDIAN_DISTANCE = true;
+    static SPEED = 250;
 
     private initialWeightFactors: {[id: string] : number} = {};
     private initialAngles: {aStation: string, commonStation: string, bStation: string, angle: number}[] = [];
@@ -29,7 +30,7 @@ export class Gravitator {
 
     gravitate(delay: number, animate: boolean): number {
         if (!this.dirty)
-            return 0;
+            return delay;
         this.dirty = false;
         this.initialize();
         this.initializeGraph();
@@ -248,7 +249,7 @@ export class Gravitator {
     } 
 
     private moveStationsAndLines(solution: number[], delay: number, animate: boolean): number {
-        const animationDurationSeconds = animate ? this.getTotalDistanceToMove(solution) / Line.SPEED / 5 : 0;
+        const animationDurationSeconds = animate ? this.getTotalDistanceToMove(solution) / Gravitator.SPEED : 0;
         for (const vertex of Object.values(this.vertices)) {
             vertex.station.move(delay, animationDurationSeconds, new Vector(solution[vertex.index.x], solution[vertex.index.y]));
         }
