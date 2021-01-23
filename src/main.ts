@@ -7,20 +7,21 @@ import { Instant } from "./Instant";
 const network: Network = new Network(new SvgNetwork());
 network.initialize();
 
-const animateFromEpoch: number = getStartEpoch();
+const animateFromInstant: Instant = getStartInstant();
 slide(Instant.BIG_BANG, false);
 
-function getStartEpoch(): number {
-    if(window.location.hash && network.isEpochExisting(window.location.hash.replace('#', ''))) {
-        const animateFromEpoch: string = window.location.hash.replace('#', '');
-        console.log('fast forward to ' + animateFromEpoch);
-        return parseInt(animateFromEpoch) || 0;
+function getStartInstant(): Instant {
+    if(window.location.hash) {
+        const animateFromInstant: string[] = window.location.hash.replace('#', '').split('-');
+        const instant = new Instant(parseInt(animateFromInstant[0]) || 0, parseInt(animateFromInstant[1]) || 0, '');
+        console.log('fast forward to', instant);
+        return instant;
     }
-    return 0;
+    return Instant.BIG_BANG;
 }
 
 function slide(instant: Instant, animate: boolean): void {
-    if (instant.epoch == animateFromEpoch)
+    if (instant.epoch == animateFromInstant.epoch && instant.second >= animateFromInstant.second)
         animate = true;
 
     network.drawTimedDrawablesAt(instant, animate);
