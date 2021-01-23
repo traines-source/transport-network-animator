@@ -15,3 +15,8 @@ export interface Timed {
 
 export interface TimedDrawable extends Drawable, Timed {
 }
+
+export interface BoundingBox {
+    tl: Vector;
+    br: Vector;
+}

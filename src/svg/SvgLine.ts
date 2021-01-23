@@ -1,7 +1,7 @@
-import { LineAdapter, Line } from "./Line";
-import { Vector } from "./Vector";
-import { Stop } from "./Station";
-import { Instant } from "./Instant";
+import { LineAdapter, Line } from "../Line";
+import { Vector } from "../Vector";
+import { Stop } from "../Station";
+import { Instant } from "../Instant";
 import { SvgNetwork } from "./SvgNetwork";
 
 export class SvgLine implements LineAdapter {

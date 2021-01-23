@@ -1,6 +1,6 @@
-import { StationAdapter, Station } from "./Station";
-import { Vector } from "./Vector";
-import { Rotation } from "./Rotation";
+import { StationAdapter, Station } from "../Station";
+import { Vector } from "../Vector";
+import { Rotation } from "../Rotation";
 import { SvgNetwork } from "./SvgNetwork";
 
 export class SvgStation implements StationAdapter {

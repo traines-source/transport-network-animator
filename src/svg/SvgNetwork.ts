@@ -1,13 +1,15 @@
-import { NetworkAdapter, Network, StationProvider } from "./Network";
-import { TimedDrawable } from "./Drawable";
-import { Vector } from "./Vector";
-import { Rotation } from "./Rotation";
-import { Station } from "./Station";
-import { Line } from "./Line";
+import { NetworkAdapter, Network, StationProvider } from "../Network";
+import { TimedDrawable } from "../Drawable";
+import { Vector } from "../Vector";
+import { Rotation } from "../Rotation";
+import { Station } from "../Station";
+import { Line } from "../Line";
 import { SvgLine } from "./SvgLine";
 import { SvgStation } from "./SvgStation";
-import { Label } from "./Label";
+import { Label } from "../Label";
 import { SvgLabel } from "./SvgLabel";
+import { GenericTimedDrawable } from "../GenericTimedDrawable";
+import { SvgGenericTimedDrawable } from "./SvgGenericTimedDrawable";
 
 export class SvgNetwork implements NetworkAdapter {
 
@@ -52,7 +54,7 @@ export class SvgNetwork implements NetworkAdapter {
         } else if (element.localName == 'text') {
             return new Label(new SvgLabel(element), network);
         }
-        return null;
+        return new GenericTimedDrawable(new SvgGenericTimedDrawable(element));
     }
 
     stationById(id: string): Station | null {
@@ -87,7 +89,7 @@ export class SvgNetwork implements NetworkAdapter {
     }
    
     zoomTo(zoomCenter: Vector, zoomScale: number, animationDurationSeconds: number) {
-        console.log(zoomCenter, zoomScale);
+        console.log(zoomCenter, zoomScale, animationDurationSeconds);
         this.animateFrame(0, animationDurationSeconds/SvgNetwork.FPS, this.currentZoomCenter, zoomCenter, this.currentZoomScale, zoomScale);
         this.currentZoomCenter = zoomCenter;
         this.currentZoomScale = zoomScale;

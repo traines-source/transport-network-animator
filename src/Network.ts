@@ -82,7 +82,7 @@ export class Network implements StationProvider {
         delay = this.flushEraseBuffer(delay, animate, zoomer);
         console.log(now);
         delay = this.gravitator.gravitate(delay, animate);
-        this.adapter.zoomTo(zoomer.center, zoomer.scale, Zoomer.ZOOM_DURATION);
+        this.adapter.zoomTo(zoomer.center, zoomer.scale, zoomer.duration);
         return delay;
     }
 
@@ -91,7 +91,7 @@ export class Network implements StationProvider {
             const element = this.eraseBuffer[i];
             const shouldAnimate = this.shouldAnimate(element.to, animate);
             delay += this.eraseElement(element, delay, shouldAnimate);
-            zoomer.include(element.boundingBox, element.to, shouldAnimate);
+            zoomer.include(element, false, shouldAnimate);
         }
         this.eraseBuffer = [];
         return delay;
@@ -108,7 +108,7 @@ export class Network implements StationProvider {
         delay = this.flushEraseBuffer(delay, animate, zoomer);
         const shouldAnimate = this.shouldAnimate(element.from, animate);
         delay += this.drawElement(element, delay, shouldAnimate);
-        zoomer.include(element.boundingBox, element.from, shouldAnimate);
+        zoomer.include(element, true, shouldAnimate);
         return delay;
     }
     

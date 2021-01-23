@@ -1,6 +1,7 @@
 import { Instant } from "./Instant";
 import { Vector } from "./Vector";
 import { Rotation } from "./Rotation";
+import { TimedDrawable } from "./Drawable";
 
 
 
@@ -10,13 +11,21 @@ export class Zoomer {
     static PADDING_FACTOR = 25;
     
     private boundingBox = {tl: Vector.NULL, br: Vector.NULL};
+    private customDuration = 0;
     
     constructor(private canvasSize: Vector) {
 
     }
 
-    include(boundingBox: { tl: Vector, br: Vector }, now: Instant, shouldAnimate: boolean) {
-        if (shouldAnimate && now.flag != 'nozoom') {
+    include(element: TimedDrawable, draw: boolean, shouldAnimate: boolean) {
+        let boundingBox = element.boundingBox;
+        const now = draw ? element.from : element.to;
+        if (shouldAnimate && !now.flag.includes('nozoom')) {
+            if (now.flag.includes('slowzoom') && draw) {
+                this.customDuration = element.from.delta(element.to);
+            } else {
+                boundingBox = this.paddedBoundingBox(boundingBox);
+            }
             this.boundingBox.tl = this.boundingBox.tl.bothAxisMins(boundingBox.tl);
             this.boundingBox.br = this.boundingBox.br.bothAxisMaxs(boundingBox.br);
         }
@@ -24,7 +33,7 @@ export class Zoomer {
 
     private enforcedBoundingBox(): {tl: Vector, br: Vector} {
         if (this.boundingBox.tl != Vector.NULL && this.boundingBox.br != Vector.NULL) {
-            const paddedBoundingBox = this.paddedBoundingBox();
+            const paddedBoundingBox = this.boundingBox;
             const zoomSize = paddedBoundingBox.tl.delta(paddedBoundingBox.br);
             const minZoomSize = new Vector(this.canvasSize.x / Zoomer.ZOOM_MAX_SCALE, this.canvasSize.y / Zoomer.ZOOM_MAX_SCALE);
             const delta = zoomSize.delta(minZoomSize);
@@ -37,11 +46,11 @@ export class Zoomer {
         return this.boundingBox;
     }
 
-    private paddedBoundingBox(): {tl: Vector, br: Vector} {
+    private paddedBoundingBox(boundingBox: {tl: Vector, br: Vector}): {tl: Vector, br: Vector} {
         const padding = (this.canvasSize.x + this.canvasSize.y)/Zoomer.PADDING_FACTOR;
         return {
-            tl: this.boundingBox.tl.add(new Vector(-padding, -padding)),
-            br: this.boundingBox.br.add(new Vector(padding, padding))
+            tl: boundingBox.tl.add(new Vector(-padding, -padding)),
+            br: boundingBox.br.add(new Vector(padding, padding))
         };
     }
 
@@ -52,7 +61,7 @@ export class Zoomer {
                 Math.round((enforcedBoundingBox.tl.x + enforcedBoundingBox.br.x)/2), 
                 Math.round((enforcedBoundingBox.tl.y + enforcedBoundingBox.br.y)/2));
         }
-        return new Vector(this.canvasSize.x / 2, this.canvasSize.y / 2);;
+        return new Vector(this.canvasSize.x / 2, this.canvasSize.y / 2);
     }
 
     get scale(): number {
@@ -62,5 +71,12 @@ export class Zoomer {
             return Math.min(this.canvasSize.x / zoomSize.x, this.canvasSize.y / zoomSize.y);
         }
         return 1;
+    }
+
+    get duration(): number {
+        if (this.customDuration == 0) {
+            return Zoomer.ZOOM_DURATION;
+        }
+        return this.customDuration;
     }
 }

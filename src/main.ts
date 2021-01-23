@@ -1,4 +1,4 @@
-import { SvgNetwork } from "./SvgNetwork";
+import { SvgNetwork } from "./svg/SvgNetwork";
 import { Network } from "./Network";
 import { Instant } from "./Instant";
 

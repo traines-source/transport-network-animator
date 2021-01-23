@@ -1,8 +1,8 @@
-import { Rotation } from "./Rotation";
-import { LabelAdapter, Label } from "./Label";
-import { Instant } from "./Instant";
-import { Vector } from "./Vector";
-import { Utils } from "./Utils";
+import { Rotation } from "../Rotation";
+import { LabelAdapter, Label } from "../Label";
+import { Instant } from "../Instant";
+import { Vector } from "../Vector";
+import { Utils } from "../Utils";
 import { SvgNetwork } from "./SvgNetwork";
 
 export class SvgLabel implements LabelAdapter {
@@ -30,7 +30,7 @@ export class SvgLabel implements LabelAdapter {
     get boundingBox(): {tl: Vector, br: Vector} {
         if (this.element.style.visibility == 'visible') {
             const r = this.element.getBBox();
-            return {tl: new Vector(r.left, r.top), br: new Vector(r.right, r.bottom)};
+            return {tl: new Vector(r.x, r.y), br: new Vector(r.x+r.width, r.y+r.height)};
         }
         return {tl: Vector.NULL, br: Vector.NULL};
     }
