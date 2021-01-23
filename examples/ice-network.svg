@@ -8,6 +8,7 @@
 
         <path data-line="ICE6A" class="ICE11 some" data-stops="- FF HH HB" data-from="1996 20" data-to="1999 28 nozoom"/>
 
+        <text data-station="HBS" data-from="2018 29" data-to="2019 40">Braunschweig</text>
         <path data-line="ICE11" class="e1h" data-stops="AH HH HG" data-from="1991 5" data-to="1993 23 noanim"/>
         <path data-line="ICE11" class="e1h" data-stops="HG FKW FFU FF RM TS TU MA MH" data-from="1991 5" data-to="2003 61 noanim" />
         <path data-line="ICE11" class="e2h" data-stops="HH HG" data-from="1993 23 noanim" data-to="2003 105 reverse" />
@@ -27,13 +28,16 @@
         <path data-line="ICE11" class="some" data-stops="MH fXAI" data-from="2003 125" data-to="2009 15" />
         <path data-line="ICE11" class="e2h" data-stops="FFU UE - LL BL" data-from="2018 40" />
         <path data-line="ICE11" class="some" data-stops="BL - h_AH_BL + AH" data-from="2018 40" />
-        <path data-line="ICE11" class="some" data-stops="UE UWM2 -1 LL" data-from="2018 55" />
+        <text data-station="UWM2" data-from="2018 65" data-to="2019 10">Weimar</text>
+        <path data-line="ICE11" class="some" data-stops="* UE UWM2 -1 * LL" data-from="2018 65" />
 
         <text data-line="ICE11" data-from="1991 5" data-to="1992 43">6</text>
         <text data-line="ICE11" data-from="1993 23" data-to="1994 10">6</text>
         <text data-line="ICE11" data-from="1997 5" data-to="1998 12">6</text>
         <text data-line="ICE11" data-from="2000 12" data-to="2001 17">6</text>
         <text data-line="ICE11" data-from="2003 125" data-to="2004 10">11</text>
+        <text data-line="ICE11" data-from="2018 40" data-to="2019 10">11</text>
+
 
         
         <path data-line="ICE25" class="e2h" data-stops="HB HH" data-from="1992 43" />
@@ -49,9 +53,9 @@
         <path data-line="ICE25" class="some" data-stops="HB HOLD" data-from="1996 10 nozoom" />
         <path data-line="ICE25" class="some" data-stops="* NN NRH NPA fNPA" data-from="1998 25" data-to="2008 48" />
         <path data-line="ICE25" class="some" data-stops="HB HBH" data-from="1997 5" data-to="2001 29 noanim" />
-        <path data-line="ICE25" class="some" data-stops="NWH MA" data-from="2007 14 noanim" data-to="2019 10"  />
+        <path data-line="ICE25" class="some" data-stops="NWH MA" data-from="2007 14 noanim" data-to="2019 9 nozoom"  />
         <path data-line="ICE25" class="some" data-stops="MA MH" data-from="2007 14 noanim" />
-        <path data-line="ICE25" class="some" data-stops="NN +0 MA" data-from="2019 10" />
+        <path data-line="ICE25" class="some" data-stops="* NN +0 MA" data-from="2019 9 nozoom" />
         <path data-line="ICE25" class="e1h" data-stops="NWH NN - MIH MH" data-from="2007 21" />
         <path data-line="ICE25" class="some" data-stops="AH AL" data-from="2009 15 nozoom" />
 
@@ -85,8 +89,8 @@
         <path data-line="ICE5" class="some" data-stops="- KK KD EDG EE EDO EHM EBIL HH BL" data-from="1994 10" data-to="1997 25" />
         <path data-line="ICE78" class="e2h" data-stops="- KK KD EDG EOB hEOB" data-from="2000 34" />
         <path data-line="ICE78" class="e2h" data-stops="KK - FFLF +4 FF" data-from="2003 37" />
-        <path data-line="ICE87" class="some" data-stops="TS RH FF" data-from="2003 40" data-to="2011 30 reverse" />
-        <path data-line="ICE87" class="e2h" data-stops="TS RSI fXSZH" data-from="1999 50" data-to="2011 30" />
+        <path data-line="ICE87" class="some" data-stops="TS RH FF" data-from="2003 40" data-to="2011 35 reverse" />
+        <path data-line="ICE87" class="e2h" data-stops="TS RSI fXSZH" data-from="1999 50" data-to="2011 35" />
         <text data-line="ICE5" data-from="1994 10" data-to="1995 8">5</text>
         <text data-line="ICE78" data-from="2000 37" data-to="2001 17">5</text>
         <text data-line="ICE87" data-from="1999 50" data-to="2000 12">2</text>
@@ -113,7 +117,7 @@
         <path data-line="ICE10" class="some" data-stops="NN MIH MH" data-from="1999 17" data-to="2003 48" />
         <path data-line="ICE10" class="some" data-stops="NN +2 MA -1* MH" data-from="1999 17" data-to="2003 48" />
         <text data-station="STR" data-from="2006 38" data-to="2007 1" >Trier</text>
-        <path data-line="ICE10" class="some" data-stops="KB STR" data-from="2006 38" data-to="2012 10"/>
+        <path data-line="ICE10" class="some" data-stops="KB STR" data-from="2006 38" data-to="2012 5"/>
         <path data-line="ICE10" class="some" data-stops="KK KB" data-from="2003 48 noanim" />
         <text data-line="ICE10" data-from="1997 27" data-to="1998 12">10</text>
         <text data-line="ICE10" data-from="2006 38" data-to="2007 1">10</text>
@@ -123,28 +127,34 @@
         <text data-station="MIH" data-from="2007 14" data-to="2008 31" >Ingolstadt</text>
         <path data-line="ICE28" class="e2h" data-stops="BL LL UJP NN +1 MA MH" data-from="2000 12" data-to="2007 14 noanim" />
         <path data-line="ICE28" class="e2h" data-stops="BL h_AH_BL AH" data-from="2001 29" data-to="2006 48 noanim" />
-        <path data-line="ICE28" class="e1h" data-stops="BL h_AH_BL AH" data-from="2006 48 noanim" data-to="2018 5 noanim" />
+        <path data-line="ICE28" class="e1h" data-stops="BL h_AH_BL AH" data-from="2006 48 noanim" data-to="2018 8 noanim" />
         <path data-line="ICE28" class="some" data-stops="BL WR" data-from="2007 1" data-to="2016 35" />
-        <path data-line="ICE28" class="e1h" data-stops="BL LL" data-from="2007 14 noanim" data-to="2018 5 noanim" />
-        <path data-line="ICE28" class="e1h" data-stops="LL UJP NN" data-from="2007 14 noanim" data-to="2018 5 reverse" />
-        <path data-line="ICE28" class="e2h" data-stops="NN +1 MA MH" data-from="2007 14 noanim" data-to="2018 5 noanim" />
-        <path data-line="ICE28" class="e2h" data-stops="NN MIH MH" data-from="2007 14" data-to="2018 5 noanim" />
-        <path data-line="ICE28" class="some" data-stops="MH fXAI" data-from="2009 15" data-to="2019 10" />
-        <path data-line="ICE28" class="some" data-stops="MH MGP fXAI2" data-from="2010 3" data-to="2019 10" />
-        <path data-line="ICE28" class="some" data-stops="BL WSR" data-from="2012 5"  />
-        <path data-line="ICE28" class="some" data-stops="WSR WBI" data-from="2013 0 nozoom" />
-        <path data-line="ICE28" class="e2h" data-stops="AH h_AH_BL BL LL" data-from="2018 5 noanim" />
-        <path data-line="ICE28" class="e4h" data-stops="NN +1 MA MH" data-from="2018 5 noanim" />
-        <path data-line="ICE28" class="e4h" data-stops="NN MIH MH" data-from="2018 5 noanim" />
-        <path data-line="ICE28" class="e2h" data-stops="NN +1 UE +0 LL" data-from="2018 5" />
-        <path data-line="ICE28" class="some" data-stops="LL UJP" data-from="2018 5" />
+        <path data-line="ICE28" class="e1h" data-stops="BL LL" data-from="2007 14 noanim" data-to="2018 8 noanim" />
+        <path data-line="ICE28" class="e1h" data-stops="LL UJP NN" data-from="2007 14 noanim" data-to="2018 8 reverse" />
+        <text data-station="UJP" data-from="2018 8" data-to="2019 10" >Jena</text>
+
+        <path data-line="ICE28" class="e2h" data-stops="NN +1 MA MH" data-from="2007 14 noanim" data-to="2018 8 noanim" />
+        <path data-line="ICE28" class="e2h" data-stops="NN MIH MH" data-from="2007 14" data-to="2018 8 noanim" />
+        <path data-line="ICE28" class="some" data-stops="MH fXAI" data-from="2009 15" data-to="2019 13 nozoom" />
+        <path data-line="ICE28" class="some" data-stops="MH MGP fXAI2" data-from="2010 3" data-to="2019 13 nozoom" />
+        <text data-station="WSR" data-from="2012 20" data-to="2014 10">Stralsund</text>
+        <path data-line="ICE28" class="some" data-stops="BL WSR" data-from="2012 20"  />
+        <path data-line="ICE28" class="some" data-stops="WSR WBI" data-from="2012 20" />
+        <text data-line="ICE28" data-from="2012 20" data-to="2014 10">28</text>
+
+        <path data-line="ICE28" class="e2h" data-stops="AH h_AH_BL BL LL" data-from="2018 8 noanim" />
+        <path data-line="ICE28" class="e4h" data-stops="NN +1 MA MH" data-from="2018 8 noanim" />
+        <path data-line="ICE28" class="e4h" data-stops="NN MIH MH" data-from="2018 8 noanim" />
+        <path data-line="ICE28" class="e2h" data-stops="NN +1 UE +0 LL" data-from="2018 8" />
+        <path data-line="ICE28" class="some" data-stops="LL UJP" data-from="2018 8" />
 
         <text data-line="ICE28" data-from="2000 12" data-to="2001 17">8</text>
         <text data-line="ICE28" data-from="2001 29" data-to="2002 1">8</text>
         <text data-line="ICE28" data-from="2007 14" data-to="2008 31">28</text>
+        <text data-line="ICE28" data-from="2018 8" data-to="2019 10">28</text>
         
         <path data-line="ICE50" class="e2h" data-stops="SSH SKL RM +1 hRM FF" data-from="2000 27" data-to="2006 25 noanim" />
-        <path data-line="ICE50" class="some" data-stops="SSH SKL RM +1 hRM FF" data-from="2006 25 noanim" data-to="2019 30 reverse" />
+        <path data-line="ICE50" class="some" data-stops="SSH SKL RM +1 hRM FF" data-from="2006 25 noanim" data-to="2019 50 reverse" />
         <path data-line="ICE50" class="e2h" data-stops="FF FFU UE UWM LL DH" data-from="2000 27" data-to="2016 20 noanim" />
         <text data-line="ICE50" data-from="2000 27" data-to="2001 17">9</text>
 
@@ -167,17 +177,21 @@
         <path data-line="ICE41" class="e2h" data-stops="NN MIH MH" data-from="2004 25" data-to="2007 27" />
         <path data-line="ICE41" class="e1h" data-stops="NN MH" data-from="2007 27" />
         <path data-line="ICE41" class="e1h" data-stops="NWH +0 FF -1 FFLF" data-from="2007 32" />
-        <path data-line="ICE41" class="some" data-stops="NWH FFU FKW EPD EHM EDO" data-from="2011 20" />
+        <text data-station="NWH" data-from="2011 20" data-to="2011 45">Würzburg</text>
+        <path data-line="ICE41" class="some" data-stops="NWH FFU FKW +0 h_EPD_FKW +0 EPD +0 EHM * EDO" data-from="2011 20" />
+
+
         <text data-line="ICE49" data-from="2003 10" data-to="2004 10">40</text>
         <text data-line="ICE49" data-from="2007 101" data-to="2008 31">49</text>
         <text data-line="ICE41" data-from="2003 10" data-to="2004 10">41</text>
         <text data-line="ICE41" data-from="2004 25" data-to="2006 10">41</text>
         <text data-line="ICE41" data-from="2007 27" data-to="2008 31">41</text>
+        <text data-line="ICE41" data-from="2011 20" data-to="2012 5">41</text>
 
 
         <path data-line="ICE79" class="e2h" data-stops="hKA KA KK - FFLF +3 FF" data-from="2003 44" data-to="2007 27 noanim" />
-        <path data-line="ICE79" class="some" data-stops="hKA KA KK - FFLF + FF" data-from="2007 27 noanim" data-to="2017 5 noanim" />
-        <path data-line="ICE79" class="e2h" data-stops="hKA KA KK - FFLF + FF" data-from="2017 5 noanim" />
+        <path data-line="ICE79" class="some" data-stops="hKA KA KK - FFLF + FF" data-from="2007 27 noanim" data-to="2017 10 noanim" />
+        <path data-line="ICE79" class="e2h" data-stops="hKA KA KK - FFLF + FF" data-from="2017 10 noanim" />
         <text data-line="ICE79" data-from="2003 44" data-to="2004 10">79</text>
 
         <text data-station="FMZ" data-from="2003 48" data-to="2004 10" >Mainz</text>
@@ -219,9 +233,13 @@
         <text data-line="ICE88" data-from="2003 125" data-to="2004 10">88</text>
 
 
-        <path data-line="ICE31" class="some" data-stops="AH HB EMST EDO EE EDG - KD -3 KK -0 KB FMZ +0 FFLF +1 FF NWH NN" data-from="2004 30" />
+        <text data-station="EHG" data-from="2012 8" data-to="2014 10">Hagen</text>
+        <path data-line="ICE31" class="some" data-stops="AH HB EMST EDO EE EDG - KD -3 KK" data-from="2004 30" data-to="2012 8 reverse"/>
+        <path data-line="ICE31" class="some" data-stops="KK -0 KB FMZ +0 FFLF +1 FF NWH NN" data-from="2004 30" />
         <path data-line="ICE31" class="some" data-stops="NN NRH NPA fNPA" data-from="2004 30" data-to="2008 48" />
+        <path data-line="ICE31" class="some" data-stops="KK EHG EDO EMST HB AH" data-from="2012 8" />
         <text data-line="ICE31" data-from="2004 30" data-to="2006 10">31</text>
+        <text data-line="ICE31" data-from="2012 8" data-to="2014 10">31</text>
 
 
         <path data-line="ICE50" class="e2h" data-stops="FF FFLF FMZ - FW" data-from="2006 25" />
@@ -235,37 +253,55 @@
         <text data-line="ICE22" data-from="2004 50" data-to="2006 10">22</text>
         <text data-line="ICE25" data-from="2004 50" data-to="2006 10">25</text>
         <text data-line="ICE28" data-from="2004 50" data-to="2006 10">28</text>
+        <text data-station="UWM" data-from="2016 10" data-to="2017 10">Weimar</text>
+        <text data-station="FW" data-from="2016 10" data-to="2017 10">Wiesbaden</text>
         <path data-line="ICE50" class="some" data-stops="* UWM * LHA" data-from="2006 30" data-to="2016 10" />
         <path data-line="ICE50" class="some" data-stops="LHA -0 BL" data-from="2006 30" data-to="2008 42" />
+
         <text data-station="LM" data-from="2006 30" data-to="2007 1">Magdeburg</text>
 
+        <text data-station="EDO" data-from="2014 10" data-to="2017 10">Dortmund</text>
         <path data-line="ICE50a" class="ICE50 some" data-stops="* LL LHA hLM LM" data-from="2006 30" data-to="2016 10" />
-        <path data-line="ICE50a" class="ICE50 some" data-stops="LM HBS HH HB HOLD" data-from="2011 5" data-to="2014 5" />
-        <path data-line="ICE50a" class="ICE50 some" data-stops="LM HBS HH EBIL EHM" data-from="2014 5" data-to="2016 10" />
-        <path data-line="ICE50" class="some" data-stops="UE FKW EPD EHM +3 EDO +3 EE +3 EDG KD" data-from="2011 13" data-to="2016 10" />
+        <text data-station="LM" data-from="2011 5" data-to="2012 5">Magdeburg</text>
+        <text data-station="HB" data-from="2011 5" data-to="2012 5">Bremen</text>
+        <path data-line="ICE50a" class="ICE50 some" data-stops="+0* LM HBS HH HB HOLD" data-from="2011 5" data-to="2014 10" />
+
+        <path data-line="ICE50a" class="ICE50 some" data-stops="+0* LM HBS HH EBIL * EHM" data-from="2014 10" data-to="2016 10" />
+
+        <text data-station="EPD" data-from="2011 13" data-to="2011 45">Paderborn</text>
+        <path data-line="ICE50" class="some" data-stops="* UE FKW -1 h_EPD_FKW -1 EPD +1 EHM +3 EDO +3 EE +3 EDG KD" data-from="2011 13" data-to="2016 10" />
+
         <path data-line="ICE50" class="e1h" data-stops="FF FFU UE LL" data-from="2016 20 noanim" data-to="2018 40 noanim" />
         <path data-line="ICE50" class="e2h" data-stops="LL DH" data-from="2016 20 noanim" />
         <path data-line="ICE50" class="e2h" data-stops="FF FFU UE LL" data-from="2018 40 noanim" />
         <text data-line="ICE50" data-from="2006 30" data-to="2007 1">50</text>
+        <text data-line="ICE50" data-from="2011 13" data-to="2012 20">50</text>
+        <text data-line="ICE50" data-from="2014 10" data-to="2015 10">50</text>
+        <text data-line="ICE50" data-from="2016 20" data-to="2017 10">50</text>
 
 
+        <text data-station="LHA" data-from="2016 27" data-to="2019 10">Halle</text>
         <path data-line="ICE15" class="e2h" data-stops="+3 FF +3 h_FF_FKW UE LHA +0 BL" data-from="2016 27" />
-        <path data-line="ICE15" class="some" data-stops="FF -0 RM -0 SKL -0 SSH" data-from="2019 30" />
+        <path data-line="ICE15" class="some" data-stops="FF -0 RM -0 SKL -0 SSH" data-from="2019 50" />
+        <text data-line="ICE15" data-from="2016 27" data-to="2019 10">15</text>
+        <text data-line="ICE15" data-from="2019 50" data-to="2020 10">15</text>
 
 
 
-        <path data-line="ICE90" class="some" data-stops="MH fXASB" data-from="2007 130" data-to="2011 35" />
+        <path data-line="ICE90" class="some" data-stops="MH fXASB" data-from="2007 130" data-to="2011 45" />
         <text data-line="ICE90" data-from="2007 130" data-to="2008 31">90</text>
 
 
         <path data-line="ICE82" class="e4h" data-stops="FF - RM SKL SSH hSSH"  data-from="2007 135" />
-        <path data-line="ICE82" class="some" data-stops="RM RK hXFSTG" data-from="2016 40" />
-        <path data-line="ICE83" class="some" data-stops="TS RK hXFSTG" data-from="2016 40" />
+        <path data-line="ICE82" class="some" data-stops="* RM RK hXFSTG" data-from="2016 43" />
+        <path data-line="ICE83" class="some" data-stops="TS RK hXFSTG" data-from="2016 43" />
         <text data-line="ICE82" data-from="2007 135" data-to="2008 31">82</text>
+        <text data-line="ICE82" data-from="2016 43" data-to="2017 10">82</text>
+        <text data-line="ICE83" data-from="2016 43" data-to="2017 10">83</text>
 
         <path data-line="ICE75" class="some" data-stops="- BL h_AH_BL h_AH_BL_2 + AH AL fXDKH"  data-from="2008 31" data-to="2018 1 reverse" />
         <text data-line="ICE75" data-from="2008 31" data-to="2009 15">75</text>
-        <path data-line="ICE76" class="some" data-stops="- BL h_AH_BL h_AH_BL_2 +0 AH AF fXDAR"  data-from="2008 31" data-to="2017 5 reverse" />
+        <path data-line="ICE76" class="some" data-stops="- BL h_AH_BL h_AH_BL_2 +0 AH AF fXDAR"  data-from="2008 31" data-to="2017 10 reverse" />
         <text data-line="ICE76" data-from="2008 31" data-to="2009 15">76</text>
 
 
@@ -274,26 +310,48 @@
         <text data-line="ICE91" data-from="2008 52" data-to="2009 15">91</text>
 
 
-        <path data-line="ICE47" class="some" data-stops="+3 EDO +3 EE +3 EDG +3 KD KKDZ FFLF RM TS" data-from="2015 5" data-to="2019 40 noanim" />
-        <path data-line="ICE47" class="e2h" data-stops="EDO EE EDG KD KKDZ FFLF RM TS" data-from="2019 40 noanim" />
-        <path data-line="ICE47" class="some" data-stops="EE EG - EMST" data-from="2019 40" />
+        <text data-station="EG" data-from="2019 65" data-to="2020 10">Gelsenkirchen</text>
+        <path data-line="ICE47" class="some" data-stops="+3 EDO +3 EE +3 EDG +3 KD KKDZ FFLF RM +1 TS" data-from="2015 10" data-to="2019 65 noanim" />
+        <path data-line="ICE47" class="e2h" data-stops="EDO EE EDG KD KKDZ FFLF RM TS" data-from="2019 65 noanim" />
+        <path data-line="ICE47" class="some" data-stops="* EE EG - EMST" data-from="2019 65" />
+        <text data-line="ICE47" data-from="2015 10" data-to="2016 10">47</text>
+        <text data-line="ICE47" data-from="2019 65" data-to="2020 10">47</text>
+
        
-        <path data-line="ICE18" class="some" data-stops="+1 AH - h_AH_BL BL" data-from="2018 13" data-to="2021 5 noanim" />
+        <path data-line="ICE18" class="some" data-stops="+1 AH - h_AH_BL BL" data-from="2018 19" data-to="2021 5 noanim" />
         <path data-line="ICE18" class="e2h" data-stops="AH h_AH_BL BL" data-from="2021 5 noanim" />
-        <path data-line="ICE18" class="e2h" data-stops="BL LHA UE NN" data-from="2018 13" />
-        <path data-line="ICE18" class="e4h" data-stops="NN MA + MH" data-from="2018 13" />
-        <path data-line="ICE18" class="e4h" data-stops="NN +0 MIH +1 MH" data-from="2018 13" />
+        <path data-line="ICE18" class="e2h" data-stops="BL LHA UE NN" data-from="2018 19" />
+        <path data-line="ICE18" class="e4h" data-stops="NN MA + MH" data-from="2018 19" />
+        <path data-line="ICE18" class="e4h" data-stops="NN +0 MIH +1 * MH" data-from="2018 19" />
+        <text data-line="ICE18" data-from="2018 19" data-to="2019 10">18</text>
 
-        <path data-line="ICE29" class="some" data-stops="MH +2 hMIH NN UE LHA BL" data-from="2018 26" />
-        <path data-line="ICE29" class="some" data-stops="BL WR" data-from="2018 26" />
-        <path data-line="ICE13" class="e2h" data-stops="-0 BL -0 HWOB -0 HBS -0 HG -0 FKW FFU hFF2 - FFLF" data-from="2018 50" />
 
-        <path data-line="ICE26" class="some" data-stops="fXAI +0 h_MGP_MH +4 MH" data-from="2019 10" />
-        <path data-line="ICE26" class="some" data-stops="fXAI2 MGP +0 h_MGP_MH +4 MH - MA + NWH - FFU -4 FKW" data-from="2019 10" />
-        <path data-line="ICE26" class="e2h" data-stops="- RK RH FF FG -4 FKW -4 HG hHG +0 HH +0 h_AH_HH +0 AH h_AH_WS WS WR WSR" data-from="2019 10" />
-        <path data-line="ICE26" class="some" data-stops="WSR WBI" data-from="2019 10" />
+        <text data-station="WR" data-from="2018 29" data-to="2019 10">Rostock</text>
+        
+        <path data-line="ICE29" class="some" data-stops="MH +2 hMIH NN UE LHA BL" data-from="2018 29" />
+        <path data-line="ICE29" class="some" data-stops="BL WR" data-from="2018 29" />
+        <text data-line="ICE29" data-from="2018 29" data-to="2019 10">29</text>
 
-        <path data-line="ICE39" class="some" data-stops="- KK KD EDG EE -0 EMST HB AH" data-from="2020 5" />
+        
+        <path data-line="ICE13" class="e2h" data-stops="-0 BL -0 HWOB -0 HBS -0 HG -0 FKW FFU hFF2 - FFLF" data-from="2018 58" />
+        <text data-line="ICE13" data-from="2018 58" data-to="2019 10">13</text>
+
+        <text data-line="ICE22" data-from="2019 10" data-to="2020 10">22</text>
+        <text data-line="ICE25" data-from="2019 10" data-to="2020 10">25</text>
+
+        <text data-station="FG" data-from="2019 28" data-to="2020 10">Gießen</text>
+        <text data-station="WS" data-from="2019 28" data-to="2020 10">Schwerin</text>
+        <path data-line="ICE26" class="some" data-stops="fXAI +0 h_MGP_MH +4 MH" data-from="2019 28" />
+        <path data-line="ICE26" class="some" data-stops="fXAI2 MGP +0 h_MGP_MH +4 MH - MA + NWH - FFU -4* FKW" data-from="2019 28" />
+        <path data-line="ICE26" class="e2h" data-stops="- RK RH FF FG -4 FKW -4 HG hHG +0 HH +0 h_AH_HH +0 AH h_AH_WS WS WR WSR" data-from="2019 28" />
+        <path data-line="ICE26" class="some" data-stops="WSR WBI" data-from="2019 28" />
+        <text data-line="ICE26" data-from="2019 28" data-to="2020 10">26</text>
+
+
+        <text data-station="EMST" data-from="2020 10" data-to="2021 5">Münster</text>
+        <path data-line="ICE39" class="some" data-stops="- KK KD EDG EE -0 EMST HB AH" data-from="2020 10" />
+        <text data-line="ICE39" data-from="2020 10" data-to="2021 5">39</text>
+
 
 
 
@@ -311,8 +369,121 @@
         <text data-station="SSH">Saarbrücken</text>
         <text data-station="TS">Stuttgart</text>
         <text data-station="UE">Erfurt</text>
-        <text data-station="FD">Darmstadt</text>
-        
+        <text data-station="FD">Darmstadt</text>      
+
+        <text data-from="2010 3" data-to="2010 80" data-station="AF">Flensburg</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="WR">Rostock</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="WSR">Stralsund</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="WS">Schwerin</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="AK">Kiel</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="AL">Lübeck</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="BGS">Gesundbrunnen</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="HOLD">Oldenburg</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="HWOB">Wolfsburg</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="HBH">Bremerhaven</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="HB">Bremen</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="HBS">Braunschweig</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="HG">Göttingen</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="EBIL">Bielefeld</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="EPD">Paderborn</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="EMST">Münster</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="EHM">Hamm</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="EHG">Hagen</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="EG">Gelsenkirchen</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="EDO">Dortmund</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="EDG">Duisburg</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="EOB">Oberhausen</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="KD">Düsseldorf</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="KKDZ">Köln Messe/Deutz</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="KA">Aachen</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="KB">Bonn</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="LHA">Halle</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="LM">Magdeburg</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="UJP">Jena</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="UWM">Weimar</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="UWM2">Weimar</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="DC">Chemnitz</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="FKW">Kassel</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="FFU">Fulda</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="FG">Gießen</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="FFLF">FFM Flughafen</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="FMZ">Mainz</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="FW">Wiesbaden</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="FD">Darmstadt</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="SKL">Kaiserslautern</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="STR">Trier</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="RM">Mannheim</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="RH">Heidelberg</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="RO">Offenburg</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="RF">Freiburg</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="RSI">Singen</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="RB">Basel</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="NWH">Würzburg</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="NRH">Regensburg</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="NPA">Passau</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="TU">Ulm</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="MIH">Ingolstadt</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="MA">Augsburg</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="MP">Pasing</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="MGP">Garmisch-Partenkirchen</text>
+        <text data-from="2010 3" data-to="2010 80" data-station="MLI">Lindau</text>
+
+        <text data-from="2021 5" data-station="AF">Flensburg</text>
+        <text data-from="2021 5" data-station="WR">Rostock</text>
+        <text data-from="2021 5" data-station="WSR">Stralsund</text>
+        <text data-from="2021 5" data-station="WS">Schwerin</text>
+        <text data-from="2021 5" data-station="AK">Kiel</text>
+        <text data-from="2021 5" data-station="AL">Lübeck</text>
+        <text data-from="2021 5" data-station="BGS">Gesundbrunnen</text>
+        <text data-from="2021 5" data-station="HOLD">Oldenburg</text>
+        <text data-from="2021 5" data-station="HWOB">Wolfsburg</text>
+        <text data-from="2021 5" data-station="HBH">Bremerhaven</text>
+        <text data-from="2021 5" data-station="HB">Bremen</text>
+        <text data-from="2021 5" data-station="HBS">Braunschweig</text>
+        <text data-from="2021 5" data-station="HG">Göttingen</text>
+        <text data-from="2021 5" data-station="EBIL">Bielefeld</text>
+        <text data-from="2021 5" data-station="EPD">Paderborn</text>
+        <text data-from="2021 5" data-station="EMST">Münster</text>
+        <text data-from="2021 5" data-station="EHM">Hamm</text>
+        <text data-from="2021 5" data-station="EHG">Hagen</text>
+        <text data-from="2021 5" data-station="EG">Gelsenkirchen</text>
+        <text data-from="2021 5" data-station="EDO">Dortmund</text>
+        <text data-from="2021 5" data-station="EDG">Duisburg</text>
+        <text data-from="2021 5" data-station="EOB">Oberhausen</text>
+        <text data-from="2021 5" data-station="KD">Düsseldorf</text>
+        <text data-from="2021 5" data-station="KKDZ">Köln Messe/Deutz</text>
+        <text data-from="2021 5" data-station="KA">Aachen</text>
+        <text data-from="2021 5" data-station="KB">Bonn</text>
+        <text data-from="2021 5" data-station="LHA">Halle</text>
+        <text data-from="2021 5" data-station="LM">Magdeburg</text>
+        <text data-from="2021 5" data-station="UJP">Jena</text>
+        <text data-from="2021 5" data-station="UWM">Weimar</text>
+        <text data-from="2021 5" data-station="UWM2">Weimar</text>
+        <text data-from="2021 5" data-station="DC">Chemnitz</text>
+        <text data-from="2021 5" data-station="FKW">Kassel</text>
+        <text data-from="2021 5" data-station="FFU">Fulda</text>
+        <text data-from="2021 5" data-station="FG">Gießen</text>
+        <text data-from="2021 5" data-station="FFLF">FFM Flughafen</text>
+        <text data-from="2021 5" data-station="FMZ">Mainz</text>
+        <text data-from="2021 5" data-station="FW">Wiesbaden</text>
+        <text data-from="2021 5" data-station="FD">Darmstadt</text>
+        <text data-from="2021 5" data-station="SKL">Kaiserslautern</text>
+        <text data-from="2021 5" data-station="STR">Trier</text>
+        <text data-from="2021 5" data-station="RM">Mannheim</text>
+        <text data-from="2021 5" data-station="RH">Heidelberg</text>
+        <text data-from="2021 5" data-station="RO">Offenburg</text>
+        <text data-from="2021 5" data-station="RF">Freiburg</text>
+        <text data-from="2021 5" data-station="RSI">Singen</text>
+        <text data-from="2021 5" data-station="RB">Basel</text>
+        <text data-from="2021 5" data-station="NWH">Würzburg</text>
+        <text data-from="2021 5" data-station="NRH">Regensburg</text>
+        <text data-from="2021 5" data-station="NPA">Passau</text>
+        <text data-from="2021 5" data-station="TU">Ulm</text>
+        <text data-from="2021 5" data-station="MIH">Ingolstadt</text>
+        <text data-from="2021 5" data-station="MA">Augsburg</text>
+        <text data-from="2021 5" data-station="MP">Pasing</text>
+        <text data-from="2021 5" data-station="MGP">Garmisch-Partenkirchen</text>
+        <text data-from="2021 5" data-station="MLI">Lindau</text>  
 
         <path data-line="dummy" style="stroke:transparent" data-stops="hRB hEOB" data-from="2001 48 noanim" />
         <path data-line="dummy" style="stroke:transparent" data-stops="hRB hEOB" data-from="2002 80 noanim" />
@@ -363,9 +534,37 @@
         <text data-line="ICE79" data-from="2010 3" data-to="2010 80">79</text>
         <text data-line="ICE82" data-from="2010 3" data-to="2010 80">82</text>
         <text data-line="ICE87" data-from="2010 3" data-to="2010 80">87</text>
+        <text data-line="ICE90" data-from="2010 3" data-to="2010 80">90</text>
         <text data-line="ICE91" data-from="2010 3" data-to="2010 80">91</text>
 
 
+        <text data-line="ICE10" data-from="2021 5">10</text>
+        <text data-line="ICE11" data-from="2021 5">11</text>
+        <text data-line="ICE12" data-from="2021 5">12</text>
+        <text data-line="ICE13" data-from="2021 5">13</text>
+        <text data-line="ICE15" data-from="2021 5">15</text>
+        <text data-line="ICE18" data-from="2021 5">18</text>
+        <text data-line="ICE20" data-from="2021 5">20</text>
+        <text data-line="ICE22" data-from="2021 5">22</text>
+        <text data-line="ICE25" data-from="2021 5">25</text>
+        <text data-line="ICE26" data-from="2021 5">26</text>
+        <text data-line="ICE28" data-from="2021 5">28</text>
+        <text data-line="ICE29" data-from="2021 5">29</text>
+        <text data-line="ICE31" data-from="2021 5">31</text>
+        <text data-line="ICE39" data-from="2021 5">39</text>
+        <text data-line="ICE41" data-from="2021 5">41</text>
+        <text data-line="ICE42" data-from="2021 5">42</text>
+        <text data-line="ICE43" data-from="2021 5">43</text>
+        <text data-line="ICE45" data-from="2021 5">45</text>
+        <text data-line="ICE47" data-from="2021 5">47</text>
+        <text data-line="ICE49" data-from="2021 5">49</text>
+        <text data-line="ICE50" data-from="2021 5">50</text>
+        <text data-line="ICE78" data-from="2021 5">78</text>
+        <text data-line="ICE79" data-from="2021 5">79</text>
+        <text data-line="ICE82" data-from="2021 5">82</text>
+        <text data-line="ICE83" data-from="2021 5">83</text>
+        <text data-line="ICE85" data-from="2021 5">85</text>
+        <text data-line="ICE91" data-from="2021 5">91</text>
 
 
         <!--
@@ -442,70 +641,70 @@
     </g>
     <g id="stations">
         <rect id="WR" x="1000" y="110" data-comment="Rostock" data-dir="nw" />
-        <rect id="WSR" x="1080" y="100" data-comment="Stralsund" data-dir="nw" />
+        <rect id="WSR" x="1080" y="100" data-comment="Stralsund" data-dir="nw" data-label-dir="s" />
         <rect id="WBI" x="1090" y="80" data-comment="Binz" data-dir="nw" />
-        <rect id="WS" x="950" y="150" data-comment="Schwerin" data-dir="nw" />
+        <rect id="WS" x="950" y="150" data-comment="Schwerin" data-dir="nw" data-label-dir="ne" />
         <rect id="AK" x="890" y="100" data-comment="Kiel" data-dir="nw" />
         <rect id="AL" x="920" y="140" data-comment="Lübeck" data-dir="nw" />
         <rect id="AF" x="840" y="80" data-comment="Flensburg" data-dir="nw" />
         <rect id="AA" x="890" y="160" data-comment="Altona" data-dir="n" />
-        <rect id="AH" x="890" y="190" data-comment="Hamburg" data-dir="n" data-label-dir="ne" />
+        <rect id="AH" x="890" y="190" data-comment="Hamburg" data-dir="n" data-label-dir="se" />
         <rect id="BGS" x="1120" y="255" data-comment="Gesundbrunnen" data-dir="n" />
         <rect id="BHF" x="1190" y="295" data-comment="Berlin Ost" data-dir="n" />
         <rect id="BL" x="1120" y="295" data-comment="Berlin Hbf" data-dir="n" data-label-dir="e" />
-        <rect id="HOLD" x="790" y="230" data-comment="Oldenburg" data-dir="n" />
+        <rect id="HOLD" x="790" y="230" data-comment="Oldenburg" data-dir="n" data-label-dir="w" />
         <rect id="HWOB" x="940" y="295" data-comment="Wolfsburg" data-dir="n" />
         <rect id="HBH" x="775" y="190" data-comment="Bremerhaven" data-dir="n" />
         <rect id="HB" x="835" y="240" data-comment="Bremen" data-dir="nw" />
         <rect id="HH" x="850" y="315" data-comment="Hannover" data-dir="n" data-label-dir="nw" />
         <rect id="HBS" x="905" y="350" data-comment="Braunschweig" data-dir="ne" />
-        <rect id="HG" x="850" y="420" data-comment="Göttingen" data-dir="n" />
+        <rect id="HG" x="850" y="420" data-comment="Göttingen" data-dir="n" data-label-dir="e" />
         <rect id="EBIL" x="780" y="345" data-comment="Bielefeld" data-dir="ne" />
         <rect id="EPD" x="790" y="405" data-comment="Paderborn" data-dir="w" data-label-dir="s" />
         <rect id="EMST" x="720" y="325" data-comment="Münster Westf" data-dir="ne" />
-        <rect id="EHM" x="755" y="380" data-comment="Hamm" data-dir="ne" />
-        <rect id="EHG" x="730" y="440" data-comment="Hagen" data-dir="ne" />
-        <rect id="EG" x="685" y="370" data-comment="Gelsenkirchen" data-dir="n" />
-        <rect id="EDO" x="705" y="400" data-comment="Dortmund" data-dir="n" />
+        <rect id="EHM" x="755" y="380" data-comment="Hamm" data-dir="ne" data-label-dir="e" />
+        <rect id="EHG" x="730" y="440" data-comment="Hagen" data-dir="ne" data-label-dir="se"  />
+        <rect id="EG" x="685" y="370" data-comment="Gelsenkirchen" data-dir="n" data-label-dir="n" />
+        <rect id="EDO" x="705" y="400" data-comment="Dortmund" data-dir="n" data-label-dir="n" />
         <rect id="EE" x="670" y="400" data-comment="Essen" data-dir="n" data-label-dir="s" />
-        <rect id="EDG" x="630" y="410" data-comment="Duisburg" data-dir="ne" />
-        <rect id="EOB" x="620" y="375" data-comment="Oberhausen" data-dir="nw" />
-        <rect id="KD" x="610" y="450" data-comment="Düsseldorf" data-dir="n" />
+        <rect id="EDG" x="630" y="410" data-comment="Duisburg" data-dir="ne" data-label-dir="w" />
+        <rect id="EOB" x="620" y="375" data-comment="Oberhausen" data-dir="nw" data-label-dir="nw" />
+        <rect id="KD" x="610" y="450" data-comment="Düsseldorf" data-dir="n" data-label-dir="nw" />
         <rect id="KK" x="610" y="500" data-comment="Köln" data-dir="n" data-label-dir="nw" />
         <rect id="KKDZ" x="645" y="490" data-comment="Deutz" data-dir="n" data-label-dir="e" />
-        <rect id="KA" x="565" y="510" data-comment="Aachen" data-dir="nw" />
+        <rect id="KA" x="565" y="510" data-comment="Aachen" data-dir="nw" data-label-dir="sw" />
         <rect id="KB" x="630" y="550" data-comment="Bonn" data-dir="nw" data-label-dir="sw" />
         <rect id="LHA" x="1025" y="420" data-comment="Halle" data-dir="ne" />
         <rect id="LM" x="990" y="320" data-comment="Magdeburg" data-dir="n" data-label-dir="n" />
         <rect id="LL" x="1045" y="460" data-comment="Leipzig" data-dir="ne" data-label-dir="se" />
         <rect id="UE" x="950" y="480" data-comment="Erfurt" data-dir="n" data-label-dir="nw" />
-        <rect id="UJP" x="990" y="530" data-comment="Jena" data-dir="n" />
+        <rect id="UJP" x="990" y="530" data-comment="Jena" data-dir="n" data-label-dir="e" />
         <rect id="UWM" x="980" y="480" data-comment="Weimar" data-dir="n" />
-        <rect id="UWM2" x="980" y="486" data-comment="Weimar" data-dir="n" />
+        <rect id="UWM2" x="980" y="486" data-comment="Weimar" data-dir="n"/>
         <rect id="DH" x="1160" y="475" data-comment="Dresden" data-dir="nw" data-label-dir="se" />
         <rect id="DC" x="1060" y="525" data-comment="Chemnitz" data-dir="ne" data-label-dir="se" />
         <rect id="FKW" x="850" y="460" data-comment="Kassel" data-dir="n" />
-        <rect id="FFU" x="845" y="530" data-comment="Fulda" data-dir="nw" />
-        <rect id="FG" x="810" y="500" data-comment="Gießen" data-dir="ne" />
+        <rect id="FFU" x="845" y="530" data-comment="Fulda" data-dir="nw" data-label-dir="e" />
+        <rect id="FG" x="810" y="500" data-comment="Gießen" data-dir="ne" data-label-dir="nw" />
         <rect id="FF" x="795" y="555" data-comment="Frankfurt" data-dir="n" data-label-dir="nw" />
-        <rect id="FFLF" x="740" y="580" data-comment="FFM Flughafen" data-dir="ne" />
+        <rect id="FFLF" x="740" y="580" data-comment="FFM Flughafen" data-dir="ne" data-label-dir="se" />
         <rect id="FMZ" x="705" y="605" data-comment="Mainz" data-dir="n" data-label-dir="s" />
         <rect id="FW" x="705" y="585" data-comment="Wiesbaden" data-dir="n" data-label-dir="w" />
         <rect id="FD" x="807" y="620" data-comment="Darmstadt" data-dir="n" />
-        <rect id="SKL" x="695" y="670" data-comment="Kaiserslautern" data-dir="n" />
+        <rect id="SKL" x="695" y="670" data-comment="Kaiserslautern" data-dir="n" data-label-dir="w" />
         <rect id="STR" x="650" y="640" data-comment="Trier" data-dir="n" data-label-dir="w" />
         <rect id="SSH" x="650" y="695" data-comment="Saarbrücken" data-dir="nw" data-label-dir="sw" />
         <rect id="RM" x="760" y="670" data-comment="Mannheim" data-dir="n" data-label-dir="e" />
-        <rect id="RH" x="810" y="690" data-comment="Heidelberg" data-dir="nw" />
+        <rect id="RH" x="810" y="690" data-comment="Heidelberg" data-dir="nw" data-label-dir="e" />
         <rect id="RK" x="755" y="720" data-comment="Karlsruhe" data-dir="ne" data-label-dir="nw" />
-        <rect id="RO" x="720" y="790" data-comment="Offenburg" data-dir="n" />
-        <rect id="RF" x="710" y="830" data-comment="Freiburg" data-dir="ne" />
-        <rect id="RSI" x="800" y="850" data-comment="Singen" data-dir="n" />
+        <rect id="RO" x="720" y="790" data-comment="Offenburg" data-dir="n" data-label-dir="w" />
+        <rect id="RF" x="710" y="830" data-comment="Freiburg" data-dir="ne" data-label-dir="w" />
+        <rect id="RSI" x="800" y="850" data-comment="Singen" data-dir="n" data-label-dir="e" />
         <rect id="RB" x="680" y="900" data-comment="Basel" data-dir="n" data-label-dir="e" />
         <rect id="NWH" x="885" y="625" data-comment="Würzburg"  data-dir="ne" />
         <rect id="NN" x="950" y="660" data-comment="Nürnberg" data-dir="n" data-label-dir="ne" />
-        <rect id="NRH" x="1050" y="700" data-comment="Regensburg" data-dir="w" />
-        <rect id="NPA" x="1135" y="760" data-comment="Passau" data-dir="w" />
+        <rect id="NRH" x="1050" y="700" data-comment="Regensburg" data-dir="w" data-label-dir="ne" />
+        <rect id="NPA" x="1135" y="760" data-comment="Passau" data-dir="w" data-label-dir="se" />
         <rect id="TS" x="820" y="745" data-comment="Stuttgart" data-dir="nw" data-label-dir="e" />
         <rect id="TU" x="890" y="790" data-comment="Ulm" data-dir="n" />
         <rect id="MIH" x="1000" y="760" data-comment="Ingolstadt" data-dir="nw" data-label-dir="ne" />
