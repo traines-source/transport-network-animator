@@ -4,7 +4,7 @@ import { Station, StationAdapter } from '../src/Station';
 import { Vector } from '../src/Vector';
 import { Rotation } from '../src/Rotation';
 import { instance, mock, when, verify, anything } from 'ts-mockito';
-import { TimedDrawable } from '../src/Drawable';
+import { TimedDrawable, BoundingBox } from '../src/Drawable';
 import { Instant } from '../src/Instant';
 
 describe('Network', () => {
@@ -14,6 +14,7 @@ describe('Network', () => {
 
     beforeEach(() => {
         networkAdapter = mock();
+        when(networkAdapter.canvasSize).thenReturn(new BoundingBox(new Vector(0,0), new Vector(1000,1000)));
         timedDrawable = mock();
         stationAdapter = mock();
     })
@@ -79,7 +80,7 @@ describe('Network', () => {
 
         when(timedDrawable.from).thenReturn(Instant.BIG_BANG);
         when(timedDrawable.to).thenReturn(Instant.BIG_BANG);
-        when(timedDrawable.boundingBox).thenReturn({tl: new Vector(50, 50), br: new Vector(450, 850)});
+        when(timedDrawable.boundingBox).thenReturn(new BoundingBox(new Vector(50, 50), new Vector(450, 850)));
         when(timedDrawable.draw(1, true)).thenReturn(5);
         underTest.addToIndex(instance(timedDrawable));
 
@@ -93,7 +94,7 @@ describe('Network', () => {
 
         when(timedDrawable.from).thenReturn(new Instant(1, 1, ''));
         when(timedDrawable.to).thenReturn(new Instant(2, 3, ''));
-        when(timedDrawable.boundingBox).thenReturn({tl: new Vector(50, 50), br: new Vector(450, 850)});
+        when(timedDrawable.boundingBox).thenReturn(new BoundingBox(new Vector(50, 50), new Vector(450, 850)));
         when(timedDrawable.draw(1, true)).thenReturn(2);
         when(timedDrawable.erase(1, true, false)).thenReturn(3);
         underTest.addToIndex(instance(timedDrawable));
@@ -101,7 +102,7 @@ describe('Network', () => {
         const timedDrawable1: TimedDrawable = mock();
         when(timedDrawable1.from).thenReturn(new Instant(1, 1, ''));
         when(timedDrawable1.to).thenReturn(new Instant(2, 4, 'noanim'));
-        when(timedDrawable1.boundingBox).thenReturn({tl: new Vector(500, 400), br: new Vector(450, 850)});
+        when(timedDrawable1.boundingBox).thenReturn(new BoundingBox(new Vector(500, 400), new Vector(450, 850)));
         when(timedDrawable1.draw(3, true)).thenReturn(4);
         when(timedDrawable1.erase(1, false, false)).thenReturn(0);
         underTest.addToIndex(instance(timedDrawable1));
@@ -121,7 +122,7 @@ describe('Network', () => {
 
         when(timedDrawable.from).thenReturn(new Instant(2, 3, ''));
         when(timedDrawable.to).thenReturn(new Instant(2, 4, ''));
-        when(timedDrawable.boundingBox).thenReturn({tl: new Vector(50, 50), br: new Vector(450, 850)});
+        when(timedDrawable.boundingBox).thenReturn(new BoundingBox(new Vector(50, 50), new Vector(450, 850)));
         when(timedDrawable.draw(1, true)).thenReturn(3);
         when(timedDrawable.erase(1, true, false)).thenReturn(5);
         underTest.addToIndex(instance(timedDrawable));
@@ -129,7 +130,7 @@ describe('Network', () => {
         const timedDrawable1: TimedDrawable = mock();
         when(timedDrawable1.from).thenReturn(new Instant(1, 2, ''));
         when(timedDrawable1.to).thenReturn(new Instant(2, 3, ''));
-        when(timedDrawable1.boundingBox).thenReturn({tl: new Vector(500, 400), br: new Vector(450, 850)});
+        when(timedDrawable1.boundingBox).thenReturn(new BoundingBox(new Vector(500, 400), new Vector(450, 850)));
         when(timedDrawable1.draw(1, true)).thenReturn(2);
         when(timedDrawable1.erase(4, true, false)).thenReturn(4);
         underTest.addToIndex(instance(timedDrawable1));
@@ -149,7 +150,7 @@ describe('Network', () => {
         when(timedDrawable.name).thenReturn("01");
         when(timedDrawable.from).thenReturn(new Instant(1, 1, ''));
         when(timedDrawable.to).thenReturn(new Instant(2, 3, ''));
-        when(timedDrawable.boundingBox).thenReturn({tl: new Vector(50, 50), br: new Vector(450, 850)});
+        when(timedDrawable.boundingBox).thenReturn(new BoundingBox(new Vector(50, 50), new Vector(450, 850)));
         when(timedDrawable.draw(1, true)).thenReturn(2);
         when(timedDrawable.erase(6, true, false)).thenReturn(6);
         underTest.addToIndex(instance(timedDrawable));
@@ -158,7 +159,7 @@ describe('Network', () => {
         when(timedDrawable1.name).thenReturn("01");
         when(timedDrawable1.from).thenReturn(new Instant(1, 2, ''));
         when(timedDrawable1.to).thenReturn(new Instant(2, 3, 'noanim'));
-        when(timedDrawable1.boundingBox).thenReturn({tl: new Vector(500, 400), br: new Vector(450, 850)});
+        when(timedDrawable1.boundingBox).thenReturn(new BoundingBox(new Vector(500, 400), new Vector(450, 850)));
         when(timedDrawable1.draw(1, true)).thenReturn(3);
         when(timedDrawable1.erase(1, false, false)).thenReturn(5);
         underTest.addToIndex(instance(timedDrawable1));
@@ -167,7 +168,7 @@ describe('Network', () => {
         when(timedDrawable2.name).thenReturn("2");
         when(timedDrawable2.from).thenReturn(new Instant(2, 3, ''));
         when(timedDrawable2.to).thenReturn(Instant.BIG_BANG);
-        when(timedDrawable2.boundingBox).thenReturn({tl: new Vector(900, 400), br: new Vector(1000, 1000)});
+        when(timedDrawable2.boundingBox).thenReturn(new BoundingBox(new Vector(900, 400), new Vector(1000, 1000)));
         when(timedDrawable2.draw(12, true)).thenReturn(7);
         underTest.addToIndex(instance(timedDrawable2));
 
@@ -175,7 +176,7 @@ describe('Network', () => {
         when(timedDrawable3.name).thenReturn("3");
         when(timedDrawable3.from).thenReturn(new Instant(1, 2, ''));
         when(timedDrawable3.to).thenReturn(new Instant(2, 3, ''));
-        when(timedDrawable3.boundingBox).thenReturn({tl: new Vector(500, 400), br: new Vector(450, 850)});
+        when(timedDrawable3.boundingBox).thenReturn(new BoundingBox(new Vector(500, 400), new Vector(450, 850)));
         when(timedDrawable3.draw(4, true)).thenReturn(4);
         when(timedDrawable3.erase(19, true, false)).thenReturn(8);
         underTest.addToIndex(instance(timedDrawable3));

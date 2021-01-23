@@ -1,9 +1,9 @@
-import { TimedDrawable, Timed } from "./Drawable";
+import { TimedDrawable, Timed, BoundingBox } from "./Drawable";
 import { Vector } from "./Vector";
 
 export interface GenericTimedDrawableAdapter extends Timed {
     name: string;
-    boundingBox: {tl: Vector, br: Vector};
+    boundingBox: BoundingBox;
     zoom: Vector;
     draw(delaySeconds: number): void;
     erase(delaySeconds: number): void;
@@ -30,7 +30,7 @@ export class GenericTimedDrawable implements TimedDrawable {
         return 0;
     }
 
-    get boundingBox(): {tl: Vector, br: Vector} {
+    get boundingBox(): BoundingBox {
         const bbox = this.adapter.boundingBox;
 
         const center = this.adapter.zoom;
@@ -42,11 +42,11 @@ export class GenericTimedDrawable implements TimedDrawable {
         return bbox;
     }
 
-    private calculateBoundingBoxForZoom(percentX: number, percentY: number, bbox: {tl: Vector, br: Vector}): {tl: Vector, br: Vector} {
-        const delta = bbox.tl.delta(bbox.br);
+    private calculateBoundingBoxForZoom(percentX: number, percentY: number, bbox: BoundingBox): BoundingBox {
+        const delta = bbox.dimensions;
         const relativeCenter = new Vector(percentX/100, percentY/100);
         const center = bbox.tl.add(new Vector(delta.x*relativeCenter.x, delta.y*relativeCenter.y));
         const edgeDistance = new Vector(delta.x*Math.min(relativeCenter.x, 1-relativeCenter.x), delta.y*Math.min(relativeCenter.y, 1-relativeCenter.y));
-        return {tl: center.add(new Vector(-edgeDistance.x, -edgeDistance.y)), br: center.add(edgeDistance)};
+        return new BoundingBox(center.add(new Vector(-edgeDistance.x, -edgeDistance.y)), center.add(edgeDistance));
     }
 }

@@ -1,4 +1,4 @@
-import { TimedDrawable, Timed } from "./Drawable";
+import { TimedDrawable, Timed, BoundingBox } from "./Drawable";
 import { Station } from "./Station";
 import { Rotation } from "./Rotation";
 import { StationProvider } from "./Network";
@@ -7,7 +7,7 @@ import { Vector } from "./Vector";
 export interface LabelAdapter extends Timed {
     forStation: string | undefined;
     forLine: string | undefined;
-    boundingBox: {tl: Vector, br: Vector};
+    boundingBox: BoundingBox;
     draw(delaySeconds: number, textCoords: Vector, labelDir: Rotation, children: LabelAdapter[]): void;
     erase(delaySeconds: number): void;
     cloneForStation(stationId: string): LabelAdapter;

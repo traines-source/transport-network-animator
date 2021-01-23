@@ -1,4 +1,4 @@
-import { TimedDrawable } from "./Drawable";
+import { TimedDrawable, BoundingBox } from "./Drawable";
 import { Instant } from "./Instant";
 import { Station } from "./Station";
 import { Vector } from "./Vector";
@@ -14,7 +14,7 @@ export interface StationProvider {
     createVirtualStop(id: string, baseCoords: Vector, rotation: Rotation): Station;
 }
 export interface NetworkAdapter {
-    canvasSize: Vector;
+    canvasSize: BoundingBox;
     initialize(network: Network): void;
     stationById(id: string): Station | null;
     createVirtualStop(id: string, baseCoords: Vector, rotation: Rotation): Station;
@@ -91,7 +91,7 @@ export class Network implements StationProvider {
             const element = this.eraseBuffer[i];
             const shouldAnimate = this.shouldAnimate(element.to, animate);
             delay += this.eraseElement(element, delay, shouldAnimate);
-            zoomer.include(element, false, shouldAnimate);
+            zoomer.include(element.boundingBox, element.from, element.to, false, shouldAnimate);
         }
         this.eraseBuffer = [];
         return delay;
@@ -108,7 +108,7 @@ export class Network implements StationProvider {
         delay = this.flushEraseBuffer(delay, animate, zoomer);
         const shouldAnimate = this.shouldAnimate(element.from, animate);
         delay += this.drawElement(element, delay, shouldAnimate);
-        zoomer.include(element, true, shouldAnimate);
+        zoomer.include(element.boundingBox, element.from, element.to, true, shouldAnimate);
         return delay;
     }
     

@@ -2,6 +2,7 @@ import { Instant } from "../Instant";
 import { Vector } from "../Vector";
 import { GenericTimedDrawableAdapter } from "../GenericTimedDrawable";
 import { DEFAULT_MIN_VERSION } from "tls";
+import { BoundingBox } from "../Drawable";
 
 export class SvgGenericTimedDrawable implements GenericTimedDrawableAdapter {
 
@@ -21,9 +22,9 @@ export class SvgGenericTimedDrawable implements GenericTimedDrawableAdapter {
         return this.getInstant('to');
     }
 
-    get boundingBox(): {tl: Vector, br: Vector} {
+    get boundingBox(): BoundingBox {
         const r = this.element.getBBox();
-        const bbox = {tl: new Vector(r.x, r.y), br: new Vector(r.x+r.width, r.y+r.height)};
+        const bbox = new BoundingBox(new Vector(r.x, r.y), new Vector(r.x+r.width, r.y+r.height));
         console.log('bbox', bbox);
         return bbox;
     }

@@ -4,6 +4,7 @@ import { Instant } from "../Instant";
 import { Vector } from "../Vector";
 import { Utils } from "../Utils";
 import { SvgNetwork } from "./SvgNetwork";
+import { BoundingBox } from "../Drawable";
 
 export class SvgLabel implements LabelAdapter {
 
@@ -27,12 +28,12 @@ export class SvgLabel implements LabelAdapter {
         return this.element.dataset.line;
     }
 
-    get boundingBox(): {tl: Vector, br: Vector} {
+    get boundingBox(): BoundingBox {
         if (this.element.style.visibility == 'visible') {
             const r = this.element.getBBox();
-            return {tl: new Vector(r.x, r.y), br: new Vector(r.x+r.width, r.y+r.height)};
+            return new BoundingBox(new Vector(r.x, r.y), new Vector(r.x+r.width, r.y+r.height));
         }
-        return {tl: Vector.NULL, br: Vector.NULL};
+        return new BoundingBox(Vector.NULL, Vector.NULL);
     }
 
     draw(delaySeconds: number, textCoords: Vector, labelDir: Rotation, children: LabelAdapter[]): void {

@@ -3,11 +3,12 @@ import { Vector } from "../Vector";
 import { Stop } from "../Station";
 import { Instant } from "../Instant";
 import { SvgNetwork } from "./SvgNetwork";
+import { BoundingBox } from "../Drawable";
 
 export class SvgLine implements LineAdapter {
 
     private _stops: Stop[] = [];
-    boundingBox = {tl: Vector.NULL, br: Vector.NULL};
+    boundingBox = new BoundingBox(Vector.NULL, Vector.NULL);
 
     constructor(private element: SVGPathElement) {
 

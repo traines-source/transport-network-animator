@@ -3,7 +3,7 @@ import { Vector } from "./Vector";
 
 export interface Drawable {
     name: string;
-    boundingBox: {tl: Vector, br: Vector};
+    boundingBox: BoundingBox;
     draw(delaySeconds: number, animate: boolean): number;
     erase(delaySeconds: number, animate: boolean, reverse: boolean): number;
 }
@@ -16,7 +16,11 @@ export interface Timed {
 export interface TimedDrawable extends Drawable, Timed {
 }
 
-export interface BoundingBox {
-    tl: Vector;
-    br: Vector;
+export class BoundingBox {    
+    constructor(public tl: Vector, public br: Vector) {
+    }
+
+    get dimensions(): Vector {
+        return this.tl.delta(this.br);
+    }
 }

@@ -112,6 +112,7 @@ describe('Vector', () => {
         expect(new Vector(1, 0).between(new Vector(5, 0), 0.75)).eql(new Vector(4, 0));
         expect(new Vector(1, 5).between(new Vector(5, 13), 0.75)).eql(new Vector(4, 11));
         expect(new Vector(1, 5).between(new Vector(1, 5), 0.75)).eql(new Vector(1, 5));
+        expect(new Vector(0, 0).between(new Vector(2, 2), 0.5)).eql(new Vector(1, 1));
     })
 
     it('whenAngle', () => {

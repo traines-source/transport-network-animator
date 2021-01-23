@@ -1,4 +1,4 @@
-import { TimedDrawable, Timed } from "./Drawable";
+import { TimedDrawable, Timed, BoundingBox } from "./Drawable";
 import { Station, Stop } from "./Station";
 import { Vector } from "./Vector";
 import { StationProvider } from "./Network";
@@ -9,7 +9,7 @@ import { PreferredTrack } from "./PreferredTrack";
 export interface LineAdapter extends Timed  {
     stops: Stop[];
     name: string;
-    boundingBox: { tl: Vector; br: Vector; };
+    boundingBox: BoundingBox;
     weight: number | undefined;
     draw(delaySeconds: number, animationDurationSeconds: number, path: Vector[], length: number): void;
     move(delaySeconds: number, animationDurationSeconds: number, from: Vector[], to: Vector[]): void;

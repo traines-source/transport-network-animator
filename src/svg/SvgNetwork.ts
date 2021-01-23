@@ -1,5 +1,5 @@
 import { NetworkAdapter, Network, StationProvider } from "../Network";
-import { TimedDrawable } from "../Drawable";
+import { TimedDrawable, BoundingBox } from "../Drawable";
 import { Vector } from "../Vector";
 import { Rotation } from "../Rotation";
 import { Station } from "../Station";
@@ -19,13 +19,13 @@ export class SvgNetwork implements NetworkAdapter {
     private currentZoomCenter: Vector = Vector.NULL;
     private currentZoomScale: number = 1;
 
-    get canvasSize(): Vector {
+    get canvasSize(): BoundingBox {
         const svg = document.querySelector('svg');
         const box = svg?.viewBox.baseVal;
         if (box) {
-            return new Vector(box.width, box.height);
+            return new BoundingBox(new Vector(box.x, box.y), new Vector(box.x+box.width, box.y+box.height));
         }
-        return Vector.NULL;        
+        return new BoundingBox(Vector.NULL, Vector.NULL);        
     }
 
     get beckStyle(): boolean {
@@ -117,8 +117,9 @@ export class SvgNetwork implements NetworkAdapter {
     private updateZoom(center: Vector, scale: number) {
         const zoomable = document.getElementById('zoomable');
         if (zoomable != undefined) {
-            zoomable.style.transformOrigin = 'center';
-            zoomable.style.transform = 'scale(' + scale + ') translate(' + (this.canvasSize.x / 2 - center.x) + 'px,' + (this.canvasSize.y / 2 - center.y) + 'px)';
+            const origin = this.canvasSize.tl.between(this.canvasSize.br, 0.5);
+            zoomable.style.transformOrigin = origin.x + 'px ' + origin.y + 'px';
+            zoomable.style.transform = 'scale(' + scale + ') translate(' + (origin.x - center.x) + 'px,' + (origin.y - center.y) + 'px)';
         }
     }
 }
