@@ -120,7 +120,7 @@ export class Network implements StationProvider {
     }
     
     private eraseElement(element: TimedDrawable, delay: number, animate: boolean): number {
-        return element.erase(delay, animate, element.to.flag == 'reverse');
+        return element.erase(delay, animate, element.to.flag.includes('reverse'));
     }
     
     private shouldAnimate(instant: Instant, animate: boolean): boolean {

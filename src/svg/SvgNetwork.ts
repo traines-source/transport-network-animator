@@ -10,6 +10,7 @@ import { Label } from "../Label";
 import { SvgLabel } from "./SvgLabel";
 import { GenericTimedDrawable } from "../GenericTimedDrawable";
 import { SvgGenericTimedDrawable } from "./SvgGenericTimedDrawable";
+import { Zoomer } from "../Zoomer";
 
 export class SvgNetwork implements NetworkAdapter {
 
@@ -90,21 +91,28 @@ export class SvgNetwork implements NetworkAdapter {
    
     zoomTo(zoomCenter: Vector, zoomScale: number, animationDurationSeconds: number) {
         console.log(zoomCenter, zoomScale, animationDurationSeconds);
-        this.animateFrame(0, animationDurationSeconds/SvgNetwork.FPS, this.currentZoomCenter, zoomCenter, this.currentZoomScale, zoomScale);
+        const network = this;
+        window.setTimeout(function() { network.doZoom(zoomCenter, zoomScale, animationDurationSeconds); },
+        animationDurationSeconds <= Zoomer.ZOOM_DURATION ? 0 : Zoomer.ZOOM_DURATION * 1000);
+        return;
+    }
+
+    private doZoom(zoomCenter: Vector, zoomScale: number, animationDurationSeconds: number) {
+        this.animateFrame(0, 1/animationDurationSeconds/SvgNetwork.FPS, animationDurationSeconds <= Zoomer.ZOOM_DURATION, this.currentZoomCenter, zoomCenter, this.currentZoomScale, zoomScale);
         this.currentZoomCenter = zoomCenter;
         this.currentZoomScale = zoomScale;
     }
 
-    private animateFrame(x: number, animationPerFrame: number, fromCenter: Vector, toCenter: Vector, fromScale: number, toScale: number): void {
+    private animateFrame(x: number, animationPerFrame: number, ease: boolean, fromCenter: Vector, toCenter: Vector, fromScale: number, toScale: number): void {
         if (x < 1) {
             x += animationPerFrame;
-            const ease = this.ease(x);
+            const fx = ease ? this.ease(x) : x;
             const delta = fromCenter.delta(toCenter)
-            const center = new Vector(delta.x * ease, delta.y * ease).add(fromCenter);
-            const scale = (toScale - fromScale) * ease + fromScale;
+            const center = new Vector(delta.x * fx, delta.y * fx).add(fromCenter);
+            const scale = (toScale - fromScale) * fx + fromScale;
             this.updateZoom(center, scale);
             const network = this;
-            window.requestAnimationFrame(function() { network.animateFrame(x, animationPerFrame, fromCenter, toCenter, fromScale, toScale); });
+            window.requestAnimationFrame(function() { network.animateFrame(x, animationPerFrame, ease, fromCenter, toCenter, fromScale, toScale); });
         } else {
             this.updateZoom(toCenter, toScale);
         }

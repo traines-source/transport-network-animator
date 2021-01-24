@@ -23,4 +23,8 @@ export class BoundingBox {
     get dimensions(): Vector {
         return this.tl.delta(this.br);
     }
+
+    isNull() {
+        return this.tl == Vector.NULL || this.br == Vector.NULL;
+    }
 }

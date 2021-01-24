@@ -10,8 +10,8 @@ export class Zoomer {
     static ZOOM_MAX_SCALE = 3;
     static PADDING_FACTOR = 25;
     
-    private boundingBox = {tl: Vector.NULL, br: Vector.NULL};
-    private customDuration = 0;
+    private boundingBox = new BoundingBox(Vector.NULL, Vector.NULL);
+    private customDuration = -1;
     
     constructor(private canvasSize: BoundingBox) {
         console.log('canvas', this.canvasSize);
@@ -21,8 +21,11 @@ export class Zoomer {
         const now = draw ? from : to;
         if (shouldAnimate && !now.flag.includes('nozoom')) {
             if (now.flag.includes('slowzoom') && draw) {
-                this.customDuration = from.delta(to);
-            } else {
+                this.customDuration = from.delta(to) - Zoomer.ZOOM_DURATION;
+            } else if (now.flag.includes('slowzoom') && !draw) {
+                this.customDuration = 0;
+                boundingBox = new BoundingBox(Vector.NULL, Vector.NULL);
+            } else if (!boundingBox.isNull()) {
                 boundingBox = this.paddedBoundingBox(boundingBox);
             }
             this.boundingBox.tl = this.boundingBox.tl.bothAxisMins(boundingBox.tl);
@@ -30,24 +33,23 @@ export class Zoomer {
         }
     }
 
-    private enforcedBoundingBox(): {tl: Vector, br: Vector} {
-        if (this.boundingBox.tl != Vector.NULL && this.boundingBox.br != Vector.NULL) {
+    private enforcedBoundingBox(): BoundingBox {
+        if (!this.boundingBox.isNull()) {
             const paddedBoundingBox = this.boundingBox;
-            const zoomSize = paddedBoundingBox.tl.delta(paddedBoundingBox.br);
+            const zoomSize = paddedBoundingBox.dimensions;
             const canvasSize = this.canvasSize.dimensions;
             const minZoomSize = new Vector(canvasSize.x / Zoomer.ZOOM_MAX_SCALE, canvasSize.y / Zoomer.ZOOM_MAX_SCALE);
             const delta = zoomSize.delta(minZoomSize);
             const additionalSpacing = new Vector(Math.max(0, delta.x/2), Math.max(0, delta.y/2))
-            return {
-                tl: paddedBoundingBox.tl.add(additionalSpacing.rotate(new Rotation(180))),
-                br: paddedBoundingBox.br.add(additionalSpacing)
-            };
+            return new BoundingBox(
+                paddedBoundingBox.tl.add(additionalSpacing.rotate(new Rotation(180))),
+                paddedBoundingBox.br.add(additionalSpacing)
+            );
         }
         return this.boundingBox;
     }
 
     private paddedBoundingBox(boundingBox: BoundingBox): BoundingBox {
-
         const padding = (this.canvasSize.dimensions.x + this.canvasSize.dimensions.y)/Zoomer.PADDING_FACTOR;
         return new BoundingBox(
             boundingBox.tl.add(new Vector(-padding, -padding)),
@@ -57,7 +59,7 @@ export class Zoomer {
 
     get center(): Vector {
         const enforcedBoundingBox = this.enforcedBoundingBox();
-        if (enforcedBoundingBox.tl != Vector.NULL && enforcedBoundingBox.br != Vector.NULL) {
+        if (!enforcedBoundingBox.isNull()) {
             return new Vector(
                 Math.round((enforcedBoundingBox.tl.x + enforcedBoundingBox.br.x)/2), 
                 Math.round((enforcedBoundingBox.tl.y + enforcedBoundingBox.br.y)/2));
@@ -67,16 +69,16 @@ export class Zoomer {
 
     get scale(): number {
         const enforcedBoundingBox = this.enforcedBoundingBox();
-        if (enforcedBoundingBox.tl != Vector.NULL && enforcedBoundingBox.br != Vector.NULL) {
-            const zoomSize = enforcedBoundingBox.tl.delta(enforcedBoundingBox.br);
-            const delta = this.canvasSize.tl.delta(this.canvasSize.br);
+        if (!enforcedBoundingBox.isNull()) {
+            const zoomSize = enforcedBoundingBox.dimensions;
+            const delta = this.canvasSize.dimensions;
             return Math.min(delta.x / zoomSize.x, delta.y / zoomSize.y);
         }
         return 1;
     }
 
     get duration(): number {
-        if (this.customDuration == 0) {
+        if (this.customDuration == -1) {
             return Zoomer.ZOOM_DURATION;
         }
         return this.customDuration;
