@@ -28,8 +28,7 @@
         <path data-line="ICE11" class="some" data-stops="MH fXAI" data-from="2003 125" data-to="2009 15" />
         <path data-line="ICE11" class="e2h" data-stops="FFU UE - LL BL" data-from="2018 68" />
         <path data-line="ICE11" class="some" data-stops="BL - h_AH_BL + AH" data-from="2018 68" />
-        <text data-station="UWM2" data-from="2018 83" data-to="2018 87">Weimar</text>
-        <path data-line="ICE11" class="some" data-stops="+1* UE UWM2 -1* LL" data-from="2018 83" />
+    
 
         <text data-line="ICE11" data-from="1991 5" data-to="1992 43">6</text>
         <text data-line="ICE11" data-from="1993 23" data-to="1994 10">6</text>
@@ -283,7 +282,7 @@
         <path data-line="ICE15" class="e2h" data-stops="+3 FF +3 h_FF_FKW UE LHA +0 BL" data-from="2016 37" />
         <path data-line="ICE15" class="some" data-stops="FF -0 RM -0 SKL -0 SSH" data-from="2019 45 nozoom" />
         <text data-line="ICE15" data-from="2016 37" data-to="2017 15">15</text>
-        <text data-line="ICE15" data-from="2019 50" data-to="2020 10">15</text>
+        <text data-line="ICE15" data-from="2019 50" data-to="2020 5">15</text>
 
 
 
@@ -308,7 +307,7 @@
         <path data-line="ICE91" class="e2h" data-stops="FF FFLF FMZ - KB + KK +1 KD +1 EDG +1 EE +1 EDO" data-from="2008 52" />
         <text data-line="ICE91" data-from="2008 52" data-to="2009 15">91</text>
 
-
+        <text data-station="EMST" data-from="2019 55" data-to="2021 10">Münster</text>
         <text data-station="EG" data-from="2019 55" data-to="2020 10">Gelsenkirchen</text>
         <path data-line="ICE47" class="some" data-stops="+3 EDO +3 EE +3 EDG +3 KD KKDZ FFLF RM +1 TS" data-from="2015 10" data-to="2019 55 noanim" />
         <path data-line="ICE47" class="e2h" data-stops="EDO EE EDG KD KKDZ FFLF RM TS" data-from="2019 55 noanim" />
@@ -336,23 +335,23 @@
         <path data-line="ICE13" class="e2h" data-stops="-0 BL -0 HWOB -0 HBS -0 HG -0 FKW FFU hFF2 - FFLF" data-from="2018 76" />
         <text data-line="ICE13" data-from="2018 76" data-to="2018 87">13</text>
 
-        <text data-line="ICE22" data-from="2018 87" data-to="2020 10">22</text>
-        <text data-line="ICE25" data-from="2018 87" data-to="2020 10">25</text>
+        <text data-line="ICE22" data-from="2018 87" data-to="2020 5">22</text>
+        <text data-line="ICE25" data-from="2018 87" data-to="2020 5">25</text>
 
-        <text data-station="FG" data-from="2019 30" data-to="2020 10">Gießen</text>
-        <text data-station="WS" data-from="2019 30" data-to="2020 10">Schwerin</text>
+        <text data-station="FG" data-from="2019 30" data-to="2020 5">Gießen</text>
+        <text data-station="WS" data-from="2019 30" data-to="2020 5">Schwerin</text>
         <path data-line="ICE26" class="some" data-stops="fXAI +0 h_MGP_MH +4 * MH" data-from="2019 30 nozoom" />
         <path data-line="ICE26" class="some" data-stops="fXAI2 MGP +0 h_MGP_MH +4 MH - MA + NWH - FFU -4* FKW" data-from="2019 30 nozoom" />
         <path data-line="ICE26" class="e2h" data-stops="- RK RH FF FG -4 FKW -4 HG hHG +0 HH +0 h_AH_HH +0 AH h_AH_WS WS WR WSR" data-from="2019 30 nozoom" />
         <path data-line="ICE26" class="some" data-stops="WSR WBI" data-from="2019 30 nozoom" />
-        <text data-line="ICE26" data-from="2019 30" data-to="2020 10">26</text>
+        <text data-line="ICE26" data-from="2019 30" data-to="2020 5">26</text>
 
 
-        <text data-station="EMST" data-from="2020 10" data-to="2021 10">Münster</text>
         <path data-line="ICE39" class="some" data-stops="- KK -4 KD EDG EE -0 EMST HB AH" data-from="2020 5" />
         <text data-line="ICE39" data-from="2020 5" data-to="2021 10">39</text>
 
-
+        <text data-station="UWM2" data-from="2018 83" data-to="2018 87">Weimar</text>
+        <path data-line="ICE11" class="some" data-stops="+1* UE UWM2 -1* LL" data-from="2018 83" />
 
 
         <text data-station="AH">Hamburg</text>
@@ -490,6 +489,7 @@
         <path data-line="dummy" style="stroke:transparent" data-stops="hRB hEOB" data-from="2004 74 noanim" />
         <path data-line="dummy" style="stroke:transparent" data-stops="hRB hEOB" data-from="2006 76 noanim" />
         <path data-line="dummy" style="stroke:transparent" data-stops="hRB hEOB" data-from="2010 15 noanim" />
+        <path data-line="dummy" style="stroke:transparent" data-stops="hRB hEOB" data-from="2010 58 noanim" />
 
 
         <text data-line="ICE11" data-from="2002 1" data-to="2002 10">6</text>
@@ -754,5 +754,5 @@
     </g>
     <rect id="epoch-label-bg" x="1519" y="50" width="180" height="90" />
     <text id="epoch-label" x="1609" y="100"></text>
-    <script xlink:href="../dist/network-animator.js" />
+    <script xlink:href="./network-animator.js" />
 </svg>
