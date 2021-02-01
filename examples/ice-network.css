@@ -83,7 +83,7 @@ svg {
     text-align: center;
 }
 
-.ICE11, .ICE31 {
+.ICE11, .ICE30, .ICE31 {
     stroke:#ee1d23;
     background-color: #ee1d23;
     color: white;
@@ -156,7 +156,7 @@ svg {
 }
 
 
-.ICE45, .ICE82, .ICE13 {
+.ICE45, .ICE82, .ICE13, .ICE14 {
     stroke:#0095d9;
     background-color: #0095d9;
     color: white;
