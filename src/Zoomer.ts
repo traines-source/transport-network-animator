@@ -1,7 +1,8 @@
 import { Instant } from "./Instant";
 import { Vector } from "./Vector";
 import { Rotation } from "./Rotation";
-import { TimedDrawable, BoundingBox } from "./Drawable";
+import { TimedDrawable } from "./Drawable";
+import { BoundingBox } from "./BoundingBox";
 
 
 
@@ -17,15 +18,10 @@ export class Zoomer {
         console.log('canvas', this.canvasSize);
     }
 
-    include(boundingBox: BoundingBox, from: Instant, to: Instant, draw: boolean, shouldAnimate: boolean) {
+    include(boundingBox: BoundingBox, from: Instant, to: Instant, draw: boolean, shouldAnimate: boolean, pad: boolean = true) {
         const now = draw ? from : to;
         if (shouldAnimate && !now.flag.includes('nozoom')) {
-            if (now.flag.includes('slowzoom') && draw) {
-                this.customDuration = from.delta(to) - Zoomer.ZOOM_DURATION;
-            } else if (now.flag.includes('slowzoom') && !draw) {
-                this.customDuration = 0;
-                boundingBox = new BoundingBox(Vector.NULL, Vector.NULL);
-            } else if (!boundingBox.isNull()) {
+            if (pad && !boundingBox.isNull()) {
                 boundingBox = this.paddedBoundingBox(boundingBox);
             }
             this.boundingBox.tl = this.boundingBox.tl.bothAxisMins(boundingBox.tl);

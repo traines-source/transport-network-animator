@@ -1,11 +1,14 @@
-import { TimedDrawable, Timed, BoundingBox } from "./Drawable";
+import { TimedDrawable, Timed } from "./Drawable";
+import { BoundingBox } from "./BoundingBox";
 import { Vector } from "./Vector";
+import { Zoomer } from "./Zoomer";
+import { Instant } from "./Instant";
 
 export interface GenericTimedDrawableAdapter extends Timed {
     name: string;
     boundingBox: BoundingBox;
     zoom: Vector;
-    draw(delaySeconds: number): void;
+    draw(delaySeconds: number, animationDurationSeconds: number, zoomCenter: Vector, zoomScale: number): void;
     erase(delaySeconds: number): void;
 }
 
@@ -19,9 +22,12 @@ export class GenericTimedDrawable implements TimedDrawable {
     from = this.adapter.from;
     to = this.adapter.to;
     name = this.adapter.name;
+    boundingBox = this.adapter.boundingBox;
 
     draw(delay: number, animate: boolean): number {
-        this.adapter.draw(delay);
+        const zoomer = new Zoomer(this.boundingBox);
+        zoomer.include(this.getZoomedBoundingBox(), Instant.BIG_BANG, Instant.BIG_BANG, true, true, false);
+        this.adapter.draw(delay, this.adapter.from.delta(this.adapter.to), zoomer.center, zoomer.scale);
         return 0;
     }
 
@@ -30,23 +36,17 @@ export class GenericTimedDrawable implements TimedDrawable {
         return 0;
     }
 
-    get boundingBox(): BoundingBox {
+    private getZoomedBoundingBox(): BoundingBox {
         const bbox = this.adapter.boundingBox;
 
         const center = this.adapter.zoom;
-        if (this.adapter.zoom != Vector.NULL) {
-            const zoomBbox = this.calculateBoundingBoxForZoom(center.x, center.y, bbox);
+        if (center != Vector.NULL) {
+            const zoomBbox = bbox.calculateBoundingBoxForZoom(center.x, center.y);
             console.log('zoom', zoomBbox);
             return zoomBbox;
         }
         return bbox;
     }
 
-    private calculateBoundingBoxForZoom(percentX: number, percentY: number, bbox: BoundingBox): BoundingBox {
-        const delta = bbox.dimensions;
-        const relativeCenter = new Vector(percentX/100, percentY/100);
-        const center = bbox.tl.add(new Vector(delta.x*relativeCenter.x, delta.y*relativeCenter.y));
-        const edgeDistance = new Vector(delta.x*Math.min(relativeCenter.x, 1-relativeCenter.x), delta.y*Math.min(relativeCenter.y, 1-relativeCenter.y));
-        return new BoundingBox(center.add(new Vector(-edgeDistance.x, -edgeDistance.y)), center.add(edgeDistance));
-    }
+    
 }

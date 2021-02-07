@@ -2,9 +2,13 @@ import { Instant } from "../Instant";
 import { Vector } from "../Vector";
 import { GenericTimedDrawableAdapter } from "../GenericTimedDrawable";
 import { DEFAULT_MIN_VERSION } from "tls";
-import { BoundingBox } from "../Drawable";
+import { BoundingBox } from "../BoundingBox";
+import { SvgNetwork } from "./SvgNetwork";
 
 export class SvgGenericTimedDrawable implements GenericTimedDrawableAdapter {
+
+    private currentZoomCenter: Vector = Vector.NULL;
+    private currentZoomScale: number = 1;
 
     constructor(private element: SVGGraphicsElement) {
 
@@ -29,7 +33,7 @@ export class SvgGenericTimedDrawable implements GenericTimedDrawableAdapter {
         return bbox;
     }
 
-    get zoom() {
+    get zoom(): Vector {
         if (this.element.dataset['zoom'] != undefined) {
             const center = this.element.dataset['zoom'].split(' ');
             return new Vector(parseInt(center[0]) || 50, parseInt(center[1]) || 50);
@@ -37,13 +41,45 @@ export class SvgGenericTimedDrawable implements GenericTimedDrawableAdapter {
         return Vector.NULL;
     }
 
-    draw(delaySeconds: number): void {
+    draw(delaySeconds: number, animationDurationSeconds: number, zoomCenter: Vector, zoomScale: number): void {
         if (delaySeconds > 0) {
             const label = this;
-            window.setTimeout(function() { label.draw(0); }, delaySeconds * 1000);
+            window.setTimeout(function() { label.draw(0, animationDurationSeconds, zoomCenter, zoomScale); }, delaySeconds * 1000);
             return;
         }
         this.element.style.visibility = 'visible';
+        this.doZoom(zoomCenter, zoomScale, animationDurationSeconds);
+    }
+
+    private doZoom(zoomCenter: Vector, zoomScale: number, animationDurationSeconds: number) {
+        this.animateFrame(0, 1/animationDurationSeconds/SvgNetwork.FPS, this.currentZoomCenter, zoomCenter, this.currentZoomScale, zoomScale);
+        this.currentZoomCenter = zoomCenter;
+        this.currentZoomScale = zoomScale;
+    }
+
+    private animateFrame(x: number, animationPerFrame: number, fromCenter: Vector, toCenter: Vector, fromScale: number, toScale: number): void {
+        if (x < 1) {
+            x += animationPerFrame;
+            const fx = x;
+            const delta = fromCenter.delta(toCenter)
+            const center = new Vector(delta.x * fx, delta.y * fx).add(fromCenter);
+            const scale = (toScale - fromScale) * fx + fromScale;
+            this.updateZoom(center, scale);
+            const network = this;
+            window.requestAnimationFrame(function() { network.animateFrame(x, animationPerFrame, fromCenter, toCenter, fromScale, toScale); });
+        } else {
+            this.updateZoom(toCenter, toScale);
+        }
+    }
+
+    private updateZoom(center: Vector, scale: number) {
+        const zoomable = this.element;
+        if (zoomable != undefined) {
+            const origin = this.boundingBox.tl.between(this.boundingBox.br, 0.5);
+            //zoomable.style.transformOrigin = origin.x + 'px ' + origin.y + 'px';
+            zoomable.style.transformOrigin = 'center center';
+            zoomable.style.transform = 'scale(' + scale + ') translate(' + (origin.x - center.x) + 'px,' + (origin.y - center.y) + 'px)';
+        }
     }
 
     erase(delaySeconds: number): void {

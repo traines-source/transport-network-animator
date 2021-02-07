@@ -3,7 +3,7 @@ import { Vector } from "../Vector";
 import { Stop } from "../Station";
 import { Instant } from "../Instant";
 import { SvgNetwork } from "./SvgNetwork";
-import { BoundingBox } from "../Drawable";
+import { BoundingBox } from "../BoundingBox";
 
 export class SvgLine implements LineAdapter {
 

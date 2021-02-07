@@ -1,5 +1,6 @@
 import { NetworkAdapter, Network, StationProvider } from "../Network";
-import { TimedDrawable, BoundingBox } from "../Drawable";
+import { TimedDrawable } from "../Drawable";
+import { BoundingBox } from "../BoundingBox";
 import { Vector } from "../Vector";
 import { Rotation } from "../Rotation";
 import { Station } from "../Station";

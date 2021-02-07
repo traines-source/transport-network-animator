@@ -4,7 +4,7 @@ import { Instant } from "../Instant";
 import { Vector } from "../Vector";
 import { Utils } from "../Utils";
 import { SvgNetwork } from "./SvgNetwork";
-import { BoundingBox } from "../Drawable";
+import { BoundingBox } from "../BoundingBox";
 
 export class SvgLabel implements LabelAdapter {
 

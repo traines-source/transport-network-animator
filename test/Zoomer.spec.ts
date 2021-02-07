@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import { Vector } from '../src/Vector';
 import { Zoomer } from '../src/Zoomer';
 import { Instant } from '../src/Instant';
-import { BoundingBox } from '../src/Drawable';
+import { BoundingBox } from "../src/BoundingBox";
 
 describe('Zoomer', () => {
 

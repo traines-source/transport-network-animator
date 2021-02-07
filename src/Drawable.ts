@@ -1,5 +1,5 @@
 import { Instant } from "./Instant";
-import { Vector } from "./Vector";
+import { BoundingBox } from "./BoundingBox";
 
 export interface Drawable {
     name: string;
@@ -16,15 +16,3 @@ export interface Timed {
 export interface TimedDrawable extends Drawable, Timed {
 }
 
-export class BoundingBox {    
-    constructor(public tl: Vector, public br: Vector) {
-    }
-
-    get dimensions(): Vector {
-        return this.tl.delta(this.br);
-    }
-
-    isNull() {
-        return this.tl == Vector.NULL || this.br == Vector.NULL;
-    }
-}

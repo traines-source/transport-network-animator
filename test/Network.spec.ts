@@ -4,7 +4,8 @@ import { Station, StationAdapter } from '../src/Station';
 import { Vector } from '../src/Vector';
 import { Rotation } from '../src/Rotation';
 import { instance, mock, when, verify, anything } from 'ts-mockito';
-import { TimedDrawable, BoundingBox } from '../src/Drawable';
+import { TimedDrawable } from '../src/Drawable';
+import { BoundingBox } from "../src/BoundingBox";
 import { Instant } from '../src/Instant';
 
 describe('Network', () => {

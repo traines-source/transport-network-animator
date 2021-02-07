@@ -1,4 +1,5 @@
-import { TimedDrawable, BoundingBox } from "./Drawable";
+import { TimedDrawable } from "./Drawable";
+import { BoundingBox } from "./BoundingBox";
 import { Instant } from "./Instant";
 import { Station } from "./Station";
 import { Vector } from "./Vector";
