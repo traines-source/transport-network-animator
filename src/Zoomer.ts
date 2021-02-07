@@ -13,6 +13,7 @@ export class Zoomer {
     
     private boundingBox = new BoundingBox(Vector.NULL, Vector.NULL);
     private customDuration = -1;
+    private resetFlag = false;
     
     constructor(private canvasSize: BoundingBox) {
         console.log('canvas', this.canvasSize);
@@ -20,12 +21,19 @@ export class Zoomer {
 
     include(boundingBox: BoundingBox, from: Instant, to: Instant, draw: boolean, shouldAnimate: boolean, pad: boolean = true) {
         const now = draw ? from : to;
-        if (shouldAnimate && !now.flag.includes('nozoom')) {
-            if (pad && !boundingBox.isNull()) {
-                boundingBox = this.paddedBoundingBox(boundingBox);
+        if (now.flag.includes('keepzoom')) {
+            this.resetFlag = false;
+        } else {
+            if (this.resetFlag) {
+                this.doReset();
             }
-            this.boundingBox.tl = this.boundingBox.tl.bothAxisMins(boundingBox.tl);
-            this.boundingBox.br = this.boundingBox.br.bothAxisMaxs(boundingBox.br);
+            if (shouldAnimate && !now.flag.includes('nozoom')) {
+                if (pad && !boundingBox.isNull()) {
+                    boundingBox = this.paddedBoundingBox(boundingBox);
+                }
+                this.boundingBox.tl = this.boundingBox.tl.bothAxisMins(boundingBox.tl);
+                this.boundingBox.br = this.boundingBox.br.bothAxisMaxs(boundingBox.br);
+            }
         }
     }
 
@@ -78,5 +86,15 @@ export class Zoomer {
             return Zoomer.ZOOM_DURATION;
         }
         return this.customDuration;
+    }
+
+    private doReset() {
+        this.boundingBox = new BoundingBox(Vector.NULL, Vector.NULL);
+        this.customDuration = -1;
+        this.resetFlag = false;
+    }
+
+    public reset() {
+        this.resetFlag = true;
     }
 }

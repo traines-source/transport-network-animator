@@ -56,3 +56,4 @@ The code can quite easily be rewritten to use another base technology, e.g. HTML
 
 ## Breaking Changes
 * Stations need to have a `data-station` attribute instead of an `id`. Elements that can be animated will be sourced from the entire SVG document instead of only the `elements` and `station` groups.
+* To achieve the previous behavior of the `noanim` flag, the `noanim-nozoom` flags now need to be used.

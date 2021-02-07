@@ -28,9 +28,11 @@ export class Network implements StationProvider {
     private lineGroups: { [id: string] : LineGroup } = {};
     private eraseBuffer: TimedDrawable[] = [];
     private gravitator: Gravitator;
+    private zoomer: Zoomer;
 
     constructor(private adapter: NetworkAdapter) {
         this.gravitator = new Gravitator(this);
+        this.zoomer = new Zoomer(this.adapter.canvasSize);
     }
 
     initialize(): void {
@@ -67,43 +69,43 @@ export class Network implements StationProvider {
     }
 
     drawTimedDrawablesAt(now: Instant, animate: boolean): number {
-        const zoomer = new Zoomer(this.adapter.canvasSize);
         this.displayInstant(now);
         const elements: TimedDrawable[] = this.timedDrawablesAt(now);
         let delay = Zoomer.ZOOM_DURATION;
         for (let i=0; i<elements.length; i++) {
-            delay = this.drawOrEraseElement(elements[i], delay, animate, now, zoomer);
+            delay = this.drawOrEraseElement(elements[i], delay, animate, now);
         }
-        delay = this.flushEraseBuffer(delay, animate, zoomer);
+        delay = this.flushEraseBuffer(delay, animate);
         console.log(now);
         delay = this.gravitator.gravitate(delay, animate);
-        this.adapter.zoomTo(zoomer.center, zoomer.scale, zoomer.duration);
+        this.adapter.zoomTo(this.zoomer.center, this.zoomer.scale, this.zoomer.duration);
+        this.zoomer.reset();
         return delay;
     }
 
-    private flushEraseBuffer(delay: number, animate: boolean, zoomer: Zoomer): number {
+    private flushEraseBuffer(delay: number, animate: boolean): number {
         for (let i=this.eraseBuffer.length-1; i>=0; i--) {
             const element = this.eraseBuffer[i];
             const shouldAnimate = this.shouldAnimate(element.to, animate);
             delay += this.eraseElement(element, delay, shouldAnimate);
-            zoomer.include(element.boundingBox, element.from, element.to, false, shouldAnimate);
+            this.zoomer.include(element.boundingBox, element.from, element.to, false, animate);
         }
         this.eraseBuffer = [];
         return delay;
     }
 
-    private drawOrEraseElement(element: TimedDrawable, delay: number, animate: boolean, instant: Instant, zoomer: Zoomer): number {
+    private drawOrEraseElement(element: TimedDrawable, delay: number, animate: boolean, instant: Instant): number {
         if (instant.equals(element.to) && !element.from.equals(element.to)) {
             if (this.eraseBuffer.length > 0 && this.eraseBuffer[this.eraseBuffer.length-1].name != element.name) {
-                delay = this.flushEraseBuffer(delay, animate, zoomer);
+                delay = this.flushEraseBuffer(delay, animate);
             }
             this.eraseBuffer.push(element);
             return delay;
         }
-        delay = this.flushEraseBuffer(delay, animate, zoomer);
+        delay = this.flushEraseBuffer(delay, animate);
         const shouldAnimate = this.shouldAnimate(element.from, animate);
         delay += this.drawElement(element, delay, shouldAnimate);
-        zoomer.include(element.boundingBox, element.from, element.to, true, shouldAnimate);
+        this.zoomer.include(element.boundingBox, element.from, element.to, true, animate);
         return delay;
     }
     
@@ -121,7 +123,7 @@ export class Network implements StationProvider {
     private shouldAnimate(instant: Instant, animate: boolean): boolean {
         if (!animate)
             return false;
-        if (instant.flag == 'noanim')
+        if (instant.flag.includes('noanim'))
             return false;
         return animate;
     }
