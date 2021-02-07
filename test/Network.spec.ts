@@ -45,9 +45,11 @@ describe('Network', () => {
     })
 
     it('whenGetStationbyId', () => {
+        when(stationAdapter.id).thenReturn('a');
         const a = new Station(instance(stationAdapter));
-        when(networkAdapter.stationById('a')).thenReturn(a);
+
         const underTest = new Network(instance(networkAdapter));
+        underTest.addToIndex(a);
 
         expect(underTest.stationById('a')).eql(a);
         expect(underTest.stationById('a')).eql(a);
