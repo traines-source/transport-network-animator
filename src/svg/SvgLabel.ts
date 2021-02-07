@@ -42,12 +42,15 @@ export class SvgLabel implements LabelAdapter {
             window.setTimeout(function() { label.draw(0, textCoords, labelDir, children); }, delaySeconds * 1000);
             return;
         }
-        this.setCoord(this.element, textCoords);
-
-        if (children.length > 0) {
-            this.drawLineLabels(labelDir, children);
+        if (textCoords != Vector.NULL) {
+            this.setCoord(this.element, textCoords);
+            if (children.length > 0) {
+                this.drawLineLabels(labelDir, children);
+            } else {
+                this.drawStationLabel(labelDir);
+            }
         } else {
-            this.drawStationLabel(labelDir);
+            this.element.style.visibility = 'visible';
         }
     }
 

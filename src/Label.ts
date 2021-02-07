@@ -74,6 +74,8 @@ export class Label implements TimedDrawable {
                 }
             
             });
+        } else {
+            this.adapter.draw(delay, Vector.NULL, Rotation.from('n'), []);
         }
         return 0;
     }
@@ -107,6 +109,8 @@ export class Label implements TimedDrawable {
             this.children.forEach(c => {
                 c.erase(delay, animate, reverse);
             });
+        } else {
+            this.adapter.erase(delay);
         }
         return 0;
     }

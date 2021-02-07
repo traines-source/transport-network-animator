@@ -6,9 +6,6 @@ import { SvgNetwork } from "./SvgNetwork";
 
 export class SvgGenericTimedDrawable implements GenericTimedDrawableAdapter {
 
-    private currentZoomCenter: Vector = Vector.NULL;
-    private currentZoomScale: number = 1;
-
     constructor(private element: SVGGraphicsElement) {
 
     }
@@ -51,9 +48,7 @@ export class SvgGenericTimedDrawable implements GenericTimedDrawableAdapter {
     }
 
     private doZoom(zoomCenter: Vector, zoomScale: number, animationDurationSeconds: number) {
-        this.animateFrame(0, 1/animationDurationSeconds/SvgNetwork.FPS, this.currentZoomCenter, zoomCenter, this.currentZoomScale, zoomScale);
-        this.currentZoomCenter = zoomCenter;
-        this.currentZoomScale = zoomScale;
+        this.animateFrame(0, 1/animationDurationSeconds/SvgNetwork.FPS, this.boundingBox.tl.between(this.boundingBox.br, 0.5), zoomCenter, 1, zoomScale);
     }
 
     private animateFrame(x: number, animationPerFrame: number, fromCenter: Vector, toCenter: Vector, fromScale: number, toScale: number): void {
@@ -75,8 +70,7 @@ export class SvgGenericTimedDrawable implements GenericTimedDrawableAdapter {
         const zoomable = this.element;
         if (zoomable != undefined) {
             const origin = this.boundingBox.tl.between(this.boundingBox.br, 0.5);
-            //zoomable.style.transformOrigin = origin.x + 'px ' + origin.y + 'px';
-            zoomable.style.transformOrigin = 'center center';
+            zoomable.style.transformOrigin = origin.x + 'px ' + origin.y + 'px';
             zoomable.style.transform = 'scale(' + scale + ') translate(' + (origin.x - center.x) + 'px,' + (origin.y - center.y) + 'px)';
         }
     }
