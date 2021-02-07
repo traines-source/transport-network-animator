@@ -36,7 +36,7 @@ export class SvgNetwork implements NetworkAdapter {
     }
 
     initialize(network: Network): void {
-        let elements = document.getElementById('elements')?.children;
+        let elements = document.getElementsByTagName("*");
         if (elements == undefined)
         {
             console.error('Please define the "elements" group.');
@@ -51,25 +51,21 @@ export class SvgNetwork implements NetworkAdapter {
     }
 
     private mirrorElement(element: any, network: StationProvider): TimedDrawable | null {
-        if (element.localName == 'path') {
+        if (element.localName == 'path' && element.dataset.line != undefined) {
             return new Line(new SvgLine(element), network, this.beckStyle);
+        } else if (element.localName == 'rect' && element.dataset.station != undefined) {
+            return new Station(new SvgStation(element));
         } else if (element.localName == 'text') {
             return new Label(new SvgLabel(element), network);
-        }
-        return new GenericTimedDrawable(new SvgGenericTimedDrawable(element));
-    }
-
-    stationById(id: string): Station | null {
-        const element = document.getElementById(id);
-        if (element != undefined) {
-            return new Station(new SvgStation(<SVGRectElement> <unknown>element));
+        } else if (element.dataset.from != undefined || element.dataset.to != undefined) {
+            return new GenericTimedDrawable(new SvgGenericTimedDrawable(element));
         }
         return null;
     }
 
     createVirtualStop(id: string, baseCoords: Vector, rotation: Rotation): Station {
         const helpStop = <SVGRectElement> document.createElementNS(SvgNetwork.SVGNS, 'rect');
-        helpStop.id = id;    
+        helpStop.setAttribute('data-station', id);
         helpStop.setAttribute('data-dir', rotation.name);
         this.setCoord(helpStop, baseCoords);
         helpStop.className.baseVal = 'helper';

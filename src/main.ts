@@ -21,7 +21,7 @@ function getStartInstant(): Instant {
 }
 
 function slide(instant: Instant, animate: boolean): void {
-    if (instant.epoch == animateFromInstant.epoch && instant.second >= animateFromInstant.second)
+    if (instant != Instant.BIG_BANG && instant.epoch >= animateFromInstant.epoch && instant.second >= animateFromInstant.second)
         animate = true;
 
     network.drawTimedDrawablesAt(instant, animate);

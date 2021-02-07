@@ -81,7 +81,7 @@ export class Line implements TimedDrawable {
             if (stop == undefined)
                 throw new Error('Station with ID ' + stops[j].stationId + ' is undefined');
             stop.removeLine(this);
-            stop.draw(delay);
+            stop.draw(delay, animate);
             if (j > 0) {
                 const helpStopId = 'h_' + Utils.alphabeticId(stops[j-1].stationId, stops[j].stationId);
                 let helpStop = this.stationProvider.stationById(helpStopId);
@@ -135,7 +135,7 @@ export class Line implements TimedDrawable {
         station.addLine(this, newDir.isVertical() ? 'x' : 'y', newPos);
         path.push(newCoord);
         delay = this.getAnimationDuration(path, animate) + delay;
-        station.draw(delay);
+        station.draw(delay, animate);
         this.precedingStop = station;
     }
 

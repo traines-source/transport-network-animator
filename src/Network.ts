@@ -17,7 +17,6 @@ export interface StationProvider {
 export interface NetworkAdapter {
     canvasSize: BoundingBox;
     initialize(network: Network): void;
-    stationById(id: string): Station | null;
     createVirtualStop(id: string, baseCoords: Vector, rotation: Rotation): Station;
     drawEpoch(epoch: string): void;
     zoomTo(zoomCenter: Vector, zoomScale: number, animationDurationSeconds: number): void;
@@ -39,11 +38,6 @@ export class Network implements StationProvider {
     }
 
     stationById(id: string): Station | undefined {
-        if (this.stations[id] == undefined) {
-            const station = this.adapter.stationById(id)
-            if (station != null)
-                this.stations[id] = station;
-        }
         return this.stations[id];
     }
 
@@ -140,6 +134,9 @@ export class Network implements StationProvider {
         this.setSlideIndexElement(element.from, element);
         if (!Instant.BIG_BANG.equals(element.to))
             this.setSlideIndexElement(element.to, element);
+        if (element instanceof Station) {
+            this.stations[element.id] = element;
+        }
     }
 
     private setSlideIndexElement(instant: Instant, element: TimedDrawable): void {

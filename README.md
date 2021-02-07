@@ -9,7 +9,7 @@ See an example of how to use it in the [examples/](https://github.com/traines-so
 ## Steps to Animate a Network Map
 
 1. Create an SVG file as seen in the [examples/](https://github.com/traines-source/transport-network-animator/blame/master/examples/ice-network.svg) directory
-2. Define stations and their positions `<rect id="Berlin" x="150" y="510" data-dir="n" />`
+2. Define stations and their positions `<rect data-station="Berlin" x="150" y="510" data-dir="n" />`
 3. Define line segments connecting those stations `<path data-line="ICE1" data-stops="Berlin Hannover Frankfurt" data-from="1999 17" data-to="2003 30" />`
 4. View the animation in your browser (preferably Chrome)
 5. Iterate and fix the appearance of lines and stations until you're happy
@@ -18,14 +18,14 @@ See an example of how to use it in the [examples/](https://github.com/traines-so
 ## Concepts
 
 ### Stations
-Stations need to have an id and a position. They may have a direction (`data-dir`), in which they will be rotated (e.g. n, nw, se, e) and a label direction (`data-label-dir`), where labels belonging to this station will appear. Stations need to be added to the `stations` group.
+Stations need to have an id (`data-station`) and a position. They may have a direction (`data-dir`), in which they will be rotated (e.g. n, nw, se, e) and a label direction (`data-label-dir`), where labels belonging to this station will appear.
 
 ### Lines
-Each line segment needs to have a space separated list (`data-stops`) of station ids that it connects, where the first specified station is the origin and the last the terminus – the direction impacting the animation. In the `data-stops` string, before each station, additional flags can be set, which are discussed under Tracks. Usually, lines appear and disappear at certain points in time, which can be set using "instants" in the `data-from` and `data-to` fields. Multiple line segments together can form a line, identified by the common `data-line` name. Line segments of one line will adhere to a couple of special rules, e.g. they will join seamlessly and leave stations in the same direction they arrived, just as at interstations of a line segment.
+Each line segment needs to have a name (`data-line`) and a space separated list (`data-stops`) of station ids that it connects, where the first specified station is the origin and the last the terminus – the direction impacting the animation. In the `data-stops` string, before each station, additional flags can be set, which are discussed under Tracks. Usually, lines appear and disappear at certain points in time, which can be set using "instants" in the `data-from` and `data-to` fields. Multiple line segments together can form a line, identified by the common `data-line` name. Line segments of one line will adhere to a couple of special rules, e.g. they will join seamlessly and leave stations in the same direction they arrived, just as at interstations of a line segment.
 
 The algorithm will try to find a nice "Harry Beck style" way to draw the lines. Sometimes it will fail. You can fix this by adjusting station positioning and rotation and by adding additional "helper" stations while setting `class="helper"` in the example or making these helper stations invisible however you like.
 
-Lines will be animated with a constant speed, that is currently only configurable in the code. Lines need to be added to the `elements` group.
+Lines will be animated with a constant speed, that is currently only configurable in the code.
 
 ### Instants
 An "instant" is a point in time, consisting of an "epoch", a "second" and a flag. Seconds start again from 0 for each new epoch. Events defined for the same epoch and second will (a bit counterintuitively) not be animated at the same time, but exactly consecutively. This is very handy for multiple line segments or lines that should appear directly one after another in one single fluid animation. The order in which they are animated depends on the order the elements appear in the SVG source, with one exception: when removing elements (`data-to`), consecutive elements with the same name and instant will be animated in reverse order.
@@ -42,7 +42,7 @@ Line segments with the same line name will automatically share the same track at
 An asterisk (`*`) can be appended or specified alone as the track to mark the stop of this line segment as not being an origin or terminus of the entire line. This is only necessary in conjunction with line labels, see below.
 
 ### Labels
-A label can be defined for a station (`data-station`) or for a line (`data-line`). Labels can also have instants (`data-from` and `data-to`), however, labels won't appear unless the corresponding station is visible (i.e. has a line going through it). Station labels need to reference a station id, line labels a line name. Line labels will add the specified label to all origin and terminus stations of that line at this point in time. These stations are defined as all stations that are origin or terminus of exactly one line segment of that line. Sometimes you will need to exclude some stations from this list by specifing the `*` flag with the track. Labels are drawn at the position indicated by the `data-label-dir` property on that station. Labels need to be added to the `elements` group.
+A label can be defined for a station (`data-station`) or for a line (`data-line`). Labels can also have instants (`data-from` and `data-to`), however, labels won't appear unless the corresponding station is visible (i.e. has a line going through it). Station labels need to reference a station id, line labels a line name. Line labels will add the specified label to all origin and terminus stations of that line at this point in time. These stations are defined as all stations that are origin or terminus of exactly one line segment of that line. Sometimes you will need to exclude some stations from this list by specifing the `*` flag with the track. Labels are drawn at the position indicated by the `data-label-dir` property on that station.
 
 ### Zoom
 For each instant, the canvas will zoom to the bounding box of all elements that are animated during that instant. I.e. elements that have `noanim` or `nozoom` set are not taken into account for the calculation of the bounding box. If in this instant no elements qualify for zooming, the canvas will be zoomed out completely. There is always one second reserved for zooming at the beginning of each instant, which can currently only be configured in code. Only after that second will the animation of elements for that instant start. Zoom can be disabled altogether by removing the `zoomable` group.
@@ -53,3 +53,6 @@ Using SVG as the base, the appearance of the map can be tweaked and styled as yo
 For debugging, look at possible errors and warnings in the developer console of your browser. By appending a hashtag and the epoch to the URL under which you're viewing your SVG and then refreshing the page, you can jump to that very epoch skipping the preceding ones, so that you don't have to watch the entire animation over and over again.
 
 The code can quite easily be rewritten to use another base technology, e.g. HTML5 Canvas. It's just the TS classes prefixed with `Svg` that have to be reimplemented. I just happen to think (currently) that SVG is the best choice.
+
+## Breaking Changes
+* Stations need to have a `data-station` attribute instead of an `id`. Elements that can be animated will be sourced from the entire SVG document instead of only the `elements` and `station` groups.

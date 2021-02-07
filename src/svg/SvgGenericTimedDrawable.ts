@@ -1,7 +1,6 @@
 import { Instant } from "../Instant";
 import { Vector } from "../Vector";
 import { GenericTimedDrawableAdapter } from "../GenericTimedDrawable";
-import { DEFAULT_MIN_VERSION } from "tls";
 import { BoundingBox } from "../BoundingBox";
 import { SvgNetwork } from "./SvgNetwork";
 

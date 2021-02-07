@@ -4,13 +4,16 @@ import { Line } from "./Line";
 import { Utils } from "./Utils";
 import { PreferredTrack } from "./PreferredTrack";
 import { Label } from "./Label";
+import { TimedDrawable, Timed } from "./Drawable";
+import { BoundingBox } from "./BoundingBox";
 
-export interface StationAdapter {
+export interface StationAdapter extends Timed {
     baseCoords: Vector;
     rotation: Rotation;
     labelDir: Rotation;
     id: string;
     draw(delaySeconds: number, getPositionBoundaries: () => {[id: string]: [number, number]}): void;
+    erase(delaySeconds: number): void;
     move(delaySeconds: number, animationDurationSeconds: number, from: Vector, to: Vector, callback: () => void): void;
 }
 
@@ -26,7 +29,7 @@ export interface LineAtStation {
     track: number;
 }
 
-export class Station {
+export class Station implements TimedDrawable {
     static LINE_DISTANCE = 6;
     static DEFAULT_STOP_DIMEN = 10;
     static LABEL_DISTANCE = 0;
@@ -37,6 +40,9 @@ export class Station {
     rotation = this.adapter.rotation;
     labelDir = this.adapter.labelDir;
     id = this.adapter.id;
+    name = this.adapter.id;
+    from = this.adapter.from;
+    to = this.adapter.to;
 
     constructor(private adapter: StationAdapter) {
 
@@ -49,6 +55,12 @@ export class Station {
     set baseCoords(baseCoords: Vector) {
         this.adapter.baseCoords = baseCoords;
     }
+
+
+    get boundingBox() {
+        return new BoundingBox(this.adapter.baseCoords, this.adapter.baseCoords);
+    }
+
 
     addLine(line: Line, axis: string, track: number): void {
         this.phantom = undefined;
@@ -162,16 +174,22 @@ export class Station {
         return [left, right];
     }
 
-    draw(delaySeconds: number): void {
+    draw(delaySeconds: number, aniamte: boolean): number {
         const station = this;
         this.existingLabels.forEach(l => l.draw(delaySeconds, false));
         const t = station.positionBoundaries();
         this.adapter.draw(delaySeconds, function() { return t; });
+        return 0;
     }
 
     move(delaySeconds: number, animationDurationSeconds: number, to: Vector) {
         const station = this;
         this.adapter.move(delaySeconds, animationDurationSeconds, this.baseCoords, to, () => station.existingLabels.forEach(l => l.draw(0, false)));
+    }
+
+    erase(delaySeconds: number, animate: boolean, reverse: boolean): number {
+        this.adapter.erase(delaySeconds);
+        return 0;
     }
 
     stationSizeForAxis(axis: string, vector: number): number {
