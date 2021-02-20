@@ -9,12 +9,13 @@ const fmin = require('fmin');
 
 
 export class Gravitator {
-    static INERTNESS = 50;
+    static INERTNESS = 100;
     static GRADIENT_SCALE = 0.000000001;
-    static DEVIATION_WARNING = 0.1;
+    static DEVIATION_WARNING = 0.2;
     static INITIALIZE_RELATIVE_TO_EUCLIDIAN_DISTANCE = true;
     static SPEED = 250;
     static MAX_ANIM_DURATION = 6;
+    static COLOR_DEVIATION = 0.02;
 
     private initialWeightFactors: {[id: string] : number} = {};
     private initialAngles: {aStation: string, commonStation: string, bStation: string, angle: number}[] = [];
@@ -36,14 +37,16 @@ export class Gravitator {
         this.initialize();
         this.initializeGraph();
         const solution = this.minimizeLoss();
-        console.log(this.edges);
         this.assertDistances(solution);
         return this.moveStationsAndLines(solution, delay, animate);
     }
 
     private initialize() {
+        const weights = this.getWeightsSum();
+        const euclidian = this.getEuclidianDistanceSum();
+        console.log('weights:', weights, 'euclidian:', euclidian);
         if (this.averageEuclidianLengthRatio == -1 && Object.values(this.edges).length > 0) {
-            this.averageEuclidianLengthRatio = this.getWeightsSum() / this.getEuclidianDistanceSum();
+            this.averageEuclidianLengthRatio = weights / euclidian;
             console.log('averageEuclidianLengthRatio^-1', 1/this.averageEuclidianLengthRatio);
 
             //this.initializeAngleGradients();
@@ -204,7 +207,6 @@ export class Gravitator {
             const c = new Vector(A[gravitator.vertices[pair.bStation].index.x], A[gravitator.vertices[pair.bStation].index.y]);
 
             const delta = this.evaluateThreeDotFunction(this.angleF, a, b, c, pair.angle);
-            console.log(delta);
             fx += Math.pow(delta, 2) * Gravitator.INERTNESS;
 
             fxprime[gravitator.vertices[pair.aStation].index.x] += this.evaluateThreeDotFunction(this.angleFPrime['a_x'], a, b, c, pair.angle) * Gravitator.INERTNESS;
@@ -255,10 +257,16 @@ export class Gravitator {
             vertex.station.move(delay, animationDurationSeconds, new Vector(solution[vertex.index.x], solution[vertex.index.y]));
         }
         for (const edge of Object.values(this.edges)) {
-            edge.move(delay, animationDurationSeconds, [this.getNewStationPosition(edge.termini[0].stationId, solution), this.getNewStationPosition(edge.termini[1].stationId, solution)]);
+            const coords = [this.getNewStationPosition(edge.termini[0].stationId, solution), this.getNewStationPosition(edge.termini[1].stationId, solution)];
+            edge.move(delay, animationDurationSeconds, coords, this.getColorByDeviation(edge, edge.weight || 0));
         }
         delay += animationDurationSeconds;
         return delay;
+    }
+
+    private getColorByDeviation(edge: Line, weight: number) {
+        const initialDist = this.vertices[edge.termini[0].stationId].startCoords.delta(this.vertices[edge.termini[1].stationId].startCoords).length;
+        return Math.max(-1, Math.min(1, (weight - this.averageEuclidianLengthRatio * initialDist) * Gravitator.COLOR_DEVIATION));
     }
 
     private getTotalDistanceToMove(solution: number[]) {

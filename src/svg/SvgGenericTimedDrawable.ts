@@ -25,7 +25,6 @@ export class SvgGenericTimedDrawable implements GenericTimedDrawableAdapter {
     get boundingBox(): BoundingBox {
         const r = this.element.getBBox();
         const bbox = new BoundingBox(new Vector(r.x, r.y), new Vector(r.x+r.width, r.y+r.height));
-        console.log('bbox', bbox);
         return bbox;
     }
 

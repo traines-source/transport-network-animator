@@ -42,7 +42,6 @@ export class GenericTimedDrawable implements TimedDrawable {
         const center = this.adapter.zoom;
         if (center != Vector.NULL) {
             const zoomBbox = bbox.calculateBoundingBoxForZoom(center.x, center.y);
-            console.log('zoom', zoomBbox);
             return zoomBbox;
         }
         return bbox;

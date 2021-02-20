@@ -12,8 +12,8 @@ export interface LineAdapter extends Timed  {
     name: string;
     boundingBox: BoundingBox;
     weight: number | undefined;
-    draw(delaySeconds: number, animationDurationSeconds: number, path: Vector[], length: number): void;
-    move(delaySeconds: number, animationDurationSeconds: number, from: Vector[], to: Vector[]): void;
+    draw(delaySeconds: number, animationDurationSeconds: number, path: Vector[], length: number, colorDeviation: number): void;
+    move(delaySeconds: number, animationDurationSeconds: number, from: Vector[], to: Vector[], colorFrom: number, colorTo: number): void;
     erase(delaySeconds: number, animationDurationSeconds: number, reverse: boolean, length: number): void;
 }
 
@@ -52,12 +52,13 @@ export class Line implements TimedDrawable {
             track = track.keepOnlySign();
         }
         let duration = this.getAnimationDuration(path, animate);
-        this.stationProvider.lineGroupById(this.name).addLine(this);
-        this.adapter.draw(delay, duration, path, this.getTotalLength(path));
+        const lineGroup = this.stationProvider.lineGroupById(this.name);
+        lineGroup.addLine(this);
+        this.adapter.draw(delay, duration, path, this.getTotalLength(path), lineGroup.strokeColor);
         return duration;
     }
 
-    move(delay: number, animationDurationSeconds: number, path: Vector[]) {
+    move(delay: number, animationDurationSeconds: number, path: Vector[], colorDeviation: number) {
         let oldPath = this.path;
         if (oldPath.length < 2 || path.length < 2) {
             console.warn('Trying to move a non existing line');
@@ -67,7 +68,9 @@ export class Line implements TimedDrawable {
             oldPath = [oldPath[0], oldPath[oldPath.length-1]];
             path = [path[0], path[path.length-1]];
         }
-        this.adapter.move(delay, animationDurationSeconds, this.path, path);
+        const lineGroup = this.stationProvider.lineGroupById(this.name);
+        this.adapter.move(delay, animationDurationSeconds, this.path, path, lineGroup.strokeColor, colorDeviation);
+        lineGroup.strokeColor = colorDeviation;
         this.path = path;
     }
 

@@ -87,7 +87,6 @@ export class SvgNetwork implements NetworkAdapter {
     }
    
     zoomTo(zoomCenter: Vector, zoomScale: number, animationDurationSeconds: number) {
-        console.log(zoomCenter, zoomScale, animationDurationSeconds);
         const network = this;
         window.setTimeout(function() { network.doZoom(zoomCenter, zoomScale, animationDurationSeconds); },
         animationDurationSeconds <= Zoomer.ZOOM_DURATION ? 0 : Zoomer.ZOOM_DURATION * 1000);

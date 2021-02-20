@@ -4,6 +4,7 @@ import { Stop } from "./Station";
 export class LineGroup {
     private lines: Line[] = [];
     private _termini: Stop[] = [];
+    strokeColor = 0;
     
     addLine(line: Line): void {
         if (!this.lines.includes(line))
