@@ -80,7 +80,9 @@ export class SvgLine implements LineAdapter {
         this.createPath(path);
     
         this.updateDasharray(length);
-        this.updateColor(colorDeviation);
+        if (colorDeviation != 0) {
+            this.updateColor(colorDeviation);
+        }
         if (animationDurationSeconds == 0) {
             length = 0;
         }
