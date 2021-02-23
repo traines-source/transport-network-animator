@@ -241,11 +241,11 @@ export class Gravitator {
 
     private assertDistances(solution: number[]) {
         for (const [key, edge] of Object.entries(this.edges)) {
-            const deviation = Math.abs(1 - Math.sqrt(
+            const deviation = Math.sqrt(
                 Math.pow(this.deltaX(solution, this.vertices, edge.termini), 2) +
                 Math.pow(this.deltaY(solution, this.vertices, edge.termini), 2)
-            ) / (this.initialWeightFactors[key] * (edge.weight || 0)));
-            if (deviation > Gravitator.DEVIATION_WARNING) {
+            ) / (this.initialWeightFactors[key] * (edge.weight || 0)) - 1;
+            if (Math.abs(deviation) > Gravitator.DEVIATION_WARNING) {
                 console.warn(edge.name, 'diverges by ', deviation);
             }
         }
