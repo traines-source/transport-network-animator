@@ -76,7 +76,6 @@ export class Network implements StationProvider {
             delay = this.drawOrEraseElement(elements[i], delay, animate, now);
         }
         delay = this.flushEraseBuffer(delay, animate);
-        console.log(now);
         delay = this.gravitator.gravitate(delay, animate);
         this.adapter.zoomTo(this.zoomer.center, this.zoomer.scale, this.zoomer.duration);
         this.zoomer.reset();
