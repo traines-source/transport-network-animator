@@ -22,7 +22,8 @@
     "ts-node": "^8.10.2",
     "typescript": "^3.9.7",
     "webpack": "^4.44.2",
-    "webpack-cli": "^3.3.12"
+    "webpack-cli": "^3.3.12",
+    "webpack-license-plugin": "^4.1.2"
   },
   "scripts": {
     "wp": "webpack",

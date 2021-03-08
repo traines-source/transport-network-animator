@@ -1,4 +1,5 @@
 const path = require('path');
+const LicensePlugin = require('webpack-license-plugin')
 
 module.exports = {
   mode: 'development',
@@ -20,4 +21,7 @@ module.exports = {
     filename: 'network-animator.js',
     path: path.resolve(__dirname, 'dist'),
   },
+  plugins: [
+    new LicensePlugin()
+  ],
 };

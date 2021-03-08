@@ -71,7 +71,7 @@ export class SvgNetwork implements NetworkAdapter {
         helpStop.className.baseVal = 'helper';
         document.getElementById('stations')?.appendChild(helpStop);
         return new Station(new SvgStation(helpStop));  
-    };
+    }
 
     private setCoord(element: any, coord: Vector): void {
         element.setAttribute('x', coord.x);

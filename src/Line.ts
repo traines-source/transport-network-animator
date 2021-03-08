@@ -44,7 +44,7 @@ export class Line implements TimedDrawable {
             track = track.fromString(stops[j].preferredTrack);
             const stop = this.stationProvider.stationById(stops[j].stationId);
             if (stop == undefined)
-                throw new Error('Station with ID ' + stops[j].stationId + ' is undefined');
+                throw new Error(this.name + ': Station with ID ' + stops[j].stationId + ' is undefined');
             if (path.length == 0)
                 track = track.fromExistingLineAtStation(stop.axisAndTrackForExistingLine(this.name));
             
@@ -82,7 +82,7 @@ export class Line implements TimedDrawable {
         for (let j=0; j<stops.length; j++) {
             const stop = this.stationProvider.stationById(stops[j].stationId);
             if (stop == undefined)
-                throw new Error('Station with ID ' + stops[j].stationId + ' is undefined');
+                throw new Error(this.name + ': Station with ID ' + stops[j].stationId + ' is undefined');
             stop.removeLine(this);
             stop.draw(delay, animate);
             if (j > 0) {
@@ -101,7 +101,7 @@ export class Line implements TimedDrawable {
             const id = stops[currentStopIndex+1].stationId;
             const stop = this.stationProvider.stationById(id);
             if (stop == undefined)
-                throw new Error('Station with ID ' + id + ' is undefined');
+                throw new Error(this.name + ': Station with ID ' + id + ' is undefined');
             return stop.baseCoords;            
         }
         return defaultCoords;
