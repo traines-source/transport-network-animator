@@ -18,9 +18,11 @@ export interface StationAdapter extends Timed {
 }
 
 export class Stop {
-    constructor(public stationId: string, public preferredTrack: string) {
+    constructor(public stationId: string, public trackInfo: string) {
 
     }
+
+    public coord: Vector | null = null;
 }
 
 export interface LineAtStation {

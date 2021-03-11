@@ -586,7 +586,6 @@ function createAndAssertStandardLine(a: Station, b: Station, c: Station): Line {
         expect(path.shift()?.delta(new Vector(500, 300)).length).lessThan(0.1);
         expect(path.shift()).eql(new Vector(400, 200));
     })
-    console.log('station', a);
     when(stationProvider.stationById('a')).thenReturn(a);
     when(stationProvider.stationById('b')).thenReturn(b);
     when(stationProvider.stationById('c')).thenReturn(c);

@@ -16,7 +16,6 @@ export class Zoomer {
     private resetFlag = false;
     
     constructor(private canvasSize: BoundingBox) {
-        console.log('canvas', this.canvasSize);
     }
 
     include(boundingBox: BoundingBox, from: Instant, to: Instant, draw: boolean, shouldAnimate: boolean, pad: boolean = true) {

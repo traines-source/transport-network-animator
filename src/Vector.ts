@@ -98,4 +98,8 @@ export class Vector {
         const delta = this.delta(other);
         return this.add(delta.withLength(delta.length*x));
     }
+
+    equals(other: Vector) {
+        return this.x == other.x && this.y == other.y;
+    }
 }

@@ -61,7 +61,7 @@ export class SvgLine implements LineAdapter {
                     this._stops.push(nextStop);
                     nextStop = new Stop('', '');
                 } else {
-                    nextStop.preferredTrack = tokens[i];
+                    nextStop.trackInfo = tokens[i];
                 }
             }
         }

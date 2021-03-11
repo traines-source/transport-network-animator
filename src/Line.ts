@@ -33,22 +33,22 @@ export class Line implements TimedDrawable {
     
     private precedingStop: Station | undefined = undefined;
     private precedingDir: Rotation | undefined = undefined;
-    private path: Vector[] = [];
+    private _path: Vector[] = [];
 
     draw(delay: number, animate: boolean): number {
         const stops = this.adapter.stops;
-        const path = this.path;
+        const path = this._path;
         
         let track = new PreferredTrack('+');
         for (let j=0; j<stops.length; j++) {
-            track = track.fromString(stops[j].preferredTrack);
+            track = track.fromString(stops[j].trackInfo);
             const stop = this.stationProvider.stationById(stops[j].stationId);
             if (stop == undefined)
                 throw new Error(this.name + ': Station with ID ' + stops[j].stationId + ' is undefined');
             if (path.length == 0)
                 track = track.fromExistingLineAtStation(stop.axisAndTrackForExistingLine(this.name));
             
-            this.createConnection(stop, this.nextStopBaseCoord(stops, j, stop.baseCoords), track, path, delay, animate, true);
+            stops[j].coord = this.createConnection(stop, this.nextStopBaseCoord(stops, j, stop.baseCoords), track, path, delay, animate, true);
             track = track.keepOnlySign();
         }
         let duration = this.getAnimationDuration(path, animate);
@@ -59,7 +59,7 @@ export class Line implements TimedDrawable {
     }
 
     move(delay: number, animationDurationSeconds: number, path: Vector[], colorDeviation: number) {
-        let oldPath = this.path;
+        let oldPath = this._path;
         if (oldPath.length < 2 || path.length < 2) {
             console.warn('Trying to move a non existing line');
             return;
@@ -69,15 +69,15 @@ export class Line implements TimedDrawable {
             path = [path[0], path[path.length-1]];
         }
         const lineGroup = this.stationProvider.lineGroupById(this.name);
-        this.adapter.move(delay, animationDurationSeconds, this.path, path, lineGroup.strokeColor, colorDeviation);
+        this.adapter.move(delay, animationDurationSeconds, this._path, path, lineGroup.strokeColor, colorDeviation);
         lineGroup.strokeColor = colorDeviation;
-        this.path = path;
+        this._path = path;
     }
 
     erase(delay: number, animate: boolean, reverse: boolean): number {
-        let duration = this.getAnimationDuration(this.path, animate);
+        let duration = this.getAnimationDuration(this._path, animate);
         this.stationProvider.lineGroupById(this.name).removeLine(this);
-        this.adapter.erase(delay, duration, reverse, this.getTotalLength(this.path));
+        this.adapter.erase(delay, duration, reverse, this.getTotalLength(this._path));
         const stops = this.adapter.stops;
         for (let j=0; j<stops.length; j++) {
             const stop = this.stationProvider.stationById(stops[j].stationId);
@@ -107,7 +107,7 @@ export class Line implements TimedDrawable {
         return defaultCoords;
     }
 
-    private createConnection(station: Station, nextStopBaseCoord: Vector, track: PreferredTrack, path: Vector[], delay: number, animate: boolean, recurse: boolean): void {
+    private createConnection(station: Station, nextStopBaseCoord: Vector, track: PreferredTrack, path: Vector[], delay: number, animate: boolean, recurse: boolean): Vector {
         const dir = station.rotation;
         const baseCoord = station.baseCoords;
         const newDir = this.getStopOrientationBasedOnThreeStops(station, nextStopBaseCoord, dir, path);
@@ -128,8 +128,7 @@ export class Line implements TimedDrawable {
                 
                 this.precedingDir = this.precedingDir.add(new Rotation(180));
                 this.createConnection(helpStop, baseCoord, track.keepOnlySign(), path, delay, animate, false);
-                this.createConnection(station, nextStopBaseCoord, track, path, delay, animate, false);
-                return;
+                return this.createConnection(station, nextStopBaseCoord, track, path, delay, animate, false);
             } else if (!found) {
                 console.warn('path to fix on line', this.adapter.name, 'at station', station.id);
             }
@@ -137,9 +136,11 @@ export class Line implements TimedDrawable {
         }
         station.addLine(this, newDir.isVertical() ? 'x' : 'y', newPos);
         path.push(newCoord);
+
         delay = this.getAnimationDuration(path, animate) + delay;
         station.draw(delay, animate);
         this.precedingStop = station;
+        return newCoord;
     }
 
     private getStopOrientationBasedOnThreeStops(station: Station, nextStopBaseCoord: Vector, dir: Rotation, path: Vector[]): Rotation {
@@ -224,5 +225,18 @@ export class Line implements TimedDrawable {
         if (stops.length == 0) 
             return [];
         return [stops[0], stops[stops.length-1]];
+    }
+
+    get path(): Vector[] {
+        return this._path;
+    }
+
+    getStop(stationId: string): Stop | null {
+        for (const stop of Object.values(this.adapter.stops)) {
+            if (stop.stationId == stationId) {
+                return stop;
+            }
+        }
+        return null;
     }
 }

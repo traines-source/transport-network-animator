@@ -12,6 +12,9 @@ import { SvgLabel } from "./SvgLabel";
 import { GenericTimedDrawable } from "../GenericTimedDrawable";
 import { SvgGenericTimedDrawable } from "./SvgGenericTimedDrawable";
 import { Zoomer } from "../Zoomer";
+import { Train } from "../Train";
+import { SvgTrain } from "./SvgTrain";
+import { Utils } from "../Utils";
 
 export class SvgNetwork implements NetworkAdapter {
 
@@ -53,6 +56,8 @@ export class SvgNetwork implements NetworkAdapter {
     private mirrorElement(element: any, network: StationProvider): TimedDrawable | null {
         if (element.localName == 'path' && element.dataset.line != undefined) {
             return new Line(new SvgLine(element), network, this.beckStyle);
+        } else if (element.localName == 'path' && element.dataset.train != undefined) {
+            return new Train(new SvgTrain(element), network);
         } else if (element.localName == 'rect' && element.dataset.station != undefined) {
             return new Station(new SvgStation(element));
         } else if (element.localName == 'text') {
@@ -102,7 +107,7 @@ export class SvgNetwork implements NetworkAdapter {
     private animateFrame(x: number, animationPerFrame: number, ease: boolean, fromCenter: Vector, toCenter: Vector, fromScale: number, toScale: number): void {
         if (x < 1) {
             x += animationPerFrame;
-            const fx = ease ? this.ease(x) : x;
+            const fx = ease ? Utils.ease(x) : x;
             const delta = fromCenter.delta(toCenter)
             const center = new Vector(delta.x * fx, delta.y * fx).add(fromCenter);
             const scale = (toScale - fromScale) * fx + fromScale;
@@ -112,10 +117,6 @@ export class SvgNetwork implements NetworkAdapter {
         } else {
             this.updateZoom(toCenter, toScale);
         }
-    }
-
-    private ease(x: number) {
-        return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
     }
 
     private updateZoom(center: Vector, scale: number) {
