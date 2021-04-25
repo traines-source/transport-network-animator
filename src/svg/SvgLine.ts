@@ -76,7 +76,7 @@ export class SvgLine implements LineAdapter {
             return;
         }
     
-        this.element.className.baseVal += ' ' + this.name;
+        this.element.className.baseVal += ' line ' + this.name;
         this.createPath(path);
     
         this.updateDasharray(length);

@@ -57,6 +57,9 @@ export class SvgStation implements StationAdapter {
         const positionBoundaries = getPositionBoundaries();
         const stopDimen = [positionBoundaries.x[1] - positionBoundaries.x[0], positionBoundaries.y[1] - positionBoundaries.y[0]];
         
+        if (!this.element.className.baseVal.includes('station')) {
+            this.element.className.baseVal += ' station ' + this.id;
+        }
         this.element.style.visibility = stopDimen[0] < 0 && stopDimen[1] < 0 ? 'hidden' : 'visible';
 
         this.element.setAttribute('width', (Math.max(stopDimen[0], 0) * Station.LINE_DISTANCE + Station.DEFAULT_STOP_DIMEN) + '');

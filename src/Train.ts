@@ -40,14 +40,14 @@ export class Train implements TimedDrawable {
                 }
                 this.adapter.move(delay + arrdep.departure - this.from.second, arrdep.arrival - arrdep.departure, path);
             } else {
-                throw Error('no path found betwen ' + stops[i-1].stationId + ' ' + stops[i].stationId)
+                throw Error(this.name + ': No path found between ' + stops[i-1].stationId + ' ' + stops[i].stationId)
             }
         }
         return 0;
     }
 
     erase(delay: number, animate: boolean, reverse: boolean): number {
-        
+        this.adapter.erase(delay);
         return 0;
     }
 }

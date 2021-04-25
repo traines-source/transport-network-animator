@@ -30,33 +30,44 @@ export class LineGroup {
     }
 
     getPathBetween(stationIdFrom: string, stationIdTo: string): {path: Vector[], from: number, to: number} | null {
-        const from = this.getLineWithStop(stationIdFrom);
-        const to = this.getLineWithStop(stationIdTo);
-        if (from == null || to == null) {
+        const from = this.getLinesWithStop(stationIdFrom);
+        const to = this.getLinesWithStop(stationIdTo);
+
+        if (from.length == 0 || to.length == 0) {
             return null;
         }
-        if (from.line == to.line) {
-            return this.getPathBetweenStops(from.line, from.stop, to.stop);
-        } 
-        const common = this.findCommonStop(from.line, to.line);
-        if (common == null) {
-            throw new Error("Complex Train routing for Lines of LineGroups not yet implemented");
+
+        for (const a of Object.values(from)) {
+            for (const b of Object.values(to)) {
+                if (a.line == b.line) {
+                    return this.getPathBetweenStops(a.line, a.stop, b.stop);
+                }
+            }
         }
-        const firstPart = this.getPathBetweenStops(from.line, from.stop, common);
-        const secondPart = this.getPathBetweenStops(to.line, common, to.stop);
-        const firstPartSlice = firstPart.path.slice(0, firstPart.to+1);
-        const secondPartSlice = secondPart.path.slice(secondPart.from);
-        return { path: firstPartSlice.concat(secondPartSlice), from: firstPart.from, to: firstPartSlice.length + secondPart.to};
+        for (const a of Object.values(from)) {
+            for (const b of Object.values(to)) {
+                const common = this.findCommonStop(a.line, b.line);
+                if (common != null) {
+                    const firstPart = this.getPathBetweenStops(a.line, a.stop, common);
+                    const secondPart = this.getPathBetweenStops(b.line, common, b.stop);
+                    const firstPartSlice = firstPart.path.slice(0, firstPart.to+1);
+                    const secondPartSlice = secondPart.path.slice(secondPart.from);
+                    return { path: firstPartSlice.concat(secondPartSlice), from: firstPart.from, to: firstPartSlice.length + secondPart.to};
+                }
+            }
+        }
+        throw new Error("Complex Train routing for Lines of LineGroups not yet implemented");
     }
 
-    private getLineWithStop(stationId: string): {line: Line, stop: Stop} | null {
+    private getLinesWithStop(stationId: string): {line: Line, stop: Stop}[] {
+        const arr: {line: Line, stop: Stop}[] = [];
         for (const line of Object.values(this._lines)) {
             const stop = line.getStop(stationId);
             if (stop != null) {
-                return {line: line, stop: stop};
+                arr.push({line: line, stop: stop});
             }
         }
-        return null;
+        return arr;
     }
 
     private getPathBetweenStops(line: Line, from: Stop, to: Stop): {path: Vector[], from: number, to: number} {

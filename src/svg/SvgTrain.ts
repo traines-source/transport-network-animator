@@ -40,7 +40,7 @@ export class SvgTrain implements TrainAdapter {
         if (this._stops.length == 0) {
             const tokens = this.element.dataset.stops?.split(/\s+/) || [];
             let nextStop = new Stop('', '');
-            for(var i=0;i<tokens?.length;i++) {                
+            for (var i = 0; i < tokens?.length; i++) {
                 if (tokens[i][0] != '-' && tokens[i][0] != '+' && tokens[i][0] != '*') {
                     nextStop.stationId = tokens[i];
                     this._stops.push(nextStop);
@@ -63,17 +63,18 @@ export class SvgTrain implements TrainAdapter {
         return Instant.BIG_BANG;
     }
 
-    draw(delaySeconds: number, animate: boolean, follow: {path: Vector[], from: number, to: number}): void {
+    draw(delaySeconds: number, animate: boolean, follow: { path: Vector[], from: number, to: number }): void {
         if (delaySeconds > 0) {
             const train = this;
-            window.setTimeout(function() { train.draw(0, animate, follow); }, delaySeconds * 1000);
+            window.setTimeout(function () { train.draw(0, animate, follow); }, delaySeconds * 1000);
             return;
         }
-        this.createPath(this.calcTrainHinges(this.getPathLength(follow).lengthToStart, follow.path))
+        this.createPath(this.calcTrainHinges(this.getPathLength(follow).lengthToStart, follow.path));
+        this.element.className.baseVal += ' train';
         this.element.style.visibility = 'visible';
     }
 
-    move(delaySeconds: number, animationDurationSeconds: number, follow: {path: Vector[], from: number, to: number}) {
+    move(delaySeconds: number, animationDurationSeconds: number, follow: { path: Vector[], from: number, to: number }) {
         if (delaySeconds > 0) {
             const train = this;
             window.setTimeout(function () { train.move(0, animationDurationSeconds, follow); }, delaySeconds * 1000);
@@ -86,55 +87,55 @@ export class SvgTrain implements TrainAdapter {
             follow.path,
             pathLength.totalBoundedLength,
             pathLength.lengthToStart,
-            (-delaySeconds)/animationDurationSeconds,
-            1/animationDurationSeconds/SvgNetwork.FPS);
+            (-delaySeconds) / animationDurationSeconds,
+            1 / animationDurationSeconds / SvgNetwork.FPS);
     }
 
-    private getPathLength(follow: {path: Vector[], from: number, to: number}): {lengthToStart: number, totalBoundedLength: number} {
+    private getPathLength(follow: { path: Vector[], from: number, to: number }): { lengthToStart: number, totalBoundedLength: number } {
         let lengthToStart = 0;
         let totalBoundedLength = 0;
-        for(let i=0; i<follow.path.length-1; i++) {
-            const l = follow.path[i].delta(follow.path[i+1]).length;
+        for (let i = 0; i < follow.path.length - 1; i++) {
+            const l = follow.path[i].delta(follow.path[i + 1]).length;
             if (i < follow.from) {
                 lengthToStart += l;
             } else if (i < follow.to) {
                 totalBoundedLength += l;
             }
         }
-        return {lengthToStart: lengthToStart, totalBoundedLength: totalBoundedLength};
+        return { lengthToStart: lengthToStart, totalBoundedLength: totalBoundedLength };
     }
 
     private getPositionByLength(current: number, path: Vector[]): Vector {
         let thresh = 0;
-        for (let i=0; i<path.length - 1; i++) {
-            const delta = path[i].delta(path[i+1]);
+        for (let i = 0; i < path.length - 1; i++) {
+            const delta = path[i].delta(path[i + 1]);
             const l = delta.length;
             if (thresh + l >= current) {
-                return path[i].between(path[i+1], (current-thresh)/l).add(delta.rotate(new Rotation(90)).withLength(SvgTrain.TRACK_OFFSET));
+                return path[i].between(path[i + 1], (current - thresh) / l).add(delta.rotate(new Rotation(90)).withLength(SvgTrain.TRACK_OFFSET));
             }
             thresh += l;
         }
-        return path[path.length-1];
+        return path[path.length - 1];
     }
-    
+
     erase(delaySeconds: number): void {
         if (delaySeconds > 0) {
             const train = this;
-            window.setTimeout(function() { train.erase(0); }, delaySeconds * 1000);
+            window.setTimeout(function () { train.erase(0); }, delaySeconds * 1000);
             return;
         }
         this.element.style.visibility = 'hidden';
     }
 
     private createPath(path: Vector[]) {
-        const d = 'M' + path.map(v => v.x+','+v.y).join(' L');
+        const d = 'M' + path.map(v => v.x + ',' + v.y).join(' L');
         this.element.setAttribute('d', d);
     }
 
     private calcTrainHinges(front: number, path: Vector[]): Vector[] {
         const newTrain: Vector[] = [];
-        for (let i=0; i<this.length+1; i++) {
-            newTrain.push(this.getPositionByLength(front-i*SvgTrain.WAGON_LENGTH, path));
+        for (let i = 0; i < this.length + 1; i++) {
+            newTrain.push(this.getPositionByLength(front - i * SvgTrain.WAGON_LENGTH, path));
         }
         return newTrain;
     }
@@ -142,17 +143,17 @@ export class SvgTrain implements TrainAdapter {
     private ease(x: number): number {
         return -(Math.cos(Math.PI * x) - 1) / 2;
     }
-    
+
     private animateFrame(path: Vector[], totalBoundedLength: number, from: number, x: number, animationPerFrame: number): void {
         const current = from + this.ease(x) * totalBoundedLength;
         const train = this.calcTrainHinges(current, path);
         this.createPath(train);
 
         x += animationPerFrame;
-            
+
         if (x < 1) {
             const train = this;
-            window.requestAnimationFrame(function() { train.animateFrame(path, totalBoundedLength, from, x, animationPerFrame); });
+            window.requestAnimationFrame(function () { train.animateFrame(path, totalBoundedLength, from, x, animationPerFrame); });
         }
     }
 }
