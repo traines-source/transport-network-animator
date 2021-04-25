@@ -84,6 +84,9 @@ export class SvgNetwork implements NetworkAdapter {
     }
 
     drawEpoch(epoch: string): void {
+        const event = new CustomEvent('epoch', { detail: epoch });
+        document.dispatchEvent(event);
+        
         let epochLabel;
         if (document.getElementById('epoch-label') != undefined) {
             epochLabel = <SVGTextElement> <unknown> document.getElementById('epoch-label');
