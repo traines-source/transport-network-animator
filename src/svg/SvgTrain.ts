@@ -69,7 +69,7 @@ export class SvgTrain implements TrainAdapter {
             window.setTimeout(function () { train.draw(0, animate, follow); }, delaySeconds * 1000);
             return;
         }
-        this.createPath(this.calcTrainHinges(this.getPathLength(follow).lengthToStart, follow.path));
+        this.setPath(this.calcTrainHinges(this.getPathLength(follow).lengthToStart, follow.path));
         this.element.className.baseVal += ' train';
         this.element.style.visibility = 'visible';
     }
@@ -88,7 +88,9 @@ export class SvgTrain implements TrainAdapter {
             pathLength.totalBoundedLength,
             pathLength.lengthToStart,
             (-delaySeconds) / animationDurationSeconds,
-            1 / animationDurationSeconds / SvgNetwork.FPS);
+            animationDurationSeconds * 1000,
+            performance.now(),
+            performance.now());
     }
 
     private getPathLength(follow: { path: Vector[], from: number, to: number }): { lengthToStart: number, totalBoundedLength: number } {
@@ -127,7 +129,7 @@ export class SvgTrain implements TrainAdapter {
         this.element.style.visibility = 'hidden';
     }
 
-    private createPath(path: Vector[]) {
+    private setPath(path: Vector[]) {
         const d = 'M' + path.map(v => v.x + ',' + v.y).join(' L');
         this.element.setAttribute('d', d);
     }
@@ -144,16 +146,15 @@ export class SvgTrain implements TrainAdapter {
         return -(Math.cos(Math.PI * x) - 1) / 2;
     }
 
-    private animateFrame(path: Vector[], totalBoundedLength: number, from: number, x: number, animationPerFrame: number): void {
-        const current = from + this.ease(x) * totalBoundedLength;
-        const train = this.calcTrainHinges(current, path);
-        this.createPath(train);
-
-        x += animationPerFrame;
+    private animateFrame(path: Vector[], totalBoundedLength: number, lengthToStart: number, offset: number, animationDurationMs: number, startTime: DOMHighResTimeStamp, now: DOMHighResTimeStamp): void {
+        const x = offset + (now - startTime) / animationDurationMs * (offset + 1);
+        const current = lengthToStart + this.ease(x) * totalBoundedLength;
+        const trainPath = this.calcTrainHinges(current, path);
+        this.setPath(trainPath);
 
         if (x < 1) {
             const train = this;
-            window.requestAnimationFrame(function () { train.animateFrame(path, totalBoundedLength, from, x, animationPerFrame); });
+            window.requestAnimationFrame(function (timestamp) { train.animateFrame(path, totalBoundedLength, lengthToStart, offset, animationDurationMs, startTime, timestamp); });
         }
     }
 }
