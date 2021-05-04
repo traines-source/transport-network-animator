@@ -66,13 +66,13 @@ export class Rotation {
         return this.degrees % 180 == 0;
     }
 
-    quarterDirection(relativeTo: Rotation) {
+    quarterDirection(relativeTo: Rotation): Rotation {
         const deltaDir = relativeTo.delta(this).degrees;
         const deg = deltaDir < 0 ? Math.ceil((deltaDir-45)/90) : Math.floor((deltaDir+45)/90);
         return new Rotation(deg*90);
     }
 
-    halfDirection(relativeTo: Rotation, splitAxis: Rotation) {
+    halfDirection(relativeTo: Rotation, splitAxis: Rotation): Rotation {
         const deltaDir = relativeTo.delta(this).degrees;
         let deg;
         if (splitAxis.isVertical()) {
@@ -88,4 +88,17 @@ export class Rotation {
         }
         return new Rotation(deg);
     }
+
+    nearestRoundedInDirection(relativeTo: Rotation, direction: number) {
+        const ceiledOrFlooredOrientation = relativeTo.round(direction);
+        const differenceInOrientation = Math.abs(ceiledOrFlooredOrientation.degrees - this.degrees) % 90;
+        return this.add(new Rotation(Math.sign(direction)*differenceInOrientation));
+    }
+
+    private round(direction: number): Rotation {
+        const deg = this.degrees / 45;
+        return new Rotation((direction >= 0 ? Math.ceil(deg) : Math.floor(deg)) * 45);
+    }
+
+    
 }

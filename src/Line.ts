@@ -198,7 +198,7 @@ export class Line implements TimedDrawable {
             const newCoord = toStop.baseCoords;
             const delta = newCoord.delta(oldCoord);
             const deg = oldCoord.delta(newCoord).inclination();
-            const intermediateDir = new Rotation((deg.delta(fromDir).degrees >= 0 ? Math.floor(deg.degrees / 45) : Math.ceil(deg.degrees / 45)) * 45).normalize();
+            const intermediateDir = fromStop.rotation.nearestRoundedInDirection(deg, fromDir.delta(deg).degrees);
             const intermediateCoord = delta.withLength(delta.length/2).add(newCoord);
 
             helpStop = this.stationProvider.createVirtualStop(helpStopId, intermediateCoord, intermediateDir);

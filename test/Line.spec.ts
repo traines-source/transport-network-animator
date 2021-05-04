@@ -95,13 +95,39 @@ describe('Line', () => {
         when(stationProvider.createVirtualStop('h_b_c', anything(), anything())).thenCall((id: string, v: Vector, r: Rotation) => {
             expect(r).eql(new Rotation(0));
             expect(v).eql(new Vector(250, 375));
-            return mockStation('h_b_c', new Vector(250, 375), new Rotation(0));
+            return mockStation(id, v, r);
         });
         const l = new Line(instance(lineAdapter), instance(stationProvider));
         expect(l.draw(2, true)).approximately(725 / Line.SPEED, 0.1);
     })
 
-    it('givenFourStopLineWithRightAngle', () => {
+    it('givenFourStopLineWithAllNorth_thenCreateHelperStop', () => {
+        when(lineAdapter.stops).thenReturn([new Stop('a', ''), new Stop('b', ''), new Stop('c', ''), new Stop('d', '')]);
+        when(lineAdapter.draw(2, anyNumber(), anything(), anything(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
+            const path = [...p];
+            console.log(path);
+            expect(path.shift()).eql(new Vector(500, 500));
+            expect(path.shift()).eql(new Vector(600, 500));
+            expect(path.shift()?.delta(new Vector(650, 500)).length).lessThan(0.1);
+            expect(path.shift()).eql(new Vector(700, 550));
+            expect(path.shift()?.delta(new Vector(750, 600)).length).lessThan(0.1);
+            expect(path.shift()).eql(new Vector(800, 600));
+            expect(path.shift()).eql(new Vector(900, 600));
+        })
+        when(stationProvider.stationById('a')).thenReturn(mockStation('a', new Vector(500, 500), Rotation.from('n')));
+        when(stationProvider.stationById('b')).thenReturn(mockStation('b', new Vector(600, 500), Rotation.from('n')));
+        when(stationProvider.stationById('c')).thenReturn(mockStation('c', new Vector(800, 600), Rotation.from('n')));
+        when(stationProvider.stationById('d')).thenReturn(mockStation('d', new Vector(900, 600), Rotation.from('n')));
+        when(stationProvider.createVirtualStop('h_b_c', anything(), anything())).thenCall((id: string, v: Vector, r: Rotation) => {
+            expect(r).eql(new Rotation(45));
+            expect(v).eql(new Vector(700, 550));
+            return mockStation(id, v, r);
+        });
+        const l = new Line(instance(lineAdapter), instance(stationProvider));
+        expect(l.draw(2, true)).approximately(441 / Line.SPEED, 0.1);
+    })
+
+    it('givenFourStopLineWithRightAngle_thenCreateHelperStopsWhereNecessary', () => {
         when(lineAdapter.stops).thenReturn([new Stop('d', ''), new Stop('c', ''), new Stop('b', ''), new Stop('a', '')]);
         when(lineAdapter.draw(2, anyNumber(), anything(), anything(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
             const path = [...p];
@@ -129,7 +155,7 @@ describe('Line', () => {
             return mockStation(id, v, r);
         });
         when(stationProvider.createVirtualStop('h_b_c', anything(), anything())).thenCall((id: string, v: Vector, r: Rotation) => {
-            expect(r).eql(new Rotation(0));
+            expect(r).eql(new Rotation(90));
             expect(v).eql(new Vector(475, 350));
             return mockStation(id, v, r);
         });
@@ -215,7 +241,7 @@ describe('Line', () => {
         when(stationProvider.stationById('b')).thenReturn(b);
         when(stationProvider.stationById('d')).thenReturn(d);
         when(stationProvider.createVirtualStop('h_b_d', anything(), anything())).thenCall((id: string, v: Vector, r: Rotation) => {
-            expect(r).eql(new Rotation(90));
+            expect(r).eql(new Rotation(0));
             expect(v).eql(new Vector(550, 375));
             return mockStation(id, v, r);
         });
@@ -313,7 +339,7 @@ describe('Line', () => {
         when(stationProvider.stationById('c')).thenReturn(c);
         when(stationProvider.stationById('d')).thenReturn(d);
         when(stationProvider.createVirtualStop('h_b_c', anything(), anything())).thenCall((id: string, v: Vector, r: Rotation) => {
-            expect(r).eql(new Rotation(-0));
+            expect(r).eql(new Rotation(0));
             expect(v).eql(new Vector(450, 300));
             return mockStation(id, v, r);
         });
@@ -450,7 +476,7 @@ describe('Line', () => {
         when(stationProvider.stationById('b')).thenReturn(b);
         when(stationProvider.stationById('d')).thenReturn(d);
         when(stationProvider.createVirtualStop('h_a_b', anything(), anything())).thenCall((id: string, v: Vector, r: Rotation) => {
-            expect(r).eql(new Rotation(0));
+            expect(r).eql(new Rotation(90));
             expect(v).eql(new Vector(500, 450));
             return mockStation(id, v, r);
         });

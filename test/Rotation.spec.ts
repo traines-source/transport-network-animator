@@ -139,4 +139,35 @@ describe('Rotation', () => {
         expect(new Rotation(  10).halfDirection(Rotation.from('w'), Rotation.from('w')).degrees).eql(180);
         expect(new Rotation( 100).halfDirection(Rotation.from('w'), Rotation.from('w')).degrees).eql(180);
     })
+
+    it('whenNearestRoundedInDirection', () => {
+        expect(new Rotation( 180).nearestRoundedInDirection(new Rotation(116), 1).degrees).eql(-135);
+        expect(new Rotation(-135).nearestRoundedInDirection(new Rotation(116), 1).degrees).eql(-135);
+        expect(new Rotation( -90).nearestRoundedInDirection(new Rotation(116), 1).degrees).eql(-45);
+        expect(new Rotation( -45).nearestRoundedInDirection(new Rotation(116), 1).degrees).eql(-45);
+        expect(new Rotation(   0).nearestRoundedInDirection(new Rotation(116), 1).degrees).eql(45);
+        expect(new Rotation(  45).nearestRoundedInDirection(new Rotation(116), 1).degrees).eql(45);
+        expect(new Rotation(  90).nearestRoundedInDirection(new Rotation(116), 1).degrees).eql(135);
+        expect(new Rotation( 135).nearestRoundedInDirection(new Rotation(116), 1).degrees).eql(135);
+
+        expect(new Rotation( 180).nearestRoundedInDirection(new Rotation(116), -1).degrees).eql(180);
+        expect(new Rotation(-135).nearestRoundedInDirection(new Rotation(116), -1).degrees).eql(180);
+        expect(new Rotation( -90).nearestRoundedInDirection(new Rotation(116), -1).degrees).eql(-90);
+        expect(new Rotation( -45).nearestRoundedInDirection(new Rotation(116), -1).degrees).eql(-90);
+        expect(new Rotation(   0).nearestRoundedInDirection(new Rotation(116), -1).degrees).eql(0);
+        expect(new Rotation(  45).nearestRoundedInDirection(new Rotation(116), -1).degrees).eql(0);
+        expect(new Rotation(  90).nearestRoundedInDirection(new Rotation(116), -1).degrees).eql(90);
+        expect(new Rotation( 135).nearestRoundedInDirection(new Rotation(116), -1).degrees).eql(90);
+
+        expect(new Rotation( 180).nearestRoundedInDirection(new Rotation(-45), -1).degrees).eql(135);
+        expect(new Rotation(-135).nearestRoundedInDirection(new Rotation(-45), -1).degrees).eql(-135);
+        expect(new Rotation( -90).nearestRoundedInDirection(new Rotation(-45),  1).degrees).eql(-45);
+        expect(new Rotation( -45).nearestRoundedInDirection(new Rotation(  0), -1).degrees).eql(-90);
+        expect(new Rotation(   0).nearestRoundedInDirection(new Rotation(  0), -1).degrees).eql(0);
+        expect(new Rotation(  45).nearestRoundedInDirection(new Rotation(  0),  1).degrees).eql(90);
+        expect(new Rotation(  90).nearestRoundedInDirection(new Rotation( 40), -1).degrees).eql(90);
+        expect(new Rotation( 135).nearestRoundedInDirection(new Rotation( 40),  1).degrees).eql(135);
+
+    
+    })
 })
