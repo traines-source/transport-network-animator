@@ -1,6 +1,6 @@
 # Transport Network Animator
 
-A browser-based tool to animate maps of public transportation networks.
+An SVG-based tool to animate maps of public transportation networks.
 
 See an example of how to use it in the [examples/](https://github.com/traines-source/transport-network-animator/blame/master/examples/ice-network.svg) directory. See it in action in this video: https://youtu.be/1-3F0ViONS4
 
@@ -17,8 +17,18 @@ See an example of how to use it in the [examples/](https://github.com/traines-so
 
 ## Concepts
 
+This is not
+* a graph layout algorithm. You will have to position the stations (nodes) yourself.
+* an interactive UI. The map must be defined in SVG code.
+
+This is
+* a "Harry Beck style" algorithm. It will try to nicely draw the lines between the stations.
+* a time saver (given this software already exists). It saves you from having to tediously position and animate every single line segment.
+
 ### Stations
 Stations need to have an id (`data-station`) and a position. They may have a direction (`data-dir`), in which they will be rotated (e.g. n, nw, se, e) and a label direction (`data-label-dir`), where labels belonging to this station will appear.
+
+Once a line is assigned to a station, it will stay where it is, i.e. it is not moved or altered, until it is removed again. That means that the layout of lines and stations will not be optimized over time, during the animation, as more lines are added.
 
 ### Lines
 Each line segment needs to have a name (`data-line`) and a space separated list (`data-stops`) of station ids that it connects, where the first specified station is the origin and the last the terminus – the direction impacting the animation. In the `data-stops` string, before each station, additional flags can be set, which are discussed under Tracks. Usually, lines appear and disappear at certain points in time, which can be set using "instants" in the `data-from` and `data-to` fields. Multiple line segments together can form a line, identified by the common `data-line` name. Line segments of one line will adhere to a couple of special rules, e.g. they will join seamlessly and leave stations in the same direction they arrived, just as at interstations of a line segment.
@@ -45,7 +55,7 @@ An asterisk (`*`) can be appended or specified alone as the track to mark the st
 A label can be defined for a station (`data-station`) or for a line (`data-line`). Labels can also have instants (`data-from` and `data-to`), however, labels won't appear unless the corresponding station is visible (i.e. has a line going through it). Station labels need to reference a station id, line labels a line name. Line labels will add the specified label to all origin and terminus stations of that line at this point in time. These stations are defined as all stations that are origin or terminus of exactly one line segment of that line. Sometimes you will need to exclude some stations from this list by specifing the `*` flag with the track. Labels are drawn at the position indicated by the `data-label-dir` property on that station.
 
 ### Zoom
-For each instant, the canvas will zoom to the bounding box of all elements that are animated during that instant. I.e. elements that have `noanim` or `nozoom` set are not taken into account for the calculation of the bounding box. If in this instant no elements qualify for zooming, the canvas will be zoomed out completely. There is always one second reserved for zooming at the beginning of each instant, which can currently only be configured in code. Only after that second will the animation of elements for that instant start. Zoom can be disabled altogether by removing the `zoomable` group.
+For each instant, the canvas will zoom to the bounding box of all elements that are altered during that instant. Elements that have `nozoom` set are not taken into account for the calculation of the bounding box. If in this instant no elements qualify for zooming, the canvas will be zoomed out completely. There is always one second reserved for zooming at the beginning of each instant, which can currently only be configured in code. Only after that second will the animation of elements for that instant start. Zoom can be disabled altogether by removing the `zoomable` group.
 
 ## Why SVG?
 Using SVG as the base, the appearance of the map can be tweaked and styled as you wish, with additional SVG elements and CSS. The styles (e.g. colors) of the lines should also be adjusted via CSS. It might also come in handy to add a background map as SVG or embedded image. Please note that SVG filters do not seem to be supported by the timecut renderer, in case you want to render your animation to a video.
