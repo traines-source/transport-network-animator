@@ -33,7 +33,27 @@ export class SvgLine implements LineAdapter {
         return parseInt(this.element.dataset.length);
     }
 
+    get totalLength(): number {
+        return this.element.getTotalLength();
+    }
+
+    get speed(): number {
+        if (this.element.dataset.speed == undefined) {
+            return Line.SPEED;
+        }
+        return parseInt(this.element.dataset.speed);
+    }
+
     private updateBoundingBox(path: Vector[]): void {
+        if (path.length == 0) {
+            if (this.element.style.visibility == 'visible') {
+                const r = this.element.getBBox();
+                this.boundingBox = new BoundingBox(new Vector(r.x, r.y), new Vector(r.x+r.width, r.y+r.height));
+                return;
+            }
+            this.boundingBox = new BoundingBox(Vector.NULL, Vector.NULL);
+            return;
+        }
         for(let i=0;i<path.length;i++) {
             this.boundingBox.tl = this.boundingBox.tl.bothAxisMins(path[i]);
             this.boundingBox.br = this.boundingBox.br.bothAxisMaxs(path[i]);
@@ -115,6 +135,10 @@ export class SvgLine implements LineAdapter {
     }
 
     private createPath(path: Vector[]) {
+        this.element.style.visibility = 'visible';
+        if (path.length == 0) {
+            return;
+        }
         const d = 'M' + path.map(v => v.x+','+v.y).join(' L');
         this.element.setAttribute('d', d);
     }

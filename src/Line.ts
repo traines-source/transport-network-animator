@@ -12,6 +12,8 @@ export interface LineAdapter extends Timed  {
     name: string;
     boundingBox: BoundingBox;
     weight: number | undefined;
+    totalLength: number;
+    speed: number;
     draw(delaySeconds: number, animationDurationSeconds: number, path: Vector[], length: number, colorDeviation: number): void;
     move(delaySeconds: number, animationDurationSeconds: number, from: Vector[], to: Vector[], colorFrom: number, colorTo: number): void;
     erase(delaySeconds: number, animationDurationSeconds: number, reverse: boolean, length: number): void;
@@ -36,25 +38,13 @@ export class Line implements TimedDrawable {
     private _path: Vector[] = [];
 
     draw(delay: number, animate: boolean): number {
-        const stops = this.adapter.stops;
-        const path = this._path;
-        
-        let track = new PreferredTrack('+');
-        for (let j=0; j<stops.length; j++) {
-            track = track.fromString(stops[j].trackInfo);
-            const stop = this.stationProvider.stationById(stops[j].stationId);
-            if (stop == undefined)
-                throw new Error(this.name + ': Station with ID ' + stops[j].stationId + ' is undefined');
-            if (path.length == 0)
-                track = track.fromExistingLineAtStation(stop.axisAndTrackForExistingLine(this.name));
-            
-            stops[j].coord = this.createConnection(stop, this.nextStopBaseCoord(stops, j, stop.baseCoords), track, path, delay, animate, true);
-            track = track.keepOnlySign();
-        }
-        let duration = this.getAnimationDuration(path, animate);
+        if (this.adapter.totalLength == 0) {
+            this.createLine(delay, animate);
+        }        
+        let duration = this.getAnimationDuration(this._path, animate);
         const lineGroup = this.stationProvider.lineGroupById(this.name);
         lineGroup.addLine(this);
-        this.adapter.draw(delay, duration, path, this.getTotalLength(path), lineGroup.strokeColor);
+        this.adapter.draw(delay, duration, this._path, this.getTotalLength(this._path), lineGroup.strokeColor);
         return duration;
     }
 
@@ -94,6 +84,24 @@ export class Line implements TimedDrawable {
             }
         }
         return duration;
+    }
+
+    private createLine(delay: number, animate: boolean) {
+        const stops = this.adapter.stops;
+        const path = this._path;
+
+        let track = new PreferredTrack('+');
+        for (let j=0; j<stops.length; j++) {
+            track = track.fromString(stops[j].trackInfo);
+            const stop = this.stationProvider.stationById(stops[j].stationId);
+            if (stop == undefined)
+                throw new Error(this.name + ': Station with ID ' + stops[j].stationId + ' is undefined');
+            if (path.length == 0)
+                track = track.fromExistingLineAtStation(stop.axisAndTrackForExistingLine(this.name));
+            
+            stops[j].coord = this.createConnection(stop, this.nextStopBaseCoord(stops, j, stop.baseCoords), track, path, delay, animate, true);
+            track = track.keepOnlySign();
+        }
     }
 
     private nextStopBaseCoord(stops: Stop[], currentStopIndex: number, defaultCoords: Vector) {
@@ -209,10 +217,14 @@ export class Line implements TimedDrawable {
     private getAnimationDuration(path: Vector[], animate: boolean): number {
         if (!animate)
             return 0;
-        return this.getTotalLength(path) / Line.SPEED;
+        return this.getTotalLength(path) / this.adapter.speed;
     }
     
     private getTotalLength(path: Vector[]): number {
+        const actualLength = this.adapter.totalLength;
+        if (actualLength != 0) {
+            return actualLength;
+        }
         let length = 0;
         for (let i=0; i<path.length-1; i++) {
             length += path[i].delta(path[i+1]).length;
