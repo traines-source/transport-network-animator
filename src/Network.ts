@@ -16,6 +16,7 @@ export interface StationProvider {
 }
 export interface NetworkAdapter {
     canvasSize: BoundingBox;
+    autoStart: boolean;
     initialize(network: Network): void;
     createVirtualStop(id: string, baseCoords: Vector, rotation: Rotation): Station;
     drawEpoch(epoch: string): void;
@@ -33,6 +34,10 @@ export class Network implements StationProvider {
     constructor(private adapter: NetworkAdapter) {
         this.gravitator = new Gravitator(this);
         this.zoomer = new Zoomer(this.adapter.canvasSize);
+    }
+
+    get autoStart(): boolean {
+        return this.adapter.autoStart;
     }
 
     initialize(): void {

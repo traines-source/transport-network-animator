@@ -33,6 +33,11 @@ export class SvgNetwork implements NetworkAdapter {
         return new BoundingBox(Vector.NULL, Vector.NULL);        
     }
 
+    get autoStart(): boolean {
+        const svg = document.querySelector('svg');
+        return svg?.dataset.autoStart != 'false';
+    }
+
     get beckStyle(): boolean {
         const svg = document.querySelector('svg');
         return svg?.dataset.beckStyle != 'false';

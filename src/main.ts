@@ -2,15 +2,29 @@ import { SvgNetwork } from "./svg/SvgNetwork";
 import { Network } from "./Network";
 import { Instant } from "./Instant";
 
-// TODO: erase anim, labels, negative default tracks based on direction, rejoin lines track selection
-
 let timePassed = 0;
 
 const network: Network = new Network(new SvgNetwork());
-network.initialize();
-
 const animateFromInstant: Instant = getStartInstant();
-slide(Instant.BIG_BANG, false);
+let started = false;
+
+if (network.autoStart) {
+    started = true;
+    startTransportNetworkAnimator();
+}
+
+document.addEventListener('startTransportNetworkAnimator', function(e) {
+    if (started) {
+        console.warn('transport-network-animator already started. You should probably set data-auto-start="false". Starting anyways.')
+    }
+    started = true;
+    startTransportNetworkAnimator();
+});
+
+function startTransportNetworkAnimator() {
+    network.initialize();    
+    slide(Instant.BIG_BANG, false);
+}
 
 function getStartInstant(): Instant {
     if(window.location.hash) {
