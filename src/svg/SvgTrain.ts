@@ -1,7 +1,6 @@
 import { Vector } from "../Vector";
 import { Stop } from "../Station";
 import { Instant } from "../Instant";
-import { SvgNetwork } from "./SvgNetwork";
 import { BoundingBox } from "../BoundingBox";
 import { TrainAdapter } from "../Train";
 import { Rotation } from "../Rotation";
@@ -147,7 +146,7 @@ export class SvgTrain implements TrainAdapter {
     }
 
     private animateFrame(path: Vector[], totalBoundedLength: number, lengthToStart: number, offset: number, animationDurationMs: number, startTime: DOMHighResTimeStamp, now: DOMHighResTimeStamp): void {
-        const x = offset + (now - startTime) / animationDurationMs * (offset + 1);
+        const x = (now - startTime) / animationDurationMs + offset;
         const current = lengthToStart + this.ease(x) * totalBoundedLength;
         const trainPath = this.calcTrainHinges(current, path);
         this.setPath(trainPath);
