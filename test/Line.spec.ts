@@ -13,6 +13,7 @@ describe('Line', () => {
 
     beforeEach(() => {
         lineAdapter = mock();
+        when(lineAdapter.speed).thenReturn(undefined);
         stationProvider = mockStationProvider();
     })
 
@@ -403,6 +404,7 @@ describe('Line', () => {
         stationProvider = mockStationProvider();
         when(lineAdapter.stops).thenReturn([new Stop('d', '+1'), new Stop('b', '-2')]);
         when(lineAdapter.name).thenReturn('l3');
+        when(lineAdapter.speed).thenReturn(155);
         when(lineAdapter.draw(4, anyNumber(), anything(), anything(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
             const path = [...p];
             expect(path.shift()).eql(new Vector(600+Station.LINE_DISTANCE/Math.sqrt(2), 200+Station.LINE_DISTANCE/Math.sqrt(2)));
@@ -412,7 +414,7 @@ describe('Line', () => {
         when(stationProvider.stationById('b')).thenReturn(mockStation('b', new Vector(500, 400), Rotation.from('e')));
         when(stationProvider.stationById('d')).thenReturn(mockStation('d', new Vector(600, 200), Rotation.from('nw')));
         const l3 = new Line(instance(lineAdapter), instance(stationProvider));
-        expect(l3.draw(4, true)).approximately(240 / Line.SPEED, 0.1);
+        expect(l3.draw(4, true)).approximately(240 / 155, 0.1);
     })
 
     it('givenParallelLinesWithAutomaticTracks_thenUseNewTracks', () => {
@@ -442,6 +444,7 @@ describe('Line', () => {
         stationProvider = mockStationProvider();
         when(lineAdapter.stops).thenReturn([new Stop('d', ''), new Stop('b', '')]);
         when(lineAdapter.name).thenReturn('l3');
+        when(lineAdapter.speed).thenReturn(undefined);
         when(lineAdapter.draw(4, anyNumber(), anything(), anything(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
             const path = [...p];
             expect(path.shift()).eql(new Vector(600+Station.LINE_DISTANCE/Math.sqrt(2), 200+Station.LINE_DISTANCE/Math.sqrt(2)));
@@ -514,6 +517,7 @@ describe('Line', () => {
         stationProvider = mockStationProvider();
         when(lineAdapter.stops).thenReturn([new Stop('d', ''), new Stop('b', ''), new Stop('a', '')]);
         when(lineAdapter.name).thenReturn('l1');
+        when(lineAdapter.speed).thenReturn(undefined);
         when(lineAdapter.draw(2, anyNumber(), anything(), anything(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
             const path = [...p];
             expect(path.shift()?.delta(new Vector(600+Station.LINE_DISTANCE/Math.sqrt(2), 200+Station.LINE_DISTANCE/Math.sqrt(2))).length).lessThan(0.1);
@@ -557,6 +561,7 @@ describe('Line', () => {
         stationProvider = mockStationProvider();
         when(lineAdapter.stops).thenReturn([new Stop('d', ''), new Stop('b', ''), new Stop('a', '')]);
         when(lineAdapter.name).thenReturn('l3');
+        when(lineAdapter.speed).thenReturn(undefined);
         when(lineAdapter.draw(2, anyNumber(), anything(), anything(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
             const path = [...p];
             expect(path.shift()?.delta(new Vector(600+Station.LINE_DISTANCE/Math.sqrt(2), 200+Station.LINE_DISTANCE/Math.sqrt(2))).length).lessThan(0.1);
@@ -605,6 +610,7 @@ function createAndAssertStandardLine(a: Station, b: Station, c: Station): Line {
 
     when(lineAdapter.stops).thenReturn([new Stop('a', ''), new Stop('b', ''), new Stop('c', '')]);
     when(lineAdapter.name).thenReturn('l1');
+    when(lineAdapter.speed).thenReturn(undefined);
     when(lineAdapter.draw(0, anyNumber(), anything(), anything(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
         const path = [...p];
         expect(path.shift()).eql(new Vector(500, 500));

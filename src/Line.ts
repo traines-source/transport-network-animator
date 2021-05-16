@@ -13,7 +13,7 @@ export interface LineAdapter extends Timed  {
     boundingBox: BoundingBox;
     weight: number | undefined;
     totalLength: number;
-    speed: number;
+    speed: number | undefined;
     draw(delaySeconds: number, animationDurationSeconds: number, path: Vector[], length: number, colorDeviation: number): void;
     move(delaySeconds: number, animationDurationSeconds: number, from: Vector[], to: Vector[], colorFrom: number, colorTo: number): void;
     erase(delaySeconds: number, animationDurationSeconds: number, reverse: boolean, length: number): void;
@@ -38,7 +38,7 @@ export class Line implements TimedDrawable {
     private _path: Vector[] = [];
 
     draw(delay: number, animate: boolean): number {
-        if (this.adapter.totalLength == 0) {
+        if (!(this.adapter.totalLength > 0)) {
             this.createLine(delay, animate);
         }        
         let duration = this.getAnimationDuration(this._path, animate);
@@ -217,12 +217,12 @@ export class Line implements TimedDrawable {
     private getAnimationDuration(path: Vector[], animate: boolean): number {
         if (!animate)
             return 0;
-        return this.getTotalLength(path) / this.adapter.speed;
+        return this.getTotalLength(path) / (this.adapter.speed || Line.SPEED);
     }
     
     private getTotalLength(path: Vector[]): number {
         const actualLength = this.adapter.totalLength;
-        if (actualLength != 0) {
+        if (actualLength > 0) {
             return actualLength;
         }
         let length = 0;

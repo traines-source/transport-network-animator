@@ -1,4 +1,4 @@
-import { LineAdapter, Line } from "../Line";
+import { LineAdapter } from "../Line";
 import { Vector } from "../Vector";
 import { Stop } from "../Station";
 import { Instant } from "../Instant";
@@ -37,9 +37,9 @@ export class SvgLine implements LineAdapter {
         return this.element.getTotalLength();
     }
 
-    get speed(): number {
+    get speed(): number | undefined {
         if (this.element.dataset.speed == undefined) {
-            return Line.SPEED;
+            return undefined;
         }
         return parseInt(this.element.dataset.speed);
     }
