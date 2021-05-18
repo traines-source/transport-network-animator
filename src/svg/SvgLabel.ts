@@ -130,7 +130,7 @@ export class SvgLabel implements LabelAdapter {
         const container = document.createElementNS('http://www.w3.org/1999/xhtml', 'div');
         lineLabel.appendChild(container);
        
-        document.getElementById('stations')?.appendChild(lineLabel);
+        document.getElementById('elements')?.appendChild(lineLabel);
         return new SvgLabel(lineLabel)
     }
     

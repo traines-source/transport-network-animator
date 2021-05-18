@@ -44,12 +44,11 @@ export class SvgNetwork implements NetworkAdapter {
     }
 
     initialize(network: Network): void {
-        let elements = document.getElementsByTagName("*");
-        if (elements == undefined)
+        if (document.getElementById("elements"))
         {
-            console.error('Please define the "elements" group.');
-            return;
+            console.warn('A group with the id "elements" is missing in the SVG source. It might be needed for helper stations and labels.');
         }
+        let elements = document.getElementsByTagName("*");
         for (let i=0; i<elements.length; i++) {
             const element: TimedDrawable | null = this.mirrorElement(elements[i], network);
             if (element != null) {
@@ -79,7 +78,7 @@ export class SvgNetwork implements NetworkAdapter {
         helpStop.setAttribute('data-dir', rotation.name);
         this.setCoord(helpStop, baseCoords);
         helpStop.className.baseVal = 'helper';
-        document.getElementById('stations')?.appendChild(helpStop);
+        document.getElementById('elements')?.appendChild(helpStop);
         return new Station(new SvgStation(helpStop));  
     }
 
