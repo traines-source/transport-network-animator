@@ -38,14 +38,21 @@ export class SvgNetwork implements NetworkAdapter {
         return svg?.dataset.autoStart != 'false';
     }
 
+    get zoomMaxScale(): number {
+        const svg = document.querySelector('svg');
+        if (svg?.dataset.zoomMaxScale == undefined) {
+            return 3;
+        }
+        return parseInt(svg?.dataset.zoomMaxScale);
+    }
+
     get beckStyle(): boolean {
         const svg = document.querySelector('svg');
         return svg?.dataset.beckStyle != 'false';
     }
 
     initialize(network: Network): void {
-        if (document.getElementById("elements"))
-        {
+        if (!document.getElementById("elements")) {
             console.warn('A group with the id "elements" is missing in the SVG source. It might be needed for helper stations and labels.');
         }
         let elements = document.getElementsByTagName("*");

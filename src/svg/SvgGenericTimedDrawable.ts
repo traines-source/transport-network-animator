@@ -43,7 +43,9 @@ export class SvgGenericTimedDrawable implements GenericTimedDrawableAdapter {
             return;
         }
         this.element.style.visibility = 'visible';
-        this.doZoom(zoomCenter, zoomScale, animationDurationSeconds);
+        if (animationDurationSeconds > 0) {
+            this.doZoom(zoomCenter, zoomScale, animationDurationSeconds);
+        }
     }
 
     private doZoom(zoomCenter: Vector, zoomScale: number, animationDurationSeconds: number) {

@@ -27,7 +27,7 @@ export class GenericTimedDrawable implements TimedDrawable {
     draw(delay: number, animate: boolean): number {
         const zoomer = new Zoomer(this.boundingBox);
         zoomer.include(this.getZoomedBoundingBox(), Instant.BIG_BANG, Instant.BIG_BANG, true, true, false);
-        this.adapter.draw(delay, this.adapter.from.delta(this.adapter.to), zoomer.center, zoomer.scale);
+        this.adapter.draw(delay, !animate ? 0 : this.adapter.from.delta(this.adapter.to), zoomer.center, zoomer.scale);
         return 0;
     }
 

@@ -76,10 +76,17 @@ describe('Vector', () => {
     it('whenSolveForIntersection_givenParallel', () => {
         expect(new Vector(0, -7).solveDeltaForIntersection(new Vector(0, 1), new Vector(0, 2))).eql({a: NaN, b: NaN});
     })
+    it('whenSolveForIntersection_givenSW', () => {
+        const result = new Vector(-10, 25).solveDeltaForIntersection(Vector.UNIT.rotate(Rotation.from("sw")), Vector.UNIT.rotate(Rotation.from("n")));
+        expect(result.a).approximately(14, 0.2);
+        expect(result.b).approximately(15, 0.2);
+    })
 
     it('whenIsDeltaMatchingParallel', () => {
         expect(new Vector(0.0001, -7).isDeltaMatchingParallel(new Vector(0, 1), new Vector(0, 2))).is.true;
-        expect(new Vector(1, 0.0001).isDeltaMatchingParallel(new Vector(0.0001, 0.0001), new Vector(1, 0.00001))).is.true;
+        expect(new Vector(1, 0.0001).isDeltaMatchingParallel(new Vector(-1.0001, 0.0001), new Vector(1, 0.00001))).is.true;
+        expect(new Vector(7, -7).isDeltaMatchingParallel(new Vector(-1, 1), new Vector(1, -1))).is.true;
+        expect(new Vector(7, -7).isDeltaMatchingParallel(new Vector(-1, -1), new Vector(1, -1))).is.false;
         expect(new Vector(7, -7).isDeltaMatchingParallel(new Vector(0, 1), new Vector(0, 2))).is.false;
     })
 

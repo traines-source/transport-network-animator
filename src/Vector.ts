@@ -58,11 +58,9 @@ export class Vector {
     }
 
     isDeltaMatchingParallel(dir1: Vector, dir2: Vector): boolean {
-        return this.allEqualZero(this.x, dir1.x, dir2.x) || this.allEqualZero(this.y, dir1.y, dir2.y);
-    }
-
-    private allEqualZero(n1: number, n2: number, n3: number): boolean {
-        return Utils.equals(n1, 0) && Utils.equals(n2, 0) && Utils.equals(n3, 0);
+        const a = this.angle(dir1).degrees;
+        const b = dir1.angle(dir2).degrees;
+        return Utils.equals(a % 180, 0) && Utils.equals(b % 180, 0);
     }
 
     inclination(): Rotation {

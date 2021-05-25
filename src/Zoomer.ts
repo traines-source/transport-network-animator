@@ -1,21 +1,19 @@
 import { Instant } from "./Instant";
 import { Vector } from "./Vector";
 import { Rotation } from "./Rotation";
-import { TimedDrawable } from "./Drawable";
 import { BoundingBox } from "./BoundingBox";
 
 
 
 export class Zoomer {
     static ZOOM_DURATION = 1;
-    static ZOOM_MAX_SCALE = 3;
-    static PADDING_FACTOR = 25;
+    static PADDING_FACTOR = 30;
     
     private boundingBox = new BoundingBox(Vector.NULL, Vector.NULL);
     private customDuration = -1;
     private resetFlag = false;
     
-    constructor(private canvasSize: BoundingBox) {
+    constructor(private canvasSize: BoundingBox, private zoomMaxScale = 3) {
     }
 
     include(boundingBox: BoundingBox, from: Instant, to: Instant, draw: boolean, shouldAnimate: boolean, pad: boolean = true) {
@@ -41,7 +39,7 @@ export class Zoomer {
             const paddedBoundingBox = this.boundingBox;
             const zoomSize = paddedBoundingBox.dimensions;
             const canvasSize = this.canvasSize.dimensions;
-            const minZoomSize = new Vector(canvasSize.x / Zoomer.ZOOM_MAX_SCALE, canvasSize.y / Zoomer.ZOOM_MAX_SCALE);
+            const minZoomSize = new Vector(canvasSize.x / this.zoomMaxScale, canvasSize.y / this.zoomMaxScale);
             const delta = zoomSize.delta(minZoomSize);
             const additionalSpacing = new Vector(Math.max(0, delta.x/2), Math.max(0, delta.y/2))
             return new BoundingBox(
