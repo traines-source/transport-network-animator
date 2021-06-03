@@ -38,7 +38,9 @@ export class Train implements TimedDrawable {
                 if (i == 1) {
                     this.adapter.draw(delay, animate, path);
                 }
-                this.adapter.move(delay + arrdep.departure - this.from.second, arrdep.arrival - arrdep.departure, path);
+                if (animate) {
+                    this.adapter.move(delay + arrdep.departure - this.from.second, arrdep.arrival - arrdep.departure, path);
+                }
             } else {
                 throw Error(this.name + ': No path found between ' + stops[i-1].stationId + ' ' + stops[i].stationId)
             }
