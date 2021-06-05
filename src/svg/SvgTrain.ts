@@ -4,6 +4,7 @@ import { Instant } from "../Instant";
 import { BoundingBox } from "../BoundingBox";
 import { TrainAdapter } from "../Train";
 import { Rotation } from "../Rotation";
+import { Animator } from "../Animator";
 
 export class SvgTrain implements TrainAdapter {
     static WAGON_LENGTH = 10;
@@ -63,33 +64,26 @@ export class SvgTrain implements TrainAdapter {
     }
 
     draw(delaySeconds: number, animate: boolean, follow: { path: Vector[], from: number, to: number }): void {
-        if (delaySeconds > 0) {
-            const train = this;
-            window.setTimeout(function () { train.draw(0, animate, follow); }, delaySeconds * 1000);
-            return;
-        }
-        this.setPath(this.calcTrainHinges(this.getPathLength(follow).lengthToStart, follow.path));
-        this.element.className.baseVal += ' train';
-        this.element.style.visibility = 'visible';
+        const animator = new Animator();
+        animator.wait(delaySeconds*1000, () => {
+            this.setPath(this.calcTrainHinges(this.getPathLength(follow).lengthToStart, follow.path));
+            this.element.className.baseVal += ' train';
+            this.element.style.visibility = 'visible';
+        });        
     }
 
     move(delaySeconds: number, animationDurationSeconds: number, follow: { path: Vector[], from: number, to: number }) {
-        if (delaySeconds > 0) {
-            const train = this;
-            window.setTimeout(function () { train.move(0, animationDurationSeconds, follow); }, delaySeconds * 1000);
-            return;
-        }
+        const animator = new Animator();
+        animator.wait(delaySeconds*1000, () => {
+            const pathLength = this.getPathLength(follow);
 
-        const pathLength = this.getPathLength(follow);
-
-        this.animateFrame(
-            follow.path,
-            pathLength.totalBoundedLength,
-            pathLength.lengthToStart,
-            (-delaySeconds) / animationDurationSeconds,
-            animationDurationSeconds * 1000,
-            performance.now(),
-            performance.now());
+            animator
+                .ease(Animator.EASE_SINE)
+                .from(pathLength.lengthToStart)
+                .to(pathLength.lengthToStart+pathLength.totalBoundedLength)
+                .offset(delaySeconds < 0 ? (-delaySeconds) / animationDurationSeconds : 0)
+                .animate(animationDurationSeconds*1000, (x, isLast) => this.animateFrame(x, follow.path));            
+        });
     }
 
     private getPathLength(follow: { path: Vector[], from: number, to: number }): { lengthToStart: number, totalBoundedLength: number } {
@@ -120,12 +114,10 @@ export class SvgTrain implements TrainAdapter {
     }
 
     erase(delaySeconds: number): void {
-        if (delaySeconds > 0) {
-            const train = this;
-            window.setTimeout(function () { train.erase(0); }, delaySeconds * 1000);
-            return;
-        }
-        this.element.style.visibility = 'hidden';
+        const animator = new Animator();
+        animator.wait(delaySeconds*1000, () => {
+            this.element.style.visibility = 'hidden';
+        });
     }
 
     private setPath(path: Vector[]) {
@@ -141,19 +133,9 @@ export class SvgTrain implements TrainAdapter {
         return newTrain;
     }
 
-    private ease(x: number): number {
-        return -(Math.cos(Math.PI * x) - 1) / 2;
-    }
-
-    private animateFrame(path: Vector[], totalBoundedLength: number, lengthToStart: number, offset: number, animationDurationMs: number, startTime: DOMHighResTimeStamp, now: DOMHighResTimeStamp): void {
-        const x = (now - startTime) / animationDurationMs + offset;
-        const current = lengthToStart + this.ease(x) * totalBoundedLength;
-        const trainPath = this.calcTrainHinges(current, path);
+    private animateFrame(x: number, path: Vector[]): boolean {
+        const trainPath = this.calcTrainHinges(x, path);
         this.setPath(trainPath);
-
-        if (x < 1) {
-            const train = this;
-            window.requestAnimationFrame(function (timestamp) { train.animateFrame(path, totalBoundedLength, lengthToStart, offset, animationDurationMs, startTime, timestamp); });
-        }
+        return true;
     }
 }

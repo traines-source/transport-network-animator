@@ -2,8 +2,8 @@ import { LineAdapter } from "../Line";
 import { Vector } from "../Vector";
 import { Stop } from "../Station";
 import { Instant } from "../Instant";
-import { SvgNetwork } from "./SvgNetwork";
 import { BoundingBox } from "../BoundingBox";
+import { Animator } from "../Animator";
 
 export class SvgLine implements LineAdapter {
 
@@ -90,52 +90,51 @@ export class SvgLine implements LineAdapter {
 
     draw(delaySeconds: number, animationDurationSeconds: number, path: Vector[], length: number, colorDeviation: number): void {
         this.updateBoundingBox(path);
-        if (delaySeconds > 0) {
-            const line = this;
-            window.setTimeout(function () { line.draw(0, animationDurationSeconds, path, length, colorDeviation); }, delaySeconds * 1000);
-            return;
-        }
-    
-        this.element.className.baseVal += ' line ' + this.name;
-        this.createPath(path);
-    
-        this.updateDasharray(length);
-        if (colorDeviation != 0) {
-            this.updateColor(colorDeviation);
-        }
-        if (animationDurationSeconds == 0) {
-            length = 0;
-        }
-        this.animateFrame(length, 0, -length/animationDurationSeconds/SvgNetwork.FPS);
+
+        const animator = new Animator();
+        animator.wait(delaySeconds * 1000, () => {
+            this.element.className.baseVal += ' line ' + this.name;
+            this.element.style.visibility = 'visible';
+            this.createPath(path);
+        
+            this.updateDasharray(length);
+            if (colorDeviation != 0) {
+                this.updateColor(colorDeviation);
+            }
+            if (animationDurationSeconds == 0) {
+                length = 0;
+            }
+            animator
+                .from(length)
+                .to(0)
+                .animate(animationDurationSeconds * 1000, (x: number, isLast: boolean) => this.animateFrame(x, isLast));
+        });
     }
 
     move(delaySeconds: number, animationDurationSeconds: number, from: Vector[], to: Vector[], colorFrom: number, colorTo: number) {
         this.updateBoundingBox(to);
-        if (delaySeconds > 0) {
-            const line = this;
-            window.setTimeout(function () { line.move(0, animationDurationSeconds, from, to, colorFrom, colorTo); }, delaySeconds * 1000);
-            return;
-        }
-        this.animateFrameVector(from, to, colorFrom, colorTo, 0, 1/animationDurationSeconds/SvgNetwork.FPS);
+        const animator = new Animator();
+        animator.wait(delaySeconds*1000, () => {
+            animator.animate(animationDurationSeconds*1000, (x, isLast) => this.animateFrameVector(from, to, colorFrom, colorTo, x, isLast));
+        });
     }
 
-    
     erase(delaySeconds: number, animationDurationSeconds: number, reverse: boolean, length: number): void {
-        if (delaySeconds > 0) {
-            const line = this;
-            window.setTimeout(function() { line.erase(0, animationDurationSeconds, reverse, length); }, delaySeconds * 1000);
-            return;
-        }
-        let from = 0;
-        if (animationDurationSeconds == 0) {
-            from = length;
-        }
-        const direction = reverse ? -1 : 1;
-        this.animateFrame(from, length * direction, length/animationDurationSeconds/SvgNetwork.FPS * direction);
+        const animator = new Animator();
+        animator.wait(delaySeconds * 1000, () => {
+            let from = 0;
+            if (animationDurationSeconds == 0) {
+                from = length;
+            }
+            const direction = reverse ? -1 : 1;
+            animator
+                .from(from)
+                .to(length*direction)
+                .animate(animationDurationSeconds*1000, (x, isLast) => this.animateFrame(x, isLast));
+        });
     }
 
     private createPath(path: Vector[]) {
-        this.element.style.visibility = 'visible';
         if (path.length == 0) {
             return;
         }
@@ -162,22 +161,16 @@ export class SvgLine implements LineAdapter {
         this.element.style.stroke = 'rgb(' + Math.max(0, deviation) * 256 + ', 0, ' + Math.min(0, deviation) * -256 + ')';
     }
     
-    private animateFrame(from: number, to: number, animationPerFrame: number): void {
-        if (animationPerFrame < 0 && from > to || animationPerFrame > 0 && from < to) {
-            this.element.style.strokeDashoffset = from + '';
-            from += animationPerFrame;
-            const line = this;
-            window.requestAnimationFrame(function() { line.animateFrame(from, to, animationPerFrame); });
-        } else {
-            this.element.style.strokeDashoffset = to + '';
-            if (to != 0) {
-                this.element.style.visibility = 'hidden';
-            }
+    private animateFrame(x: number, isLast: boolean): boolean {
+        this.element.style.strokeDashoffset = x + '';
+        if (isLast && x != 0) {
+            this.element.style.visibility = 'hidden';
         }
+        return true;
     }
 
-    private animateFrameVector(from: Vector[], to: Vector[], colorFrom: number, colorTo: number, x: number, animationPerFrame: number): void {
-        if (x < 1) {
+    private animateFrameVector(from: Vector[], to: Vector[], colorFrom: number, colorTo: number, x: number, isLast: boolean): boolean {
+        if (!isLast) {
             const interpolated = [];
             for (let i=0; i<from.length; i++) {
                 interpolated.push(from[i].between(to[i], x));
@@ -185,13 +178,10 @@ export class SvgLine implements LineAdapter {
             this.updateDasharray(interpolated[0].delta(interpolated[interpolated.length-1]).length); // TODO arbitrary node count
             this.createPath(interpolated);
             this.updateColor((colorTo-colorFrom)*x+colorFrom);
-
-            x += animationPerFrame;
-            const line = this;
-            window.requestAnimationFrame(function() { line.animateFrameVector(from, to, colorFrom, colorTo, x, animationPerFrame); });
         } else {
             this.updateDasharray(to[0].delta(to[to.length-1]).length);
             this.createPath(to);
         }
+        return true;
     }
 }

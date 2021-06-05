@@ -5,6 +5,7 @@ import { Vector } from "../Vector";
 import { Utils } from "../Utils";
 import { SvgNetwork } from "./SvgNetwork";
 import { BoundingBox } from "../BoundingBox";
+import { Animator } from "../Animator";
 
 export class SvgLabel implements LabelAdapter {
 
@@ -37,21 +38,19 @@ export class SvgLabel implements LabelAdapter {
     }
 
     draw(delaySeconds: number, textCoords: Vector, labelDir: Rotation, children: LabelAdapter[]): void {
-        if (delaySeconds > 0) {
-            const label = this;
-            window.setTimeout(function() { label.draw(0, textCoords, labelDir, children); }, delaySeconds * 1000);
-            return;
-        }
-        if (textCoords != Vector.NULL) {
-            this.setCoord(this.element, textCoords);
-            if (children.length > 0) {
-                this.drawLineLabels(labelDir, children);
+        const animator = new Animator();
+        animator.wait(delaySeconds*1000, () => {
+            if (textCoords != Vector.NULL) {
+                this.setCoord(this.element, textCoords);
+                if (children.length > 0) {
+                    this.drawLineLabels(labelDir, children);
+                } else {
+                    this.drawStationLabel(labelDir);
+                }
             } else {
-                this.drawStationLabel(labelDir);
+                this.element.style.visibility = 'visible';
             }
-        } else {
-            this.element.style.visibility = 'visible';
-        }
+        });
     }
 
     private translate(boxDimen: Vector, labelDir: Rotation) {
@@ -91,12 +90,10 @@ export class SvgLabel implements LabelAdapter {
     }
 
     erase(delaySeconds: number): void {
-        if (delaySeconds > 0) {
-            const label = this;
-            window.setTimeout(function() { label.erase(0); }, delaySeconds * 1000);
-            return;
-        }
-        this.element.style.visibility = 'hidden';
+        const animator = new Animator();
+        animator.wait(delaySeconds*1000, () => {
+            this.element.style.visibility = 'hidden';
+        });
     }
 
     private getInstant(fromOrTo: string): Instant {

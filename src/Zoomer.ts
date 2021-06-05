@@ -7,7 +7,7 @@ import { BoundingBox } from "./BoundingBox";
 
 export class Zoomer {
     static ZOOM_DURATION = 1;
-    static PADDING_FACTOR = 30;
+    static PADDING_FACTOR = 25;
     
     private boundingBox = new BoundingBox(Vector.NULL, Vector.NULL);
     private customDuration = -1;

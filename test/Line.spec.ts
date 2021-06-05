@@ -106,7 +106,6 @@ describe('Line', () => {
         when(lineAdapter.stops).thenReturn([new Stop('a', ''), new Stop('b', ''), new Stop('c', ''), new Stop('d', '')]);
         when(lineAdapter.draw(2, anyNumber(), anything(), anything(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
             const path = [...p];
-            console.log(path);
             expect(path.shift()).eql(new Vector(500, 500));
             expect(path.shift()).eql(new Vector(600, 500));
             expect(path.shift()?.delta(new Vector(650, 500)).length).lessThan(0.1);

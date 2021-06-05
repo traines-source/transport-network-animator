@@ -2,7 +2,7 @@ import { Instant } from "../Instant";
 import { Vector } from "../Vector";
 import { GenericTimedDrawableAdapter } from "../GenericTimedDrawable";
 import { BoundingBox } from "../BoundingBox";
-import { SvgNetwork } from "./SvgNetwork";
+import { Animator } from "../Animator";
 
 export class SvgGenericTimedDrawable implements GenericTimedDrawableAdapter {
 
@@ -37,34 +37,27 @@ export class SvgGenericTimedDrawable implements GenericTimedDrawableAdapter {
     }
 
     draw(delaySeconds: number, animationDurationSeconds: number, zoomCenter: Vector, zoomScale: number): void {
-        if (delaySeconds > 0) {
-            const label = this;
-            window.setTimeout(function() { label.draw(0, animationDurationSeconds, zoomCenter, zoomScale); }, delaySeconds * 1000);
-            return;
-        }
-        this.element.style.visibility = 'visible';
-        if (animationDurationSeconds > 0) {
-            this.doZoom(zoomCenter, zoomScale, animationDurationSeconds);
-        }
+        const animator = new Animator();
+        animator.wait(delaySeconds*1000, () => {
+            this.element.style.visibility = 'visible';
+            if (animationDurationSeconds > 0) {
+                const fromCenter = this.boundingBox.tl.between(this.boundingBox.br, 0.5)
+                animator
+                    .animate(animationDurationSeconds*1000, (x, isLast) => this.animateFrame(x, isLast, fromCenter, zoomCenter, 1, zoomScale));
+            }
+        });
     }
 
-    private doZoom(zoomCenter: Vector, zoomScale: number, animationDurationSeconds: number) {
-        this.animateFrame(0, 1/animationDurationSeconds/SvgNetwork.FPS, this.boundingBox.tl.between(this.boundingBox.br, 0.5), zoomCenter, 1, zoomScale);
-    }
-
-    private animateFrame(x: number, animationPerFrame: number, fromCenter: Vector, toCenter: Vector, fromScale: number, toScale: number): void {
-        if (x < 1) {
-            x += animationPerFrame;
-            const fx = x;
+    private animateFrame(x: number, isLast: boolean, fromCenter: Vector, toCenter: Vector, fromScale: number, toScale: number): boolean {
+        if (!isLast) {
             const delta = fromCenter.delta(toCenter)
-            const center = new Vector(delta.x * fx, delta.y * fx).add(fromCenter);
-            const scale = (toScale - fromScale) * fx + fromScale;
-            this.updateZoom(center, scale);
-            const network = this;
-            window.requestAnimationFrame(function() { network.animateFrame(x, animationPerFrame, fromCenter, toCenter, fromScale, toScale); });
+            const center = new Vector(delta.x * x, delta.y * x).add(fromCenter);
+            const scale = (toScale - fromScale) * x + fromScale;
+            this.updateZoom(center, scale);            
         } else {
             this.updateZoom(toCenter, toScale);
         }
+        return true;
     }
 
     private updateZoom(center: Vector, scale: number) {
@@ -77,12 +70,10 @@ export class SvgGenericTimedDrawable implements GenericTimedDrawableAdapter {
     }
 
     erase(delaySeconds: number): void {
-        if (delaySeconds > 0) {
-            const label = this;
-            window.setTimeout(function() { label.erase(0); }, delaySeconds * 1000);
-            return;
-        }
-        this.element.style.visibility = 'hidden';
+        const animator = new Animator();
+        animator.wait(delaySeconds*1000, () => {
+            this.element.style.visibility = 'hidden';
+        });
     }
 
     private getInstant(fromOrTo: string): Instant {

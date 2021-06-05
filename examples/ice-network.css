@@ -1,20 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap');
 
-/*#stations rect {
+/*rect.station {
     stroke: black;
     fill: white;
     rx: 5;
     stroke-width: 2;
 }*/
 
-#stations rect {
+rect.station {
     stroke: black;
     fill: white;
     rx: 3;
     stroke-width: 1;
 }
 
-#stations rect.helper {
+rect.station.helper {
     stroke: none;
     fill: none;
 }

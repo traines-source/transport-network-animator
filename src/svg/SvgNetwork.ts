@@ -14,11 +14,10 @@ import { SvgGenericTimedDrawable } from "./SvgGenericTimedDrawable";
 import { Zoomer } from "../Zoomer";
 import { Train } from "../Train";
 import { SvgTrain } from "./SvgTrain";
-import { Utils } from "../Utils";
+import { Animator } from "../Animator";
 
 export class SvgNetwork implements NetworkAdapter {
 
-    static FPS = 60;
     static SVGNS = "http://www.w3.org/2000/svg";
 
     private currentZoomCenter: Vector = Vector.NULL;
@@ -106,28 +105,28 @@ export class SvgNetwork implements NetworkAdapter {
     }
    
     zoomTo(zoomCenter: Vector, zoomScale: number, animationDurationSeconds: number) {
-        const network = this;
-        window.setTimeout(function() { network.doZoom(zoomCenter, zoomScale, animationDurationSeconds); },
-        animationDurationSeconds <= Zoomer.ZOOM_DURATION ? 0 : Zoomer.ZOOM_DURATION * 1000);
-        return;
+        const animator = new Animator();
+        const defaultBehaviour = animationDurationSeconds <= Zoomer.ZOOM_DURATION;
+        animator.wait(defaultBehaviour ? 0 : Zoomer.ZOOM_DURATION * 1000, () => {
+            const currentZoomCenter = this.currentZoomCenter;
+            const currentZoomScale = this.currentZoomScale;
+            animator
+                .ease(defaultBehaviour ? Animator.EASE_CUBIC : Animator.EASE_NONE)
+                .animate(animationDurationSeconds * 1000, (x, isLast) => {
+                    this.animateFrame(x, isLast, currentZoomCenter, zoomCenter, currentZoomScale, zoomScale);
+                    return true;
+                });
+            this.currentZoomCenter = zoomCenter;
+            this.currentZoomScale = zoomScale;
+        });
     }
 
-    private doZoom(zoomCenter: Vector, zoomScale: number, animationDurationSeconds: number) {
-        this.animateFrame(0, 1/animationDurationSeconds/SvgNetwork.FPS, animationDurationSeconds <= Zoomer.ZOOM_DURATION, this.currentZoomCenter, zoomCenter, this.currentZoomScale, zoomScale);
-        this.currentZoomCenter = zoomCenter;
-        this.currentZoomScale = zoomScale;
-    }
-
-    private animateFrame(x: number, animationPerFrame: number, ease: boolean, fromCenter: Vector, toCenter: Vector, fromScale: number, toScale: number): void {
-        if (x < 1) {
-            x += animationPerFrame;
-            const fx = ease ? Utils.ease(x) : x;
+    private animateFrame(x: number, isLast: boolean, fromCenter: Vector, toCenter: Vector, fromScale: number, toScale: number): void {
+        if (!isLast) {
             const delta = fromCenter.delta(toCenter)
-            const center = new Vector(delta.x * fx, delta.y * fx).add(fromCenter);
-            const scale = (toScale - fromScale) * fx + fromScale;
+            const center = new Vector(delta.x * x, delta.y * x).add(fromCenter);
+            const scale = (toScale - fromScale) * x + fromScale;
             this.updateZoom(center, scale);
-            const network = this;
-            window.requestAnimationFrame(function() { network.animateFrame(x, animationPerFrame, ease, fromCenter, toCenter, fromScale, toScale); });
         } else {
             this.updateZoom(toCenter, toScale);
         }

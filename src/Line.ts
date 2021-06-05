@@ -201,7 +201,6 @@ export class Line implements TimedDrawable {
         const helpStopId = 'h_' + Utils.alphabeticId(fromStop.id, toStop.id);
         let helpStop = this.stationProvider.stationById(helpStopId);
         if (helpStop == undefined) {
-            console.log('Creating', helpStopId);
             const oldCoord = fromStop.baseCoords;
             const newCoord = toStop.baseCoords;
             const delta = newCoord.delta(oldCoord);

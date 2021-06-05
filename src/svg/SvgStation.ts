@@ -1,8 +1,8 @@
 import { StationAdapter, Station } from "../Station";
 import { Vector } from "../Vector";
 import { Rotation } from "../Rotation";
-import { SvgNetwork } from "./SvgNetwork";
 import { Instant } from "../Instant";
+import { Animator } from "../Animator";
 
 export class SvgStation implements StationAdapter {
 
@@ -49,23 +49,22 @@ export class SvgStation implements StationAdapter {
     }
 
     draw(delaySeconds: number, getPositionBoundaries: () => {[id: string]: [number, number]}): void {
-        if (delaySeconds > 0) {
-            const station = this;
-            window.setTimeout(function() { station.draw(0, getPositionBoundaries); }, delaySeconds * 1000);
-            return;
-        }
-        const positionBoundaries = getPositionBoundaries();
-        const stopDimen = [positionBoundaries.x[1] - positionBoundaries.x[0], positionBoundaries.y[1] - positionBoundaries.y[0]];
-        
-        if (!this.element.className.baseVal.includes('station')) {
-            this.element.className.baseVal += ' station ' + this.id;
-        }
-        this.element.style.visibility = stopDimen[0] < 0 && stopDimen[1] < 0 ? 'hidden' : 'visible';
-
-        this.element.setAttribute('width', (Math.max(stopDimen[0], 0) * Station.LINE_DISTANCE + Station.DEFAULT_STOP_DIMEN) + '');
-        this.element.setAttribute('height', (Math.max(stopDimen[1], 0) * Station.LINE_DISTANCE + Station.DEFAULT_STOP_DIMEN) + '');
-        this.updateTransformOrigin();
-        this.element.setAttribute('transform','rotate(' + this.rotation.degrees + ') translate(' + (Math.min(positionBoundaries.x[0], 0) * Station.LINE_DISTANCE - Station.DEFAULT_STOP_DIMEN / 2) + ',' + (Math.min(positionBoundaries.y[0], 0) * Station.LINE_DISTANCE - Station.DEFAULT_STOP_DIMEN / 2) + ')');
+        const animator = new Animator();
+        animator.wait(delaySeconds*1000, () => {
+            const positionBoundaries = getPositionBoundaries();
+            const stopDimen = [positionBoundaries.x[1] - positionBoundaries.x[0], positionBoundaries.y[1] - positionBoundaries.y[0]];
+            
+            if (!this.element.className.baseVal.includes('station')) {
+                this.element.className.baseVal += ' station ' + this.id;
+            }
+            this.element.style.visibility = stopDimen[0] < 0 && stopDimen[1] < 0 ? 'hidden' : 'visible';
+    
+            this.element.setAttribute('width', (Math.max(stopDimen[0], 0) * Station.LINE_DISTANCE + Station.DEFAULT_STOP_DIMEN) + '');
+            this.element.setAttribute('height', (Math.max(stopDimen[1], 0) * Station.LINE_DISTANCE + Station.DEFAULT_STOP_DIMEN) + '');
+            this.updateTransformOrigin();
+            this.element.setAttribute('transform','rotate(' + this.rotation.degrees + ') translate(' + (Math.min(positionBoundaries.x[0], 0) * Station.LINE_DISTANCE - Station.DEFAULT_STOP_DIMEN / 2) + ',' + (Math.min(positionBoundaries.y[0], 0) * Station.LINE_DISTANCE - Station.DEFAULT_STOP_DIMEN / 2) + ')');
+    
+        });
     }
 
     private updateTransformOrigin() {
@@ -73,37 +72,29 @@ export class SvgStation implements StationAdapter {
     }
 
     move(delaySeconds: number, animationDurationSeconds: number, from: Vector, to: Vector, callback: () => void): void {
-        if (delaySeconds > 0) {
-            const station = this;
-            window.setTimeout(function() { station.move(0, animationDurationSeconds, from, to, callback); }, delaySeconds * 1000);
-            return;
-        }
-        this.animateFrameVector(from, to, 0, 1/animationDurationSeconds/SvgNetwork.FPS, callback);
+        const animator = new Animator();
+        animator.wait(delaySeconds*1000, () => {
+            animator
+                .animate(animationDurationSeconds*1000, (x, isLast) => this.animateFrameVector(x, isLast, from, to, callback));
+        });
     }
 
-    private animateFrameVector(from: Vector, to: Vector, x: number, animationPerFrame: number, callback: () => void): void {
-        if (x < 1) {
+    private animateFrameVector(x: number, isLast: boolean, from: Vector, to: Vector, callback: () => void): boolean {
+        if (!isLast) {
             this.baseCoords = from.between(to, x);
-            this.updateTransformOrigin();
-            callback();
-            
-            x += animationPerFrame;
-            const line = this;
-            window.requestAnimationFrame(function() { line.animateFrameVector(from, to, x, animationPerFrame, callback); });
         } else {
             this.baseCoords = to;
-            this.updateTransformOrigin();
-            callback();
         }
+        this.updateTransformOrigin();
+        callback();
+        return true;
     }
 
     erase(delaySeconds: number): void {
-        if (delaySeconds > 0) {
-            const station = this;
-            window.setTimeout(function() { station.erase(0); }, delaySeconds * 1000);
-            return;
-        }
-        this.element.style.visibility = 'hidden';
+        const animator = new Animator();
+        animator.wait(delaySeconds*1000, () => {
+            this.element.style.visibility = 'hidden';
+        });
     }
     
 }
