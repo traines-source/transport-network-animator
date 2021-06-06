@@ -58,19 +58,14 @@ export class DrawableSorter {
             let projectionForShortest = 0;
             let delayForShortest = 0;
             for (let j=0;j<i;j++) {
-                let delta = refPoint.delta(cache[j].termini[0]);
-                let potentialShortest = delta.length;
-                if (potentialShortest < shortest) {
-                    shortest = potentialShortest;
-                    projectionForShortest = delta.signedLengthProjectedAt(direction);
-                    delayForShortest = delays[j].delay;
-                }
-                delta = refPoint.delta(cache[j].termini[1]);
-                potentialShortest = delta.length;
-                if (potentialShortest < shortest) {
-                    shortest = potentialShortest;
-                    projectionForShortest = delta.signedLengthProjectedAt(direction);
-                    delayForShortest = delays[j].delay + cache[j].animationDuration;
+                for (let k=0;k<2;k++) {
+                    const delta = refPoint.delta(cache[j].termini[k]);
+                    const potentialShortest = delta.length;
+                    if (potentialShortest < shortest) {
+                        shortest = potentialShortest;
+                        projectionForShortest = delta.signedLengthProjectedAt(direction);
+                        delayForShortest = delays[j].delay + (k == 1 ? cache[j].animationDuration : 0);
+                    }
                 }
             }
             const delay = delayForShortest + projectionForShortest/cache[i].element.speed;
