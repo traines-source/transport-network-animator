@@ -1,24 +1,16 @@
 import { Rotation } from "../Rotation";
 import { LabelAdapter, Label } from "../Label";
-import { Instant } from "../Instant";
 import { Vector } from "../Vector";
 import { Utils } from "../Utils";
 import { SvgNetwork } from "./SvgNetwork";
 import { BoundingBox } from "../BoundingBox";
-import { Animator } from "../Animator";
+import { SvgAnimator } from "./SvgAnimator";
+import { SvgAbstractTimedDrawable } from "./SvgAbstractTimedDrawable";
 
-export class SvgLabel implements LabelAdapter {
+export class SvgLabel extends SvgAbstractTimedDrawable implements LabelAdapter {
 
-    constructor(private element: SVGGraphicsElement) {
-
-    }
-
-    get from(): Instant {
-        return this.getInstant('from');
-    }
-
-    get to(): Instant {
-        return this.getInstant('to');
+    constructor(protected element: SVGGraphicsElement) {
+        super(element);
     }
 
     get forStation(): string | undefined {
@@ -38,7 +30,7 @@ export class SvgLabel implements LabelAdapter {
     }
 
     draw(delaySeconds: number, textCoords: Vector, labelDir: Rotation, children: LabelAdapter[]): void {
-        const animator = new Animator();
+        const animator = new SvgAnimator();
         animator.wait(delaySeconds*1000, () => {
             if (textCoords != Vector.NULL) {
                 this.setCoord(this.element, textCoords);
@@ -90,20 +82,10 @@ export class SvgLabel implements LabelAdapter {
     }
 
     erase(delaySeconds: number): void {
-        const animator = new Animator();
+        const animator = new SvgAnimator();
         animator.wait(delaySeconds*1000, () => {
             this.element.style.visibility = 'hidden';
         });
-    }
-
-    private getInstant(fromOrTo: string): Instant {
-        if (this.element.dataset[fromOrTo] != undefined) {
-            const arr = this.element.dataset[fromOrTo]?.split(/\s+/)
-            if (arr != undefined) {
-                return Instant.from(arr);
-            }
-        }
-        return Instant.BIG_BANG;
     }
 
     private setCoord(element: any, coord: Vector): void {

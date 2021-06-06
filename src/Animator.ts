@@ -1,4 +1,4 @@
-export class Animator {
+export abstract class Animator {
 
     static EASE_NONE: (x: number) => number = x => x;
     static EASE_CUBIC: (x: number) => number = x => x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
@@ -6,7 +6,7 @@ export class Animator {
     
     private _from: number = 0;
     private _to: number = 1;
-    private _offset: number = 0;
+    private _timePassed: number = 0;
     private _ease: (x: number) => number = Animator.EASE_NONE;
 
     private callback: (x: number, isLast: boolean) => boolean = x => true;
@@ -14,7 +14,6 @@ export class Animator {
     private durationMilliseconds: number = 0;
 
     constructor() {
-        
     }
 
     public from(from: number): Animator {
@@ -27,8 +26,8 @@ export class Animator {
         return this;
     }
 
-    public offset(offset: number): Animator {
-        this._offset = offset;
+    public timePassed(timePassed: number): Animator {
+        this._timePassed = timePassed;
         return this;
     }
 
@@ -56,7 +55,7 @@ export class Animator {
         const now = this.now();
         let x = 1;
         if (this.durationMilliseconds > 0) {
-            x = (now-this.startTime) / this.durationMilliseconds + this._offset;
+            x = (now-this.startTime+this._timePassed) / this.durationMilliseconds;
         }
         x = Math.max(0, Math.min(1, x));
         const y = this._from + (this._to-this._from) * this._ease(x);
@@ -66,16 +65,9 @@ export class Animator {
         }
     }
 
-    private now(): number {
-        return performance.now();
-    }
+    protected abstract now(): number;
 
-    private timeout(callback: () => void, delayMilliseconds: number): void {
-        window.setTimeout(callback, delayMilliseconds);
-    }
+    protected abstract timeout(callback: () => void, delayMilliseconds: number): void;
 
-    private requestFrame(callback: () => void): void {
-        window.requestAnimationFrame(callback);
-    }
-
+    protected abstract requestFrame(callback: () => void): void;
 }

@@ -4,10 +4,10 @@ import { Line } from "./Line";
 import { Utils } from "./Utils";
 import { PreferredTrack } from "./PreferredTrack";
 import { Label } from "./Label";
-import { TimedDrawable, Timed } from "./Drawable";
 import { BoundingBox } from "./BoundingBox";
+import { AbstractTimedDrawable, AbstractTimedDrawableAdapter } from "./AbstractTimedDrawable";
 
-export interface StationAdapter extends Timed {
+export interface StationAdapter extends AbstractTimedDrawableAdapter {
     baseCoords: Vector;
     rotation: Rotation;
     labelDir: Rotation;
@@ -31,7 +31,7 @@ export interface LineAtStation {
     track: number;
 }
 
-export class Station implements TimedDrawable {
+export class Station extends AbstractTimedDrawable {
     static LINE_DISTANCE = 6;
     static DEFAULT_STOP_DIMEN = 10;
     static LABEL_DISTANCE = 0;
@@ -42,12 +42,9 @@ export class Station implements TimedDrawable {
     rotation = this.adapter.rotation;
     labelDir = this.adapter.labelDir;
     id = this.adapter.id;
-    name = this.adapter.id;
-    from = this.adapter.from;
-    to = this.adapter.to;
 
-    constructor(private adapter: StationAdapter) {
-
+    constructor(protected adapter: StationAdapter) {
+        super(adapter);
     }
 
     get baseCoords() {
@@ -58,11 +55,9 @@ export class Station implements TimedDrawable {
         this.adapter.baseCoords = baseCoords;
     }
 
-
     get boundingBox() {
         return new BoundingBox(this.adapter.baseCoords, this.adapter.baseCoords);
     }
-
 
     addLine(line: Line, axis: string, track: number): void {
         this.phantom = undefined;

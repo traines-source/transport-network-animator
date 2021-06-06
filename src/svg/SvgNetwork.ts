@@ -14,7 +14,9 @@ import { SvgGenericTimedDrawable } from "./SvgGenericTimedDrawable";
 import { Zoomer } from "../Zoomer";
 import { Train } from "../Train";
 import { SvgTrain } from "./SvgTrain";
-import { Animator } from "../Animator";
+import { SvgAnimator } from "./SvgAnimator";
+import { SvgKenImage } from "./SvgImage";
+import { KenImage } from "../Image";
 
 export class SvgNetwork implements NetworkAdapter {
 
@@ -72,7 +74,10 @@ export class SvgNetwork implements NetworkAdapter {
             return new Station(new SvgStation(element));
         } else if (element.localName == 'text') {
             return new Label(new SvgLabel(element), network);
+        } else if (element.localName == 'image') {
+            return new KenImage(new SvgKenImage(element));
         } else if (element.dataset.from != undefined || element.dataset.to != undefined) {
+            console.log(element);
             return new GenericTimedDrawable(new SvgGenericTimedDrawable(element));
         }
         return null;
@@ -105,13 +110,13 @@ export class SvgNetwork implements NetworkAdapter {
     }
    
     zoomTo(zoomCenter: Vector, zoomScale: number, animationDurationSeconds: number) {
-        const animator = new Animator();
+        const animator = new SvgAnimator();
         const defaultBehaviour = animationDurationSeconds <= Zoomer.ZOOM_DURATION;
         animator.wait(defaultBehaviour ? 0 : Zoomer.ZOOM_DURATION * 1000, () => {
             const currentZoomCenter = this.currentZoomCenter;
             const currentZoomScale = this.currentZoomScale;
             animator
-                .ease(defaultBehaviour ? Animator.EASE_CUBIC : Animator.EASE_NONE)
+                .ease(defaultBehaviour ? SvgAnimator.EASE_CUBIC : SvgAnimator.EASE_NONE)
                 .animate(animationDurationSeconds * 1000, (x, isLast) => {
                     this.animateFrame(x, isLast, currentZoomCenter, zoomCenter, currentZoomScale, zoomScale);
                     return true;

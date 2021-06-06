@@ -1,32 +1,27 @@
 import { Vector } from "../Vector";
 import { Stop } from "../Station";
-import { Instant } from "../Instant";
 import { BoundingBox } from "../BoundingBox";
 import { TrainAdapter } from "../Train";
 import { Rotation } from "../Rotation";
-import { Animator } from "../Animator";
+import { SvgAnimator } from "./SvgAnimator";
+import { SvgAbstractTimedDrawable } from "./SvgAbstractTimedDrawable";
 
-export class SvgTrain implements TrainAdapter {
+export class SvgTrain extends SvgAbstractTimedDrawable implements TrainAdapter {
     static WAGON_LENGTH = 10;
     static TRACK_OFFSET = 0;
 
     private _stops: Stop[] = [];
-    boundingBox = new BoundingBox(Vector.NULL, Vector.NULL);
 
-    constructor(private element: SVGPathElement) {
-
+    constructor(protected element: SVGPathElement) {
+        super(element);
     }
 
     get name(): string {
         return this.element.dataset.train || '';
     }
 
-    get from(): Instant {
-        return this.getInstant('from');
-    }
-
-    get to(): Instant {
-        return this.getInstant('to');
+    get boundingBox(): BoundingBox {
+        return new BoundingBox(Vector.NULL, Vector.NULL);
     }
 
     get length(): number {
@@ -53,18 +48,8 @@ export class SvgTrain implements TrainAdapter {
         return this._stops;
     }
 
-    private getInstant(fromOrTo: string): Instant {
-        if (this.element.dataset[fromOrTo] != undefined) {
-            const arr = this.element.dataset[fromOrTo]?.split(/\s+/)
-            if (arr != undefined) {
-                return Instant.from(arr);
-            }
-        }
-        return Instant.BIG_BANG;
-    }
-
     draw(delaySeconds: number, animate: boolean, follow: { path: Vector[], from: number, to: number }): void {
-        const animator = new Animator();
+        const animator = new SvgAnimator();
         animator.wait(delaySeconds*1000, () => {
             this.setPath(this.calcTrainHinges(this.getPathLength(follow).lengthToStart, follow.path));
             this.element.className.baseVal += ' train';
@@ -73,15 +58,15 @@ export class SvgTrain implements TrainAdapter {
     }
 
     move(delaySeconds: number, animationDurationSeconds: number, follow: { path: Vector[], from: number, to: number }) {
-        const animator = new Animator();
+        const animator = new SvgAnimator();
         animator.wait(delaySeconds*1000, () => {
             const pathLength = this.getPathLength(follow);
 
             animator
-                .ease(Animator.EASE_SINE)
+                .ease(SvgAnimator.EASE_SINE)
                 .from(pathLength.lengthToStart)
                 .to(pathLength.lengthToStart+pathLength.totalBoundedLength)
-                .offset(delaySeconds < 0 ? (-delaySeconds) / animationDurationSeconds : 0)
+                .timePassed(delaySeconds < 0 ? (-delaySeconds*1000) : 0)
                 .animate(animationDurationSeconds*1000, (x, isLast) => this.animateFrame(x, follow.path));            
         });
     }
@@ -114,7 +99,7 @@ export class SvgTrain implements TrainAdapter {
     }
 
     erase(delaySeconds: number): void {
-        const animator = new Animator();
+        const animator = new SvgAnimator();
         animator.wait(delaySeconds*1000, () => {
             this.element.style.visibility = 'hidden';
         });

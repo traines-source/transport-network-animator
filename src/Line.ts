@@ -1,16 +1,13 @@
-import { TimedDrawable, Timed } from "./Drawable";
-import { BoundingBox } from "./BoundingBox";
 import { Station, Stop } from "./Station";
 import { Vector } from "./Vector";
 import { StationProvider } from "./Network";
 import { Rotation } from "./Rotation";
 import { Utils } from "./Utils";
 import { PreferredTrack } from "./PreferredTrack";
+import { AbstractTimedDrawableAdapter, AbstractTimedDrawable } from "./AbstractTimedDrawable";
 
-export interface LineAdapter extends Timed  {
+export interface LineAdapter extends AbstractTimedDrawableAdapter  {
     stops: Stop[];
-    name: string;
-    boundingBox: BoundingBox;
     weight: number | undefined;
     totalLength: number;
     speed: number | undefined;
@@ -19,18 +16,14 @@ export interface LineAdapter extends Timed  {
     erase(delaySeconds: number, animationDurationSeconds: number, reverse: boolean, length: number): void;
 }
 
-export class Line implements TimedDrawable {
+export class Line extends AbstractTimedDrawable {
     static NODE_DISTANCE = 0;
     static SPEED = 100;
 
-    constructor(private adapter: LineAdapter, private stationProvider: StationProvider, private beckStyle: boolean = true) {
-
+    constructor(protected adapter: LineAdapter, private stationProvider: StationProvider, private beckStyle: boolean = true) {
+        super(adapter);
     }
 
-    from = this.adapter.from;
-    to = this.adapter.to;
-    name = this.adapter.name;
-    boundingBox = this.adapter.boundingBox;
     weight = this.adapter.weight;
     
     private precedingStop: Station | undefined = undefined;

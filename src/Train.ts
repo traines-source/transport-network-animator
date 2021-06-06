@@ -4,26 +4,20 @@ import { Stop } from "./Station";
 import { StationProvider } from "./Network";
 import { Vector } from "./Vector";
 import { ArrivalDepartureTime } from "./ArrivalDepartureTime";
+import { AbstractTimedDrawableAdapter, AbstractTimedDrawable } from "./AbstractTimedDrawable";
 
-export interface TrainAdapter extends Timed {
-    name: string;
-    boundingBox: BoundingBox;
+export interface TrainAdapter extends AbstractTimedDrawableAdapter {
     stops: Stop[];
     draw(delaySeconds: number, animate: boolean, follow: {path: Vector[], from: number, to: number}): void;
     move(delaySeconds: number, animationDurationSeconds: number, follow: {path: Vector[], from: number, to: number}): void;
     erase(delaySeconds: number): void;
 }
 
-export class Train implements TimedDrawable {
+export class Train extends AbstractTimedDrawable {
 
-    constructor(private adapter: TrainAdapter, private stationProvider: StationProvider) {
-
+    constructor(protected adapter: TrainAdapter, private stationProvider: StationProvider) {
+        super(adapter);
     }
-
-    from = this.adapter.from;
-    to = this.adapter.to;
-    name = this.adapter.name;
-    boundingBox = this.adapter.boundingBox;
 
     draw(delay: number, animate: boolean): number {
         const lineGroup = this.stationProvider.lineGroupById(this.name)

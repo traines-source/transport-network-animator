@@ -1,29 +1,25 @@
 import { LineAdapter } from "../Line";
 import { Vector } from "../Vector";
 import { Stop } from "../Station";
-import { Instant } from "../Instant";
 import { BoundingBox } from "../BoundingBox";
-import { Animator } from "../Animator";
+import { SvgAnimator } from "./SvgAnimator";
+import { SvgAbstractTimedDrawable } from "./SvgAbstractTimedDrawable";
 
-export class SvgLine implements LineAdapter {
+export class SvgLine extends SvgAbstractTimedDrawable implements LineAdapter {
 
     private _stops: Stop[] = [];
-    boundingBox = new BoundingBox(Vector.NULL, Vector.NULL);
+    private _boundingBox = new BoundingBox(Vector.NULL, Vector.NULL);
 
-    constructor(private element: SVGPathElement) {
-
+    constructor(protected element: SVGPathElement) {
+        super(element);
     }
 
     get name(): string {
         return this.element.dataset.line || '';
     }
 
-    get from(): Instant {
-        return this.getInstant('from');
-    }
-
-    get to(): Instant {
-        return this.getInstant('to');
+    get boundingBox(): BoundingBox {
+        return this._boundingBox;
     }
 
     get weight(): number | undefined {
@@ -48,28 +44,17 @@ export class SvgLine implements LineAdapter {
         if (path.length == 0) {
             if (this.element.style.visibility == 'visible') {
                 const r = this.element.getBBox();
-                this.boundingBox = new BoundingBox(new Vector(r.x, r.y), new Vector(r.x+r.width, r.y+r.height));
+                this._boundingBox = new BoundingBox(new Vector(r.x, r.y), new Vector(r.x+r.width, r.y+r.height));
                 return;
             }
-            this.boundingBox = new BoundingBox(Vector.NULL, Vector.NULL);
+            this._boundingBox = new BoundingBox(Vector.NULL, Vector.NULL);
             return;
         }
         for(let i=0;i<path.length;i++) {
-            this.boundingBox.tl = this.boundingBox.tl.bothAxisMins(path[i]);
-            this.boundingBox.br = this.boundingBox.br.bothAxisMaxs(path[i]);
+            this._boundingBox.tl = this._boundingBox.tl.bothAxisMins(path[i]);
+            this._boundingBox.br = this._boundingBox.br.bothAxisMaxs(path[i]);
         }
     }
-
-    private getInstant(fromOrTo: string): Instant {
-        if (this.element.dataset[fromOrTo] != undefined) {
-            const arr = this.element.dataset[fromOrTo]?.split(/\s+/)
-            if (arr != undefined) {
-                return Instant.from(arr);
-            }
-        }
-        return Instant.BIG_BANG;
-    }
-
 
     get stops(): Stop[] {
         if (this._stops.length == 0) {
@@ -91,7 +76,7 @@ export class SvgLine implements LineAdapter {
     draw(delaySeconds: number, animationDurationSeconds: number, path: Vector[], length: number, colorDeviation: number): void {
         this.updateBoundingBox(path);
 
-        const animator = new Animator();
+        const animator = new SvgAnimator();
         animator.wait(delaySeconds * 1000, () => {
             this.element.className.baseVal += ' line ' + this.name;
             this.element.style.visibility = 'visible';
@@ -113,14 +98,14 @@ export class SvgLine implements LineAdapter {
 
     move(delaySeconds: number, animationDurationSeconds: number, from: Vector[], to: Vector[], colorFrom: number, colorTo: number) {
         this.updateBoundingBox(to);
-        const animator = new Animator();
+        const animator = new SvgAnimator();
         animator.wait(delaySeconds*1000, () => {
             animator.animate(animationDurationSeconds*1000, (x, isLast) => this.animateFrameVector(from, to, colorFrom, colorTo, x, isLast));
         });
     }
 
     erase(delaySeconds: number, animationDurationSeconds: number, reverse: boolean, length: number): void {
-        const animator = new Animator();
+        const animator = new SvgAnimator();
         animator.wait(delaySeconds * 1000, () => {
             let from = 0;
             if (animationDurationSeconds == 0) {

@@ -1,7 +1,7 @@
 import { SvgNetwork } from "./svg/SvgNetwork";
 import { Network } from "./Network";
 import { Instant } from "./Instant";
-import { Animator } from "./Animator";
+import { SvgAnimator } from "./svg/SvgAnimator";
 
 let timePassed = 0;
 
@@ -50,7 +50,7 @@ function slide(instant: Instant, animate: boolean): void {
         const delta = instant.delta(next);
         timePassed += delta;
         const delay = animate ? delta : 0;
-        const animator = new Animator();
+        const animator = new SvgAnimator();
         animator.wait(delay*1000, () => slide(next, animate));
     }
 }

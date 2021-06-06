@@ -1,29 +1,24 @@
-import { TimedDrawable, Timed } from "./Drawable";
-import { BoundingBox } from "./BoundingBox";
 import { Station } from "./Station";
 import { Rotation } from "./Rotation";
 import { StationProvider } from "./Network";
 import { Vector } from "./Vector";
+import { AbstractTimedDrawable, AbstractTimedDrawableAdapter } from "./AbstractTimedDrawable";
 
-export interface LabelAdapter extends Timed {
+export interface LabelAdapter extends AbstractTimedDrawableAdapter {
     forStation: string | undefined;
     forLine: string | undefined;
-    boundingBox: BoundingBox;
     draw(delaySeconds: number, textCoords: Vector, labelDir: Rotation, children: LabelAdapter[]): void;
     erase(delaySeconds: number): void;
     cloneForStation(stationId: string): LabelAdapter;
 }
 
-export class Label implements TimedDrawable {
+export class Label extends AbstractTimedDrawable {
     static LABEL_HEIGHT = 12;
 
-    constructor(private adapter: LabelAdapter, private stationProvider: StationProvider) {
-
+    constructor(protected adapter: LabelAdapter, private stationProvider: StationProvider) {
+        super(adapter);
     }
 
-    from = this.adapter.from;
-    to = this.adapter.to;
-    boundingBox = this.adapter.boundingBox;
     children: Label[] = [];
 
     hasChildren(): boolean {
