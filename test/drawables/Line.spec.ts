@@ -1,11 +1,11 @@
 import { expect } from 'chai';
-import { StationProvider } from '../src/Network';
-import { Station, StationAdapter, Stop } from '../src/drawables/Station';
-import { Vector } from '../src/Vector';
-import { Rotation } from '../src/Rotation';
-import { Line, LineAdapter } from '../src/drawables/Line';
+import { StationProvider } from '../../src/Network';
+import { Station, StationAdapter, Stop } from '../../src/drawables/Station';
+import { Vector } from '../../src/Vector';
+import { Rotation } from '../../src/Rotation';
+import { Line, LineAdapter } from '../../src/drawables/Line';
 import { instance, mock, when, anyNumber, anything } from 'ts-mockito';
-import { LineGroup } from '../src/LineGroup';
+import { LineGroup } from '../../src/LineGroup';
 
 describe('Line', () => {
     let lineAdapter: LineAdapter;
