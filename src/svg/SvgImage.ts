@@ -1,6 +1,6 @@
 import { Vector } from "../Vector";
 import { SvgAnimator } from "./SvgAnimator";
-import { KenImageAdapter } from "../Image";
+import { KenImageAdapter } from "../drawables/Image";
 import { SvgAbstractTimedDrawable } from "./SvgAbstractTimedDrawable";
 
 export class SvgKenImage extends SvgAbstractTimedDrawable implements KenImageAdapter {

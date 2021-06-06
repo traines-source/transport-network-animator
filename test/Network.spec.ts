@@ -1,10 +1,10 @@
 import { expect } from 'chai';
 import { NetworkAdapter, Network } from '../src/Network';
-import { Station, StationAdapter } from '../src/Station';
+import { Station, StationAdapter } from '../src/drawables/Station';
 import { Vector } from '../src/Vector';
 import { Rotation } from '../src/Rotation';
 import { instance, mock, when, verify, anything } from 'ts-mockito';
-import { TimedDrawable } from '../src/Drawable';
+import { TimedDrawable } from '../src/drawables/TimedDrawable';
 import { BoundingBox } from "../src/BoundingBox";
 import { Instant } from '../src/Instant';
 

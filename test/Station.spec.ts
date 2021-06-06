@@ -1,9 +1,9 @@
 import { expect } from 'chai';
 import { StationProvider } from '../src/Network';
-import { Station, StationAdapter } from '../src/Station';
+import { Station, StationAdapter } from '../src/drawables/Station';
 import { Vector } from '../src/Vector';
 import { Rotation } from '../src/Rotation';
-import { Line, LineAdapter } from '../src/Line';
+import { Line, LineAdapter } from '../src/drawables/Line';
 import { instance, mock, when } from 'ts-mockito';
 import { Utils } from '../src/Utils';
 import { PreferredTrack } from '../src/PreferredTrack';

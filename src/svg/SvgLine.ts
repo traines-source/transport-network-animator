@@ -1,6 +1,6 @@
-import { LineAdapter } from "../Line";
+import { LineAdapter } from "../drawables/Line";
 import { Vector } from "../Vector";
-import { Stop } from "../Station";
+import { Stop } from "../drawables/Station";
 import { BoundingBox } from "../BoundingBox";
 import { SvgAnimator } from "./SvgAnimator";
 import { SvgAbstractTimedDrawable } from "./SvgAbstractTimedDrawable";

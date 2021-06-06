@@ -1,9 +1,9 @@
 import { Station, Stop } from "./Station";
-import { Vector } from "./Vector";
-import { StationProvider } from "./Network";
-import { Rotation } from "./Rotation";
-import { Utils } from "./Utils";
-import { PreferredTrack } from "./PreferredTrack";
+import { Vector } from "../Vector";
+import { StationProvider } from "../Network";
+import { Rotation } from "../Rotation";
+import { Utils } from "../Utils";
+import { PreferredTrack } from "../PreferredTrack";
 import { AbstractTimedDrawableAdapter, AbstractTimedDrawable } from "./AbstractTimedDrawable";
 
 export interface LineAdapter extends AbstractTimedDrawableAdapter  {

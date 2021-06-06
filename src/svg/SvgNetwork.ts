@@ -1,22 +1,22 @@
 import { NetworkAdapter, Network, StationProvider } from "../Network";
-import { TimedDrawable } from "../Drawable";
+import { TimedDrawable } from "../drawables/TimedDrawable";
 import { BoundingBox } from "../BoundingBox";
 import { Vector } from "../Vector";
 import { Rotation } from "../Rotation";
-import { Station } from "../Station";
-import { Line } from "../Line";
+import { Station } from "../drawables/Station";
+import { Line } from "../drawables/Line";
 import { SvgLine } from "./SvgLine";
 import { SvgStation } from "./SvgStation";
-import { Label } from "../Label";
+import { Label } from "../drawables/Label";
 import { SvgLabel } from "./SvgLabel";
-import { GenericTimedDrawable } from "../GenericTimedDrawable";
+import { GenericTimedDrawable } from "../drawables/GenericTimedDrawable";
 import { SvgGenericTimedDrawable } from "./SvgGenericTimedDrawable";
 import { Zoomer } from "../Zoomer";
-import { Train } from "../Train";
+import { Train } from "../drawables/Train";
 import { SvgTrain } from "./SvgTrain";
 import { SvgAnimator } from "./SvgAnimator";
 import { SvgKenImage } from "./SvgImage";
-import { KenImage } from "../Image";
+import { KenImage } from "../drawables/Image";
 
 export class SvgNetwork implements NetworkAdapter {
 

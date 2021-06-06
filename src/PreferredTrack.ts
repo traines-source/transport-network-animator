@@ -1,4 +1,4 @@
-import { LineAtStation } from "./Station";
+import { LineAtStation } from "./drawables/Station";
 
 export class PreferredTrack {
     private value: string;

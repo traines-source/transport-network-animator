@@ -1,8 +1,8 @@
 import { expect } from 'chai';
 import { Instant } from '../src/Instant';
 import { LineGroup } from '../src/LineGroup';
-import { Stop } from '../src/Station';
-import { Line } from '../src/Line';
+import { Stop } from '../src/drawables/Station';
+import { Line } from '../src/drawables/Line';
 import { instance, mock, when, anyNumber, anything } from 'ts-mockito';
 
 describe('LineGroup', () => {

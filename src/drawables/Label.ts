@@ -1,7 +1,7 @@
 import { Station } from "./Station";
-import { Rotation } from "./Rotation";
-import { StationProvider } from "./Network";
-import { Vector } from "./Vector";
+import { Rotation } from "../Rotation";
+import { StationProvider } from "../Network";
+import { Vector } from "../Vector";
 import { AbstractTimedDrawable, AbstractTimedDrawableAdapter } from "./AbstractTimedDrawable";
 
 export interface LabelAdapter extends AbstractTimedDrawableAdapter {

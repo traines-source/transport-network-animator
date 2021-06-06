@@ -1,9 +1,7 @@
-import { TimedDrawable, Timed } from "./Drawable";
-import { BoundingBox } from "./BoundingBox";
 import { Stop } from "./Station";
-import { StationProvider } from "./Network";
-import { Vector } from "./Vector";
-import { ArrivalDepartureTime } from "./ArrivalDepartureTime";
+import { StationProvider } from "../Network";
+import { Vector } from "../Vector";
+import { ArrivalDepartureTime } from "../ArrivalDepartureTime";
 import { AbstractTimedDrawableAdapter, AbstractTimedDrawable } from "./AbstractTimedDrawable";
 
 export interface TrainAdapter extends AbstractTimedDrawableAdapter {

@@ -1,5 +1,5 @@
 import { Rotation } from "../Rotation";
-import { LabelAdapter, Label } from "../Label";
+import { LabelAdapter, Label } from "../drawables/Label";
 import { Vector } from "../Vector";
 import { Utils } from "../Utils";
 import { SvgNetwork } from "./SvgNetwork";

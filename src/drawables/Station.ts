@@ -1,10 +1,10 @@
-import { Vector } from "./Vector";
-import { Rotation } from "./Rotation";
+import { Vector } from "../Vector";
+import { Rotation } from "../Rotation";
 import { Line } from "./Line";
-import { Utils } from "./Utils";
-import { PreferredTrack } from "./PreferredTrack";
+import { Utils } from "../Utils";
+import { PreferredTrack } from "../PreferredTrack";
 import { Label } from "./Label";
-import { BoundingBox } from "./BoundingBox";
+import { BoundingBox } from "../BoundingBox";
 import { AbstractTimedDrawable, AbstractTimedDrawableAdapter } from "./AbstractTimedDrawable";
 
 export interface StationAdapter extends AbstractTimedDrawableAdapter {

@@ -1,10 +1,10 @@
 import { expect } from 'chai';
-import { LabelAdapter, Label } from '../src/Label';
+import { LabelAdapter, Label } from '../src/drawables/Label';
 import {instance, mock, when, anything, verify, between} from 'ts-mockito';
 import { StationProvider } from '../src/Network';
 import { Vector } from '../src/Vector';
 import { Rotation } from '../src/Rotation';
-import { Station } from '../src/Station';
+import { Station } from '../src/drawables/Station';
 
 describe('Label', () => {
     let labelAdapter: LabelAdapter;

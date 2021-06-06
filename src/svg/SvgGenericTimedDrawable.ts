@@ -1,4 +1,4 @@
-import { GenericTimedDrawableAdapter } from "../GenericTimedDrawable";
+import { GenericTimedDrawableAdapter } from "../drawables/GenericTimedDrawable";
 import { SvgAnimator } from "./SvgAnimator";
 import { SvgAbstractTimedDrawable } from "./SvgAbstractTimedDrawable";
 

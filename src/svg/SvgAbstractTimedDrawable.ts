@@ -1,7 +1,7 @@
 import { Instant } from "../Instant";
 import { Vector } from "../Vector";
 import { BoundingBox } from "../BoundingBox";
-import { AbstractTimedDrawableAdapter } from "../AbstractTimedDrawable";
+import { AbstractTimedDrawableAdapter } from "../drawables/AbstractTimedDrawable";
 
 export class SvgAbstractTimedDrawable implements AbstractTimedDrawableAdapter {
 

@@ -1,7 +1,7 @@
 import { Vector } from "../Vector";
-import { Stop } from "../Station";
+import { Stop } from "../drawables/Station";
 import { BoundingBox } from "../BoundingBox";
-import { TrainAdapter } from "../Train";
+import { TrainAdapter } from "../drawables/Train";
 import { Rotation } from "../Rotation";
 import { SvgAnimator } from "./SvgAnimator";
 import { SvgAbstractTimedDrawable } from "./SvgAbstractTimedDrawable";

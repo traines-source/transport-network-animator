@@ -1,6 +1,6 @@
-import { TimedDrawable, Timed } from "./Drawable";
-import { BoundingBox } from "./BoundingBox";
-import { Instant } from "./Instant";
+import { TimedDrawable, Timed } from "./TimedDrawable";
+import { BoundingBox } from "../BoundingBox";
+import { Instant } from "../Instant";
 
 export interface AbstractTimedDrawableAdapter extends Timed {
     name: string;

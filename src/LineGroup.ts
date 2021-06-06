@@ -1,5 +1,5 @@
-import { Line } from "./Line";
-import { Stop } from "./Station";
+import { Line } from "./drawables/Line";
+import { Stop } from "./drawables/Station";
 import { Vector } from "./Vector";
 
 export class LineGroup {

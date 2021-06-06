@@ -1,7 +1,7 @@
-import { BoundingBox } from "./BoundingBox";
-import { Vector } from "./Vector";
-import { Zoomer } from "./Zoomer";
-import { Instant } from "./Instant";
+import { BoundingBox } from "../BoundingBox";
+import { Vector } from "../Vector";
+import { Zoomer } from "../Zoomer";
+import { Instant } from "../Instant";
 import { AbstractTimedDrawable, AbstractTimedDrawableAdapter } from "./AbstractTimedDrawable";
 
 export interface KenImageAdapter extends AbstractTimedDrawableAdapter {

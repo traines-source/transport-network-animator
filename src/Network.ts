@@ -1,13 +1,13 @@
-import { TimedDrawable } from "./Drawable";
+import { TimedDrawable } from "./drawables/TimedDrawable";
 import { BoundingBox } from "./BoundingBox";
 import { Instant } from "./Instant";
-import { Station } from "./Station";
+import { Station } from "./drawables/Station";
 import { Vector } from "./Vector";
 import { Rotation } from "./Rotation";
 import { Zoomer } from "./Zoomer";
 import { LineGroup } from "./LineGroup";
 import { Gravitator } from "./Gravitator";
-import { Line } from "./Line";
+import { Line } from "./drawables/Line";
 
 export interface StationProvider {
     stationById(id: string): Station | undefined;

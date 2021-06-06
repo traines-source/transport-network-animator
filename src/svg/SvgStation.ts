@@ -1,4 +1,4 @@
-import { StationAdapter, Station } from "../Station";
+import { StationAdapter, Station } from "../drawables/Station";
 import { Vector } from "../Vector";
 import { Rotation } from "../Rotation";
 import { SvgAnimator } from "./SvgAnimator";

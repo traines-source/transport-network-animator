@@ -1,6 +1,6 @@
-import { Station, Stop } from "./Station";
+import { Station, Stop } from "./drawables/Station";
 import { Vector } from "./Vector";
-import { Line } from "./Line";
+import { Line } from "./drawables/Line";
 import { Utils } from "./Utils";
 import { StationProvider } from "./Network";
 
