@@ -26,6 +26,11 @@ export class Vector {
         return new Vector(this.x*ratio, this.y*ratio);
     }
 
+    signedLengthProjectedAt(direction: Rotation): number {
+        const s = Vector.UNIT.rotate(direction);
+        return this.dotProduct(s)/s.dotProduct(s);
+    }
+
     add(that : Vector): Vector {
         return new Vector(this.x + that.x, this.y + that.y);
     }

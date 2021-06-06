@@ -171,7 +171,7 @@ export class Station extends AbstractTimedDrawable {
         return [left, right];
     }
 
-    draw(delaySeconds: number, aniamte: boolean): number {
+    draw(delaySeconds: number, animate: boolean): number {
         const station = this;
         this.existingLabels.forEach(l => l.draw(delaySeconds, false));
         const t = station.positionBoundaries();

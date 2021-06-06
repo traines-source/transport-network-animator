@@ -2,10 +2,11 @@ import { SvgNetwork } from "./svg/SvgNetwork";
 import { Network } from "./Network";
 import { Instant } from "./Instant";
 import { SvgAnimator } from "./svg/SvgAnimator";
+import { DrawableSorter } from "./DrawableSorter";
 
 let timePassed = 0;
 
-const network: Network = new Network(new SvgNetwork());
+const network: Network = new Network(new SvgNetwork(), new DrawableSorter());
 const animateFromInstant: Instant = getStartInstant();
 let started = false;
 

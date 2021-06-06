@@ -5,6 +5,7 @@ import { BoundingBox } from "../BoundingBox";
 import { SvgAnimator } from "./SvgAnimator";
 import { SvgAbstractTimedDrawable } from "./SvgAbstractTimedDrawable";
 import { SvgUtils } from "./SvgUtils";
+import { Rotation } from "../Rotation";
 
 export class SvgLine extends SvgAbstractTimedDrawable implements LineAdapter {
 
@@ -32,6 +33,25 @@ export class SvgLine extends SvgAbstractTimedDrawable implements LineAdapter {
 
     get totalLength(): number {
         return this.element.getTotalLength();
+    }
+
+    get termini(): Vector[] {
+        const d = this.element.getAttribute('d');
+        const numbers = d?.trim().split(/[^\d]+/);
+        if (numbers != undefined) {
+            return [
+                new Vector(parseInt(numbers[1]), parseInt(numbers[2])),
+                new Vector(parseInt(numbers[numbers.length-2]), parseInt(numbers[numbers.length-1]))
+            ];
+        }
+        return [];
+    }
+
+    get animOrder(): Rotation | undefined {
+        if (this.element.dataset.animOrder == undefined) {
+            return undefined;
+        }
+        return Rotation.from(this.element.dataset.animOrder);
     }
 
     get speed(): number | undefined {

@@ -7,6 +7,7 @@ import { instance, mock, when, verify, anything } from 'ts-mockito';
 import { TimedDrawable } from '../src/drawables/TimedDrawable';
 import { BoundingBox } from "../src/BoundingBox";
 import { Instant } from '../src/Instant';
+import { DrawableSorter } from '../src/DrawableSorter';
 
 describe('Network', () => {
     let networkAdapter: NetworkAdapter;
@@ -21,7 +22,7 @@ describe('Network', () => {
     })
 
     it('whenNextInstant', () => {
-        const underTest = new Network(instance(networkAdapter));
+        const underTest = new Network(instance(networkAdapter), new DrawableSorter());
 
         when(timedDrawable.from).thenReturn(new Instant(1, 1, ''));
         when(timedDrawable.to).thenReturn(new Instant(1, 2, ''));
@@ -39,7 +40,7 @@ describe('Network', () => {
     })
 
     it('whenInitialize', () => {
-        const underTest = new Network(instance(networkAdapter));
+        const underTest = new Network(instance(networkAdapter), new DrawableSorter());
         underTest.initialize()
         verify(networkAdapter.initialize(underTest)).called();
     })
@@ -48,7 +49,7 @@ describe('Network', () => {
         when(stationAdapter.id).thenReturn('a');
         const a = new Station(instance(stationAdapter));
 
-        const underTest = new Network(instance(networkAdapter));
+        const underTest = new Network(instance(networkAdapter), new DrawableSorter());
         underTest.addToIndex(a);
 
         expect(underTest.stationById('a')).eql(a);
@@ -57,13 +58,13 @@ describe('Network', () => {
     })
 
     it('whenDrawTimedDrawableAt_givenNotExistingInstant_thenDoNothing', () => {
-        const underTest = new Network(instance(networkAdapter));
+        const underTest = new Network(instance(networkAdapter), new DrawableSorter());
 
         expect(underTest.drawTimedDrawablesAt(Instant.BIG_BANG, true)).eql(1);
     })
 
     it('whenDrawTimedDrawableAt_givenAnimatedInstantButAnimateFalse_thenDontAnimate', () => {
-        const underTest = new Network(instance(networkAdapter));
+        const underTest = new Network(instance(networkAdapter), new DrawableSorter());
 
         when(timedDrawable.from).thenReturn(new Instant(1, 1, ''));
         when(timedDrawable.to).thenReturn(new Instant(2, 3, 'reverse'));
@@ -79,7 +80,7 @@ describe('Network', () => {
     })
 
     it('whenDrawTimedDrawableAt_givenDrawableAtBigBang_thenDrawForever', () => {
-        const underTest = new Network(instance(networkAdapter));
+        const underTest = new Network(instance(networkAdapter), new DrawableSorter());
 
         when(timedDrawable.from).thenReturn(Instant.BIG_BANG);
         when(timedDrawable.to).thenReturn(Instant.BIG_BANG);
@@ -93,7 +94,7 @@ describe('Network', () => {
     })
 
     it('whenDrawTimedDrawableAt_givenAnimatedInstantButAnimateTrue_thenAnimate', () => {
-        const underTest = new Network(instance(networkAdapter));
+        const underTest = new Network(instance(networkAdapter), new DrawableSorter());
 
         when(timedDrawable.from).thenReturn(new Instant(1, 1, ''));
         when(timedDrawable.to).thenReturn(new Instant(2, 3, ''));
@@ -121,7 +122,7 @@ describe('Network', () => {
     })
 
     it('whenDrawTimedDrawableAt_givenDrawAndEraseForSameInstant_thenObeyOrder', () => {
-        const underTest = new Network(instance(networkAdapter));
+        const underTest = new Network(instance(networkAdapter), new DrawableSorter());
 
         when(timedDrawable.from).thenReturn(new Instant(2, 3, ''));
         when(timedDrawable.to).thenReturn(new Instant(2, 4, ''));
@@ -148,7 +149,7 @@ describe('Network', () => {
     })
 
     it('whenDrawTimedDrawableAt_givenMultipleDrawAndEraseForSameInstant_thenObeyOrder', () => {
-        const underTest = new Network(instance(networkAdapter));
+        const underTest = new Network(instance(networkAdapter), new DrawableSorter());
 
         when(timedDrawable.name).thenReturn("01");
         when(timedDrawable.from).thenReturn(new Instant(1, 1, ''));
@@ -197,12 +198,49 @@ describe('Network', () => {
         verify(timedDrawable3.erase(19, true, false)).called();
     })
 
+    it('whenDrawTimedDrawableAt_givenOverrideDelaysAndReverse_thenChangeDelayCounting', () => {
+        const drawableSorter: DrawableSorter = mock();
+        when(drawableSorter.sort(anything(), anything())).thenReturn([{delay: 0, reverse: true}, {delay: 3, reverse: false}]);
+
+        const underTest = new Network(instance(networkAdapter), instance(drawableSorter));
+
+        when(timedDrawable.name).thenReturn("00");
+        when(timedDrawable.from).thenReturn(new Instant(1, 1, ''));
+        when(timedDrawable.to).thenReturn(new Instant(2, 3, ''));
+        when(timedDrawable.boundingBox).thenReturn(new BoundingBox(new Vector(50, 50), new Vector(450, 850)));
+        when(timedDrawable.erase(1, true, false)).thenReturn(6);
+        underTest.addToIndex(instance(timedDrawable));
+
+        const timedDrawable1: TimedDrawable = mock();
+        when(timedDrawable1.name).thenReturn("01");
+        when(timedDrawable1.from).thenReturn(new Instant(2, 3, ''));
+        when(timedDrawable1.to).thenReturn(new Instant(2, 5, 'noanim'));
+        when(timedDrawable1.boundingBox).thenReturn(new BoundingBox(new Vector(500, 400), new Vector(450, 850)));
+        when(timedDrawable1.draw(7, true, true)).thenReturn(5);
+        underTest.addToIndex(instance(timedDrawable1));
+
+        const timedDrawable2: TimedDrawable = mock();
+        when(timedDrawable2.name).thenReturn("01");
+        when(timedDrawable2.from).thenReturn(new Instant(2, 3, ''));
+        when(timedDrawable2.to).thenReturn(Instant.BIG_BANG);
+        when(timedDrawable2.boundingBox).thenReturn(new BoundingBox(new Vector(900, 400), new Vector(1000, 1000)));
+        when(timedDrawable2.draw(10, true, false)).thenReturn(1);
+        underTest.addToIndex(instance(timedDrawable2));
+
+        underTest.drawTimedDrawablesAt(new Instant(2, 3, ''), true);
+        expect(underTest.drawTimedDrawablesAt(new Instant(2, 3, ''), true)).eql(12);
+
+        verify(timedDrawable.erase(1, true, false)).called();
+        verify(timedDrawable1.draw(7, true, true)).called();
+        verify(timedDrawable2.draw(10, true, false)).called();
+    })
+
     it('whenCreateVirtualStop', () => {
         const a = new Station(instance(stationAdapter));
         const v = new Vector(1, 1);
         const r = new Rotation(90);
         when(networkAdapter.createVirtualStop('a', v, r)).thenReturn(a);
-        const underTest = new Network(instance(networkAdapter));
+        const underTest = new Network(instance(networkAdapter), new DrawableSorter());
 
         expect(underTest.createVirtualStop('a', v, r)).eql(a);
         expect(underTest.stationById('a')).eql(a);

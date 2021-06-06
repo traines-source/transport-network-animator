@@ -8,6 +8,7 @@ import { Zoomer } from "./Zoomer";
 import { LineGroup } from "./LineGroup";
 import { Gravitator } from "./Gravitator";
 import { Line } from "./drawables/Line";
+import { DrawableSorter } from "./DrawableSorter";
 
 export interface StationProvider {
     stationById(id: string): Station | undefined;
@@ -32,7 +33,7 @@ export class Network implements StationProvider {
     private gravitator: Gravitator;
     private zoomer: Zoomer;
 
-    constructor(private adapter: NetworkAdapter) {
+    constructor(private adapter: NetworkAdapter, private drawableSorter: DrawableSorter) {
         this.gravitator = new Gravitator(this);
         this.zoomer = new Zoomer(this.adapter.canvasSize, this.adapter.zoomMaxScale);
     }
@@ -89,37 +90,40 @@ export class Network implements StationProvider {
         return delay;
     }
 
-    private populateDrawableBuffer(element: TimedDrawable, delay: number, animate: boolean, instant: Instant): number {
-        if (!this.isDrawableEliglibleForSameBuffer(element, instant)) {
-            delay = this.flushDrawableBuffer(delay, animate, instant);
+    private populateDrawableBuffer(element: TimedDrawable, delay: number, animate: boolean, now: Instant): number {
+        if (!this.isDrawableEliglibleForSameBuffer(element, now)) {
+            delay = this.flushDrawableBuffer(delay, animate, now);
         }
         this.drawableBuffer.push(element);
         return delay;
     }
 
-    private sortDrawableBuffer(instant: Instant) {
+    private sortDrawableBuffer(now: Instant): {delay: number, reverse: boolean}[] {
         if (this.drawableBuffer.length == 0) {
-            return;
+            return [];
         }
-        if (!this.isDraw(this.drawableBuffer[this.drawableBuffer.length-1], instant)) {
-            this.drawableBuffer.reverse();
-        }
+        return this.drawableSorter.sort(this.drawableBuffer, this.isDraw(this.drawableBuffer[this.drawableBuffer.length-1], now));
     }
 
-    private flushDrawableBuffer(delay: number, animate: boolean, instant: Instant): number {
-        this.sortDrawableBuffer(instant);
+    private flushDrawableBuffer(delay: number, animate: boolean, now: Instant): number {
+        const delays = this.sortDrawableBuffer(now);
+        const override = delays.length == this.drawableBuffer.length;
+        let maxDelay = delay;
         for (let i=0; i<this.drawableBuffer.length; i++) {
-            delay = this.drawOrEraseElement(this.drawableBuffer[i], delay, animate, instant)
+            const specificDelay = override ? delay + delays[i].delay : maxDelay;
+            const overrideReverse = override ? delays[i].reverse : undefined;
+            const newDelay = this.drawOrEraseElement(this.drawableBuffer[i], specificDelay, animate, overrideReverse, now)
+            maxDelay = Math.max(newDelay, maxDelay);
         }
         this.drawableBuffer = [];
-        return delay;
+        return maxDelay;
     }
 
-    private isDraw(element: TimedDrawable, instant: Instant) {
-        return instant.equals(element.from);
+    private isDraw(element: TimedDrawable, now: Instant) {
+        return now.equals(element.from);
     }
 
-    private isDrawableEliglibleForSameBuffer(element: TimedDrawable, instant: Instant): boolean {
+    private isDrawableEliglibleForSameBuffer(element: TimedDrawable, now: Instant): boolean {
         if (this.drawableBuffer.length == 0) {
             return true;
         }
@@ -127,31 +131,36 @@ export class Network implements StationProvider {
         if (element.name != lastElement.name) {
             return false;
         }
-        if (this.isDraw(element, instant) != this.isDraw(lastElement, instant)) {
+        if (this.isDraw(element, now) != this.isDraw(lastElement, now)) {
+            return false;
+        }
+        if (element instanceof Line && lastElement instanceof Line && element.animOrder != lastElement.animOrder) {
             return false;
         }
         return true;
     }
 
-    private drawOrEraseElement(element: TimedDrawable, delay: number, animate: boolean, instant: Instant): number {
-        const draw = this.isDraw(element, instant);
-        const shouldAnimate = this.shouldAnimate(draw ? element.from : element.to, animate);
+    private drawOrEraseElement(element: TimedDrawable, delay: number, animate: boolean, overrideReverse: boolean | undefined, now: Instant): number {
+        const draw = this.isDraw(element, now);
+        const instant = draw ? element.from : element.to;
+        const shouldAnimate = this.shouldAnimate(instant, animate);
+        const reverse = overrideReverse != undefined ? overrideReverse : instant.flag.includes('reverse');
         delay += draw
-            ? this.drawElement(element, delay, shouldAnimate)
-            : this.eraseElement(element, delay, shouldAnimate);
+            ? this.drawElement(element, delay, shouldAnimate, reverse)
+            : this.eraseElement(element, delay, shouldAnimate, reverse);
         this.zoomer.include(element.boundingBox, element.from, element.to, draw, animate);
         return delay;
     }
     
-    private drawElement(element: TimedDrawable, delay: number, animate: boolean): number {
+    private drawElement(element: TimedDrawable, delay: number, animate: boolean, reverse: boolean): number {
         if (element instanceof Line) {
             this.gravitator.addEdge(element);
         }
-        return element.draw(delay, animate, element.from.flag.includes('reverse'));
+        return element.draw(delay, animate, reverse);
     }
     
-    private eraseElement(element: TimedDrawable, delay: number, animate: boolean): number {
-        return element.erase(delay, animate, element.to.flag.includes('reverse'));
+    private eraseElement(element: TimedDrawable, delay: number, animate: boolean, reverse: boolean): number {
+        return element.erase(delay, animate, reverse);
     }
     
     private shouldAnimate(instant: Instant, animate: boolean): boolean {
@@ -171,6 +180,7 @@ export class Network implements StationProvider {
         if (!Instant.BIG_BANG.equals(element.to))
             this.setSlideIndexElement(element.to, element);
         if (element instanceof Station) {
+            console.log('do we get here');
             this.stations[element.id] = element;
         }
     }

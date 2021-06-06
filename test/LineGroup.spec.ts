@@ -1,5 +1,4 @@
 import { expect } from 'chai';
-import { Instant } from '../src/Instant';
 import { LineGroup } from '../src/LineGroup';
 import { Stop } from '../src/drawables/Station';
 import { Line } from '../src/drawables/Line';

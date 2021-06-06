@@ -8,7 +8,7 @@ export class Rotation {
     }
 
     static from(direction: string): Rotation {
-        return new Rotation(Rotation.DIRS[direction])
+        return new Rotation(Rotation.DIRS[direction] || 0);
     }
 
     get name(): string {

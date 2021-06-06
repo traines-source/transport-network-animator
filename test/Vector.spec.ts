@@ -132,4 +132,13 @@ describe('Vector', () => {
         expect(new Vector(0, -1).angle(new Vector(1, -1)).degrees).approximately(45, 1);
         expect(new Vector(0, -1).angle(new Vector(-1, 0)).degrees).approximately(-90, 1);
     })
+
+    it('whenSignedLengthProjectedAt', () => {
+        expect(new Vector(1, 0).signedLengthProjectedAt(Rotation.from('n'))).approximately(0, 0.1);
+        expect(new Vector(2, 0).signedLengthProjectedAt(Rotation.from('w'))).approximately(-2, 0.1);
+        expect(new Vector(4, 0).signedLengthProjectedAt(Rotation.from('se'))).approximately(Math.sqrt(8), 0.1);
+        expect(new Vector(-5.5, -5.5).signedLengthProjectedAt(Rotation.from('nw'))).approximately(7.8, 0.1);
+        expect(new Vector(5.5, 0.2).signedLengthProjectedAt(Rotation.from('nw'))).approximately(-4, 0.1);
+        expect(new Vector(-5, 5).signedLengthProjectedAt(Rotation.from('s'))).approximately(5, 0.1);
+    })
 })

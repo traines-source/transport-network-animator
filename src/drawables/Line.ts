@@ -10,7 +10,9 @@ export interface LineAdapter extends AbstractTimedDrawableAdapter  {
     stops: Stop[];
     weight: number | undefined;
     totalLength: number;
+    termini: Vector[];
     speed: number | undefined;
+    animOrder: Rotation | undefined;
     draw(delaySeconds: number, animationDurationSeconds: number, reverse: boolean, path: Vector[], length: number, colorDeviation: number): void;
     move(delaySeconds: number, animationDurationSeconds: number, from: Vector[], to: Vector[], colorFrom: number, colorTo: number): void;
     erase(delaySeconds: number, animationDurationSeconds: number, reverse: boolean, length: number): void;
@@ -25,6 +27,7 @@ export class Line extends AbstractTimedDrawable {
     }
 
     weight = this.adapter.weight;
+    animOrder = this.adapter.animOrder;
     
     private precedingStop: Station | undefined = undefined;
     private precedingDir: Rotation | undefined = undefined;
@@ -206,10 +209,18 @@ export class Line extends AbstractTimedDrawable {
         return helpStop;
     }
 
+    get animationDurationSeconds(): number {
+        return this.getAnimationDuration(this._path, true);
+    }
+
+    get speed(): number {
+        return this.adapter.speed || Line.SPEED;
+    }
+
     private getAnimationDuration(path: Vector[], animate: boolean): number {
         if (!animate)
             return 0;
-        return this.getTotalLength(path) / (this.adapter.speed || Line.SPEED);
+        return this.getTotalLength(path) / this.speed;
     }
     
     private getTotalLength(path: Vector[]): number {
@@ -232,6 +243,9 @@ export class Line extends AbstractTimedDrawable {
     }
 
     get path(): Vector[] {
+        if (this._path.length == 0) {
+            this.adapter.termini;
+        }
         return this._path;
     }
 
