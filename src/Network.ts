@@ -28,7 +28,7 @@ export class Network implements StationProvider {
     private slideIndex: {[id: string] : {[id: string]: TimedDrawable[]}} = {};
     private stations: { [id: string] : Station } = {};
     private lineGroups: { [id: string] : LineGroup } = {};
-    private eraseBuffer: TimedDrawable[] = [];
+    private drawableBuffer: TimedDrawable[] = [];
     private gravitator: Gravitator;
     private zoomer: Zoomer;
 
@@ -76,41 +76,70 @@ export class Network implements StationProvider {
 
     drawTimedDrawablesAt(now: Instant, animate: boolean): number {
         this.displayInstant(now);
+        console.log(now);
         const elements: TimedDrawable[] = this.timedDrawablesAt(now);
         let delay = Zoomer.ZOOM_DURATION;
         for (let i=0; i<elements.length; i++) {
-            delay = this.drawOrEraseElement(elements[i], delay, animate, now);
+            delay = this.populateDrawableBuffer(elements[i], delay, animate, now);
         }
-        delay = this.flushEraseBuffer(delay, animate);
+        delay = this.flushDrawableBuffer(delay, animate, now);
         delay = this.gravitator.gravitate(delay, animate);
         this.adapter.zoomTo(this.zoomer.center, this.zoomer.scale, this.zoomer.duration);
         this.zoomer.reset();
         return delay;
     }
 
-    private flushEraseBuffer(delay: number, animate: boolean): number {
-        for (let i=this.eraseBuffer.length-1; i>=0; i--) {
-            const element = this.eraseBuffer[i];
-            const shouldAnimate = this.shouldAnimate(element.to, animate);
-            delay += this.eraseElement(element, delay, shouldAnimate);
-            this.zoomer.include(element.boundingBox, element.from, element.to, false, animate);
+    private populateDrawableBuffer(element: TimedDrawable, delay: number, animate: boolean, instant: Instant): number {
+        if (!this.isDrawableEliglibleForSameBuffer(element, instant)) {
+            delay = this.flushDrawableBuffer(delay, animate, instant);
         }
-        this.eraseBuffer = [];
+        this.drawableBuffer.push(element);
         return delay;
     }
 
-    private drawOrEraseElement(element: TimedDrawable, delay: number, animate: boolean, instant: Instant): number {
-        if (instant.equals(element.to) && !element.from.equals(element.to)) {
-            if (this.eraseBuffer.length > 0 && this.eraseBuffer[this.eraseBuffer.length-1].name != element.name) {
-                delay = this.flushEraseBuffer(delay, animate);
-            }
-            this.eraseBuffer.push(element);
-            return delay;
+    private sortDrawableBuffer(instant: Instant) {
+        if (this.drawableBuffer.length == 0) {
+            return;
         }
-        delay = this.flushEraseBuffer(delay, animate);
-        const shouldAnimate = this.shouldAnimate(element.from, animate);
-        delay += this.drawElement(element, delay, shouldAnimate);
-        this.zoomer.include(element.boundingBox, element.from, element.to, true, animate);
+        if (!this.isDraw(this.drawableBuffer[this.drawableBuffer.length-1], instant)) {
+            this.drawableBuffer.reverse();
+        }
+    }
+
+    private flushDrawableBuffer(delay: number, animate: boolean, instant: Instant): number {
+        this.sortDrawableBuffer(instant);
+        for (let i=0; i<this.drawableBuffer.length; i++) {
+            delay = this.drawOrEraseElement(this.drawableBuffer[i], delay, animate, instant)
+        }
+        this.drawableBuffer = [];
+        return delay;
+    }
+
+    private isDraw(element: TimedDrawable, instant: Instant) {
+        return instant.equals(element.from);
+    }
+
+    private isDrawableEliglibleForSameBuffer(element: TimedDrawable, instant: Instant): boolean {
+        if (this.drawableBuffer.length == 0) {
+            return true;
+        }
+        const lastElement = this.drawableBuffer[this.drawableBuffer.length-1];
+        if (element.name != lastElement.name) {
+            return false;
+        }
+        if (this.isDraw(element, instant) != this.isDraw(lastElement, instant)) {
+            return false;
+        }
+        return true;
+    }
+
+    private drawOrEraseElement(element: TimedDrawable, delay: number, animate: boolean, instant: Instant): number {
+        const draw = this.isDraw(element, instant);
+        const shouldAnimate = this.shouldAnimate(draw ? element.from : element.to, animate);
+        delay += draw
+            ? this.drawElement(element, delay, shouldAnimate)
+            : this.eraseElement(element, delay, shouldAnimate);
+        this.zoomer.include(element.boundingBox, element.from, element.to, draw, animate);
         return delay;
     }
     
@@ -118,7 +147,7 @@ export class Network implements StationProvider {
         if (element instanceof Line) {
             this.gravitator.addEdge(element);
         }
-        return element.draw(delay, animate);
+        return element.draw(delay, animate, element.from.flag.includes('reverse'));
     }
     
     private eraseElement(element: TimedDrawable, delay: number, animate: boolean): number {

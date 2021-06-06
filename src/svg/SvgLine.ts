@@ -64,7 +64,7 @@ export class SvgLine extends SvgAbstractTimedDrawable implements LineAdapter {
         return this._stops;
     }
 
-    draw(delaySeconds: number, animationDurationSeconds: number, path: Vector[], length: number, colorDeviation: number): void {
+    draw(delaySeconds: number, animationDurationSeconds: number, reverse: boolean, path: Vector[], length: number, colorDeviation: number): void {
         this.updateBoundingBox(path);
 
         const animator = new SvgAnimator();
@@ -80,8 +80,9 @@ export class SvgLine extends SvgAbstractTimedDrawable implements LineAdapter {
             if (animationDurationSeconds == 0) {
                 length = 0;
             }
+            const direction = reverse ? -1 : 1;
             animator
-                .from(length)
+                .from(length*direction)
                 .to(0)
                 .animate(animationDurationSeconds * 1000, (x: number, isLast: boolean) => this.animateFrame(x, isLast));
         });

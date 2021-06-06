@@ -34,7 +34,7 @@ export abstract class AbstractTimedDrawable implements TimedDrawable {
         return this._boundingBox;
     }
 
-    abstract draw(delay: number, animate: boolean): number;
+    abstract draw(delay: number, animate: boolean, reverse: boolean): number;
 
     abstract erase(delay: number, animate: boolean, reverse: boolean): number;
 

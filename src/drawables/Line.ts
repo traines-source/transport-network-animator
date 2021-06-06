@@ -11,7 +11,7 @@ export interface LineAdapter extends AbstractTimedDrawableAdapter  {
     weight: number | undefined;
     totalLength: number;
     speed: number | undefined;
-    draw(delaySeconds: number, animationDurationSeconds: number, path: Vector[], length: number, colorDeviation: number): void;
+    draw(delaySeconds: number, animationDurationSeconds: number, reverse: boolean, path: Vector[], length: number, colorDeviation: number): void;
     move(delaySeconds: number, animationDurationSeconds: number, from: Vector[], to: Vector[], colorFrom: number, colorTo: number): void;
     erase(delaySeconds: number, animationDurationSeconds: number, reverse: boolean, length: number): void;
 }
@@ -30,14 +30,14 @@ export class Line extends AbstractTimedDrawable {
     private precedingDir: Rotation | undefined = undefined;
     private _path: Vector[] = [];
 
-    draw(delay: number, animate: boolean): number {
+    draw(delay: number, animate: boolean, reverse: boolean): number {
         if (!(this.adapter.totalLength > 0)) {
             this.createLine(delay, animate);
         }        
         let duration = this.getAnimationDuration(this._path, animate);
         const lineGroup = this.stationProvider.lineGroupById(this.name);
         lineGroup.addLine(this);
-        this.adapter.draw(delay, duration, this._path, this.getTotalLength(this._path), lineGroup.strokeColor);
+        this.adapter.draw(delay, duration, reverse, this._path, this.getTotalLength(this._path), lineGroup.strokeColor);
         return duration;
     }
 

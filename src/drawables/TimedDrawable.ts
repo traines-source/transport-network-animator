@@ -9,7 +9,7 @@ export interface Timed {
 export interface TimedDrawable extends Timed {
     name: string;
     boundingBox: BoundingBox;
-    draw(delaySeconds: number, animate: boolean): number;
+    draw(delaySeconds: number, animate: boolean, reverse: boolean): number;
     erase(delaySeconds: number, animate: boolean, reverse: boolean): number;
 }
 

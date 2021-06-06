@@ -20,7 +20,7 @@ describe('Line', () => {
     it('givenFirstStationNotExists_thenThrow', () => {
         when(lineAdapter.stops).thenReturn([new Stop('a', ''), new Stop('b', ''), new Stop('c', '')]);
         const l = new Line(instance(lineAdapter), instance(stationProvider));
-        expect(() => l.draw(2, false)).to.throw(Error);
+        expect(() => l.draw(2, false, false)).to.throw(Error);
         expect(() => l.erase(2, false, false)).to.throw(Error);
     })
 
@@ -29,36 +29,38 @@ describe('Line', () => {
         when(stationProvider.stationById('a')).thenReturn(mockStation('a', new Vector(1, 0), new Rotation(0)));
         when(stationProvider.stationById('b')).thenReturn(mockStation('b', new Vector(0, 50), new Rotation(0)));
         const l = new Line(instance(lineAdapter), instance(stationProvider));
-        expect(() => l.draw(2, false)).to.throw(Error);
+        expect(() => l.draw(2, false, false)).to.throw(Error);
     })
     
     it('givenSimpleLineWithoutAnimation_thenNoDuration', () => {
         when(lineAdapter.stops).thenReturn([new Stop('a', ''), new Stop('b', '')]);
-        when(lineAdapter.draw(2, anyNumber(), anything(), anything(), anything())).thenCall((delay: number, duration: number, path: Vector[]) => {
+        when(lineAdapter.draw(2, anyNumber(), anything(), anything(), anything(), anything())).thenCall((delay: number, duration: number, reverse: boolean, path: Vector[]) => {
             expect(duration).eql(0);
             expect(path).eql([new Vector(10, 0), new Vector(10, 50)]);
+            expect(reverse).is.false;
         })
         when(stationProvider.stationById('a')).thenReturn(mockStation('a', new Vector(10, 0), new Rotation(0)));
         when(stationProvider.stationById('b')).thenReturn(mockStation('b', new Vector(10, 50), new Rotation(0)));
         const l = new Line(instance(lineAdapter), instance(stationProvider));
-        expect(l.draw(2, false)).eql(0);
+        expect(l.draw(2, false, false)).eql(0);
     })
 
     it('givenSimpleLineWithAnimation_thenDuration', () => {
         when(lineAdapter.stops).thenReturn([new Stop('a', ''), new Stop('b', '')]);
-        when(lineAdapter.draw(2, anyNumber(), anything(), anything(), anything())).thenCall((delay: number, duration: number, path: Vector[]) => {
+        when(lineAdapter.draw(2, anyNumber(), anything(), anything(), anything(), anything())).thenCall((delay: number, duration: number, reverse: boolean, path: Vector[]) => {
             expect(duration).approximately(50 / Line.SPEED, 0.1);
             expect(path).eql([new Vector(0, 10), new Vector(50, 10)]);
+            expect(reverse).is.true;
         })
         when(stationProvider.stationById('a')).thenReturn(mockStation('a', new Vector(0, 10), new Rotation(0)));
         when(stationProvider.stationById('b')).thenReturn(mockStation('b', new Vector(50, 10), new Rotation(0)));
         const l = new Line(instance(lineAdapter), instance(stationProvider));
-        expect(l.draw(2, true)).approximately(50 / Line.SPEED, 0.1);
+        expect(l.draw(2, true, true)).approximately(50 / Line.SPEED, 0.1);
     })
 
     it('givenFourStopLineWithAnimation_thenCreateNodes', () => {
         when(lineAdapter.stops).thenReturn([new Stop('a', ''), new Stop('b', ''), new Stop('c', ''), new Stop('d', '')]);
-        when(lineAdapter.draw(2, anyNumber(), anything(), anything(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
+        when(lineAdapter.draw(2, anyNumber(), anything(), anything(), anything(), anything())).thenCall((delay: number, duration: number, reverse: boolean, p: Vector[]) => {
             const path = [...p];
             expect(path.shift()).eql(new Vector(0, 0));
             expect(path.shift()?.delta(new Vector(0, 50)).length).lessThan(0.1);
@@ -72,12 +74,12 @@ describe('Line', () => {
         when(stationProvider.stationById('c')).thenReturn(mockStation('c', new Vector(200, 150), Rotation.from('w')));
         when(stationProvider.stationById('d')).thenReturn(mockStation('d', new Vector(300, 150), Rotation.from('w')));
         const l = new Line(instance(lineAdapter), instance(stationProvider));
-        expect(l.draw(2, true)).approximately(400 / Line.SPEED, 0.1);
+        expect(l.draw(2, true, true)).approximately(400 / Line.SPEED, 0.1);
     })
 
     it('givenFourStopLineWithHelperStopNecessary_thenCreateHelperStop', () => {
         when(lineAdapter.stops).thenReturn([new Stop('a', ''), new Stop('b', ''), new Stop('c', ''), new Stop('d', '')]);
-        when(lineAdapter.draw(2, anyNumber(), anything(), anything(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
+        when(lineAdapter.draw(2, anyNumber(), anything(), anything(), anything(), anything())).thenCall((delay: number, duration: number, reverse: boolean, p: Vector[]) => {
             const path = [...p];
             expect(path.shift()).eql(new Vector(500, 500));
             expect(path.shift()?.delta(new Vector(450, 500)).length).lessThan(0.1);
@@ -99,12 +101,12 @@ describe('Line', () => {
             return mockStation(id, v, r);
         });
         const l = new Line(instance(lineAdapter), instance(stationProvider));
-        expect(l.draw(2, true)).approximately(725 / Line.SPEED, 0.1);
+        expect(l.draw(2, true, false)).approximately(725 / Line.SPEED, 0.1);
     })
 
     it('givenFourStopLineWithAllNorth_thenCreateHelperStop', () => {
         when(lineAdapter.stops).thenReturn([new Stop('a', ''), new Stop('b', ''), new Stop('c', ''), new Stop('d', '')]);
-        when(lineAdapter.draw(2, anyNumber(), anything(), anything(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
+        when(lineAdapter.draw(2, anyNumber(), anything(), anything(), anything(), anything())).thenCall((delay: number, duration: number, reverse: boolean, p: Vector[]) => {
             const path = [...p];
             expect(path.shift()).eql(new Vector(500, 500));
             expect(path.shift()).eql(new Vector(600, 500));
@@ -124,12 +126,12 @@ describe('Line', () => {
             return mockStation(id, v, r);
         });
         const l = new Line(instance(lineAdapter), instance(stationProvider));
-        expect(l.draw(2, true)).approximately(441 / Line.SPEED, 0.1);
+        expect(l.draw(2, true, false)).approximately(441 / Line.SPEED, 0.1);
     })
 
     it('givenFourStopLineWithRightAngle_thenCreateHelperStopsWhereNecessary', () => {
         when(lineAdapter.stops).thenReturn([new Stop('d', ''), new Stop('c', ''), new Stop('b', ''), new Stop('a', '')]);
-        when(lineAdapter.draw(2, anyNumber(), anything(), anything(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
+        when(lineAdapter.draw(2, anyNumber(), anything(), anything(), anything(), anything())).thenCall((delay: number, duration: number, reverse: boolean, p: Vector[]) => {
             const path = [...p];
             expect(path.shift()).eql(new Vector(500, 500));
             expect(path.shift()?.delta(new Vector(500, 475)).length).lessThan(0.1);
@@ -165,7 +167,7 @@ describe('Line', () => {
             return mockStation(id, v, r);
         });
         const l = new Line(instance(lineAdapter), instance(stationProvider));
-        expect(l.draw(2, true)).approximately(470 / Line.SPEED, 0.1);
+        expect(l.draw(2, true, false)).approximately(470 / Line.SPEED, 0.1);
     })
 
     it('givenLineForkWithSameName_thenUseSameTrack', () => {
@@ -178,7 +180,7 @@ describe('Line', () => {
 
         when(lineAdapter.stops).thenReturn([new Stop('b', ''), new Stop('d', '')]);
         when(lineAdapter.name).thenReturn('l1');
-        when(lineAdapter.draw(2, anyNumber(), anything(), anything(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
+        when(lineAdapter.draw(2, anyNumber(), anything(), anything(), anything(), anything())).thenCall((delay: number, duration: number, reverse: boolean, p: Vector[]) => {
             const path = [...p];
             expect(path.shift()).eql(new Vector(500, 400));
             expect(path.shift()?.delta(new Vector(500, 300)).length).lessThan(0.1);
@@ -187,7 +189,7 @@ describe('Line', () => {
         when(stationProvider.stationById('b')).thenReturn(b);
         when(stationProvider.stationById('d')).thenReturn(d);
         const l2 = new Line(instance(lineAdapter), instance(stationProvider));
-        expect(l2.draw(2, true)).approximately(240 / Line.SPEED, 0.1);
+        expect(l2.draw(2, true, false)).approximately(240 / Line.SPEED, 0.1);
     })
 
     it('givenLineForkWithSameNameAndTwoCommonStations_thenUseSameTrackOnlyOnceAndHavePathToFix', () => {
@@ -200,7 +202,7 @@ describe('Line', () => {
 
         when(lineAdapter.stops).thenReturn([new Stop('a', ''), new Stop('b', ''), new Stop('d', '')]);
         when(lineAdapter.name).thenReturn('l1');
-        when(lineAdapter.draw(2, anyNumber(), anything(), anything(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
+        when(lineAdapter.draw(2, anyNumber(), anything(), anything(), anything(), anything())).thenCall((delay: number, duration: number, reverse: boolean, p: Vector[]) => {
             const path = [...p];
             expect(path.shift()).eql(new Vector(500, 500));
             expect(path.shift()).eql(new Vector(500, 450));
@@ -217,7 +219,7 @@ describe('Line', () => {
             return mockStation(id, v, r);
         });
         const l2 = new Line(instance(lineAdapter), instance(stationProvider));
-        expect(l2.draw(2, true)).approximately(340 / Line.SPEED, 0.1);
+        expect(l2.draw(2, true, false)).approximately(340 / Line.SPEED, 0.1);
     })
 
     it('givenLineForkWithSameNameAndPerpendicularDirectionOptimal_thenStillUseParallelDirection', () => {
@@ -230,7 +232,7 @@ describe('Line', () => {
 
         when(lineAdapter.stops).thenReturn([new Stop('b', ''), new Stop('d', '')]);
         when(lineAdapter.name).thenReturn('l1');
-        when(lineAdapter.draw(2, anyNumber(), anything(), anything(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
+        when(lineAdapter.draw(2, anyNumber(), anything(), anything(), anything(), anything())).thenCall((delay: number, duration: number, reverse: boolean, p: Vector[]) => {
             const path = [...p];
             expect(path.shift()).eql(new Vector(500, 400));
             expect(path.shift()).eql(new Vector(500, 375));
@@ -246,7 +248,7 @@ describe('Line', () => {
             return mockStation(id, v, r);
         });
         const l2 = new Line(instance(lineAdapter), instance(stationProvider));
-        expect(l2.draw(2, true)).approximately(130 / Line.SPEED, 0.1);
+        expect(l2.draw(2, true, false)).approximately(130 / Line.SPEED, 0.1);
     })
 
     it('givenLineJoinWithSameNameAndPerpendicularDirectionOptimal_thenUseOptimalDirection', () => {
@@ -259,7 +261,7 @@ describe('Line', () => {
 
         when(lineAdapter.stops).thenReturn([new Stop('d', ''), new Stop('b', '')]);
         when(lineAdapter.name).thenReturn('l1');
-        when(lineAdapter.draw(2, anyNumber(), anything(), anything(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
+        when(lineAdapter.draw(2, anyNumber(), anything(), anything(), anything(), anything())).thenCall((delay: number, duration: number, reverse: boolean, p: Vector[]) => {
             const path = [...p];
             expect(path.shift()).eql(new Vector(600, 350));
             expect(path.shift()).eql(new Vector(550, 400));
@@ -268,7 +270,7 @@ describe('Line', () => {
         when(stationProvider.stationById('b')).thenReturn(b);
         when(stationProvider.stationById('d')).thenReturn(d);
         const l2 = new Line(instance(lineAdapter), instance(stationProvider));
-        expect(l2.draw(2, true)).approximately(120 / Line.SPEED, 0.1);
+        expect(l2.draw(2, true, false)).approximately(120 / Line.SPEED, 0.1);
     })
 
     it('givenLineForkWithDifferentName_thenUseDifferentTrack', () => {
@@ -281,7 +283,7 @@ describe('Line', () => {
 
         when(lineAdapter.stops).thenReturn([new Stop('b', ''), new Stop('d', '')]);
         when(lineAdapter.name).thenReturn('l2');
-        when(lineAdapter.draw(2, anyNumber(), anything(), anything(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
+        when(lineAdapter.draw(2, anyNumber(), anything(), anything(), anything(), anything())).thenCall((delay: number, duration: number, reverse: boolean, p: Vector[]) => {
             const path = [...p];
             expect(path.shift()).eql(new Vector(500+Station.LINE_DISTANCE, 400));
             expect(path.shift()?.delta(new Vector(500+Station.LINE_DISTANCE, 300-Station.LINE_DISTANCE)).length).lessThan(0.1);
@@ -290,7 +292,7 @@ describe('Line', () => {
         when(stationProvider.stationById('b')).thenReturn(b);
         when(stationProvider.stationById('d')).thenReturn(d);
         const l2 = new Line(instance(lineAdapter), instance(stationProvider));
-        expect(l2.draw(2, true)).approximately(240 / Line.SPEED, 0.1);
+        expect(l2.draw(2, true, false)).approximately(240 / Line.SPEED, 0.1);
     })
 
     it('givenLineJoin_thenUseDifferentTrack', () => {
@@ -303,7 +305,7 @@ describe('Line', () => {
 
         when(lineAdapter.stops).thenReturn([new Stop('d', ''), new Stop('b', '')]);
         when(lineAdapter.name).thenReturn('l1');
-        when(lineAdapter.draw(2, anyNumber(), anything(), anything(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
+        when(lineAdapter.draw(2, anyNumber(), anything(), anything(), anything(), anything())).thenCall((delay: number, duration: number, reverse: boolean, p: Vector[]) => {
             const path = [...p];
             expect(path.shift()).eql(new Vector(600, 200));
             expect(path.shift()?.delta(new Vector(500+Station.LINE_DISTANCE, 300-Station.LINE_DISTANCE)).length).lessThan(0.1);
@@ -312,7 +314,7 @@ describe('Line', () => {
         when(stationProvider.stationById('b')).thenReturn(b);
         when(stationProvider.stationById('d')).thenReturn(d);
         const l2 = new Line(instance(lineAdapter), instance(stationProvider));
-        expect(l2.draw(2, true)).approximately(240 / Line.SPEED, 0.1);
+        expect(l2.draw(2, true, false)).approximately(240 / Line.SPEED, 0.1);
     })
 
     it('givenLineCross_thenDoNotInterfere', () => {
@@ -325,7 +327,7 @@ describe('Line', () => {
 
         when(lineAdapter.stops).thenReturn([new Stop('d', ''), new Stop('b', ''), new Stop('c', '')]);
         when(lineAdapter.name).thenReturn('l2');
-        when(lineAdapter.draw(2, anyNumber(), anything(), anything(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
+        when(lineAdapter.draw(2, anyNumber(), anything(), anything(), anything(), anything())).thenCall((delay: number, duration: number, reverse: boolean, p: Vector[]) => {
             const path = [...p];
             expect(path.shift()).eql(new Vector(600, 350));
             expect(path.shift()).eql(new Vector(550, 400));
@@ -344,7 +346,7 @@ describe('Line', () => {
             return mockStation(id, v, r);
         });
         const l2 = new Line(instance(lineAdapter), instance(stationProvider));
-        expect(l2.draw(2, true)).approximately(390 / Line.SPEED, 0.1);
+        expect(l2.draw(2, true, false)).approximately(390 / Line.SPEED, 0.1);
     })
 
     it('givenLineCrossWithTrackPreference_thenDoNotInterfere', () => {
@@ -357,7 +359,7 @@ describe('Line', () => {
 
         when(lineAdapter.stops).thenReturn([new Stop('d', '-'), new Stop('b', ''), new Stop('c', '')]);
         when(lineAdapter.name).thenReturn('l2');
-        when(lineAdapter.draw(2, anyNumber(), anything(), anything(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
+        when(lineAdapter.draw(2, anyNumber(), anything(), anything(), anything(), anything())).thenCall((delay: number, duration: number, reverse: boolean, p: Vector[]) => {
             const path = [...p];
             expect(path.shift()).eql(new Vector(600, 350));
             expect(path.shift()).eql(new Vector(550, 400));
@@ -372,7 +374,7 @@ describe('Line', () => {
         when(stationProvider.stationById('d')).thenReturn(d);
         when(stationProvider.stationById('h_b_c')).thenReturn(mockStation('h_b_c', new Vector(450, 300), new Rotation(-0)));
         const l2 = new Line(instance(lineAdapter), instance(stationProvider));
-        expect(l2.draw(2, true)).approximately(390 / Line.SPEED, 0.1);
+        expect(l2.draw(2, true, false)).approximately(390 / Line.SPEED, 0.1);
     })
 
     it('givenParallelLinesWithManuallySetTracks_thenUseTheseTracks', () => {
@@ -385,7 +387,7 @@ describe('Line', () => {
 
         when(lineAdapter.stops).thenReturn([new Stop('d', ''), new Stop('b', '-1'), new Stop('a', '+1')]);
         when(lineAdapter.name).thenReturn('l2');
-        when(lineAdapter.draw(2, anyNumber(), anything(), anything(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
+        when(lineAdapter.draw(2, anyNumber(), anything(), anything(), anything(), anything())).thenCall((delay: number, duration: number, r: boolean, p: Vector[]) => {
             const path = [...p];
             expect(path.shift()).eql(new Vector(600, 200));
             expect(path.shift()).eql(new Vector(500+Station.LINE_DISTANCE, 300-Station.LINE_DISTANCE));
@@ -397,14 +399,14 @@ describe('Line', () => {
         when(stationProvider.stationById('b')).thenReturn(mockStation('b', new Vector(500, 400), Rotation.from('e')));
         when(stationProvider.stationById('d')).thenReturn(mockStation('d', new Vector(600, 200), Rotation.from('nw')));
         const l2 = new Line(instance(lineAdapter), instance(stationProvider));
-        expect(l2.draw(2, true)).approximately(340 / Line.SPEED, 0.1);
+        expect(l2.draw(2, true, false)).approximately(340 / Line.SPEED, 0.1);
 
         lineAdapter = mock();
         stationProvider = mockStationProvider();
         when(lineAdapter.stops).thenReturn([new Stop('d', '+1'), new Stop('b', '-2')]);
         when(lineAdapter.name).thenReturn('l3');
         when(lineAdapter.speed).thenReturn(155);
-        when(lineAdapter.draw(4, anyNumber(), anything(), anything(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
+        when(lineAdapter.draw(4, anyNumber(), anything(), anything(), anything(), anything())).thenCall((delay: number, duration: number, r: boolean, p: Vector[]) => {
             const path = [...p];
             expect(path.shift()).eql(new Vector(600+Station.LINE_DISTANCE/Math.sqrt(2), 200+Station.LINE_DISTANCE/Math.sqrt(2)));
             expect(path.shift()?.delta(new Vector(500+2*Station.LINE_DISTANCE, 296)).length).lessThan(0.5);
@@ -413,7 +415,7 @@ describe('Line', () => {
         when(stationProvider.stationById('b')).thenReturn(mockStation('b', new Vector(500, 400), Rotation.from('e')));
         when(stationProvider.stationById('d')).thenReturn(mockStation('d', new Vector(600, 200), Rotation.from('nw')));
         const l3 = new Line(instance(lineAdapter), instance(stationProvider));
-        expect(l3.draw(4, true)).approximately(240 / 155, 0.1);
+        expect(l3.draw(4, true, false)).approximately(240 / 155, 0.1);
     })
 
     it('givenParallelLinesWithAutomaticTracks_thenUseNewTracks', () => {
@@ -426,7 +428,7 @@ describe('Line', () => {
 
         when(lineAdapter.stops).thenReturn([new Stop('d', ''), new Stop('b', ''), new Stop('a', '')]);
         when(lineAdapter.name).thenReturn('l2');
-        when(lineAdapter.draw(2, anyNumber(), anything(), anything(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
+        when(lineAdapter.draw(2, anyNumber(), anything(), anything(), anything(), anything())).thenCall((delay: number, duration: number, r: boolean, p: Vector[]) => {
             const path = [...p];
             expect(path.shift()).eql(new Vector(600, 200));
             expect(path.shift()).eql(new Vector(500+Station.LINE_DISTANCE, 300-Station.LINE_DISTANCE));
@@ -437,14 +439,14 @@ describe('Line', () => {
         when(stationProvider.stationById('b')).thenReturn(b);
         when(stationProvider.stationById('d')).thenReturn(d);
         const l2 = new Line(instance(lineAdapter), instance(stationProvider));
-        expect(l2.draw(2, true)).approximately(340 / Line.SPEED, 0.1);
+        expect(l2.draw(2, true, false)).approximately(340 / Line.SPEED, 0.1);
 
         lineAdapter = mock();
         stationProvider = mockStationProvider();
         when(lineAdapter.stops).thenReturn([new Stop('d', ''), new Stop('b', '')]);
         when(lineAdapter.name).thenReturn('l3');
         when(lineAdapter.speed).thenReturn(undefined);
-        when(lineAdapter.draw(4, anyNumber(), anything(), anything(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
+        when(lineAdapter.draw(4, anyNumber(), anything(), anything(), anything(), anything())).thenCall((delay: number, duration: number, r: boolean, p: Vector[]) => {
             const path = [...p];
             expect(path.shift()).eql(new Vector(600+Station.LINE_DISTANCE/Math.sqrt(2), 200+Station.LINE_DISTANCE/Math.sqrt(2)));
             expect(path.shift()?.delta(new Vector(500+2*Station.LINE_DISTANCE, 296)).length).lessThan(0.5);
@@ -453,7 +455,7 @@ describe('Line', () => {
         when(stationProvider.stationById('b')).thenReturn(b);
         when(stationProvider.stationById('d')).thenReturn(d);
         const l3 = new Line(instance(lineAdapter), instance(stationProvider));
-        expect(l3.draw(4, true)).approximately(240 / Line.SPEED, 0.1);
+        expect(l3.draw(4, true, false)).approximately(240 / Line.SPEED, 0.1);
     })
 
     it('givenParallelLinesWithStationRotationNotMatching_thenPathToFix', () => {
@@ -466,7 +468,7 @@ describe('Line', () => {
 
         when(lineAdapter.stops).thenReturn([new Stop('d', ''), new Stop('b', ''), new Stop('a', '')]);
         when(lineAdapter.name).thenReturn('l2');
-        when(lineAdapter.draw(2, anyNumber(), anything(), anything(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
+        when(lineAdapter.draw(2, anyNumber(), anything(), anything(), anything(), anything())).thenCall((delay: number, duration: number, r: boolean, p: Vector[]) => {
             const path = [...p];
             expect(path.shift()).eql(new Vector(600, 200));
             expect(path.shift()).eql(new Vector(500-Station.LINE_DISTANCE, 300+Station.LINE_DISTANCE));
@@ -483,7 +485,7 @@ describe('Line', () => {
             return mockStation(id, v, r);
         });
         const l2 = new Line(instance(lineAdapter), instance(stationProvider));
-        expect(l2.draw(2, true)).approximately(340 / Line.SPEED, 0.1);
+        expect(l2.draw(2, true, false)).approximately(340 / Line.SPEED, 0.1);
     })
 
 
@@ -497,7 +499,7 @@ describe('Line', () => {
 
         when(lineAdapter.stops).thenReturn([new Stop('d', ''), new Stop('b', ''), new Stop('a', '')]);
         when(lineAdapter.name).thenReturn('l2');
-        when(lineAdapter.draw(2, anyNumber(), anything(), anything(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
+        when(lineAdapter.draw(2, anyNumber(), anything(), anything(), anything(), anything())).thenCall((delay: number, duration: number, r: boolean, p: Vector[]) => {
             const path = [...p];
             expect(path.shift()).eql(new Vector(600, 200));
             expect(path.shift()?.delta(new Vector(500+Station.LINE_DISTANCE, 300-Station.LINE_DISTANCE)).length).lessThan(0.1);
@@ -508,7 +510,7 @@ describe('Line', () => {
         when(stationProvider.stationById('b')).thenReturn(b);
         when(stationProvider.stationById('d')).thenReturn(d);
         const l2 = new Line(instance(lineAdapter), instance(stationProvider));
-        expect(l2.draw(2, true)).approximately(340 / Line.SPEED, 0.1);
+        expect(l2.draw(2, true, false)).approximately(340 / Line.SPEED, 0.1);
 
         expect(l1.erase(0, false, false)).approximately(0, 0.1);
 
@@ -517,7 +519,7 @@ describe('Line', () => {
         when(lineAdapter.stops).thenReturn([new Stop('d', ''), new Stop('b', ''), new Stop('a', '')]);
         when(lineAdapter.name).thenReturn('l1');
         when(lineAdapter.speed).thenReturn(undefined);
-        when(lineAdapter.draw(2, anyNumber(), anything(), anything(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
+        when(lineAdapter.draw(2, anyNumber(), anything(), anything(), anything(), anything())).thenCall((delay: number, duration: number, r: boolean, p: Vector[]) => {
             const path = [...p];
             expect(path.shift()?.delta(new Vector(600+Station.LINE_DISTANCE/Math.sqrt(2), 200+Station.LINE_DISTANCE/Math.sqrt(2))).length).lessThan(0.1);
             expect(path.shift()?.delta(new Vector(500, 300+Station.LINE_DISTANCE/Math.sqrt(2)*2)).length).lessThan(0.1);
@@ -528,7 +530,7 @@ describe('Line', () => {
         when(stationProvider.stationById('b')).thenReturn(b);
         when(stationProvider.stationById('d')).thenReturn(d);
         const l1_1 = new Line(instance(lineAdapter), instance(stationProvider));
-        expect(l1_1.draw(2, true)).approximately(340 / Line.SPEED, 0.1);
+        expect(l1_1.draw(2, true, false)).approximately(340 / Line.SPEED, 0.1);
     })
 
     it('whenDrawAndErase_givenDifferentName_thenUseNewTrack', () => {
@@ -541,7 +543,7 @@ describe('Line', () => {
         
         when(lineAdapter.stops).thenReturn([new Stop('d', ''), new Stop('b', ''), new Stop('a', '')]);
         when(lineAdapter.name).thenReturn('l2');
-        when(lineAdapter.draw(2, anyNumber(), anything(), anything(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
+        when(lineAdapter.draw(2, anyNumber(), anything(), anything(), anything(), anything())).thenCall((delay: number, duration: number, r: boolean, p: Vector[]) => {
             const path = [...p];
             expect(path.shift()).eql(new Vector(600, 200));
             expect(path.shift()?.delta(new Vector(500+Station.LINE_DISTANCE, 300-Station.LINE_DISTANCE)).length).lessThan(0.1);
@@ -552,7 +554,7 @@ describe('Line', () => {
         when(stationProvider.stationById('b')).thenReturn(b);
         when(stationProvider.stationById('d')).thenReturn(d);
         const l2 = new Line(instance(lineAdapter), instance(stationProvider));
-        expect(l2.draw(2, true)).approximately(340 / Line.SPEED, 0.1);
+        expect(l2.draw(2, true, false)).approximately(340 / Line.SPEED, 0.1);
 
         expect(l1.erase(0, false, false)).approximately(0, 0.1);
 
@@ -561,7 +563,7 @@ describe('Line', () => {
         when(lineAdapter.stops).thenReturn([new Stop('d', ''), new Stop('b', ''), new Stop('a', '')]);
         when(lineAdapter.name).thenReturn('l3');
         when(lineAdapter.speed).thenReturn(undefined);
-        when(lineAdapter.draw(2, anyNumber(), anything(), anything(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
+        when(lineAdapter.draw(2, anyNumber(), anything(), anything(), anything(), anything())).thenCall((delay: number, duration: number, r: boolean, p: Vector[]) => {
             const path = [...p];
             expect(path.shift()?.delta(new Vector(600+Station.LINE_DISTANCE/Math.sqrt(2), 200+Station.LINE_DISTANCE/Math.sqrt(2))).length).lessThan(0.1);
             expect(path.shift()?.delta(new Vector(500+2*Station.LINE_DISTANCE, 300+Station.LINE_DISTANCE/Math.sqrt(2)*2-2*Station.LINE_DISTANCE)).length).lessThan(0.1);
@@ -572,7 +574,7 @@ describe('Line', () => {
         when(stationProvider.stationById('b')).thenReturn(b);
         when(stationProvider.stationById('d')).thenReturn(d);
         const l1_1 = new Line(instance(lineAdapter), instance(stationProvider));
-        expect(l1_1.draw(2, true)).approximately(340 / Line.SPEED, 0.1);
+        expect(l1_1.draw(2, true, false)).approximately(340 / Line.SPEED, 0.1);
     })
 
     it('whenTermini_givenNoStops', () => { 
@@ -610,7 +612,7 @@ function createAndAssertStandardLine(a: Station, b: Station, c: Station): Line {
     when(lineAdapter.stops).thenReturn([new Stop('a', ''), new Stop('b', ''), new Stop('c', '')]);
     when(lineAdapter.name).thenReturn('l1');
     when(lineAdapter.speed).thenReturn(undefined);
-    when(lineAdapter.draw(0, anyNumber(), anything(), anything(), anything())).thenCall((delay: number, duration: number, p: Vector[]) => {
+    when(lineAdapter.draw(0, anyNumber(), anything(), anything(), anything(), anything())).thenCall((delay: number, duration: number, r: boolean, p: Vector[]) => {
         const path = [...p];
         expect(path.shift()).eql(new Vector(500, 500));
         expect(path.shift()).eql(new Vector(500, 400));
@@ -621,6 +623,6 @@ function createAndAssertStandardLine(a: Station, b: Station, c: Station): Line {
     when(stationProvider.stationById('b')).thenReturn(b);
     when(stationProvider.stationById('c')).thenReturn(c);
     const l1 = new Line(instance(lineAdapter), instance(stationProvider));
-    expect(l1.draw(0, true)).approximately(340 / Line.SPEED, 0.1);
+    expect(l1.draw(0, true, false)).approximately(340 / Line.SPEED, 0.1);
     return l1;
 }

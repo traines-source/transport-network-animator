@@ -67,14 +67,14 @@ describe('Network', () => {
 
         when(timedDrawable.from).thenReturn(new Instant(1, 1, ''));
         when(timedDrawable.to).thenReturn(new Instant(2, 3, 'reverse'));
-        when(timedDrawable.draw(1, false)).thenReturn(0);
+        when(timedDrawable.draw(1, false, false)).thenReturn(0);
         when(timedDrawable.erase(1, false, true)).thenReturn(0);
         underTest.addToIndex(instance(timedDrawable));
 
         expect(underTest.drawTimedDrawablesAt(new Instant(1, 1, ''), false)).eql(1);
         expect(underTest.drawTimedDrawablesAt(new Instant(2, 3, ''), false)).eql(1);
 
-        verify(timedDrawable.draw(1, false)).called();
+        verify(timedDrawable.draw(1, false, false)).called();
         verify(timedDrawable.erase(1, false, true)).called();
     })
 
@@ -84,12 +84,12 @@ describe('Network', () => {
         when(timedDrawable.from).thenReturn(Instant.BIG_BANG);
         when(timedDrawable.to).thenReturn(Instant.BIG_BANG);
         when(timedDrawable.boundingBox).thenReturn(new BoundingBox(new Vector(50, 50), new Vector(450, 850)));
-        when(timedDrawable.draw(1, true)).thenReturn(5);
+        when(timedDrawable.draw(1, true, false)).thenReturn(5);
         underTest.addToIndex(instance(timedDrawable));
 
         expect(underTest.drawTimedDrawablesAt(Instant.BIG_BANG, true)).eql(6);
 
-        verify(timedDrawable.draw(1, true)).called();
+        verify(timedDrawable.draw(1, true, false)).called();
     })
 
     it('whenDrawTimedDrawableAt_givenAnimatedInstantButAnimateTrue_thenAnimate', () => {
@@ -98,7 +98,7 @@ describe('Network', () => {
         when(timedDrawable.from).thenReturn(new Instant(1, 1, ''));
         when(timedDrawable.to).thenReturn(new Instant(2, 3, ''));
         when(timedDrawable.boundingBox).thenReturn(new BoundingBox(new Vector(50, 50), new Vector(450, 850)));
-        when(timedDrawable.draw(1, true)).thenReturn(2);
+        when(timedDrawable.draw(1, true, false)).thenReturn(2);
         when(timedDrawable.erase(1, true, false)).thenReturn(3);
         underTest.addToIndex(instance(timedDrawable));
 
@@ -106,7 +106,7 @@ describe('Network', () => {
         when(timedDrawable1.from).thenReturn(new Instant(1, 1, ''));
         when(timedDrawable1.to).thenReturn(new Instant(2, 4, 'noanim'));
         when(timedDrawable1.boundingBox).thenReturn(new BoundingBox(new Vector(500, 400), new Vector(450, 850)));
-        when(timedDrawable1.draw(3, true)).thenReturn(4);
+        when(timedDrawable1.draw(3, true, false)).thenReturn(4);
         when(timedDrawable1.erase(1, false, false)).thenReturn(0);
         underTest.addToIndex(instance(timedDrawable1));
 
@@ -114,8 +114,8 @@ describe('Network', () => {
         expect(underTest.drawTimedDrawablesAt(new Instant(2, 3, ''), true)).eql(4);
         expect(underTest.drawTimedDrawablesAt(new Instant(2, 4, ''), true)).eql(1);
 
-        verify(timedDrawable.draw(1, true)).called();
-        verify(timedDrawable1.draw(3, true)).called();
+        verify(timedDrawable.draw(1, true, false)).called();
+        verify(timedDrawable1.draw(3, true, false)).called();
         verify(timedDrawable.erase(1, true, false)).called();
         verify(timedDrawable1.erase(1, false, false)).called();
     })
@@ -126,7 +126,7 @@ describe('Network', () => {
         when(timedDrawable.from).thenReturn(new Instant(2, 3, ''));
         when(timedDrawable.to).thenReturn(new Instant(2, 4, ''));
         when(timedDrawable.boundingBox).thenReturn(new BoundingBox(new Vector(50, 50), new Vector(450, 850)));
-        when(timedDrawable.draw(1, true)).thenReturn(3);
+        when(timedDrawable.draw(1, true, false)).thenReturn(3);
         when(timedDrawable.erase(1, true, false)).thenReturn(5);
         underTest.addToIndex(instance(timedDrawable));
 
@@ -134,15 +134,15 @@ describe('Network', () => {
         when(timedDrawable1.from).thenReturn(new Instant(1, 2, ''));
         when(timedDrawable1.to).thenReturn(new Instant(2, 3, ''));
         when(timedDrawable1.boundingBox).thenReturn(new BoundingBox(new Vector(500, 400), new Vector(450, 850)));
-        when(timedDrawable1.draw(1, true)).thenReturn(2);
+        when(timedDrawable1.draw(1, true, false)).thenReturn(2);
         when(timedDrawable1.erase(4, true, false)).thenReturn(4);
         underTest.addToIndex(instance(timedDrawable1));
 
         expect(underTest.drawTimedDrawablesAt(new Instant(1, 2, ''), true)).eql(3);
         expect(underTest.drawTimedDrawablesAt(new Instant(2, 3, ''), true)).eql(8);
 
-        verify(timedDrawable1.draw(1, true)).called();
-        verify(timedDrawable.draw(1, true)).called();
+        verify(timedDrawable1.draw(1, true, false)).called();
+        verify(timedDrawable.draw(1, true, false)).called();
         verify(timedDrawable1.erase(4, true, false)).called();
         verify(timedDrawable.erase(anything(), anything(), anything())).never();
     })
@@ -154,7 +154,7 @@ describe('Network', () => {
         when(timedDrawable.from).thenReturn(new Instant(1, 1, ''));
         when(timedDrawable.to).thenReturn(new Instant(2, 3, ''));
         when(timedDrawable.boundingBox).thenReturn(new BoundingBox(new Vector(50, 50), new Vector(450, 850)));
-        when(timedDrawable.draw(1, true)).thenReturn(2);
+        when(timedDrawable.draw(1, true, false)).thenReturn(2);
         when(timedDrawable.erase(6, true, false)).thenReturn(6);
         underTest.addToIndex(instance(timedDrawable));
 
@@ -163,7 +163,7 @@ describe('Network', () => {
         when(timedDrawable1.from).thenReturn(new Instant(1, 2, ''));
         when(timedDrawable1.to).thenReturn(new Instant(2, 3, 'noanim'));
         when(timedDrawable1.boundingBox).thenReturn(new BoundingBox(new Vector(500, 400), new Vector(450, 850)));
-        when(timedDrawable1.draw(1, true)).thenReturn(3);
+        when(timedDrawable1.draw(1, true, false)).thenReturn(3);
         when(timedDrawable1.erase(1, false, false)).thenReturn(5);
         underTest.addToIndex(instance(timedDrawable1));
 
@@ -172,7 +172,7 @@ describe('Network', () => {
         when(timedDrawable2.from).thenReturn(new Instant(2, 3, ''));
         when(timedDrawable2.to).thenReturn(Instant.BIG_BANG);
         when(timedDrawable2.boundingBox).thenReturn(new BoundingBox(new Vector(900, 400), new Vector(1000, 1000)));
-        when(timedDrawable2.draw(12, true)).thenReturn(7);
+        when(timedDrawable2.draw(12, true, false)).thenReturn(7);
         underTest.addToIndex(instance(timedDrawable2));
 
         const timedDrawable3: TimedDrawable = mock();
@@ -180,7 +180,7 @@ describe('Network', () => {
         when(timedDrawable3.from).thenReturn(new Instant(1, 2, ''));
         when(timedDrawable3.to).thenReturn(new Instant(2, 3, ''));
         when(timedDrawable3.boundingBox).thenReturn(new BoundingBox(new Vector(500, 400), new Vector(450, 850)));
-        when(timedDrawable3.draw(4, true)).thenReturn(4);
+        when(timedDrawable3.draw(4, true, false)).thenReturn(4);
         when(timedDrawable3.erase(19, true, false)).thenReturn(8);
         underTest.addToIndex(instance(timedDrawable3));
 
@@ -188,12 +188,12 @@ describe('Network', () => {
         expect(underTest.drawTimedDrawablesAt(new Instant(1, 2, ''), true)).eql(8);
         expect(underTest.drawTimedDrawablesAt(new Instant(2, 3, ''), true)).eql(27);
 
-        verify(timedDrawable.draw(1, true)).called();
-        verify(timedDrawable1.draw(1, true)).called();
-        verify(timedDrawable3.draw(4, true)).called();
+        verify(timedDrawable.draw(1, true, false)).called();
+        verify(timedDrawable1.draw(1, true, false)).called();
+        verify(timedDrawable3.draw(4, true, false)).called();
         verify(timedDrawable1.erase(1, false, false)).called();
         verify(timedDrawable.erase(6, true, false)).called();
-        verify(timedDrawable2.draw(12, true)).called();
+        verify(timedDrawable2.draw(12, true, false)).called();
         verify(timedDrawable3.erase(19, true, false)).called();
     })
 
