@@ -3,8 +3,6 @@ import { Vector } from "./Vector";
 import { Rotation } from "./Rotation";
 import { BoundingBox } from "./BoundingBox";
 
-
-
 export class Zoomer {
     static ZOOM_DURATION = 1;
     static PADDING_FACTOR = 25;

@@ -62,7 +62,7 @@ Using SVG as the base, the appearance of the map can be tweaked and styled as yo
 
 For debugging, look at possible errors and warnings in the developer console of your browser. By appending a hashtag and the epoch to the URL under which you're viewing your SVG and then refreshing the page, you can jump to that very epoch skipping the preceding ones, so that you don't have to watch the entire animation over and over again.
 
-The code can quite easily be rewritten to use another base technology, e.g. HTML5 Canvas. It's just the TS classes prefixed with `Svg` that have to be reimplemented. I just happen to think (currently) that SVG is the best choice.
+The code could probably quite easily be rewritten to use another base technology, e.g. HTML5 Canvas. It's mainly just the TS classes in the `svg` subdirectory that have to be reimplemented. I just happen to think (currently) that SVG is the best choice.
 
 ## Breaking Changes
 * Stations need to have a `data-station` attribute instead of an `id`. Elements that can be animated will be sourced from the entire SVG document instead of only the `elements` and `station` groups.

@@ -44,7 +44,7 @@ export class Line extends AbstractTimedDrawable {
     move(delay: number, animationDurationSeconds: number, path: Vector[], colorDeviation: number) {
         let oldPath = this._path;
         if (oldPath.length < 2 || path.length < 2) {
-            console.warn('Trying to move a non existing line');
+            console.warn('Trying to move a non-existing line');
             return;
         }
         if (oldPath.length != path.length) {

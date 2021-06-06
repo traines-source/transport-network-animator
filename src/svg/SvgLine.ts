@@ -4,6 +4,7 @@ import { Stop } from "../drawables/Station";
 import { BoundingBox } from "../BoundingBox";
 import { SvgAnimator } from "./SvgAnimator";
 import { SvgAbstractTimedDrawable } from "./SvgAbstractTimedDrawable";
+import { SvgUtils } from "./SvgUtils";
 
 export class SvgLine extends SvgAbstractTimedDrawable implements LineAdapter {
 
@@ -23,10 +24,10 @@ export class SvgLine extends SvgAbstractTimedDrawable implements LineAdapter {
     }
 
     get weight(): number | undefined {
-        if (this.element.dataset.length == undefined) {
+        if (this.element.dataset.weight == undefined) {
             return undefined;
         }
-        return parseInt(this.element.dataset.length);
+        return parseInt(this.element.dataset.weight);
     }
 
     get totalLength(): number {
@@ -58,17 +59,7 @@ export class SvgLine extends SvgAbstractTimedDrawable implements LineAdapter {
 
     get stops(): Stop[] {
         if (this._stops.length == 0) {
-            const tokens = this.element.dataset.stops?.split(/\s+/) || [];
-            let nextStop = new Stop('', '');
-            for(var i=0;i<tokens?.length;i++) {                
-                if (tokens[i][0] != '-' && tokens[i][0] != '+' && tokens[i][0] != '*') {
-                    nextStop.stationId = tokens[i];
-                    this._stops.push(nextStop);
-                    nextStop = new Stop('', '');
-                } else {
-                    nextStop.trackInfo = tokens[i];
-                }
-            }
+            this._stops = SvgUtils.readStops(this.element.dataset.stops);
         }
         return this._stops;
     }

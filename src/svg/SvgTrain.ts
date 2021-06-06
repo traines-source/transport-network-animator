@@ -5,6 +5,7 @@ import { TrainAdapter } from "../drawables/Train";
 import { Rotation } from "../Rotation";
 import { SvgAnimator } from "./SvgAnimator";
 import { SvgAbstractTimedDrawable } from "./SvgAbstractTimedDrawable";
+import { SvgUtils } from "./SvgUtils";
 
 export class SvgTrain extends SvgAbstractTimedDrawable implements TrainAdapter {
     static WAGON_LENGTH = 10;
@@ -33,17 +34,7 @@ export class SvgTrain extends SvgAbstractTimedDrawable implements TrainAdapter {
 
     get stops(): Stop[] {
         if (this._stops.length == 0) {
-            const tokens = this.element.dataset.stops?.split(/\s+/) || [];
-            let nextStop = new Stop('', '');
-            for (var i = 0; i < tokens?.length; i++) {
-                if (tokens[i][0] != '-' && tokens[i][0] != '+' && tokens[i][0] != '*') {
-                    nextStop.stationId = tokens[i];
-                    this._stops.push(nextStop);
-                    nextStop = new Stop('', '');
-                } else {
-                    nextStop.trackInfo = tokens[i];
-                }
-            }
+            this._stops = SvgUtils.readStops(this.element.dataset.stops);
         }
         return this._stops;
     }
