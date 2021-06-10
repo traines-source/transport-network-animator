@@ -1,4 +1,5 @@
 import { Stop } from "../drawables/Station";
+import { Vector } from "../Vector";
 
 export class SvgUtils {
 
@@ -16,6 +17,17 @@ export class SvgUtils {
             }
         }
         return stops;
+    }
+
+    static readTermini(terminiString: string | undefined): Vector[] {
+        const numbers = terminiString?.trim().split(/[^\d.]+/);
+        if (numbers != undefined) {
+            return [
+                new Vector(parseFloat(numbers[1]), parseFloat(numbers[2])),
+                new Vector(parseFloat(numbers[numbers.length-2]), parseFloat(numbers[numbers.length-1]))
+            ];
+        }
+        return [];
     }
 
 }

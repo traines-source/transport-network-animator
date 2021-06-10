@@ -82,5 +82,28 @@ describe('DrawableSorter', () => {
         expect(list).eql([l3, l1, l4, l2]);
     })
 
+    it('givenNoTermini_thenFallback', () => {
+        const underTest = new DrawableSorter();
+
+        const line1: Line = mock();
+        when(line1.animOrder).thenReturn(Rotation.from("n"));
+        when(line1.path).thenReturn([]);
+        when(line1.animationDurationSeconds).thenReturn(1);
+        when(line1.speed).thenReturn(Line.SPEED);
+        const line2: Line = mock();
+        when(line2.animOrder).thenReturn(Rotation.from("n"));
+        when(line2.path).thenReturn([new Vector(10, 20), new Vector(3, 4)]);
+        when(line2.animationDurationSeconds).thenReturn(2);
+        when(line2.speed).thenReturn(Line.SPEED);
+
+        const l1 = instance(line1);
+        const l2 = instance(line2);
+        Object.setPrototypeOf(l1, Line.prototype);
+        Object.setPrototypeOf(l2, Line.prototype);
+        const list = [l1, l2];
+        expect(underTest.sort(list, true)).eql([{delay: 0, reverse: false}, {delay: 1+4/Line.SPEED, reverse: true}]);
+        expect(list).eql([l1, l2]);
+    })
+
     
 })

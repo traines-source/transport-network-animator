@@ -37,14 +37,7 @@ export class SvgLine extends SvgAbstractTimedDrawable implements LineAdapter {
 
     get termini(): Vector[] {
         const d = this.element.getAttribute('d');
-        const numbers = d?.trim().split(/[^\d]+/);
-        if (numbers != undefined) {
-            return [
-                new Vector(parseInt(numbers[1]), parseInt(numbers[2])),
-                new Vector(parseInt(numbers[numbers.length-2]), parseInt(numbers[numbers.length-1]))
-            ];
-        }
-        return [];
+        return SvgUtils.readTermini(d || undefined);
     }
 
     get animOrder(): Rotation | undefined {

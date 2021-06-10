@@ -244,7 +244,7 @@ export class Line extends AbstractTimedDrawable {
 
     get path(): Vector[] {
         if (this._path.length == 0) {
-            this.adapter.termini;
+            return this.adapter.termini;
         }
         return this._path;
     }

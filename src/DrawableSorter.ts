@@ -27,7 +27,11 @@ export class DrawableSorter {
         for (let i=0;i<elements.length;i++) {
             if (elements[i] instanceof Line) {
                 const element = <Line>elements[i];
-                const termini = [element.path[0], element.path[element.path.length-1]];
+                let termini = [Vector.NULL, Vector.NULL];
+                if (element.path.length > 1) {
+                    termini = [element.path[0], element.path[element.path.length-1]];
+                }
+                
                 const proj1 = termini[0].signedLengthProjectedAt(direction);
                 const proj2 = termini[1].signedLengthProjectedAt(direction);
                 const reverse = proj1 < proj2;
@@ -61,9 +65,9 @@ export class DrawableSorter {
                 for (let k=0;k<2;k++) {
                     const delta = refPoint.delta(cache[j].termini[k]);
                     const potentialShortest = delta.length;
-                    if (potentialShortest < shortest) {
+                    if (potentialShortest <= shortest) {
                         shortest = potentialShortest;
-                        projectionForShortest = delta.signedLengthProjectedAt(direction);
+                        projectionForShortest = delta.signedLengthProjectedAt(direction);                        
                         delayForShortest = delays[j].delay + (k == 1 ? cache[j].animationDuration : 0);
                     }
                 }

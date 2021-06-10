@@ -77,7 +77,6 @@ export class SvgNetwork implements NetworkAdapter {
         } else if (element.localName == 'image') {
             return new KenImage(new SvgKenImage(element));
         } else if (element.dataset.from != undefined || element.dataset.to != undefined) {
-            console.log(element);
             return new GenericTimedDrawable(new SvgGenericTimedDrawable(element));
         }
         return null;

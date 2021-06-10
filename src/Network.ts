@@ -77,7 +77,6 @@ export class Network implements StationProvider {
 
     drawTimedDrawablesAt(now: Instant, animate: boolean): number {
         this.displayInstant(now);
-        console.log(now);
         const elements: TimedDrawable[] = this.timedDrawablesAt(now);
         let delay = Zoomer.ZOOM_DURATION;
         for (let i=0; i<elements.length; i++) {
@@ -134,7 +133,7 @@ export class Network implements StationProvider {
         if (this.isDraw(element, now) != this.isDraw(lastElement, now)) {
             return false;
         }
-        if (element instanceof Line && lastElement instanceof Line && element.animOrder != lastElement.animOrder) {
+        if (element instanceof Line && lastElement instanceof Line && element.animOrder?.degrees != lastElement.animOrder?.degrees) {
             return false;
         }
         return true;
@@ -180,7 +179,6 @@ export class Network implements StationProvider {
         if (!Instant.BIG_BANG.equals(element.to))
             this.setSlideIndexElement(element.to, element);
         if (element instanceof Station) {
-            console.log('do we get here');
             this.stations[element.id] = element;
         }
     }

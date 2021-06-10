@@ -140,5 +140,6 @@ describe('Vector', () => {
         expect(new Vector(-5.5, -5.5).signedLengthProjectedAt(Rotation.from('nw'))).approximately(7.8, 0.1);
         expect(new Vector(5.5, 0.2).signedLengthProjectedAt(Rotation.from('nw'))).approximately(-4, 0.1);
         expect(new Vector(-5, 5).signedLengthProjectedAt(Rotation.from('s'))).approximately(5, 0.1);
+        expect(new Vector(0, 0).signedLengthProjectedAt(Rotation.from('s'))).approximately(0, 0.1);
     })
 })
