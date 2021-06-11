@@ -19,7 +19,7 @@ describe('DrawableSorter', () => {
         expect(list).eql([timedDrawable2, timedDrawable1]);
     })
 
-    it('givenAnimOrderSE_thenSortDespiteDelete', () => {
+    it('givenAnimOrderSE_thenSortDespiteDeleteAndDoImplicitReverse', () => {
         const underTest = new DrawableSorter();
 
         const line1: Line = mock();
@@ -39,9 +39,9 @@ describe('DrawableSorter', () => {
         Object.setPrototypeOf(l2, Line.prototype);
         const list = [l1, l2];
         const delays = underTest.sort(list, false);
-        expect(delays[0]).eql({delay: 0, reverse: true});
+        expect(delays[0]).eql({delay: 0, reverse: false});
         expect(delays[1].delay).approximately(2+4/Line.SPEED, 0.01);
-        expect(delays[1].reverse).eql(false);
+        expect(delays[1].reverse).eql(true);
         expect(list).eql([l2, l1]);
     })
 

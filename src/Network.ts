@@ -110,7 +110,7 @@ export class Network implements StationProvider {
         let maxDelay = delay;
         for (let i=0; i<this.drawableBuffer.length; i++) {
             const specificDelay = override ? delay + delays[i].delay : maxDelay;
-            const overrideReverse = override ? delays[i].reverse : undefined;
+            const overrideReverse = override ? delays[i].reverse : false;
             const newDelay = this.drawOrEraseElement(this.drawableBuffer[i], specificDelay, animate, overrideReverse, now)
             maxDelay = Math.max(newDelay, maxDelay);
         }
@@ -139,11 +139,11 @@ export class Network implements StationProvider {
         return true;
     }
 
-    private drawOrEraseElement(element: TimedDrawable, delay: number, animate: boolean, overrideReverse: boolean | undefined, now: Instant): number {
+    private drawOrEraseElement(element: TimedDrawable, delay: number, animate: boolean, overrideReverse: boolean, now: Instant): number {
         const draw = this.isDraw(element, now);
         const instant = draw ? element.from : element.to;
         const shouldAnimate = this.shouldAnimate(instant, animate);
-        const reverse = overrideReverse != undefined ? overrideReverse : instant.flag.includes('reverse');
+        const reverse = overrideReverse != instant.flag.includes('reverse');
         delay += draw
             ? this.drawElement(element, delay, shouldAnimate, reverse)
             : this.eraseElement(element, delay, shouldAnimate, reverse);
