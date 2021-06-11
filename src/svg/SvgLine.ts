@@ -55,16 +55,22 @@ export class SvgLine extends SvgAbstractTimedDrawable implements LineAdapter {
     }
 
     private updateBoundingBox(path: Vector[]): void {
-        if (path.length == 0) {
-            let r = this.element.getBBox();
-            this._boundingBox.tl = new Vector(r.x, r.y);
-            this._boundingBox.br = new Vector(r.x+r.width, r.y+r.height);
+        const lBox = this.element.getBBox();
+        if (document.getElementById('zoomable') != undefined) {
+            const zoomable = <SVGGraphicsElement> <unknown> document.getElementById('zoomable');
+            const zRect = zoomable.getBoundingClientRect();
+            const zBox = zoomable.getBBox();
+            const lRect = this.element.getBoundingClientRect();
+            const zScale = zBox.width/zRect.width;
+            const x = (lRect.x-zRect.x)*zScale+zBox.x;
+            const y = (lRect.y-zRect.y)*zScale+zBox.y;
+            this._boundingBox.tl = new Vector(x, y);
+            this._boundingBox.br = new Vector(x+lRect.width*zScale, y+lRect.height*zScale);
+            console.log(lBox.x, x, lBox.y, y);
             return;
         }
-        for(let i=0;i<path.length;i++) {
-            this._boundingBox.tl = this._boundingBox.tl.bothAxisMins(path[i]);
-            this._boundingBox.br = this._boundingBox.br.bothAxisMaxs(path[i]);
-        }
+        this._boundingBox.tl = new Vector(lBox.x, lBox.y);
+        this._boundingBox.br = new Vector(lBox.x+lBox.width, lBox.y+lBox.height);
     }
 
     get stops(): Stop[] {
@@ -75,13 +81,14 @@ export class SvgLine extends SvgAbstractTimedDrawable implements LineAdapter {
     }
 
     draw(delaySeconds: number, animationDurationSeconds: number, reverse: boolean, path: Vector[], length: number, colorDeviation: number): void {
+        this.element.style.visibility = 'hidden';
+        this.createPath(path);
         this.updateBoundingBox(path);
 
         const animator = new SvgAnimator();
         animator.wait(delaySeconds * 1000, () => {
             this.element.className.baseVal += ' line ' + this.name;
             this.element.style.visibility = 'visible';
-            this.createPath(path);
         
             this.updateDasharray(length);
             if (colorDeviation != 0) {
