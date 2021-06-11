@@ -56,12 +56,9 @@ export class SvgLine extends SvgAbstractTimedDrawable implements LineAdapter {
 
     private updateBoundingBox(path: Vector[]): void {
         if (path.length == 0) {
-            if (this.element.style.visibility == 'visible') {
-                const r = this.element.getBBox();
-                this._boundingBox = new BoundingBox(new Vector(r.x, r.y), new Vector(r.x+r.width, r.y+r.height));
-                return;
-            }
-            this._boundingBox = new BoundingBox(Vector.NULL, Vector.NULL);
+            let r = this.element.getBBox();
+            this._boundingBox.tl = new Vector(r.x, r.y);
+            this._boundingBox.br = new Vector(r.x+r.width, r.y+r.height);
             return;
         }
         for(let i=0;i<path.length;i++) {

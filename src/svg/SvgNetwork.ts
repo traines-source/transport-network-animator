@@ -31,7 +31,7 @@ export class SvgNetwork implements NetworkAdapter {
         if (box) {
             return new BoundingBox(new Vector(box.x, box.y), new Vector(box.x+box.width, box.y+box.height));
         }
-        return new BoundingBox(Vector.NULL, Vector.NULL);        
+        return new BoundingBox(Vector.NULL, Vector.NULL);
     }
 
     get autoStart(): boolean {
