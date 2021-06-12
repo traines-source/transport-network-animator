@@ -72,7 +72,8 @@ export class DrawableSorter {
                     }
                 }
             }
-            const delay = delayForShortest + projectionForShortest/cache[i].element.speed;
+            const noanim = cache[i].element[draw ? 'from' : 'to']?.flag.includes('noanim');
+            const delay = noanim ? 0 : (delayForShortest + projectionForShortest/cache[i].element.speed);
             delays.push({delay: delay, reverse: cache[i].reverse == draw});
             elements.push(cache[i].element);
         }

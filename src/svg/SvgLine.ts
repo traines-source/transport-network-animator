@@ -66,7 +66,6 @@ export class SvgLine extends SvgAbstractTimedDrawable implements LineAdapter {
             const y = (lRect.y-zRect.y)*zScale+zBox.y;
             this._boundingBox.tl = new Vector(x, y);
             this._boundingBox.br = new Vector(x+lRect.width*zScale, y+lRect.height*zScale);
-            console.log(lBox.x, x, lBox.y, y);
             return;
         }
         this._boundingBox.tl = new Vector(lBox.x, lBox.y);
