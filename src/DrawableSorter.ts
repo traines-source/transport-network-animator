@@ -8,13 +8,13 @@ export class DrawableSorter {
 
     }
 
-    sort(elements: TimedDrawable[], draw: boolean): {delay: number, reverse: boolean}[] {
+    sort(elements: TimedDrawable[], draw: boolean, animate: boolean): {delay: number, reverse: boolean}[] {
         if (elements.length == 0) {
             return [];
         }
         const representativeElement = elements[0];
         if (representativeElement instanceof Line && representativeElement.animOrder != undefined) {
-            return this.orderByGeometricDirection(elements, representativeElement.animOrder, draw);
+            return this.orderByGeometricDirection(elements, representativeElement.animOrder, draw, animate);
         }
         if (!draw) {
             elements.reverse();
@@ -50,7 +50,7 @@ export class DrawableSorter {
         return cache;
     }
 
-    private orderByGeometricDirection(elements: TimedDrawable[], direction: Rotation, draw: boolean): {delay: number, reverse: boolean}[] {
+    private orderByGeometricDirection(elements: TimedDrawable[], direction: Rotation, draw: boolean, animate: boolean): {delay: number, reverse: boolean}[] {
         const cache = this.buildSortableCache(elements, direction);
         cache.sort((a, b) => (a.projection < b.projection) ? 1 : -1);
         elements.splice(0, elements.length);
@@ -72,7 +72,7 @@ export class DrawableSorter {
                     }
                 }
             }
-            const noanim = cache[i].element[draw ? 'from' : 'to']?.flag.includes('noanim');
+            const noanim = !animate || cache[i].element[draw ? 'from' : 'to']?.flag.includes('noanim');
             const delay = noanim ? 0 : (delayForShortest + projectionForShortest/cache[i].element.speed);
             delays.push({delay: delay, reverse: cache[i].reverse == draw});
             elements.push(cache[i].element);

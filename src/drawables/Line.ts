@@ -13,6 +13,7 @@ export interface LineAdapter extends AbstractTimedDrawableAdapter  {
     termini: Vector[];
     speed: number | undefined;
     animOrder: Rotation | undefined;
+    beckStyle: boolean;
     draw(delaySeconds: number, animationDurationSeconds: number, reverse: boolean, path: Vector[], length: number, colorDeviation: number): void;
     move(delaySeconds: number, animationDurationSeconds: number, from: Vector[], to: Vector[], colorFrom: number, colorTo: number): void;
     erase(delaySeconds: number, animationDurationSeconds: number, reverse: boolean, length: number): void;
@@ -176,7 +177,7 @@ export class Line extends AbstractTimedDrawable {
     }
 
     private insertNode(fromCoord: Vector, fromDir: Rotation, toCoord: Vector, toDir: Rotation, path: Vector[]): boolean {
-        if (!this.beckStyle) {
+        if (!this.beckStyle || !this.adapter.beckStyle) {
             return true;
         }
         const delta: Vector = fromCoord.delta(toCoord);

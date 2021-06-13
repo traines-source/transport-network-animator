@@ -13,9 +13,9 @@ describe('DrawableSorter', () => {
         const timedDrawable1: Line = instance(mock());
         const timedDrawable2: Line = instance(mock());
         const list = [timedDrawable1, timedDrawable2];
-        expect(underTest.sort(list, true)).eql([]);
+        expect(underTest.sort(list, true, true)).eql([]);
         expect(list).eql([timedDrawable1, timedDrawable2]);
-        expect(underTest.sort(list, false)).eql([]);
+        expect(underTest.sort(list, false, true)).eql([]);
         expect(list).eql([timedDrawable2, timedDrawable1]);
     })
 
@@ -38,7 +38,7 @@ describe('DrawableSorter', () => {
         Object.setPrototypeOf(l1, Line.prototype);
         Object.setPrototypeOf(l2, Line.prototype);
         const list = [l1, l2];
-        const delays = underTest.sort(list, false);
+        const delays = underTest.sort(list, false, true);
         expect(delays[0]).eql({delay: 0, reverse: false});
         expect(delays[1].delay).approximately(2+4/Line.SPEED, 0.01);
         expect(delays[1].reverse).eql(true);
@@ -78,7 +78,7 @@ describe('DrawableSorter', () => {
         Object.setPrototypeOf(l3, Line.prototype);
         Object.setPrototypeOf(l4, Line.prototype);
         const list = [l1, l2, l3, l4];
-        expect(underTest.sort(list, true)).eql([{delay: 0, reverse: false}, {delay: 3, reverse: true}, {delay: 3+1/Line.SPEED, reverse: false}, {delay: 4-1/Line.SPEED, reverse: true}]);
+        expect(underTest.sort(list, true, true)).eql([{delay: 0, reverse: false}, {delay: 3, reverse: true}, {delay: 3+1/Line.SPEED, reverse: false}, {delay: 4-1/Line.SPEED, reverse: true}]);
         expect(list).eql([l3, l1, l4, l2]);
     })
 
@@ -101,7 +101,7 @@ describe('DrawableSorter', () => {
         Object.setPrototypeOf(l1, Line.prototype);
         Object.setPrototypeOf(l2, Line.prototype);
         const list = [l1, l2];
-        expect(underTest.sort(list, true)).eql([{delay: 0, reverse: false}, {delay: 1+4/Line.SPEED, reverse: true}]);
+        expect(underTest.sort(list, true, true)).eql([{delay: 0, reverse: false}, {delay: 1+4/Line.SPEED, reverse: true}]);
         expect(list).eql([l1, l2]);
     })
 

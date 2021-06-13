@@ -200,7 +200,7 @@ describe('Network', () => {
 
     it('whenDrawTimedDrawableAt_givenOverrideDelaysAndReverse_thenChangeDelayCounting', () => {
         const drawableSorter: DrawableSorter = mock();
-        when(drawableSorter.sort(anything(), anything())).thenReturn([{delay: 0, reverse: true}, {delay: 3, reverse: false}]);
+        when(drawableSorter.sort(anything(), anything(), anything())).thenReturn([{delay: 0, reverse: true}, {delay: 3, reverse: false}]);
 
         const underTest = new Network(instance(networkAdapter), instance(drawableSorter));
 

@@ -31,6 +31,13 @@ export class SvgLine extends SvgAbstractTimedDrawable implements LineAdapter {
         return parseInt(this.element.dataset.weight);
     }
 
+    get beckStyle(): boolean {
+        if (this.element.dataset.beckStyle == undefined) {
+            return true;
+        }
+        return this.element.dataset.beckStyle != 'false';
+    }
+
     get totalLength(): number {
         return this.element.getTotalLength();
     }

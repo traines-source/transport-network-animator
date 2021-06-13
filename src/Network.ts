@@ -97,15 +97,15 @@ export class Network implements StationProvider {
         return delay;
     }
 
-    private sortDrawableBuffer(now: Instant): {delay: number, reverse: boolean}[] {
+    private sortDrawableBuffer(now: Instant, animate: boolean): {delay: number, reverse: boolean}[] {
         if (this.drawableBuffer.length == 0) {
             return [];
         }
-        return this.drawableSorter.sort(this.drawableBuffer, this.isDraw(this.drawableBuffer[this.drawableBuffer.length-1], now));
+        return this.drawableSorter.sort(this.drawableBuffer, this.isDraw(this.drawableBuffer[this.drawableBuffer.length-1], now), animate);
     }
 
     private flushDrawableBuffer(delay: number, animate: boolean, now: Instant): number {
-        const delays = this.sortDrawableBuffer(now);
+        const delays = this.sortDrawableBuffer(now, animate);
         const override = delays.length == this.drawableBuffer.length;
         let maxDelay = delay;
         for (let i=0; i<this.drawableBuffer.length; i++) {
