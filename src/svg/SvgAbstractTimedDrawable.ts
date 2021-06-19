@@ -22,8 +22,18 @@ export class SvgAbstractTimedDrawable implements AbstractTimedDrawableAdapter {
     }
 
     get boundingBox(): BoundingBox {
-        const r = this.element.getBBox();
-        return new BoundingBox(new Vector(r.x, r.y), new Vector(r.x+r.width, r.y+r.height));
+        const lBox = this.element.getBBox();
+        if (document.getElementById('zoomable') != undefined) {
+            const zoomable = <SVGGraphicsElement> <unknown> document.getElementById('zoomable');
+            const zRect = zoomable.getBoundingClientRect();
+            const zBox = zoomable.getBBox();
+            const lRect = this.element.getBoundingClientRect();
+            const zScale = zBox.width/zRect.width;
+            const x = (lRect.x-zRect.x)*zScale+zBox.x;
+            const y = (lRect.y-zRect.y)*zScale+zBox.y;
+            return new BoundingBox(new Vector(x, y), new Vector(x+lRect.width*zScale, y+lRect.height*zScale));
+        }
+        return new BoundingBox(new Vector(lBox.x, lBox.y), new Vector(lBox.x+lBox.width, lBox.y+lBox.height));
     }
 
     private getInstant(fromOrTo: string): Instant {

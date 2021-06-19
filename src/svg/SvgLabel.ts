@@ -23,8 +23,7 @@ export class SvgLabel extends SvgAbstractTimedDrawable implements LabelAdapter {
 
     get boundingBox(): BoundingBox {
         if (this.element.style.visibility == 'visible') {
-            const r = this.element.getBBox();
-            return new BoundingBox(new Vector(r.x, r.y), new Vector(r.x+r.width, r.y+r.height));
+            return super.boundingBox;
         }
         return new BoundingBox(Vector.NULL, Vector.NULL);
     }

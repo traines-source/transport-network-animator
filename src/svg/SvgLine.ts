@@ -62,21 +62,9 @@ export class SvgLine extends SvgAbstractTimedDrawable implements LineAdapter {
     }
 
     private updateBoundingBox(path: Vector[]): void {
-        const lBox = this.element.getBBox();
-        if (document.getElementById('zoomable') != undefined) {
-            const zoomable = <SVGGraphicsElement> <unknown> document.getElementById('zoomable');
-            const zRect = zoomable.getBoundingClientRect();
-            const zBox = zoomable.getBBox();
-            const lRect = this.element.getBoundingClientRect();
-            const zScale = zBox.width/zRect.width;
-            const x = (lRect.x-zRect.x)*zScale+zBox.x;
-            const y = (lRect.y-zRect.y)*zScale+zBox.y;
-            this._boundingBox.tl = new Vector(x, y);
-            this._boundingBox.br = new Vector(x+lRect.width*zScale, y+lRect.height*zScale);
-            return;
-        }
-        this._boundingBox.tl = new Vector(lBox.x, lBox.y);
-        this._boundingBox.br = new Vector(lBox.x+lBox.width, lBox.y+lBox.height);
+        const b = super.boundingBox;
+        this._boundingBox.tl = b.tl;
+        this._boundingBox.br = b.br;
     }
 
     get stops(): Stop[] {

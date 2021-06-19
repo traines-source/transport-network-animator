@@ -2,11 +2,17 @@ import { Vector } from "../Vector";
 import { SvgAnimator } from "./SvgAnimator";
 import { KenImageAdapter } from "../drawables/Image";
 import { SvgAbstractTimedDrawable } from "./SvgAbstractTimedDrawable";
+import { BoundingBox } from "../BoundingBox";
 
 export class SvgKenImage extends SvgAbstractTimedDrawable implements KenImageAdapter {
 
     constructor(protected element: SVGGraphicsElement) {
         super(element);
+    }
+    
+    get boundingBox(): BoundingBox {
+        const r = this.element.getBBox();
+        return new BoundingBox(new Vector(r.x, r.y), new Vector(r.x+r.width, r.y+r.height));
     }
 
     get zoom(): Vector {
