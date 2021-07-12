@@ -13,7 +13,7 @@ See an example of how to use it in the [examples/](https://github.com/traines-so
 3. Define line segments connecting those stations `<path data-line="ICE1" data-stops="Berlin Hannover Frankfurt" data-from="1999 17" data-to="2003 30" />`
 4. View the animation in your browser (preferably Chrome)
 5. Iterate and fix the appearance of lines and stations until you're happy
-6. If you like, render it to a video by adapting and running the docker-compose.yml
+6. If you like, render it to a video by running timecut-parallel.sh or adapting the docker-compose.yml
 
 ## Concepts
 

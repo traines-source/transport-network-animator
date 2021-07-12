@@ -1,4 +1,6 @@
 node_modules
 output
+out
 videos
 .nyc_output
+*.log
