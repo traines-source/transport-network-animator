@@ -40,10 +40,11 @@ export class SvgTrain extends SvgAbstractTimedDrawable implements TrainAdapter {
     }
 
     draw(delaySeconds: number, animate: boolean, follow: { path: Vector[], from: number, to: number }): void {
+        this.element.className.baseVal += ' train';
+        this.setPath(this.calcTrainHinges(this.getPathLength(follow).lengthToStart, follow.path));
+
         const animator = new SvgAnimator();
         animator.wait(delaySeconds*1000, () => {
-            this.setPath(this.calcTrainHinges(this.getPathLength(follow).lengthToStart, follow.path));
-            this.element.className.baseVal += ' train';
             this.element.style.visibility = 'visible';
         });        
     }
