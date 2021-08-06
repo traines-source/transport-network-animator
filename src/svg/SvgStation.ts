@@ -17,8 +17,8 @@ export class SvgStation extends SvgAbstractTimedDrawable implements StationAdapt
         throw new Error('Station needs to have a data-station identifier');
     }
 
-    get baseCoords(): Vector {        
-        return new Vector(parseInt(this.element.getAttribute('x') || '') || 0, parseInt(this.element.getAttribute('y') || '') || 0);
+    get baseCoords(): Vector {
+        return new Vector(parseFloat(this.element.getAttribute('x') || '') || 0, parseFloat(this.element.getAttribute('y') || '') || 0);
     }
 
     set baseCoords(baseCoords: Vector) {

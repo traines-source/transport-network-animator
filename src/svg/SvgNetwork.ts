@@ -44,7 +44,7 @@ export class SvgNetwork implements NetworkAdapter {
         if (svg?.dataset.zoomMaxScale == undefined) {
             return 3;
         }
-        return parseInt(svg?.dataset.zoomMaxScale);
+        return parseFloat(svg?.dataset.zoomMaxScale);
     }
 
     get beckStyle(): boolean {
