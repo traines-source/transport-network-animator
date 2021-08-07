@@ -6,6 +6,14 @@ See an example of how to use it in the [examples/](https://github.com/traines-so
 
 ![Example Network](examples/ice-network.png?raw=true)
 
+This is not
+* a graph layout algorithm. You will have to position the stations (nodes) yourself.
+* an interactive UI. The map must be defined in SVG code.
+
+This is
+* a "Harry Beck style" algorithm. It will try to nicely draw the lines between the stations.
+* a time saver (given this software already exists). It saves you from having to tediously position and animate every single line segment.
+
 ## Steps to Animate a Network Map
 
 1. Create an SVG file as seen in the [examples/](https://github.com/traines-source/transport-network-animator/blame/master/examples/ice-network.svg) directory
@@ -16,14 +24,6 @@ See an example of how to use it in the [examples/](https://github.com/traines-so
 6. If you like, render it to a video by running timecut-parallel.sh or adapting the docker-compose.yml
 
 ## Concepts
-
-This is not
-* a graph layout algorithm. You will have to position the stations (nodes) yourself.
-* an interactive UI. The map must be defined in SVG code.
-
-This is
-* a "Harry Beck style" algorithm. It will try to nicely draw the lines between the stations.
-* a time saver (given this software already exists). It saves you from having to tediously position and animate every single line segment.
 
 ### Stations
 Stations need to have an id (`data-station`) and a position. They may have a direction (`data-dir`), in which they will be rotated (e.g. n, nw, se, e) and a label direction (`data-label-dir`), where labels belonging to this station will appear.
@@ -40,7 +40,7 @@ Lines will be animated with a constant speed, that is currently only configurabl
 ### Instants
 An "instant" is a point in time, consisting of an "epoch", a "second" and a flag. Seconds start again from 0 for each new epoch. Events defined for the same epoch and second will (a bit counterintuitively) not be animated at the same time, but exactly consecutively. This is very handy for multiple line segments or lines that should appear directly one after another in one single fluid animation. The order in which they are animated depends on the order the elements appear in the SVG source, with one exception: when removing elements (`data-to`), consecutive elements with the same name and instant will be animated in reverse order.
 
-In the `data-from` and `data-to` fields, the instant is to be specified with space-separated epoch and second and an optional flag. Currently supported flags are `reverse`, `noanim`, `nozoom`. Usually, the removal of lines will be animated in reverse direction (i.e. starting to disappear from the terminus). With the `reverse` flag, this animation will be reversed again, i.e. the line will start to disappear from the origin. With `noanim`, the line will just appear or disappear immediately. `nozoom` will disable zooming for this element, see Zoom below.
+In the `data-from` and `data-to` fields, the instant is to be specified with space-separated epoch and second and an optional flag. Currently supported flags are `reverse`, `noanim`, `nozoom`, `keepzoom`. Usually, the removal of lines will be animated in reverse direction (i.e. starting to disappear from the terminus). With the `reverse` flag, this animation will be reversed again, i.e. the line will start to disappear from the origin. With `noanim`, the line will just appear or disappear immediately. `nozoom` and `keepzoom` will influence the zooming behavior for this element, see Zoom below.
 
 If an element with the id `epoch-label` exists in the SVG, the current epoch will be written to it and updated so that it can be displayed, which is especially useful when using the epoch to represent the year.
 
@@ -55,7 +55,9 @@ An asterisk (`*`) can be appended or specified alone as the track to mark the st
 A label can be defined for a station (`data-station`) or for a line (`data-line`). Labels can also have instants (`data-from` and `data-to`), however, labels won't appear unless the corresponding station is visible (i.e. has a line going through it). Station labels need to reference a station id, line labels a line name. Line labels will add the specified label to all origin and terminus stations of that line at this point in time. These stations are defined as all stations that are origin or terminus of exactly one line segment of that line. Sometimes you will need to exclude some stations from this list by specifing the `*` flag with the track. Labels are drawn at the position indicated by the `data-label-dir` property on that station.
 
 ### Zoom
-For each instant, the canvas will zoom to the bounding box of all elements that are altered during that instant. Elements that have `nozoom` set are not taken into account for the calculation of the bounding box. If in this instant no elements qualify for zooming, the canvas will be zoomed out completely. There is always one second reserved for zooming at the beginning of each instant, which can currently only be configured in code. Only after that second will the animation of elements for that instant start. Zoom can be disabled altogether by removing the `zoomable` group.
+For each instant, the canvas will zoom to the bounding box of all elements that are altered during that instant. Elements that have `nozoom` or `keepzoom` set are not taken into account for the calculation of the bounding box. If in this instant no elements qualify for zooming, the canvas will be zoomed out completely. However, if a `keepzoom` element is the first element for that instant, the bounding box of the previous instant will be retained. That is, if all other elements for this instant do not contribute to the bounding box, the bounding box will stay the same as in the last instant.
+
+There is always one second reserved for zooming at the beginning of each instant, which can currently only be configured in code. Only after that second will the animation of elements for that instant start. Zoom can be disabled altogether by removing the `zoomable` group.
 
 ## Why SVG?
 Using SVG as the base, the appearance of the map can be tweaked and styled as you wish, with additional SVG elements and CSS. The styles (e.g. colors) of the lines should also be adjusted via CSS. It might also come in handy to add a background map as SVG or embedded image. Please note that SVG filters do not seem to be supported by the timecut renderer, in case you want to render your animation to a video.
@@ -67,3 +69,14 @@ The code could probably quite easily be rewritten to use another base technology
 ## Breaking Changes
 * Stations need to have a `data-station` attribute instead of an `id`. Elements that can be animated will be sourced from the entire SVG document instead of only the `elements` and `station` groups.
 * To achieve the previous behavior of the `noanim` flag, the `noanim-nozoom` flags now need to be used.
+
+## Alpha Features
+You will often find examples for these experimental features over at https://github.com/traines-source/traines-videos.
+* Ken Burns Effect: Slowly zooming photos
+* Gravitator: Representing historically changing properties of relations (e.g. travel times) by edge length in a dynamic graph, using automatic optimization.
+* Animating geographical lines, and in general, paths with given path commands.
+* Optionally starting transport-network-animator only when a specific event is received, to be able to execute custom code beforehand (e.g. reading paths from geojson).
+* Firing event for every epoch, to be able to run custom code.
+* Drawing lines in geographical order (e.g. north to south) instead of defined order.
+* Overridable drawing speed for lines.
+* Animating trains on lines, stopping at stations according to a defined timetable.
