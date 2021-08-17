@@ -83,6 +83,8 @@ while [ "$i" -le "$WORKERS" ]; do
     CURRENT_SLICE_START=$(($CURRENT_SLICE_START+$CURRENT_SLICE_LENGTH))
     CURRENT_SLICE_LENGTH=$SLICE_LENGTH
     i=$(($i + 1))
+
+    sleep 40
 done
 
 wait_until_workers_finished() {
