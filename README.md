@@ -26,12 +26,12 @@ This is
 ## Concepts
 
 ### Stations
-Stations need to have an id (`data-station`) and a position. They may have a direction (`data-dir`), in which they will be rotated (e.g. n, nw, se, e) and a label direction (`data-label-dir`), where labels belonging to this station will appear.
+Stations need to be SVG `rect` elements having an id (`data-station`) and a position. They may have a direction (`data-dir`), in which they will be rotated (e.g. n, nw, se, e) and a label direction (`data-label-dir`), where labels belonging to this station will appear.
 
 Once a line is assigned to a station, it will stay where it is, i.e. it is not moved or altered, until it is removed again. That means that the layout of lines and stations will not be optimized over time, during the animation, as more lines are added.
 
 ### Lines
-Each line segment needs to have a name (`data-line`) and a space separated list (`data-stops`) of station ids that it connects, where the first specified station is the origin and the last the terminus – the direction impacting the animation. In the `data-stops` string, before each station, additional flags can be set, which are discussed under Tracks. Usually, lines appear and disappear at certain points in time, which can be set using "instants" in the `data-from` and `data-to` fields. Multiple line segments together can form a line, identified by the common `data-line` name. Line segments of one line will adhere to a couple of special rules, e.g. they will join seamlessly and leave stations in the same direction they arrived, just as at interstations of a line segment.
+Each line segment needs be be an SVG `path` element having a name (`data-line`) and a space separated list (`data-stops`) of station ids that it connects, where the first specified station is the origin and the last the terminus – the direction impacting the animation. In the `data-stops` string, before each station, additional flags can be set, which are discussed under Tracks. Usually, lines appear and disappear at certain points in time, which can be set using "instants" in the `data-from` and `data-to` fields. Multiple line segments together can form a line, identified by the common `data-line` name. Line segments of one line will adhere to a couple of special rules, e.g. they will join seamlessly and leave stations in the same direction they arrived, just as at interstations of a line segment.
 
 The algorithm will try to find a nice "Harry Beck style" way to draw the lines. Sometimes it will fail. You can fix this by adjusting station positioning and rotation and by adding additional "helper" stations while setting `class="helper"` in the example or making these helper stations invisible however you like.
 
@@ -52,12 +52,17 @@ Line segments with the same line name will automatically share the same track at
 An asterisk (`*`) can be appended or specified alone as the track to mark the stop of this line segment as not being an origin or terminus of the entire line. This is only necessary in conjunction with line labels, see below.
 
 ### Labels
-A label can be defined for a station (`data-station`) or for a line (`data-line`). Labels can also have instants (`data-from` and `data-to`), however, labels won't appear unless the corresponding station is visible (i.e. has a line going through it). Station labels need to reference a station id, line labels a line name. Line labels will add the specified label to all origin and terminus stations of that line at this point in time. These stations are defined as all stations that are origin or terminus of exactly one line segment of that line. Sometimes you will need to exclude some stations from this list by specifing the `*` flag with the track. Labels are drawn at the position indicated by the `data-label-dir` property on that station.
+A label, being an SVG `text` element, can be defined for a station (`data-station`) or for a line (`data-line`). Labels can also have instants (`data-from` and `data-to`), however, labels won't appear unless the corresponding station is visible (i.e. has a line going through it). Station labels need to reference a station id, line labels a line name. Line labels will add the specified label to all origin and terminus stations of that line at this point in time. These stations are defined as all stations that are origin or terminus of exactly one line segment of that line. Sometimes you will need to exclude some stations from this list by specifing the `*` flag with the track. Labels are drawn at the position indicated by the `data-label-dir` property on that station.
 
 ### Zoom
 For each instant, the canvas will zoom to the bounding box of all elements that are altered during that instant. Elements that have `nozoom` or `keepzoom` set are not taken into account for the calculation of the bounding box. If in this instant no elements qualify for zooming, the canvas will be zoomed out completely. However, if a `keepzoom` element is the first element for that instant, the bounding box of the previous instant will be retained. That is, if all other elements for this instant do not contribute to the bounding box, the bounding box will stay the same as in the last instant.
 
 There is always one second reserved for zooming at the beginning of each instant, which can currently only be configured in code. Only after that second will the animation of elements for that instant start. Zoom can be disabled altogether by removing the `zoomable` group.
+
+### Trains (Beta)
+Trains can be animated on previously defined lines (see the example here: [trains.svg](https://github.com/traines-source/transport-network-animator/blame/master/examples/trains.svg)). They are just paths that are moved along other paths. A `path` that is supposed to represent a train must have the `data-train` attribute, referencing the line name defined previously on which the train is supposed to run. In the `data-stops` attribute, a list of stations of this line at which the train is supposed to stop must be given, including the departure and arrival times, e.g. `Berlin +11+50 Hannover +56+120 Frankfurt`, meaning the train needs 39 minutes between Berlin and Hannover and stops at Hannover for 6 minutes, arriving in Frankfurt after another 64 minutes. The time is given in seconds relative to the `data-from` instant. This makes it easy to animate the trains according to a real timetable if one second in the animation corresponds to one minute in reality.
+
+The number of train segments can be specified using the `data-length` attribute (default: 2). The styling of the train should be done entirely using CSS, where SVG's `marker-start`, `marker-mid` and `marker-end` come in handy (see example).
 
 ## Why SVG?
 Using SVG as the base, the appearance of the map can be tweaked and styled as you wish, with additional SVG elements and CSS. The styles (e.g. colors) of the lines should also be adjusted via CSS. It might also come in handy to add a background map as SVG or embedded image. Please note that SVG filters do not seem to be supported by the timecut renderer, in case you want to render your animation to a video.
@@ -79,4 +84,3 @@ You will often find examples for these experimental features over at https://git
 * Firing event for every epoch, to be able to run custom code.
 * Drawing lines in geographical order (e.g. north to south) instead of defined order.
 * Overridable drawing speed for lines.
-* Animating trains on lines, stopping at stations according to a defined timetable.
