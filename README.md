@@ -2,7 +2,7 @@
 
 An SVG-based tool to animate maps of public transportation networks.
 
-See an example of how to use it in the [examples/](https://github.com/traines-source/transport-network-animator/blame/master/examples/ice-network.svg) directory. See it in action in this video: https://youtu.be/1-3F0ViONS4
+See an example of how to use it in the [examples/](https://github.com/traines-source/transport-network-animator/blame/master/examples/trains.svg) directory. See it in action in this video: https://youtu.be/1-3F0ViONS4
 
 ![Example Network](examples/ice-network.png?raw=true)
 
@@ -16,7 +16,7 @@ This is
 
 ## Steps to Animate a Network Map
 
-1. Create an SVG file as seen in the [examples/](https://github.com/traines-source/transport-network-animator/blame/master/examples/ice-network.svg) directory
+1. Create an SVG file as seen in the [examples/](https://github.com/traines-source/transport-network-animator/blame/master/examples/trains.svg) directory
 2. Define stations and their positions `<rect data-station="Berlin" x="150" y="510" data-dir="n" />`
 3. Define line segments connecting those stations `<path data-line="ICE1" data-stops="Berlin Hannover Frankfurt" data-from="1999 17" data-to="2003 30" />`
 4. View the animation in your browser (preferably Chrome)
@@ -45,7 +45,7 @@ In the `data-from` and `data-to` fields, the instant is to be specified with spa
 If an element with the id `epoch-label` exists in the SVG, the current epoch will be written to it and updated so that it can be displayed, which is especially useful when using the epoch to represent the year.
 
 ### Tracks
-Stations have tracks in two directions, the main direction of the station (`data-dir`) and the secondary, perpendicular direction. Tracks are numbered indepedently for the two directions. Track number `+0`/`-0` is the only track that is exactly at the position of the station. Additional lines will by default be added to the right and bottom, respectively. This can be adjusted by setting the track before the respective station in the `data-stops` string of a line segment. It can be set to just a sign (`+`, `-`, the former one being the default) or a precise track number (`+1`, `-2`). A track number must alway be prefixed with a sign, i.e. the `+` is mandatory! A track number will automatically be eroded to the respective sign for the next stop of that line segment, so that e.g. a line that was on the left stays on the left.
+Stations have tracks in two directions, the main direction of the station (`data-dir`) and the secondary, perpendicular direction (see example [ice-network.svg](https://github.com/traines-source/transport-network-animator/blame/master/examples/ice-network.svg)). Tracks are numbered indepedently for the two directions. Track number `+0`/`-0` is the only track that is exactly at the position of the station. Additional lines will by default be added to the right and bottom, respectively. This can be adjusted by setting the track before the respective station in the `data-stops` string of a line segment. It can be set to just a sign (`+`, `-`, the former one being the default) or a precise track number (`+1`, `-2`). A track number must alway be prefixed with a sign, i.e. the `+` is mandatory! A track number will automatically be eroded to the respective sign for the next stop of that line segment, so that e.g. a line that was on the left stays on the left.
 
 Line segments with the same line name will automatically share the same track at their origin stations, currently not at their termini (you will have to set the track manually if you want to join segments seamlessly in this case). The "Harry Beck style" algorithm will often fail if lines at stations that are in a straight line do not have the same track at both stations. So it is advisable to try and have parallel lines use the same track for consecutive stations.
 
@@ -60,7 +60,7 @@ For each instant, the canvas will zoom to the bounding box of all elements that 
 There is always one second reserved for zooming at the beginning of each instant, which can currently only be configured in code. Only after that second will the animation of elements for that instant start. Zoom can be disabled altogether by removing the `zoomable` group.
 
 ### Trains (Beta)
-Trains can be animated on previously defined lines (see the example here: [trains.svg](https://github.com/traines-source/transport-network-animator/blame/master/examples/trains.svg)). They are just paths that are moved along other paths. A `path` that is supposed to represent a train must have the `data-train` attribute, referencing the line name defined previously on which the train is supposed to run. In the `data-stops` attribute, a list of stations of this line at which the train is supposed to stop must be given, including the departure and arrival times, e.g. `Berlin +11+50 Hannover +56+120 Frankfurt`, meaning the train needs 39 minutes between Berlin and Hannover and stops at Hannover for 6 minutes, arriving in Frankfurt after another 64 minutes. The time is given in seconds relative to the `data-from` instant. This makes it easy to animate the trains according to a real timetable if one second in the animation corresponds to one minute in reality. Pluses (`+`) are mandatory, minuses (`-`) can be used instead to let the train start from the origin before the `data-from` instant.
+Trains can be animated on previously defined lines (see example [trains.svg](https://github.com/traines-source/transport-network-animator/blame/master/examples/trains.svg)). They are just paths that are moved along other paths. A `path` that is supposed to represent a train must have the `data-train` attribute, referencing the line name defined previously on which the train is supposed to run. In the `data-stops` attribute, a list of stations of this line at which the train is supposed to stop must be given, including the departure and arrival times, e.g. `Berlin +11+50 Hannover +56+120 Frankfurt`, meaning the train needs 39 minutes between Berlin and Hannover and stops at Hannover for 6 minutes, arriving in Frankfurt after another 64 minutes. The time is given in seconds relative to the `data-from` instant. This makes it easy to animate the trains according to a real timetable if one second in the animation corresponds to one minute in reality. Pluses (`+`) are mandatory, minuses (`-`) can be used instead to let the train start from the origin before the `data-from` instant.
 
 The number of train segments can be specified using the `data-length` attribute (default: 2). The styling of the train should be done entirely using CSS, where SVG's `marker-start`, `marker-mid` and `marker-end` come in handy (see example).
 
