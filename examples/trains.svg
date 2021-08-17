@@ -1,0 +1,120 @@
+<?xml-stylesheet type="text/css" href="trains.css" ?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" data-auto-start="true" viewBox="0 0 1000 1000">
+    <g id="zoomable">
+        <g id="elements">
+            <g id="lines" data-from="1 0 noanim-keepzoom" class="toplevel">
+
+                <path data-line="RE1" class="line-RE" data-stops="Hamburg Hannover Berlin" />
+                <path data-line="ICE2" class="line-ICE" data-stops="Hamburg Berlin" data-from="1 2" />
+                <path data-line="ICE3" class="line-ICE" data-stops="Hamburg Hannover Frankfurt" data-from="1 10 nozoom" />
+
+                <rect data-station="Hamburg" x="400" y="100" />
+                <rect data-station="Berlin" x="700" y="300" data-dir="nw" />
+                <rect data-station="Hannover" x="500" y="400" data-label-dir="nw" />
+                <rect data-station="Frankfurt" x="200" y="800" data-dir="ne" data-label-dir="s" />
+
+                <path data-train="RE1" class="train-Regio" data-stops="Hamburg -3+2 Hannover +4+9 Berlin" data-from="1 0 nozoom"  data-to="1 11 nozoom" />
+                <path data-train="ICE3" class="train-ICE" data-length="4" data-stops="Hamburg +3+8 Hannover +10+15 Frankfurt" data-from="1 10 nozoom" />
+
+                <text data-station="Hamburg">Hamburg</text>
+                <text data-station="Berlin">Berlin</text>
+                <text data-station="Hannover">Hannover</text>
+                <text data-station="Frankfurt">Frankfurt</text>
+
+                <text data-line="RE1" class="line-RE">1</text>
+                <text data-line="ICE3" class="line-ICE" data-from="1 10">3</text>
+            </g>
+        </g>
+    </g>
+    <defs>
+        <g id="regiounit" class="unit">
+            <path
+                class="bumper"
+                d="M 100,13 H 102 V 12 H 105 V 17 H 102 V 16 H 99 L 100,13 M 100,37 H 102 V 38 H 105 V 33 H 102 V 34 H 99 L 100,37" />
+            <path
+                class="trafficred"
+                d="M 65,0 C 65,0 72,1 74,1  76,1 89,4 89,5  89,6 100,5 100,12  100,19 99,13 99,25  99,37 100,31 100,38  100,45 89,44 89,45  89,46 76,49 74,49  72,49 65,50 65,50 Z" />
+            <path
+                class="windowgrey"
+                d="M 65,15 C 65,11 72,6 75,6  80,6 98,8 98,14  98,19 98,25 98,25  98,25 98,31 98,36  98,42 80,44 75,44  72,44 65,39 65,35 Z" />
+            <path
+                class="black-windscreen"
+                d="M 98,25 C 98,25 98,22 98,18  98,14 88,10 88,10  87,10 80,12 80,13  80,14 81,25 81,25  81,25 80,36 80,37  80,38 87,40 88,40  88,40 98,36 98,32  98,28 98,25 98,25" />
+            <path
+                class="lamp"
+                d="M 82,25 83,23 86,22 85,25 86,28 83,27 82,25" />
+        </g>
+        <g id="icunit" class="unit">
+            <path
+                class="bumper"
+                d="M 100,13 H 102 V 12 H 105 V 17 H 102 V 16 H 99 L 100,13 M 100,37 H 102 V 38 H 105 V 33 H 102 V 34 H 99 L 100,37" />
+            <path
+                class="lightgrey"
+                d="M 63,0 C 63,0 72,1 74,1  76,1 89,4 89,5  89,6 100,5 100,12  100,19 99,13 99,25  99,37 100,31 100,38  100,45 89,44 89,45  89,46 76,49 74,49  72,49 63,50 63,50 Z"
+                />
+            <path
+                class="windowgrey"
+                d="M 63,0 L 63,0 C 65,0 98,8 98,14  98,19 98,25 98,25  98,25 98,31 98,36  98,42 65,50 63,50 L 63,50" />
+            <path
+                class="black-windscreen"
+                d="M 98,25 C 98,25 98,22 98,18  98,14 88,10 88,10  87,10 80,12 80,13  80,14 81,25 81,25  81,25 80,36 80,37  80,38 87,40 88,40  88,40 98,36 98,32  98,28 98,25 98,25" />
+            <path
+                class="lamp"
+                d="M 82,25 83,23 86,22 85,25 86,28 83,27 82,25" />
+        </g>
+        <g id="iceunit" class="unit">
+            <path
+                class="icebody"
+                d="M 150,0 C 250,0 426,35 426,100 426,165 250,200 150,200 Z" />
+            <path
+                class="lamp"
+                d="M 410,86 387,76 384,60 407,72 Z" />
+            <path
+                class="lamp"
+                d="M 410,114 387,124 384,140 407,128 Z" />
+            <path
+                class="windscreen"
+                d="M 290,37 C 301,37 360,55 360,100 360,145 301,163 290,163 291,163 296,120 296,100 296,80 291,37 290,37 Z" />
+            <path
+                class="cap"
+                d="M 290,163 C 291,163 296,120 296,100 296,80 291,37 290,37 290,36 256,31 246,31 206,31 214,65 214,100 214,135 206,169 246,169 256,169 290,164 290,163 Z" />
+        </g>
+        <marker id="ice-start" viewBox="150 0 426,200" refX="150" refY="100" markerHeight="1" orient="auto-start-reverse">
+            <g class="train-start">
+                <use href="#iceunit" />
+            </g>
+        </marker>
+        <marker id="ice-end" viewBox="150 0 426,200" refX="150" refY="100" markerHeight="1" orient="auto-start-reverse">
+            <g class="train-end">
+                <use href="#iceunit" />
+            </g>    
+        </marker>
+        <marker id="ic-start" viewBox="63 0 105,50" refX="63" refY="25" markerHeight="1" orient="auto-start-reverse">
+            <g class="train-start">
+                <use href="#icunit" />
+            </g>
+        </marker>
+        <marker id="ic-end" viewBox="63 0 105,50" refX="63" refY="25" markerHeight="1" orient="auto-start-reverse">
+            <g class="train-end">
+                <use href="#icunit"/>
+            </g>
+        </marker>
+        <marker id="regio-start" viewBox="65 0 40,50" refX="65" refY="25" markerHeight="1" orient="auto-start-reverse">
+            <g class="train-start">
+                <use href="#regiounit" />
+            </g>
+        </marker>
+        <marker id="regio-end" viewBox="65 0 40,50" refX="65" refY="25" markerHeight="1" orient="auto-start-reverse">
+            <g class="train-end">
+                <use href="#regiounit"/>
+            </g>
+        </marker>
+        <marker id="panto" viewBox="0 0 200,200" refX="130" refY="100" markerHeight="1" orient="auto-start-reverse">
+            <path
+                d="M 200,100 L 200,90 L 90,70 M 200,100 L 200,110 L 90,130 M 113,30 L 110,35 L 110,165 L 113,170 M 83,30 80,35 L 80,165 L 83,170" class="panto" />
+            <path 
+                d="M 130,100 L 200,100" class="panto" style="stroke-width:20px" />
+        </marker>
+    </defs>
+    <script xlink:href="../../dist/network-animator.js" />
+</svg>
