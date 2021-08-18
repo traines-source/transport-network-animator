@@ -16,12 +16,12 @@ This is
 
 ## Steps to Animate a Network Map
 
-1. Create an SVG file as seen in the [examples/](https://github.com/traines-source/transport-network-animator/blame/master/examples/trains.svg) directory
-2. Define stations and their positions `<rect data-station="Berlin" x="150" y="510" data-dir="n" />`
-3. Define line segments connecting those stations `<path data-line="ICE1" data-stops="Berlin Hannover Frankfurt" data-from="1999 17" data-to="2003 30" />`
-4. View the animation in your browser (preferably Chrome)
-5. Iterate and fix the appearance of lines and stations until you're happy
-6. If you like, render it to a video by running timecut-parallel.sh or adapting the docker-compose.yml
+1. Create an SVG and a corresponding CSS file as seen in the [examples/](https://github.com/traines-source/transport-network-animator/blame/master/examples/trains.svg) directory
+3. Define stations and their positions `<rect data-station="Berlin" x="150" y="510" data-dir="n" />`
+4. Define line segments connecting those stations `<path data-line="ICE1" data-stops="Berlin Hannover Frankfurt" data-from="1999 17" data-to="2003 30" />`
+5. View the animated SVG in your browser (preferably Chrome)
+6. Iterate and fix the appearance of lines and stations until you're happy
+7. If you like, render it to a video by running timecut-parallel.sh or adapting the docker-compose.yml
 
 ## Concepts
 
@@ -31,7 +31,7 @@ Stations need to be SVG `rect` elements having an id (`data-station`) and a posi
 Once a line is assigned to a station, it will stay where it is, i.e. it is not moved or altered, until it is removed again. That means that the layout of lines and stations will not be optimized over time, during the animation, as more lines are added.
 
 ### Lines
-Each line segment needs be be an SVG `path` element having a name (`data-line`) and a space separated list (`data-stops`) of station ids that it connects, where the first specified station is the origin and the last the terminus – the direction impacting the animation. In the `data-stops` string, before each station, additional flags can be set, which are discussed under Tracks. Usually, lines appear and disappear at certain points in time, which can be set using "instants" in the `data-from` and `data-to` fields. Multiple line segments together can form a line, identified by the common `data-line` name. Line segments of one line will adhere to a couple of special rules, e.g. they will join seamlessly and leave stations in the same direction they arrived, just as at interstations of a line segment.
+Each line segment needs to be an SVG `path` element having a name (`data-line`) and a space separated list (`data-stops`) of station ids that it connects, where the first specified station is the origin and the last the terminus – the direction impacting the animation. In the `data-stops` string, before each station, additional flags can be set, which are discussed under Tracks. Usually, lines appear and disappear at certain points in time, which can be set using "instants" in the `data-from` and `data-to` fields. Multiple line segments together can form a line, identified by the common `data-line` name. Line segments of one line will adhere to a couple of special rules, e.g. they will join seamlessly and leave stations in the same direction they arrived, just as at interstations of a line segment.
 
 The algorithm will try to find a nice "Harry Beck style" way to draw the lines. Sometimes it will fail. You can fix this by adjusting station positioning and rotation and by adding additional "helper" stations while setting `class="helper"` in the example or making these helper stations invisible however you like.
 
@@ -65,7 +65,7 @@ Trains can be animated on previously defined lines (see example [trains.svg](htt
 The number of train segments can be specified using the `data-length` attribute (default: 2). The styling of the train should be done entirely using CSS, where SVG's `marker-start`, `marker-mid` and `marker-end` come in handy (see example).
 
 ## Why SVG?
-Using SVG as the base, the appearance of the map can be tweaked and styled as you wish, with additional SVG elements and CSS. The styles (e.g. colors) of the lines should also be adjusted via CSS. It might also come in handy to add a background map as SVG or embedded image. Please note that SVG filters do not seem to be supported by the timecut renderer, in case you want to render your animation to a video.
+Using SVG as the base, the appearance of the map can be tweaked and styled as you wish, with additional SVG elements and CSS. The styles (e.g. colors) of the lines should also be adjusted via CSS. It might also come in handy to add a background map as SVG or embedded image. Please note that SVG filters do not seem to be supported by the [timecut](https://github.com/tungs/timecut) renderer, in case you want to render your animation to a video.
 
 For debugging, look at possible errors and warnings in the developer console of your browser. By appending a hashtag and the epoch to the URL under which you're viewing your SVG and then refreshing the page, you can jump to that very epoch skipping the preceding ones, so that you don't have to watch the entire animation over and over again.
 
@@ -77,7 +77,8 @@ The code could probably quite easily be rewritten to use another base technology
 
 ## Alpha Features
 You will often find examples for these experimental features over at https://github.com/traines-source/traines-videos.
-* Ken Burns Effect: Slowly zooming photos
+* Animating (showing and hiding) arbitrary SVG elements using `data-from` and `data-to`.
+* Ken Burns Effect: Slowly zooming photos.
 * Gravitator: Representing historically changing properties of relations (e.g. travel times) by edge length in a dynamic graph, using automatic optimization.
 * Animating geographical lines, and in general, paths with given path commands.
 * Optionally starting transport-network-animator only when a specific event is received, to be able to execute custom code beforehand (e.g. reading paths from geojson).
