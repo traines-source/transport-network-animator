@@ -64,6 +64,8 @@ Trains can be animated on previously defined lines (see example [trains.svg](htt
 
 The number of train segments can be specified using the `data-length` attribute (default: 2). The styling of the train should be done entirely using CSS, where SVG's `marker-start`, `marker-mid` and `marker-end` come in handy (see example).
 
+A train can run across multiple line segments. However, there exists currently a limitation that a train must stop at least once per line segment. More complex train routing is not yet supported. If you want to represent a station with trains stopping at multiple tracks and positions at the platforms, it might make sense to represent each stopping position and each fork/switch as a separate dummy station and have these connected with line segments all of the same line. You can then define a lot of trains for the same line which are stopping at specific positions by referencing the dummy stations.
+
 ## Why SVG?
 Using SVG as the base, the appearance of the map can be tweaked and styled as you wish, with additional SVG elements and CSS. The styles (e.g. colors) of the lines should also be adjusted via CSS. It might also come in handy to add a background map as SVG or embedded image. Please note that SVG filters do not seem to be supported by the [timecut](https://github.com/tungs/timecut) renderer, in case you want to render your animation to a video.
 
