@@ -116,5 +116,5 @@
                 d="M 130,100 L 200,100" class="panto" style="stroke-width:20px" />
         </marker>
     </defs>
-    <script xlink:href="../../dist/network-animator.js" />
+    <script xlink:href="../dist/network-animator.js" />
 </svg>
