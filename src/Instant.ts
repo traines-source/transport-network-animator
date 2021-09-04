@@ -15,7 +15,7 @@ export class Instant {
     }
 
     static from(array: string[]): Instant {
-        return new Instant(parseInt(array[0]), parseInt(array[1]), array[2] ?? '')
+        return new Instant(parseInt(array[0]), parseFloat(array[1]), array[2] ?? '')
     }
 
     equals(that: Instant): boolean {

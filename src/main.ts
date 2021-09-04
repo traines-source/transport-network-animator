@@ -31,7 +31,7 @@ function startTransportNetworkAnimator() {
 function getStartInstant(): Instant {
     if(window.location.hash) {
         const animateFromInstant: string[] = window.location.hash.replace('#', '').split('-');
-        const instant = new Instant(parseInt(animateFromInstant[0]) || 0, parseInt(animateFromInstant[1]) || 0, '');
+        const instant = new Instant(parseInt(animateFromInstant[0]) || 0, parseFloat(animateFromInstant[1]) || 0, '');
         console.log('fast forward to', instant);
         return instant;
     }
