@@ -52,6 +52,14 @@ export class SvgNetwork implements NetworkAdapter {
         return svg?.dataset.beckStyle != 'false';
     }
 
+    get trainTimetableSpeed(): number {
+        const svg = document.querySelector('svg');
+        if (svg?.dataset.trainTimetableSpeed == undefined) {
+            return 60;
+        }
+        return parseFloat(svg?.dataset.trainTimetableSpeed);
+    }
+
     initialize(network: Network): void {
         if (!document.getElementById("elements")) {
             console.warn('A group with the id "elements" is missing in the SVG source. It might be needed for helper stations and labels.');
@@ -69,7 +77,7 @@ export class SvgNetwork implements NetworkAdapter {
         if (element.localName == 'path' && element.dataset.line != undefined) {
             return new Line(new SvgLine(element), network, this.beckStyle);
         } else if (element.localName == 'path' && element.dataset.train != undefined) {
-            return new Train(new SvgTrain(element), network);
+            return new Train(new SvgTrain(element), network, this.trainTimetableSpeed);
         } else if (element.localName == 'rect' && element.dataset.station != undefined) {
             return new Station(new SvgStation(element));
         } else if (element.localName == 'text') {

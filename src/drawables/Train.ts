@@ -13,7 +13,7 @@ export interface TrainAdapter extends AbstractTimedDrawableAdapter {
 
 export class Train extends AbstractTimedDrawable {
 
-    constructor(protected adapter: TrainAdapter, private stationProvider: StationProvider) {
+    constructor(protected adapter: TrainAdapter, private stationProvider: StationProvider, private trainTimetableSpeed: number) {
         super(adapter);
     }
 
@@ -31,7 +31,7 @@ export class Train extends AbstractTimedDrawable {
                     this.adapter.draw(delay, animate, path);
                 }
                 if (animate) {
-                    this.adapter.move(delay + arrdep.departure - this.from.second, arrdep.arrival - arrdep.departure, path);
+                    this.adapter.move(delay + this.scaleSpeed(arrdep.departure) - this.from.second, this.scaleSpeed(arrdep.arrival - arrdep.departure), path);
                 }
             } else {
                 throw Error(this.name + ': No path found between ' + stops[i-1].stationId + ' ' + stops[i].stationId)
@@ -43,5 +43,9 @@ export class Train extends AbstractTimedDrawable {
     erase(delay: number, animate: boolean, reverse: boolean): number {
         this.adapter.erase(delay);
         return 0;
+    }
+
+    private scaleSpeed(time: number): number {
+        return time / this.trainTimetableSpeed * 60;
     }
 }
