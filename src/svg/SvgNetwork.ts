@@ -80,9 +80,9 @@ export class SvgNetwork implements NetworkAdapter {
             return new Train(new SvgTrain(element), network, this.trainTimetableSpeed);
         } else if (element.localName == 'rect' && element.dataset.station != undefined) {
             return new Station(new SvgStation(element));
-        } else if (element.localName == 'text') {
+        } else if (element.localName == 'text' && (element.dataset.station != undefined || element.dataset.line != undefined)) {
             return new Label(new SvgLabel(element), network);
-        } else if (element.localName == 'image') {
+        } else if (element.localName == 'image' && element.dataset.zoom != undefined) {
             return new KenImage(new SvgKenImage(element));
         } else if (element.dataset.from != undefined || element.dataset.to != undefined) {
             return new GenericTimedDrawable(new SvgGenericTimedDrawable(element));

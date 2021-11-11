@@ -14,6 +14,9 @@ export class SvgGenericTimedDrawable extends SvgAbstractTimedDrawable implements
             this.element.style.visibility = 'visible';
             if (this.element.localName == 'g') {
                 this.element.style.opacity = '1';
+                if (this.element.onfocus != undefined) {
+                    this.element.focus();
+                }
             }
         });
     }
