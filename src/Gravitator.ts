@@ -4,7 +4,6 @@ import { Line } from "./drawables/Line";
 import { Utils } from "./Utils";
 import { StationProvider } from "./Network";
 
-//const mathjs = require('mathjs');
 const fmin = require('fmin');
 
 
@@ -18,9 +17,6 @@ export class Gravitator {
     static COLOR_DEVIATION = 0.02;
 
     private initialWeightFactors: {[id: string] : number} = {};
-    private initialAngles: {aStation: string, commonStation: string, bStation: string, angle: number}[] = [];
-    private angleF: any;
-    private angleFPrime: {[id: string]: any} = {};
     private averageEuclidianLengthRatio: number = -1;
     private edges: {[id: string]: Line} = {};
     private vertices: {[id: string] : {station: Station, index: Vector, startCoords: Vector}} = {};
@@ -48,24 +44,9 @@ export class Gravitator {
         if (this.averageEuclidianLengthRatio == -1 && Object.values(this.edges).length > 0) {
             this.averageEuclidianLengthRatio = weights / euclidian;
             console.log('averageEuclidianLengthRatio^-1', 1/this.averageEuclidianLengthRatio);
-
-            //this.initializeAngleGradients();
         }
         
     }
-
-    /*private initializeAngleGradients() {
-        const expression = '(acos(((b_x-a_x)*(b_x-c_x)+(b_y-a_y)*(b_y-c_y))/(sqrt((b_x-a_x)^2+(b_y-a_y)^2)*sqrt((b_x-c_x)^2+(b_y-c_y)^2)))*((b_y-c_y)*(b_x-a_x)-(b_y-a_y)*(b_x-c_x))/abs(((b_y-c_y)*(b_x-a_x)-(b_y-a_y)*(b_x-c_x)))-const)';
-        const f = mathjs.parse(expression);
-        this.angleF = f.compile();
-
-        const fDelta = mathjs.parse(expression + '^2');
-
-        const vars = ['a_x', 'a_y', 'b_x', 'b_y', 'c_x', 'c_y'];
-        for (let i=0; i<vars.length; i++) {
-            this.angleFPrime[vars[i]] = mathjs.derivative(fDelta, vars[i]).compile();
-        }
-    }*/
 
     private getWeightsSum() {
         let sum = 0;
@@ -93,7 +74,6 @@ export class Gravitator {
                 this.initialWeightFactors[key] = Gravitator.INITIALIZE_RELATIVE_TO_EUCLIDIAN_DISTANCE
                     ? 1 / this.averageEuclidianLengthRatio
                     : this.edgeVector(edge).length / (edge.weight || 0);
-                //this.addInitialAngles(edge);
             }
         }
         let i = 0;
@@ -101,42 +81,6 @@ export class Gravitator {
             vertex.index = new Vector(i, i+1);
             i += 2;
         }
-    }
-
-    private addInitialAngles(edge: Line) {
-        for (const adjacent of Object.values(this.edges)) {
-            if (adjacent == edge) {
-                continue;
-            }
-            for (let i=0; i<2; i++) {
-                for (let j=0; j<2; j++) {
-                    if (edge.termini[i].stationId == adjacent.termini[j].stationId) {
-                        const angle = this.threeDotAngle(
-                            this.vertices[edge.termini[i^1].stationId].station.baseCoords,
-                            this.vertices[edge.termini[i].stationId].station.baseCoords,
-                            this.vertices[adjacent.termini[j^1].stationId].station.baseCoords
-                        );
-                        this.initialAngles.push({
-                            aStation: edge.termini[i^1].stationId,
-                            commonStation: edge.termini[i].stationId,
-                            bStation: adjacent.termini[j^1].stationId,
-                            angle: angle
-                        });
-                        return;
-                    }
-                }
-            }
-        }
-        //derive arccos(((a-c)*(e-g)+(b-d)*(f-h))/(sqrt((a-c)^2+(b-d)^2)*sqrt((e-g)^2+(f-h)^2)))*((f-h)*(a-c)-(b-d)*(e-g))/|((f-h)*(a-c)-(b-d)*(e-g))|
-        //derive acos(((b_x-a_x)*(b_x-c_x)+(b_y-a_y)*(b_y-c_y))/(sqrt((b_x-a_x)^2+(b_y-a_y)^2)*sqrt((b_x-c_x)^2+(b_y-c_y)^2)))*((b_y-c_y)*(b_x-a_x)-(b_y-a_y)*(b_x-c_x))/abs(((b_y-c_y)*(b_x-a_x)-(b_y-a_y)*(b_x-c_x)))
-    }
-
-    private threeDotAngle(a: Vector, b: Vector, c: Vector) {
-        return this.evaluateThreeDotFunction(this.angleF, a, b, c, 0);
-    }
-
-    private evaluateThreeDotFunction(f: any, a: Vector, b: Vector, c: Vector, oldValue: number) {
-        return f.evaluate({a_x: a.x, a_y: a.y, b_x: b.x, b_y: b.y, c_x: c.x, c_y: c.y, const: oldValue});
     }
 
     private minimizeLoss(): number[] {
@@ -151,7 +95,6 @@ export class Gravitator {
             let fx = 0;
             fx = this.deltaToStartStationPositionsToEnsureInertness(fx, A, fxprime, gravitator);
             fx = this.deltaToCurrentStationPositionsToEnsureInertness(fx, A, fxprime, gravitator);
-            //fx = this.deltaToAnglesToEnsureInertness(fx, A, fxprime, gravitator);
             fx = this.deltaToNewDistancesToEnsureAccuracy(fx, A, fxprime, gravitator);
             this.scaleGradientToEnsureWorkingStepSize(fxprime);
             return fx;
@@ -196,25 +139,6 @@ export class Gravitator {
                 ) * Gravitator.INERTNESS;
             fxprime[vertex.index.x] += 2 * (A[vertex.index.x]-vertex.station.baseCoords.x) * Gravitator.INERTNESS;
             fxprime[vertex.index.y] += 2 * (A[vertex.index.y]-vertex.station.baseCoords.y) * Gravitator.INERTNESS;
-        }
-        return fx;
-    }
-
-    private deltaToAnglesToEnsureInertness(fx: number, A: number[], fxprime: number[], gravitator: Gravitator): number {
-        for (const pair of Object.values(gravitator.initialAngles)) {
-            const a = new Vector(A[gravitator.vertices[pair.aStation].index.x], A[gravitator.vertices[pair.aStation].index.y]);
-            const b = new Vector(A[gravitator.vertices[pair.commonStation].index.x], A[gravitator.vertices[pair.commonStation].index.y]);
-            const c = new Vector(A[gravitator.vertices[pair.bStation].index.x], A[gravitator.vertices[pair.bStation].index.y]);
-
-            const delta = this.evaluateThreeDotFunction(this.angleF, a, b, c, pair.angle);
-            fx += Math.pow(delta, 2) * Gravitator.INERTNESS;
-
-            fxprime[gravitator.vertices[pair.aStation].index.x] += this.evaluateThreeDotFunction(this.angleFPrime['a_x'], a, b, c, pair.angle) * Gravitator.INERTNESS;
-            fxprime[gravitator.vertices[pair.aStation].index.y] += this.evaluateThreeDotFunction(this.angleFPrime['a_y'], a, b, c, pair.angle) * Gravitator.INERTNESS;
-            fxprime[gravitator.vertices[pair.commonStation].index.x] += this.evaluateThreeDotFunction(this.angleFPrime['b_x'], a, b, c, pair.angle) * Gravitator.INERTNESS;
-            fxprime[gravitator.vertices[pair.commonStation].index.y] += this.evaluateThreeDotFunction(this.angleFPrime['b_y'], a, b, c, pair.angle) * Gravitator.INERTNESS;
-            fxprime[gravitator.vertices[pair.bStation].index.x] += this.evaluateThreeDotFunction(this.angleFPrime['c_x'], a, b, c, pair.angle) * Gravitator.INERTNESS;
-            fxprime[gravitator.vertices[pair.bStation].index.y] += this.evaluateThreeDotFunction(this.angleFPrime['c_y'], a, b, c, pair.angle) * Gravitator.INERTNESS;
         }
         return fx;
     }
