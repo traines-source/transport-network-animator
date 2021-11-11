@@ -5,25 +5,24 @@
   "main": "network-animator.js",
   "directories": {},
   "dependencies": {
-    "@types/mathjs": "^6.0.11",
-    "@types/node": "^14.14.19",
-    "fmin": "0.0.2",
-    "mathjs": "^9.0.0"
+    "@types/node": "^14.17.33",
+    "fmin": "0.0.2"
   },
   "devDependencies": {
-    "@types/chai": "^4.2.13",
-    "@types/mocha": "^8.0.3",
-    "chai": "^4.2.0",
-    "cross-env": "^7.0.2",
-    "mocha": "^8.1.3",
+    "@types/chai": "^4.2.22",
+    "@types/mocha": "^8.2.3",
+    "chai": "^4.3.4",
+    "cross-env": "^7.0.3",
+    "expose-loader": "^1.0.0",
+    "mocha": "^9.1.3",
     "nyc": "^15.1.0",
-    "ts-loader": "^8.0.5",
+    "ts-loader": "^8.3.0",
     "ts-mockito": "^2.6.1",
     "ts-node": "^8.10.2",
-    "typescript": "^3.9.7",
-    "webpack": "^4.44.2",
-    "webpack-cli": "^3.3.12",
-    "webpack-license-plugin": "^4.1.2"
+    "typescript": "^3.9.10",
+    "webpack": "^5.64.0",
+    "webpack-cli": "^4.9.1",
+    "webpack-license-plugin": "^4.2.1"
   },
   "scripts": {
     "wp": "webpack",

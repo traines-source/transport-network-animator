@@ -2,5 +2,7 @@ node_modules
 output
 out
 videos
+working
 .nyc_output
 *.log
+script.md

@@ -9,7 +9,10 @@ module.exports = {
     rules: [
       {
         test:  /\.tsx?$/,
-        use: [{loader: 'ts-loader', options: {onlyCompileBundledFiles: true}}],
+        use: [
+          {loader: 'expose-loader', options: { exposes: [{globalName: 'TNA', override: true}]}},
+          {loader: 'ts-loader', options: {onlyCompileBundledFiles: true}}
+        ],
         include: /src/,
       },
     ],

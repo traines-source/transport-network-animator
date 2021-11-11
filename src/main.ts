@@ -4,6 +4,8 @@ import { Instant } from "./Instant";
 import { SvgAnimator } from "./svg/SvgAnimator";
 import { DrawableSorter } from "./DrawableSorter";
 
+export { SvgAnimator } from "./svg/SvgAnimator";
+
 let timePassed = 0;
 
 const network: Network = new Network(new SvgNetwork(), new DrawableSorter());
