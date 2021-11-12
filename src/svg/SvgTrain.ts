@@ -42,24 +42,25 @@ export class SvgTrain extends SvgAbstractTimedDrawable implements TrainAdapter {
     draw(delaySeconds: number, animate: boolean, follow: { path: Vector[], from: number, to: number }): void {
         this.element.className.baseVal += ' train';
         this.setPath(this.calcTrainHinges(this.getPathLength(follow).lengthToStart, follow.path));
-
-        const animator = new SvgAnimator();
-        animator.wait(delaySeconds*1000, () => {
-            this.element.style.visibility = 'visible';
-        });        
+        if (!this.from.flag.includes('autoshow')) {
+            const animator = new SvgAnimator();
+            animator.wait(delaySeconds*1000, () => {
+                this.element.style.visibility = 'visible';
+            });
+        }
     }
 
     move(delaySeconds: number, animationDurationSeconds: number, follow: { path: Vector[], from: number, to: number }) {
         const animator = new SvgAnimator();
         animator.wait(delaySeconds*1000, () => {
+            this.element.style.visibility = 'visible';
             const pathLength = this.getPathLength(follow);
-
             animator
                 .ease(SvgAnimator.EASE_SINE)
                 .from(pathLength.lengthToStart)
                 .to(pathLength.lengthToStart+pathLength.totalBoundedLength)
                 .timePassed(delaySeconds < 0 ? (-delaySeconds*1000) : 0)
-                .animate(animationDurationSeconds*1000, (x, isLast) => this.animateFrame(x, follow.path));            
+                .animate(animationDurationSeconds*1000, (x, isLast) => this.animateFrame(x, isLast, follow.path));
         });
     }
 
@@ -110,9 +111,12 @@ export class SvgTrain extends SvgAbstractTimedDrawable implements TrainAdapter {
         return newTrain;
     }
 
-    private animateFrame(x: number, path: Vector[]): boolean {
+    private animateFrame(x: number, isLast: boolean, path: Vector[]): boolean {
         const trainPath = this.calcTrainHinges(x, path);
         this.setPath(trainPath);
+        if (isLast && this.from.flag.includes('autoshow')) {
+            this.element.style.visibility = 'hidden';
+        }
         return true;
     }
 }
