@@ -62,6 +62,8 @@ export abstract class Animator {
         const cont = this.callback(y, x == 1);
         if (cont && x < 1) {
             this.requestFrame(() => this.frame());
+        } else if (!cont) {
+            console.log('Stopped animation because callback returned false.');
         }
     }
 
