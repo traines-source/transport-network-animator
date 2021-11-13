@@ -119,3 +119,21 @@ path.train.train-Regio {
     background-color: #546E7A;
     color: white;
 }
+
+.underthrow {
+    stroke: none;
+    fill: #afafaf;
+}
+
+.platform {
+    stroke: none;
+    fill: #dbdbdb;
+}
+
+#custom-epoch-label, .custom-epoch-label {
+    font-size: 30px;
+    font-weight: bold;
+    text-anchor: middle;
+    dominant-baseline: middle;
+    visibility: hidden;
+}

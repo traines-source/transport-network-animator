@@ -1,0 +1,256 @@
+<?xml-stylesheet type="text/css" href="trains.css" ?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" data-auto-start="false" data-zoom-max-scale="100" data-train-timetable-speed="2000" viewBox="-300 -300 600 600">
+<g id="zoomable">
+    <g id="elements">
+        <g id="gleisplan" data-from="70 0 noanim-keepzoom" class="toplevel">
+
+            <path data-line="east-west" data-stops="+0 HelperWest2 +0 Gleis4a +0 Gleis4b +0 Gleis4c +0 HelperEast1" data-from="70 0 noanim-keepzoom" />
+            <path data-line="east-west" data-stops="+0 HelperWest2 +0 Gleis3a +0 Gleis3b +0 Gleis3c +0 HelperEast1" data-from="70 0 noanim-keepzoom" />
+
+            <path data-line="west-east" data-stops="+0 AbsC +0 Gleis2a +0 Gleis2b +0 Gleis2c +0 HelperEast2" data-from="70 0 noanim-keepzoom" />
+
+            <path data-line="west-east" data-stops="+0 AbsB +0 Gleis2a +0 Gleis2b +0 Gleis2c" data-from="70 0 noanim-keepzoom" />
+            <path data-line="west-east" data-stops="+0 AbsB +0 Gleis1a +0 Gleis1b +0 Gleis1c +0 HelperEast2" data-from="70 0 noanim-keepzoom" />
+
+            <path data-line="west-east" data-stops="+0 AbsA +0 Gleis1a +0 Gleis1b +0 Gleis1c" data-from="70 0 noanim-keepzoom" />
+
+
+            <rect data-station="Gleis4a" x="-40" y="-20" />
+            <rect data-station="Gleis4b" x="+00" y="-20" />
+            <rect data-station="Gleis4c" x="+40" y="-20" />
+
+            <rect data-station="Gleis3a" x="-40" y="0" />
+            <rect data-station="Gleis3b" x="+00" y="0" />
+            <rect data-station="Gleis3c" x="+40" y="0" />
+
+            <rect data-station="Gleis2a" x="-40" y="10" />
+            <rect data-station="Gleis2b" x="+00" y="10" />
+            <rect data-station="Gleis2c" x="+40" y="10" />
+
+            <rect data-station="Gleis1a" x="-40" y="30" />
+            <rect data-station="Gleis1b" x="+00" y="30" />
+            <rect data-station="Gleis1c" x="+40" y="30" />
+
+            <rect data-station="HelperWest1" x="-100" y="-20" />
+            <rect data-station="HelperWest2" x="-80" y="+00" />
+            <rect data-station="AbsC" x="-80" y="+10" />
+            <rect data-station="AbsB" x="-80" y="+20" />
+            <rect data-station="AbsA" x="-80" y="+30" />
+
+            <rect data-station="HelperEast1" x="+80" y="+00" />
+            <rect data-station="HelperEast2" x="+80" y="+10" />
+
+            <rect data-station="helper-nippes-1" x="-300" y="-50" data-dir="ne" />
+
+            <rect data-station="Nippes" x="-350" y="-200" data-dir="e" />
+            <rect data-station="West" x="-350" y="200" data-dir="ne" />
+            <rect data-station="Ehrenfeld" x="-350" y="0" data-dir="n" />
+            <rect data-station="Hbf" x="1500" y="0" data-dir="ne" />
+
+            <rect class="platform" width="70" height="10" x="-20" y="+15" />
+            <rect class="platform" width="70" height="10" x="-20" y="-15" />
+
+
+            <path data-line="east-west" data-stops="+0 HelperWest2 +0 HelperWest1 helper-nippes-1 Nippes" />
+
+            <path data-line="west-east" data-stops="Nippes helper-nippes-1 +0 AbsA" />
+
+            <path data-line="east-west" data-stops="Hbf +0 HelperEast1" />
+            <path data-line="west-east" data-stops="+0 HelperEast2 Hbf" />
+
+           
+            <!-- Szenario 1 -->
+            <path data-train="west-east" class="train-Regio  1" data-length="5" data-stops="Nippes -120+0 Gleis1c +60+180 Hbf" data-from="70 0 keepzoom"/>
+            <path data-train="west-east" class="train-Regio  9" data-length="5" data-stops="Nippes +840+960 Gleis1c +1020+1140 Hbf" data-from="70 0 keepzoom"/>
+           
+            <!-- Szenario 2 -->
+            <path data-train="west-east" class="train-Regio  1" data-length="5" data-stops="Nippes -120+0 Gleis1c +60+180 Hbf" data-from="71 0 keepzoom"/>
+            <path data-train="west-east" class="train-Regio  4" data-length="5" data-stops="Nippes +80+200 Gleis1c +300+420 Hbf" data-from="71 0 keepzoom"/>
+            <path data-train="west-east" class="train-Regio  9" data-length="5" data-stops="Nippes +740+860 Gleis1c +960+1080 Hbf" data-from="71 0 keepzoom"/>
+
+            <!-- Szenario 3 -->
+            <path data-train="west-east" class="train-Regio  3" data-length="5" data-stops="Nippes -60+60 AbsA +160+200 Gleis1c +290+410 Hbf" data-from="72 0 keepzoom"/>
+            <path data-train="west-east" class="train-Regio  6" data-length="5" data-stops="Nippes +470+590 Gleis1c +700+820 Hbf" data-from="72 0 keepzoom"/>
+            <path data-train="west-east" class="train-Regio  8" data-length="5" data-stops="Nippes +650+770 Gleis1c +960+1080 Hbf" data-from="72 0 keepzoom"/>
+
+
+            <rect class="underthrow" width="30" height="15" x="-270" y="-5" transform="rotate(0 -255 5)" />
+            
+            <path data-line="west-east" data-stops="+1 Ehrenfeld +0 AbsB" />
+            <path data-line="east-west" data-stops="+0 HelperWest2 +0 h_HelperWest1_HelperWest2 +0 HelperWest1 +0 Ehrenfeld" />
+
+
+            <!-- Szenario 1 -->
+            <path data-train="west-east" class="train-Regio  3" data-length="5" data-stops="Ehrenfeld +120+240 Gleis1c +300+420 Hbf" data-from="70 0 keepzoom"/>
+            <path data-train="west-east" class="train-Regio  5" data-length="5" data-stops="Ehrenfeld +360+480 Gleis1c +540+660 Hbf" data-from="70 0 keepzoom"/>
+            <path data-train="west-east" class="train-Regio  7" data-length="5" data-stops="Ehrenfeld +600+720 Gleis1c +780+900 Hbf" data-from="70 0 keepzoom"/>
+            <path data-train="west-east" class="train-Regio 11" data-length="5" data-stops="Ehrenfeld +1080+1200 Gleis1c +1260+1380 Hbf" data-from="70 0 keepzoom"/>
+           
+            <!-- Szenario 2 -->
+            <path data-train="west-east" class="train-Regio  3" data-length="5" data-stops="Ehrenfeld +10+130 Gleis2c +210+330 Hbf" data-from="71 0 keepzoom"/>
+            <path data-train="west-east" class="train-Regio  6" data-length="5" data-stops="Ehrenfeld +320+440 Gleis1c +500+620 Hbf" data-from="71 0 keepzoom"/>
+            <path data-train="west-east" class="train-Regio  8" data-length="5" data-stops="Ehrenfeld +590+710 Gleis1c +770+890 Hbf" data-from="71 0 keepzoom"/>
+            <path data-train="west-east" class="train-Regio 11" data-length="5" data-stops="Ehrenfeld +1080+1200 Gleis1c +1260+1380 Hbf" data-from="71 0 keepzoom"/>
+
+            <!-- Szenario 3 -->
+            <path data-train="west-east" class="train-Regio  1" data-length="5" data-stops="Ehrenfeld -120+0 Gleis1c +60+180 Hbf" data-from="72 0 keepzoom"/>
+            <path data-train="west-east" class="train-Regio  4" data-length="5" data-stops="Ehrenfeld +210+330 Gleis2c +410+530 Hbf" data-from="72 0 keepzoom"/>
+            <path data-train="west-east" class="train-Regio  9" data-length="5" data-stops="Ehrenfeld +490+610 AbsB +740+970 Gleis2c +1030+1150 Hbf" data-from="72 0 keepzoom"/>
+            <path data-train="west-east" class="train-Regio 11" data-length="5" data-stops="Ehrenfeld +1080+1200 Gleis1c +1260+1380 Hbf" data-from="72 0 keepzoom"/>
+
+
+            <rect class="underthrow" width="30" height="15" x="-185" y="17.5" transform="rotate(-45 -170 25)" />
+
+            <path data-line="west-east" data-stops="+1 West +0 AbsC" />
+            <path data-line="east-west" data-stops="+0 HelperWest2 +0 West" />
+            <path data-line="east-west" data-stops="+0 HelperWest2 +0 West" />
+
+
+            <!-- Szenario 1 -->
+            <path data-train="west-east" class="train-Regio  2" data-length="5" data-stops="West +0+120 Gleis2c +180+300 Hbf" data-from="70 0 keepzoom"/>
+            <path data-train="west-east" class="train-Regio  4" data-length="5" data-stops="West +240+360 Gleis2c +420+540 Hbf" data-from="70 0 keepzoom"/>
+            <path data-train="west-east" class="train-Regio  6" data-length="5" data-stops="West +480+600 Gleis2c +660+780 Hbf" data-from="70 0 keepzoom"/>
+            <path data-train="west-east" class="train-Regio  8" data-length="5" data-stops="West +720+840 Gleis2c +900+1020 Hbf" data-from="70 0 keepzoom"/>
+            <path data-train="west-east" class="train-Regio 10" data-length="5" data-stops="West +960+1080 Gleis2c +1140+1260 Hbf" data-from="70 0 keepzoom"/>
+           
+            <!-- Szenario 2 -->
+            <path data-train="west-east" class="train-Regio  2" data-length="5" data-stops="West -110+10 Gleis2c +140+260 Hbf" data-from="71 0 keepzoom"/>
+            <path data-train="west-east" class="train-Regio  5" data-length="5" data-stops="West +150+270 Gleis2c +390+510 Hbf" data-from="71 0 keepzoom"/>
+            <path data-train="west-east" class="train-Regio  7" data-length="5" data-stops="West +390+510 Gleis2c +580+700 Hbf" data-from="71 0 keepzoom"/>
+            <path data-train="west-east" class="train-Regio 10" data-length="5" data-stops="West +810+930 Gleis2c +1080+1200 Hbf" data-from="71 0 keepzoom"/>
+
+            <!-- Szenario 3 -->
+            <path data-train="west-east" class="train-Regio  2" data-length="5" data-stops="West -70+50 Gleis2c +170+290 Hbf" data-from="72 0 keepzoom"/>
+            <path data-train="west-east" class="train-Regio  5" data-length="5" data-stops="West +260+380 AbsC +500+520 Gleis2c +580+700 Hbf" data-from="72 0 keepzoom"/>
+            <path data-train="west-east" class="train-Regio  7" data-length="5" data-stops="West +630+750 Gleis2c +810+930 Hbf" data-from="72 0 keepzoom"/>
+            <path data-train="west-east" class="train-Regio 10" data-length="5" data-stops="West +1020+1140 Gleis2c +1200+1320 Hbf" data-from="72 0 keepzoom"/>
+            
+
+
+            <text data-station="Nippes">Nippes</text>
+            <text data-station="West">West</text>
+            <text data-station="Ehrenfeld">Ehrenfeld</text>
+            <text data-station="Hbf">Hbf</text>
+        </g>
+    </g>
+</g>
+
+<g class="dummy helper" data-from="0 1 keepzoom"></g>
+
+<text id="custom-epoch-label" x="-300" y="-250" data-from="70 0 noanim-keepzoom" data-to="80 120 noanim-nozoom"></text>
+
+<text class="custom-epoch-label" x="-100" y="-250" data-from="70 0 noanim-keepzoom" data-to="70 40 noanim-nozoom">Szenario 1</text>
+<text class="custom-epoch-label" x="-100" y="-250" data-from="71 0 noanim-keepzoom" data-to="71 40 noanim-nozoom">Szenario 2</text>
+<text class="custom-epoch-label" x="-100" y="-250" data-from="72 0 noanim-keepzoom" data-to="72 40 noanim-nozoom">Szenario 3</text>
+
+
+<defs>
+    <g id="regiounit" class="unit">
+        <path
+            class="bumper"
+            d="M 100,13 H 102 V 12 H 105 V 17 H 102 V 16 H 99 L 100,13 M 100,37 H 102 V 38 H 105 V 33 H 102 V 34 H 99 L 100,37" />
+        <path
+            class="trafficred"
+            d="M 65,0 C 65,0 72,1 74,1  76,1 89,4 89,5  89,6 100,5 100,12  100,19 99,13 99,25  99,37 100,31 100,38  100,45 89,44 89,45  89,46 76,49 74,49  72,49 65,50 65,50 Z" />
+        <path
+            class="windowgrey"
+            d="M 65,15 C 65,11 72,6 75,6  80,6 98,8 98,14  98,19 98,25 98,25  98,25 98,31 98,36  98,42 80,44 75,44  72,44 65,39 65,35 Z" />
+        <path
+            class="black-windscreen"
+            d="M 98,25 C 98,25 98,22 98,18  98,14 88,10 88,10  87,10 80,12 80,13  80,14 81,25 81,25  81,25 80,36 80,37  80,38 87,40 88,40  88,40 98,36 98,32  98,28 98,25 98,25" />
+        <path
+            class="lamp"
+            d="M 82,25 83,23 86,22 85,25 86,28 83,27 82,25" />
+    </g>
+    <g id="icunit" class="unit">
+        <path
+            class="bumper"
+            d="M 100,13 H 102 V 12 H 105 V 17 H 102 V 16 H 99 L 100,13 M 100,37 H 102 V 38 H 105 V 33 H 102 V 34 H 99 L 100,37" />
+        <path
+            class="lightgrey"
+            d="M 63,0 C 63,0 72,1 74,1  76,1 89,4 89,5  89,6 100,5 100,12  100,19 99,13 99,25  99,37 100,31 100,38  100,45 89,44 89,45  89,46 76,49 74,49  72,49 63,50 63,50 Z"
+            />
+        <path
+            class="windowgrey"
+            d="M 63,0 L 63,0 C 65,0 98,8 98,14  98,19 98,25 98,25  98,25 98,31 98,36  98,42 65,50 63,50 L 63,50" />
+        <path
+            class="black-windscreen"
+            d="M 98,25 C 98,25 98,22 98,18  98,14 88,10 88,10  87,10 80,12 80,13  80,14 81,25 81,25  81,25 80,36 80,37  80,38 87,40 88,40  88,40 98,36 98,32  98,28 98,25 98,25" />
+        <path
+            class="lamp"
+            d="M 82,25 83,23 86,22 85,25 86,28 83,27 82,25" />
+    </g>
+    <g id="iceunit" class="unit">
+        <path
+            class="icebody"
+            d="M 150,0 C 250,0 426,35 426,100 426,165 250,200 150,200 Z" />
+        <path
+            class="lamp"
+            d="M 410,86 387,76 384,60 407,72 Z" />
+        <path
+            class="lamp"
+            d="M 410,114 387,124 384,140 407,128 Z" />
+        <path
+            class="windscreen"
+            d="M 290,37 C 301,37 360,55 360,100 360,145 301,163 290,163 291,163 296,120 296,100 296,80 291,37 290,37 Z" />
+        <path
+            class="cap"
+            d="M 290,163 C 291,163 296,120 296,100 296,80 291,37 290,37 290,36 256,31 246,31 206,31 214,65 214,100 214,135 206,169 246,169 256,169 290,164 290,163 Z" />
+    </g>
+    <marker id="ice-start" viewBox="150 0 426,200" refX="150" refY="100" markerHeight="1" orient="auto-start-reverse">
+        <g class="train-start">
+            <use href="#iceunit" />
+        </g>
+    </marker>
+    <marker id="ice-end" viewBox="150 0 426,200" refX="150" refY="100" markerHeight="1" orient="auto-start-reverse">
+        <g class="train-end">
+            <use href="#iceunit" />
+        </g>    
+    </marker>
+    <marker id="ic-start" viewBox="63 0 105,50" refX="63" refY="25" markerHeight="1" orient="auto-start-reverse">
+        <g class="train-start">
+            <use href="#icunit" />
+        </g>
+    </marker>
+    <marker id="ic-end" viewBox="63 0 105,50" refX="63" refY="25" markerHeight="1" orient="auto-start-reverse">
+        <g class="train-end">
+            <use href="#icunit"/>
+        </g>
+    </marker>
+    <marker id="regio-start" viewBox="65 0 40,50" refX="65" refY="25" markerHeight="1" orient="auto-start-reverse">
+        <g class="train-start">
+            <use href="#regiounit" />
+        </g>
+    </marker>
+    <marker id="regio-end" viewBox="65 0 40,50" refX="65" refY="25" markerHeight="1" orient="auto-start-reverse">
+        <g class="train-end">
+            <use href="#regiounit"/>
+        </g>
+    </marker>
+    <marker id="panto" viewBox="0 0 200,200" refX="130" refY="100" markerHeight="1" orient="auto-start-reverse">
+        <path
+            d="M 200,100 L 200,90 L 90,70 M 200,100 L 200,110 L 90,130 M 113,30 L 110,35 L 110,165 L 113,170 M 83,30 80,35 L 80,165 L 83,170" class="panto" />
+        <path 
+            d="M 130,100 L 200,100" class="panto" style="stroke-width:20px" />
+    </marker>
+</defs>
+<script xlink:href="../dist/network-animator.js" />
+
+<script>
+    let intvl;
+    document.addEventListener('epoch', function(e) {
+        if (e.detail == '70') {
+            if (intvl == undefined) {
+                let i = -1;
+                intvl = window.setInterval(function () {
+                    i++;
+                    document.getElementById('custom-epoch-label').textContent = ((6+Math.floor(i/60))+'').padStart(2, '0')+':'+((i%60)+'').padStart(2, '0');
+                }, 1000/2000*60*60);
+            }
+        }
+    });
+
+    const event = new Event('startTransportNetworkAnimator');
+    document.dispatchEvent(event);
+</script>
+</svg>
