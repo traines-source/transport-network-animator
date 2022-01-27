@@ -48,7 +48,6 @@ export class Station extends AbstractTimedDrawable {
 
     constructor(protected adapter: StationAdapter) {
         super(adapter);
-        console.log(this.adapter.lonLat);
         if (this.adapter.lonLat != undefined) {
             this.adapter.baseCoords = new Vector(Projection.default.x(this.adapter.lonLat.x), Projection.default.y(this.adapter.lonLat.y));
         }

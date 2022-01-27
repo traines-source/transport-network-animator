@@ -15,6 +15,7 @@ describe('Station', () => {
 
     beforeEach(() => {
         stationAdapter = mock();
+        when(stationAdapter.lonLat).thenReturn(undefined);
         lineAdapter = mock();
         stationProvider = mock();
     })

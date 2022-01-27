@@ -596,6 +596,7 @@ function mockStation(id: string, baseCoords: Vector, rotation: Rotation): Statio
     when(stationAdapter.id).thenReturn(id);
     when(stationAdapter.baseCoords).thenReturn(baseCoords);
     when(stationAdapter.rotation).thenReturn(rotation);
+    when(stationAdapter.lonLat).thenReturn(undefined);
     return new Station(instance(stationAdapter));
 }
 

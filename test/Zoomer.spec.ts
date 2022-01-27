@@ -21,7 +21,7 @@ describe('Zoomer', () => {
 
         z.include(new BoundingBox(new Vector(100, 230), new Vector(300, 570)), new Instant(1, 1, ''), Instant.BIG_BANG, true, true);
         expect(z.center).eql(new Vector(200, 400));
-        expect(z.scale).eql(2);
+        expect(z.scale).lessThan(2);
 
         z.include(new BoundingBox(new Vector(100, 200), new Vector(800, 600)), new Instant(1, 1, ''), Instant.BIG_BANG, true, true);
         expect(z.center).eql(new Vector(450, 400));
@@ -41,11 +41,11 @@ describe('Zoomer', () => {
         
         z.include(new BoundingBox(new Vector(100, 230), new Vector(200, 230)), new Instant(1, 1, ''), Instant.BIG_BANG, true, true);
         expect(z.center).eql(new Vector(150, 230));
-        expect(z.scale).eql(3);
+        expect(z.scale).lessThan(3);
 
         z.include(new BoundingBox(new Vector(300, 230), new Vector(300, 570)), new Instant(1, 1, ''), Instant.BIG_BANG, true, true);
         expect(z.center).eql(new Vector(200, 400));
-        expect(z.scale).eql(2);
+        expect(z.scale).lessThan(2);
     })
 
     it('whenInclude_givenInvalidBoxesXAxis', () => {        
@@ -53,7 +53,7 @@ describe('Zoomer', () => {
 
         z.include(new BoundingBox(new Vector(300, 230), new Vector(300, 570)), new Instant(1, 1, ''), Instant.BIG_BANG, true, true);
         expect(z.center).eql(new Vector(300, 400));
-        expect(z.scale).eql(2);
+        expect(z.scale).lessThan(2);
     })
 
     it('whenInclude_givenInvalidBoxesTwoAxis', () => {        
@@ -61,6 +61,6 @@ describe('Zoomer', () => {
 
         z.include(new BoundingBox(new Vector(100, 200), new Vector(100, 200)), new Instant(1, 1, ''), Instant.BIG_BANG, true, true);
         expect(z.center).eql(new Vector(100, 200));
-        expect(z.scale).eql(3);
+        expect(z.scale).approximately(3, 0.1);
     })
 })

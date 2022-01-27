@@ -24,7 +24,7 @@ export class Line extends AbstractTimedDrawable {
     static NODE_DISTANCE = 0;
     static SPEED = 100;
 
-    constructor(protected adapter: LineAdapter, private stationProvider: StationProvider, private config: Config) {
+    constructor(protected adapter: LineAdapter, private stationProvider: StationProvider, private config: Config = Config.default) {
         super(adapter);
     }
 
