@@ -17,6 +17,7 @@ import { SvgTrain } from "./SvgTrain";
 import { SvgAnimator } from "./SvgAnimator";
 import { SvgKenImage } from "./SvgImage";
 import { KenImage } from "../drawables/Image";
+import { Config } from "../Config";
 
 export class SvgNetwork implements NetworkAdapter {
 
@@ -25,6 +26,26 @@ export class SvgNetwork implements NetworkAdapter {
     private currentZoomCenter: Vector = Vector.NULL;
     private currentZoomScale: number = 1;
 
+    constructor() {
+        this.svgConfig();
+    }
+
+    private svgConfig() {
+        const svg = document.querySelector('svg');
+        if (svg?.dataset.autoStart != undefined) {
+            Config.default.autoStart = svg?.dataset.autoStart != 'false';
+        }
+        if (svg?.dataset.zoomMaxScale != undefined) {
+            Config.default.zoomMaxScale = parseFloat(svg?.dataset.zoomMaxScale);
+        }
+        if (svg?.dataset.beckStyle != undefined) {
+            Config.default.beckStyle = svg?.dataset.beckStyle != 'false';
+        }
+        if (svg?.dataset.trainTimetableSpeed != undefined) {
+            Config.default.trainTimetableSpeed = parseFloat(svg?.dataset.trainTimetableSpeed);
+        }
+    }
+
     get canvasSize(): BoundingBox {
         const svg = document.querySelector('svg');
         const box = svg?.viewBox.baseVal;
@@ -32,32 +53,6 @@ export class SvgNetwork implements NetworkAdapter {
             return new BoundingBox(new Vector(box.x, box.y), new Vector(box.x+box.width, box.y+box.height));
         }
         return new BoundingBox(Vector.NULL, Vector.NULL);
-    }
-
-    get autoStart(): boolean {
-        const svg = document.querySelector('svg');
-        return svg?.dataset.autoStart != 'false';
-    }
-
-    get zoomMaxScale(): number {
-        const svg = document.querySelector('svg');
-        if (svg?.dataset.zoomMaxScale == undefined) {
-            return 3;
-        }
-        return parseFloat(svg?.dataset.zoomMaxScale);
-    }
-
-    get beckStyle(): boolean {
-        const svg = document.querySelector('svg');
-        return svg?.dataset.beckStyle != 'false';
-    }
-
-    get trainTimetableSpeed(): number {
-        const svg = document.querySelector('svg');
-        if (svg?.dataset.trainTimetableSpeed == undefined) {
-            return 60;
-        }
-        return parseFloat(svg?.dataset.trainTimetableSpeed);
     }
 
     initialize(network: Network): void {
@@ -75,9 +70,9 @@ export class SvgNetwork implements NetworkAdapter {
 
     private mirrorElement(element: any, network: StationProvider): TimedDrawable | null {
         if (element.localName == 'path' && element.dataset.line != undefined) {
-            return new Line(new SvgLine(element), network, this.beckStyle);
+            return new Line(new SvgLine(element), network, Config.default);
         } else if (element.localName == 'path' && element.dataset.train != undefined) {
-            return new Train(new SvgTrain(element), network, this.trainTimetableSpeed);
+            return new Train(new SvgTrain(element), network, Config.default);
         } else if (element.localName == 'rect' && element.dataset.station != undefined) {
             return new Station(new SvgStation(element));
         } else if (element.localName == 'text' && (element.dataset.station != undefined || element.dataset.line != undefined)) {

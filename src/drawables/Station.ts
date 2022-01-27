@@ -6,6 +6,7 @@ import { PreferredTrack } from "../PreferredTrack";
 import { Label } from "./Label";
 import { BoundingBox } from "../BoundingBox";
 import { AbstractTimedDrawable, AbstractTimedDrawableAdapter } from "./AbstractTimedDrawable";
+import { Projection } from "../Projection";
 
 export interface StationAdapter extends AbstractTimedDrawableAdapter {
     baseCoords: Vector;
@@ -37,8 +38,6 @@ export class Station extends AbstractTimedDrawable {
     static DEFAULT_STOP_DIMEN = 10;
     static LABEL_DISTANCE = 0;
 
-    static LONLAT_SCALE = 200;
-
 
     private existingLines: {[id: string]: LineAtStation[]} = {x: [], y: []};
     private existingLabels: Label[] = [];
@@ -51,7 +50,7 @@ export class Station extends AbstractTimedDrawable {
         super(adapter);
         console.log(this.adapter.lonLat);
         if (this.adapter.lonLat != undefined) {
-            this.adapter.baseCoords = new Vector(this.epsg3857X(this.adapter.lonLat.x), this.epsg3857Y(this.adapter.lonLat.y));
+            this.adapter.baseCoords = new Vector(Projection.default.x(this.adapter.lonLat.x), Projection.default.y(this.adapter.lonLat.y));
         }
     }
 
@@ -215,11 +214,5 @@ export class Station extends AbstractTimedDrawable {
         return false;
     }
 
-    private epsg3857X(lon: number): number {
-        return Math.round(256/Math.PI*(lon/180*Math.PI+Math.PI)*Station.LONLAT_SCALE*10)/10;
-    }
-        
-    private epsg3857Y(lat: number): number {
-        return Math.round(256/Math.PI*(Math.PI-Math.log(Math.tan(Math.PI/4+lat/180*Math.PI/2)))*Station.LONLAT_SCALE*10)/10;
-    }
+  
 }

@@ -9,6 +9,7 @@ import { LineGroup } from "./LineGroup";
 import { Gravitator } from "./Gravitator";
 import { Line } from "./drawables/Line";
 import { DrawableSorter } from "./DrawableSorter";
+import { Config } from "./Config";
 
 export interface StationProvider {
     stationById(id: string): Station | undefined;
@@ -17,8 +18,6 @@ export interface StationProvider {
 }
 export interface NetworkAdapter {
     canvasSize: BoundingBox;
-    autoStart: boolean;
-    zoomMaxScale: number;
     initialize(network: Network): void;
     createVirtualStop(id: string, baseCoords: Vector, rotation: Rotation): Station;
     drawEpoch(epoch: string): void;
@@ -35,11 +34,7 @@ export class Network implements StationProvider {
 
     constructor(private adapter: NetworkAdapter, private drawableSorter: DrawableSorter) {
         this.gravitator = new Gravitator(this);
-        this.zoomer = new Zoomer(this.adapter.canvasSize, this.adapter.zoomMaxScale);
-    }
-
-    get autoStart(): boolean {
-        return this.adapter.autoStart;
+        this.zoomer = new Zoomer(this.adapter.canvasSize, Config.default.zoomMaxScale);
     }
 
     initialize(): void {

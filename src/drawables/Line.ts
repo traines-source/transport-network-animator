@@ -5,6 +5,7 @@ import { Rotation } from "../Rotation";
 import { Utils } from "../Utils";
 import { PreferredTrack } from "../PreferredTrack";
 import { AbstractTimedDrawableAdapter, AbstractTimedDrawable } from "./AbstractTimedDrawable";
+import { Config } from "../Config";
 
 export interface LineAdapter extends AbstractTimedDrawableAdapter  {
     stops: Stop[];
@@ -23,7 +24,7 @@ export class Line extends AbstractTimedDrawable {
     static NODE_DISTANCE = 0;
     static SPEED = 100;
 
-    constructor(protected adapter: LineAdapter, private stationProvider: StationProvider, private beckStyle: boolean = true) {
+    constructor(protected adapter: LineAdapter, private stationProvider: StationProvider, private config: Config) {
         super(adapter);
     }
 
@@ -177,7 +178,7 @@ export class Line extends AbstractTimedDrawable {
     }
 
     private insertNode(fromCoord: Vector, fromDir: Rotation, toCoord: Vector, toDir: Rotation, path: Vector[]): boolean {
-        if (!this.beckStyle || !this.adapter.beckStyle) {
+        if (!this.config.beckStyle || !this.adapter.beckStyle) {
             return true;
         }
         const delta: Vector = fromCoord.delta(toCoord);

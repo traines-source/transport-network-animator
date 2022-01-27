@@ -3,6 +3,7 @@ import { StationProvider } from "../Network";
 import { Vector } from "../Vector";
 import { ArrivalDepartureTime } from "../ArrivalDepartureTime";
 import { AbstractTimedDrawableAdapter, AbstractTimedDrawable } from "./AbstractTimedDrawable";
+import { Config } from "../Config";
 
 export interface TrainAdapter extends AbstractTimedDrawableAdapter {
     stops: Stop[];
@@ -13,7 +14,7 @@ export interface TrainAdapter extends AbstractTimedDrawableAdapter {
 
 export class Train extends AbstractTimedDrawable {
 
-    constructor(protected adapter: TrainAdapter, private stationProvider: StationProvider, private trainTimetableSpeed: number) {
+    constructor(protected adapter: TrainAdapter, private stationProvider: StationProvider, private config: Config) {
         super(adapter);
     }
 
@@ -46,6 +47,6 @@ export class Train extends AbstractTimedDrawable {
     }
 
     private scaleSpeed(time: number): number {
-        return time / this.trainTimetableSpeed * 60;
+        return time / this.config.trainTimetableSpeed * 60;
     }
 }

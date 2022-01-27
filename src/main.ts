@@ -3,8 +3,11 @@ import { Network } from "./Network";
 import { Instant } from "./Instant";
 import { SvgAnimator } from "./svg/SvgAnimator";
 import { DrawableSorter } from "./DrawableSorter";
+import { Config } from "./Config";
 
 export { SvgAnimator } from "./svg/SvgAnimator";
+export { Config } from "./Config";
+export { Projection } from "./Projection";
 
 let timePassed = 0;
 
@@ -12,7 +15,7 @@ const network: Network = new Network(new SvgNetwork(), new DrawableSorter());
 const animateFromInstant: Instant = getStartInstant();
 let started = false;
 
-if (network.autoStart) {
+if (Config.default.autoStart) {
     started = true;
     startTransportNetworkAnimator();
 }
