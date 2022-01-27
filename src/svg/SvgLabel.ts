@@ -2,7 +2,6 @@ import { Rotation } from "../Rotation";
 import { LabelAdapter, Label } from "../drawables/Label";
 import { Vector } from "../Vector";
 import { Utils } from "../Utils";
-import { SvgNetwork } from "./SvgNetwork";
 import { BoundingBox } from "../BoundingBox";
 import { SvgAnimator } from "./SvgAnimator";
 import { SvgAbstractTimedDrawable } from "./SvgAbstractTimedDrawable";
@@ -101,7 +100,7 @@ export class SvgLabel extends SvgAbstractTimedDrawable implements LabelAdapter {
     }
 
     cloneForStation(stationId: string): LabelAdapter {
-        const lineLabel: SVGGraphicsElement = <SVGGraphicsElement>document.createElementNS(SvgNetwork.SVGNS, 'foreignObject');
+        const lineLabel: SVGGraphicsElement = <SVGGraphicsElement>document.createElementNS('http://www.w3.org/2000/svg', 'foreignObject');
         lineLabel.className.baseVal += ' for-line';
         lineLabel.dataset.station = stationId;
         lineLabel.setAttribute('width', '1');
