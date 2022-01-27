@@ -25,6 +25,13 @@ export class SvgStation extends SvgAbstractTimedDrawable implements StationAdapt
         this.element.setAttribute('x', baseCoords.x + ''); 
         this.element.setAttribute('y', baseCoords.y + ''); 
     }
+    
+    get lonLat(): Vector | undefined {
+        const str = this.element.dataset.lonLat?.split(' ');
+        if (str == undefined)
+            return undefined;
+        return new Vector(parseFloat(str[0]), parseFloat(str[1]));
+    }
 
     get rotation(): Rotation {
         return Rotation.from(this.element.dataset.dir || 'n');
