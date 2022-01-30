@@ -49,7 +49,7 @@ export class Station extends AbstractTimedDrawable {
     constructor(protected adapter: StationAdapter) {
         super(adapter);
         if (this.adapter.lonLat != undefined) {
-            this.adapter.baseCoords = new Vector(Projection.default.x(this.adapter.lonLat.x), Projection.default.y(this.adapter.lonLat.y));
+            this.adapter.baseCoords = Projection.default.project(this.adapter.lonLat);
         }
     }
 

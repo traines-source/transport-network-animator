@@ -9,6 +9,10 @@ export class Vector {
 
     }
 
+    static fromArray(arr: number[]) {
+        return new Vector(arr[0], arr[1]);
+    }
+
     get x(): number {
         return this._x;
     }
@@ -104,5 +108,14 @@ export class Vector {
 
     equals(other: Vector) {
         return this.x == other.x && this.y == other.y;
+    }
+
+    round(decimals: number) {
+        return new Vector(this.roundNumber(this.x, decimals), this.roundNumber(this.y, decimals));
+    }
+
+    private roundNumber(n: number, decimals: number): number {
+        const precision = Math.pow(10, decimals);
+        return Math.round(n*precision)/precision;
     }
 }
