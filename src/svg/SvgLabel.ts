@@ -1,10 +1,11 @@
 import { Rotation } from "../Rotation";
-import { LabelAdapter, Label } from "../drawables/Label";
+import { LabelAdapter } from "../drawables/Label";
 import { Vector } from "../Vector";
 import { Utils } from "../Utils";
 import { BoundingBox } from "../BoundingBox";
 import { SvgAnimator } from "./SvgAnimator";
 import { SvgAbstractTimedDrawable } from "./SvgAbstractTimedDrawable";
+import { Config } from "../Config";
 
 export class SvgLabel extends SvgAbstractTimedDrawable implements LabelAdapter {
 
@@ -48,7 +49,7 @@ export class SvgLabel extends SvgAbstractTimedDrawable implements LabelAdapter {
         this.element.style.transform = 'translate('
             + Utils.trilemma(labelunitv.x, [-boxDimen.x + 'px', -boxDimen.x/2 + 'px', '0px'])
             + ','
-            + Utils.trilemma(labelunitv.y, [-Label.LABEL_HEIGHT + 'px', -Label.LABEL_HEIGHT/2 + 'px', '0px']) // TODO magic numbers
+            + Utils.trilemma(labelunitv.y, [-Config.default.labelHeight + 'px', -Config.default.labelHeight/2 + 'px', '0px']) // TODO magic numbers
             + ')';
         this.element.style.visibility = 'visible';
     }

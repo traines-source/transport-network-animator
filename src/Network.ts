@@ -73,7 +73,7 @@ export class Network implements StationProvider {
     drawTimedDrawablesAt(now: Instant, animate: boolean): number {
         this.displayInstant(now);
         const elements: TimedDrawable[] = this.timedDrawablesAt(now);
-        let delay = Zoomer.ZOOM_DURATION;
+        let delay = Config.default.zoomDuration;
         for (let i=0; i<elements.length; i++) {
             delay = this.populateDrawableBuffer(elements[i], delay, animate, now);
         }

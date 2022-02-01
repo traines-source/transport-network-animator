@@ -6,10 +6,9 @@ import { Rotation } from "../Rotation";
 import { SvgAnimator } from "./SvgAnimator";
 import { SvgAbstractTimedDrawable } from "./SvgAbstractTimedDrawable";
 import { SvgUtils } from "./SvgUtils";
+import { Config } from "../Config";
 
 export class SvgTrain extends SvgAbstractTimedDrawable implements TrainAdapter {
-    static WAGON_LENGTH = 10;
-    static TRACK_OFFSET = 0;
 
     private _stops: Stop[] = [];
 
@@ -84,7 +83,7 @@ export class SvgTrain extends SvgAbstractTimedDrawable implements TrainAdapter {
             const delta = path[i].delta(path[i + 1]);
             const l = delta.length;
             if (thresh + l >= current) {
-                return path[i].between(path[i + 1], (current - thresh) / l).add(delta.rotate(new Rotation(90)).withLength(SvgTrain.TRACK_OFFSET));
+                return path[i].between(path[i + 1], (current - thresh) / l).add(delta.rotate(new Rotation(90)).withLength(Config.default.trainTrackOffset));
             }
             thresh += l;
         }
@@ -106,7 +105,7 @@ export class SvgTrain extends SvgAbstractTimedDrawable implements TrainAdapter {
     private calcTrainHinges(front: number, path: Vector[]): Vector[] {
         const newTrain: Vector[] = [];
         for (let i = 0; i < this.length + 1; i++) {
-            newTrain.push(this.getPositionByLength(front - i * SvgTrain.WAGON_LENGTH, path));
+            newTrain.push(this.getPositionByLength(front - i * Config.default.trainWagonLength, path));
         }
         return newTrain;
     }

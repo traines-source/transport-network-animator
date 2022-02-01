@@ -3,6 +3,7 @@ import { Rotation } from "../Rotation";
 import { StationProvider } from "../Network";
 import { Vector } from "../Vector";
 import { AbstractTimedDrawable, AbstractTimedDrawableAdapter } from "./AbstractTimedDrawable";
+import { Config } from "../Config";
 
 export interface LabelAdapter extends AbstractTimedDrawableAdapter {
     forStation: string | undefined;
@@ -13,7 +14,6 @@ export interface LabelAdapter extends AbstractTimedDrawableAdapter {
 }
 
 export class Label extends AbstractTimedDrawable {
-    static LABEL_HEIGHT = 12;
 
     constructor(protected adapter: LabelAdapter, private stationProvider: StationProvider) {
         super(adapter);
@@ -82,7 +82,7 @@ export class Label extends AbstractTimedDrawable {
             const l = station.labels[i];
             if (l == this)
                 break;
-            yOffset += Label.LABEL_HEIGHT*1.5;
+            yOffset += Config.default.labelHeight*1.5;
         }
         const labelDir = station.labelDir;
 

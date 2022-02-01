@@ -2,10 +2,9 @@ import { Instant } from "./Instant";
 import { Vector } from "./Vector";
 import { Rotation } from "./Rotation";
 import { BoundingBox } from "./BoundingBox";
+import { Config } from "./Config";
 
 export class Zoomer {
-    static ZOOM_DURATION = 1;
-    static PADDING_FACTOR = 40;
     
     private boundingBox = new BoundingBox(Vector.NULL, Vector.NULL);
     private customDuration = -1;
@@ -49,7 +48,7 @@ export class Zoomer {
     }
 
     private paddedBoundingBox(boundingBox: BoundingBox): BoundingBox {
-        const padding = Zoomer.PADDING_FACTOR*Math.min(this.zoomMaxScale, 8);
+        const padding = Config.default.zoomPaddingFactor*Math.min(this.zoomMaxScale, 8);
         return new BoundingBox(
             boundingBox.tl.add(new Vector(-padding, -padding)),
             boundingBox.br.add(new Vector(padding, padding))
@@ -78,7 +77,7 @@ export class Zoomer {
 
     get duration(): number {
         if (this.customDuration == -1) {
-            return Zoomer.ZOOM_DURATION;
+            return Config.default.zoomDuration;
         }
         return this.customDuration;
     }

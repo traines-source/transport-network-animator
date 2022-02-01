@@ -1,8 +1,9 @@
-import { StationAdapter, Station } from "../drawables/Station";
+import { StationAdapter } from "../drawables/Station";
 import { Vector } from "../Vector";
 import { Rotation } from "../Rotation";
 import { SvgAnimator } from "./SvgAnimator";
 import { SvgAbstractTimedDrawable } from "./SvgAbstractTimedDrawable";
+import { Config } from "../Config";
 
 export class SvgStation extends SvgAbstractTimedDrawable implements StationAdapter {
 
@@ -51,10 +52,12 @@ export class SvgStation extends SvgAbstractTimedDrawable implements StationAdapt
             }
             this.element.style.visibility = stopDimen[0] < 0 && stopDimen[1] < 0 ? 'hidden' : 'visible';
     
-            this.element.setAttribute('width', (Math.max(stopDimen[0], 0) * Station.LINE_DISTANCE + Station.DEFAULT_STOP_DIMEN) + '');
-            this.element.setAttribute('height', (Math.max(stopDimen[1], 0) * Station.LINE_DISTANCE + Station.DEFAULT_STOP_DIMEN) + '');
+            this.element.setAttribute('width', (Math.max(stopDimen[0], 0) * Config.default.lineDistance + Config.default.defaultStationDimen) + '');
+            this.element.setAttribute('height', (Math.max(stopDimen[1], 0) * Config.default.lineDistance + Config.default.defaultStationDimen) + '');
             this.updateTransformOrigin();
-            this.element.setAttribute('transform','rotate(' + this.rotation.degrees + ') translate(' + (Math.min(positionBoundaries.x[0], 0) * Station.LINE_DISTANCE - Station.DEFAULT_STOP_DIMEN / 2) + ',' + (Math.min(positionBoundaries.y[0], 0) * Station.LINE_DISTANCE - Station.DEFAULT_STOP_DIMEN / 2) + ')');
+            const x = Math.min(positionBoundaries.x[0], 0) * Config.default.lineDistance - Config.default.defaultStationDimen / 2;
+            const y = Math.min(positionBoundaries.y[0], 0) * Config.default.lineDistance - Config.default.defaultStationDimen / 2;
+            this.element.setAttribute('transform','rotate(' + this.rotation.degrees + ') translate(' + x + ',' + y + ')');
     
         });
     }

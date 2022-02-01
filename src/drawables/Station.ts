@@ -7,6 +7,7 @@ import { Label } from "./Label";
 import { BoundingBox } from "../BoundingBox";
 import { AbstractTimedDrawable, AbstractTimedDrawableAdapter } from "./AbstractTimedDrawable";
 import { Projection } from "../Projection";
+import { Config } from "../Config";
 
 export interface StationAdapter extends AbstractTimedDrawableAdapter {
     baseCoords: Vector;
@@ -34,10 +35,6 @@ export interface LineAtStation {
 }
 
 export class Station extends AbstractTimedDrawable {
-    static LINE_DISTANCE = 6;
-    static DEFAULT_STOP_DIMEN = 10;
-    static LABEL_DISTANCE = 0;
-
 
     private existingLines: {[id: string]: LineAtStation[]} = {x: [], y: []};
     private existingLabels: Label[] = [];
@@ -144,9 +141,9 @@ export class Station extends AbstractTimedDrawable {
     rotatedTrackCoordinates(incomingDir: Rotation, assignedTrack: number): Vector { 
         let newCoord: Vector;
         if (incomingDir.degrees % 180 == 0) {
-            newCoord = new Vector(assignedTrack * Station.LINE_DISTANCE, 0);
+            newCoord = new Vector(assignedTrack * Config.default.lineDistance, 0);
         } else {
-            newCoord = new Vector(0, assignedTrack * Station.LINE_DISTANCE);
+            newCoord = new Vector(0, assignedTrack * Config.default.lineDistance);
         }
         newCoord = newCoord.rotate(this.rotation);
         newCoord = this.baseCoords.add(newCoord);
@@ -203,7 +200,7 @@ export class Station extends AbstractTimedDrawable {
         if (dir*dimen < 0) {
             dimen = 0;
         }
-        return dimen * Station.LINE_DISTANCE + dir * (Station.DEFAULT_STOP_DIMEN + Station.LABEL_DISTANCE);
+        return dimen * Config.default.lineDistance + dir * (Config.default.defaultStationDimen + Config.default.labelDistance);
     }
 
     linesExisting(): boolean {

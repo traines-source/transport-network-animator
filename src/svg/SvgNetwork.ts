@@ -11,7 +11,6 @@ import { Label } from "../drawables/Label";
 import { SvgLabel } from "./SvgLabel";
 import { GenericTimedDrawable } from "../drawables/GenericTimedDrawable";
 import { SvgGenericTimedDrawable } from "./SvgGenericTimedDrawable";
-import { Zoomer } from "../Zoomer";
 import { Train } from "../drawables/Train";
 import { SvgTrain } from "./SvgTrain";
 import { SvgAnimator } from "./SvgAnimator";
@@ -113,8 +112,8 @@ export class SvgNetwork implements NetworkAdapter {
    
     zoomTo(zoomCenter: Vector, zoomScale: number, animationDurationSeconds: number) {
         const animator = new SvgAnimator();
-        const defaultBehaviour = animationDurationSeconds <= Zoomer.ZOOM_DURATION;
-        animator.wait(defaultBehaviour ? 0 : Zoomer.ZOOM_DURATION * 1000, () => {
+        const defaultBehaviour = animationDurationSeconds <= Config.default.zoomDuration;
+        animator.wait(defaultBehaviour ? 0 : Config.default.zoomDuration * 1000, () => {
             const currentZoomCenter = this.currentZoomCenter;
             const currentZoomScale = this.currentZoomScale;
             animator

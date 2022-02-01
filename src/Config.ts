@@ -30,6 +30,56 @@ export class Config {
     beckStyle = true;
 
     /**
+     * Minimum distance of corners for Harry Beck style.
+     */
+    minNodeDistance = 0;
+
+    /**
+     * Animation speed for lines.
+     */
+    animSpeed = 100;
+
+    /**
+     * Distance of neighboring lines at stations.
+     */
+    lineDistance = 6;
+
+    /**
+     * Size of a station with a single line.
+     */
+    defaultStationDimen = 10;
+
+    /**
+     * Height of labels. This influences the spacing of labels to stations.
+     */
+    labelHeight = 12;
+
+    /**
+     * Extra distance of labels from the station.
+     */
+    labelDistance = 0;
+
+    /**
+     * Duration of zoom at the beginning of every instant.
+     */
+    zoomDuration = 1;
+
+    /**
+     * How much padding to add around bounding box of zoomed elements to calculate the actual canvas extent.
+     */
+    zoomPaddingFactor = 40;
+
+    /**
+     * Length of one train section.
+     */
+    trainWagonLength = 10;
+
+    /**
+     * Offset of train relative to line.
+     */
+    trainTrackOffset = 0;
+
+    /**
      * How fast to animate trains according to given timetables, measured in real seconds per animated second.
      * The default (60) means that if numbers given in the timetables are interpreted as minutes, one minute in reality corresponds to one second in the animation. 
      */

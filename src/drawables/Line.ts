@@ -21,8 +21,6 @@ export interface LineAdapter extends AbstractTimedDrawableAdapter  {
 }
 
 export class Line extends AbstractTimedDrawable {
-    static NODE_DISTANCE = 0;
-    static SPEED = 100;
 
     constructor(protected adapter: LineAdapter, private stationProvider: StationProvider, private config: Config = Config.default) {
         super(adapter);
@@ -188,7 +186,7 @@ export class Line extends AbstractTimedDrawable {
             return true;
         }
         const solution = delta.solveDeltaForIntersection(oldDirV, newDirV)
-        if (solution.a > Line.NODE_DISTANCE && solution.b > Line.NODE_DISTANCE) {
+        if (solution.a > Config.default.minNodeDistance && solution.b > Config.default.minNodeDistance) {
             path.push(new Vector(fromCoord.x+oldDirV.x*solution.a, fromCoord.y+oldDirV.y*solution.a));
             return true;
         }
@@ -216,7 +214,7 @@ export class Line extends AbstractTimedDrawable {
     }
 
     get speed(): number {
-        return this.adapter.speed || Line.SPEED;
+        return this.adapter.speed || Config.default.animSpeed;
     }
 
     private getAnimationDuration(path: Vector[], animate: boolean): number {
