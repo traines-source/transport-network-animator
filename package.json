@@ -32,8 +32,9 @@
     "wpw": "webpack --watch",
     "test": "cross-env TS_NODE_COMPILER_OPTIONS='{ \"module\": \"commonjs\" }' mocha -r ts-node/register 'test/**/*.spec.ts'",
     "coverage": "cross-env TS_NODE_COMPILER_OPTIONS='{ \"module\": \"commonjs\" }' nyc mocha -r ts-node/register 'test/**/*.spec.ts'",
-    "docs": "typedoc --plugin typedoc-plugin-markdown --out docs --readme none --excludePrivate --githubPages false src/main.ts"
+    "docs": "typedoc --plugin typedoc-plugin-markdown --out docs --readme none --excludePrivate --githubPages false --gitRevision master src/main.ts"
   },
   "author": "https://github.com/traines-source/",
-  "license": "GPL-3.0"
+  "license": "GPL-3.0",
+  "private": true
 }

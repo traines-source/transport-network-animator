@@ -35,7 +35,7 @@ export class Train extends AbstractTimedDrawable {
                     this.adapter.move(delay + this.scaleSpeed(arrdep.departure) - this.from.second, this.scaleSpeed(arrdep.arrival - arrdep.departure), path);
                 }
             } else {
-                throw Error(this.name + ': No path found between ' + stops[i-1].stationId + ' ' + stops[i].stationId)
+                throw new Error(this.name + ': No path found between ' + stops[i-1].stationId + ' ' + stops[i].stationId)
             }
         }
         return 0;

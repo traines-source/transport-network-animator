@@ -53,7 +53,7 @@
 
 #### Defined in
 
-[Vector.ts:8](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Vector.ts#L8)
+[Vector.ts:8](https://github.com/traines-source/transport-network-animator/blob/master/src/Vector.ts#L8)
 
 ## Properties
 
@@ -63,7 +63,7 @@
 
 #### Defined in
 
-[Vector.ts:6](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Vector.ts#L6)
+[Vector.ts:6](https://github.com/traines-source/transport-network-animator/blob/master/src/Vector.ts#L6)
 
 ___
 
@@ -73,7 +73,7 @@ ___
 
 #### Defined in
 
-[Vector.ts:5](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Vector.ts#L5)
+[Vector.ts:5](https://github.com/traines-source/transport-network-animator/blob/master/src/Vector.ts#L5)
 
 ## Accessors
 
@@ -87,7 +87,7 @@ ___
 
 #### Defined in
 
-[Vector.ts:24](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Vector.ts#L24)
+[Vector.ts:24](https://github.com/traines-source/transport-network-animator/blob/master/src/Vector.ts#L24)
 
 ___
 
@@ -101,7 +101,7 @@ ___
 
 #### Defined in
 
-[Vector.ts:16](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Vector.ts#L16)
+[Vector.ts:16](https://github.com/traines-source/transport-network-animator/blob/master/src/Vector.ts#L16)
 
 ___
 
@@ -115,7 +115,7 @@ ___
 
 #### Defined in
 
-[Vector.ts:20](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Vector.ts#L20)
+[Vector.ts:20](https://github.com/traines-source/transport-network-animator/blob/master/src/Vector.ts#L20)
 
 ## Methods
 
@@ -135,7 +135,7 @@ ___
 
 #### Defined in
 
-[Vector.ts:38](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Vector.ts#L38)
+[Vector.ts:38](https://github.com/traines-source/transport-network-animator/blob/master/src/Vector.ts#L38)
 
 ___
 
@@ -155,7 +155,7 @@ ___
 
 #### Defined in
 
-[Vector.ts:84](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Vector.ts#L84)
+[Vector.ts:84](https://github.com/traines-source/transport-network-animator/blob/master/src/Vector.ts#L84)
 
 ___
 
@@ -176,7 +176,7 @@ ___
 
 #### Defined in
 
-[Vector.ts:104](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Vector.ts#L104)
+[Vector.ts:104](https://github.com/traines-source/transport-network-animator/blob/master/src/Vector.ts#L104)
 
 ___
 
@@ -196,7 +196,7 @@ ___
 
 #### Defined in
 
-[Vector.ts:96](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Vector.ts#L96)
+[Vector.ts:96](https://github.com/traines-source/transport-network-animator/blob/master/src/Vector.ts#L96)
 
 ___
 
@@ -216,7 +216,7 @@ ___
 
 #### Defined in
 
-[Vector.ts:88](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Vector.ts#L88)
+[Vector.ts:88](https://github.com/traines-source/transport-network-animator/blob/master/src/Vector.ts#L88)
 
 ___
 
@@ -236,7 +236,7 @@ ___
 
 #### Defined in
 
-[Vector.ts:42](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Vector.ts#L42)
+[Vector.ts:42](https://github.com/traines-source/transport-network-animator/blob/master/src/Vector.ts#L42)
 
 ___
 
@@ -256,7 +256,7 @@ ___
 
 #### Defined in
 
-[Vector.ts:51](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Vector.ts#L51)
+[Vector.ts:51](https://github.com/traines-source/transport-network-animator/blob/master/src/Vector.ts#L51)
 
 ___
 
@@ -276,7 +276,7 @@ ___
 
 #### Defined in
 
-[Vector.ts:109](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Vector.ts#L109)
+[Vector.ts:109](https://github.com/traines-source/transport-network-animator/blob/master/src/Vector.ts#L109)
 
 ___
 
@@ -290,7 +290,7 @@ ___
 
 #### Defined in
 
-[Vector.ts:75](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Vector.ts#L75)
+[Vector.ts:75](https://github.com/traines-source/transport-network-animator/blob/master/src/Vector.ts#L75)
 
 ___
 
@@ -311,7 +311,7 @@ ___
 
 #### Defined in
 
-[Vector.ts:69](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Vector.ts#L69)
+[Vector.ts:69](https://github.com/traines-source/transport-network-animator/blob/master/src/Vector.ts#L69)
 
 ___
 
@@ -331,7 +331,7 @@ ___
 
 #### Defined in
 
-[Vector.ts:46](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Vector.ts#L46)
+[Vector.ts:46](https://github.com/traines-source/transport-network-animator/blob/master/src/Vector.ts#L46)
 
 ___
 
@@ -351,7 +351,7 @@ ___
 
 #### Defined in
 
-[Vector.ts:113](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Vector.ts#L113)
+[Vector.ts:113](https://github.com/traines-source/transport-network-animator/blob/master/src/Vector.ts#L113)
 
 ___
 
@@ -371,7 +371,7 @@ ___
 
 #### Defined in
 
-[Vector.ts:33](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Vector.ts#L33)
+[Vector.ts:33](https://github.com/traines-source/transport-network-animator/blob/master/src/Vector.ts#L33)
 
 ___
 
@@ -397,7 +397,7 @@ ___
 
 #### Defined in
 
-[Vector.ts:55](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Vector.ts#L55)
+[Vector.ts:55](https://github.com/traines-source/transport-network-animator/blob/master/src/Vector.ts#L55)
 
 ___
 
@@ -417,7 +417,7 @@ ___
 
 #### Defined in
 
-[Vector.ts:28](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Vector.ts#L28)
+[Vector.ts:28](https://github.com/traines-source/transport-network-animator/blob/master/src/Vector.ts#L28)
 
 ___
 
@@ -437,4 +437,4 @@ ___
 
 #### Defined in
 
-[Vector.ts:12](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Vector.ts#L12)
+[Vector.ts:12](https://github.com/traines-source/transport-network-animator/blob/master/src/Vector.ts#L12)

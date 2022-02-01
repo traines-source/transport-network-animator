@@ -41,10 +41,11 @@
 
 Whether to automatically start TNA. Set to false if you want to run custom code (e.g. setting up paths etc. programmatically) beforehand.
 This needs to be set in the SVG to the SVG tag (data-auto-start="false"). Setting it in JavaScript will not have any effect.
+If set to false, you will need to fire an event from your JavaScript if you eventually want to start TNA: `document.dispatchEvent(new Event('startTransportNetworkAnimator'));`
 
 #### Defined in
 
-[Config.ts:8](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Config.ts#L8)
+[Config.ts:9](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L9)
 
 ___
 
@@ -57,7 +58,7 @@ This can also be set for each SVG path individually (data-beck-style="false").
 
 #### Defined in
 
-[Config.ts:29](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Config.ts#L29)
+[Config.ts:30](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L30)
 
 ___
 
@@ -69,7 +70,7 @@ Upper bound for animation duration.
 
 #### Defined in
 
-[Config.ts:75](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Config.ts#L75)
+[Config.ts:76](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L76)
 
 ___
 
@@ -81,7 +82,7 @@ How fast to animate the distortion. Depends on the scale of your map.
 
 #### Defined in
 
-[Config.ts:70](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Config.ts#L70)
+[Config.ts:71](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L71)
 
 ___
 
@@ -93,7 +94,7 @@ Color edges that are unusually long in red and those that are unusually short in
 
 #### Defined in
 
-[Config.ts:80](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Config.ts#L80)
+[Config.ts:81](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L81)
 
 ___
 
@@ -107,7 +108,7 @@ Do experimentally adjust it if the optimization takes a long time or leads to ba
 
 #### Defined in
 
-[Config.ts:50](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Config.ts#L50)
+[Config.ts:51](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L51)
 
 ___
 
@@ -122,7 +123,7 @@ Set to 0 to disable.
 
 #### Defined in
 
-[Config.ts:43](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Config.ts#L43)
+[Config.ts:44](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L44)
 
 ___
 
@@ -144,7 +145,7 @@ Bear in mind that the euclidian distance depends on your chosen map projection a
 
 #### Defined in
 
-[Config.ts:65](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Config.ts#L65)
+[Config.ts:66](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L66)
 
 ___
 
@@ -152,11 +153,11 @@ ___
 
 • **mapProjection**: `string` = `'epsg3857'`
 
-Which map projection to use if you use data-lonlat attributes on stations. For choices and custom projections, see Projection.ts
+Which map projection to use if you use data-lonlat attributes on stations. For choices and custom projections, see [Projection](Projection.md)
 
 #### Defined in
 
-[Config.ts:13](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Config.ts#L13)
+[Config.ts:14](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L14)
 
 ___
 
@@ -168,7 +169,7 @@ Scale of the map projection when converting to SVG coordinate system.
 
 #### Defined in
 
-[Config.ts:18](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Config.ts#L18)
+[Config.ts:19](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L19)
 
 ___
 
@@ -181,7 +182,7 @@ The default (60) means that if numbers given in the timetables are interpreted a
 
 #### Defined in
 
-[Config.ts:35](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Config.ts#L35)
+[Config.ts:36](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L36)
 
 ___
 
@@ -193,7 +194,7 @@ Maximum zoom level.
 
 #### Defined in
 
-[Config.ts:23](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Config.ts#L23)
+[Config.ts:24](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L24)
 
 ## Accessors
 
@@ -201,10 +202,12 @@ Maximum zoom level.
 
 • `Static` `get` **default**(): [`Config`](Config.md)
 
+The default Config that will be used everywhere except when specifically overriden. Access it from your JavaScript code to set config values using `TNA.Config.default`, e.g. `TNA.Config.default.beckStyle = false;`
+
 #### Returns
 
 [`Config`](Config.md)
 
 #### Defined in
 
-[Config.ts:82](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Config.ts#L82)
+[Config.ts:86](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L86)

@@ -39,7 +39,7 @@
 
 #### Defined in
 
-[Rotation.ts:6](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Rotation.ts#L6)
+[Rotation.ts:6](https://github.com/traines-source/transport-network-animator/blob/master/src/Rotation.ts#L6)
 
 ## Accessors
 
@@ -53,7 +53,7 @@
 
 #### Defined in
 
-[Rotation.ts:23](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Rotation.ts#L23)
+[Rotation.ts:23](https://github.com/traines-source/transport-network-animator/blob/master/src/Rotation.ts#L23)
 
 ___
 
@@ -67,7 +67,7 @@ ___
 
 #### Defined in
 
-[Rotation.ts:14](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Rotation.ts#L14)
+[Rotation.ts:14](https://github.com/traines-source/transport-network-animator/blob/master/src/Rotation.ts#L14)
 
 ___
 
@@ -81,7 +81,7 @@ ___
 
 #### Defined in
 
-[Rotation.ts:27](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Rotation.ts#L27)
+[Rotation.ts:27](https://github.com/traines-source/transport-network-animator/blob/master/src/Rotation.ts#L27)
 
 ## Methods
 
@@ -101,7 +101,7 @@ ___
 
 #### Defined in
 
-[Rotation.ts:31](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Rotation.ts#L31)
+[Rotation.ts:31](https://github.com/traines-source/transport-network-animator/blob/master/src/Rotation.ts#L31)
 
 ___
 
@@ -121,7 +121,7 @@ ___
 
 #### Defined in
 
-[Rotation.ts:40](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Rotation.ts#L40)
+[Rotation.ts:40](https://github.com/traines-source/transport-network-animator/blob/master/src/Rotation.ts#L40)
 
 ___
 
@@ -142,7 +142,7 @@ ___
 
 #### Defined in
 
-[Rotation.ts:75](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Rotation.ts#L75)
+[Rotation.ts:75](https://github.com/traines-source/transport-network-animator/blob/master/src/Rotation.ts#L75)
 
 ___
 
@@ -156,7 +156,7 @@ ___
 
 #### Defined in
 
-[Rotation.ts:65](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Rotation.ts#L65)
+[Rotation.ts:65](https://github.com/traines-source/transport-network-animator/blob/master/src/Rotation.ts#L65)
 
 ___
 
@@ -177,7 +177,7 @@ ___
 
 #### Defined in
 
-[Rotation.ts:92](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Rotation.ts#L92)
+[Rotation.ts:92](https://github.com/traines-source/transport-network-animator/blob/master/src/Rotation.ts#L92)
 
 ___
 
@@ -191,7 +191,7 @@ ___
 
 #### Defined in
 
-[Rotation.ts:54](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Rotation.ts#L54)
+[Rotation.ts:54](https://github.com/traines-source/transport-network-animator/blob/master/src/Rotation.ts#L54)
 
 ___
 
@@ -211,7 +211,7 @@ ___
 
 #### Defined in
 
-[Rotation.ts:69](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Rotation.ts#L69)
+[Rotation.ts:69](https://github.com/traines-source/transport-network-animator/blob/master/src/Rotation.ts#L69)
 
 ___
 
@@ -231,4 +231,4 @@ ___
 
 #### Defined in
 
-[Rotation.ts:10](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Rotation.ts#L10)
+[Rotation.ts:10](https://github.com/traines-source/transport-network-animator/blob/master/src/Rotation.ts#L10)

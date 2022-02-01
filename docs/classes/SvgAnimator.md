@@ -4,7 +4,7 @@
 
 ## Hierarchy
 
-- [`Animator`](Animator.md)
+- `Animator`
 
   ↳ **`SvgAnimator`**
 
@@ -40,11 +40,11 @@
 
 #### Overrides
 
-[Animator](Animator.md).[constructor](Animator.md#constructor)
+Animator.constructor
 
 #### Defined in
 
-[svg/SvgAnimator.ts:5](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/svg/SvgAnimator.ts#L5)
+[svg/SvgAnimator.ts:5](https://github.com/traines-source/transport-network-animator/blob/master/src/svg/SvgAnimator.ts#L5)
 
 ## Properties
 
@@ -68,11 +68,11 @@
 
 #### Inherited from
 
-[Animator](Animator.md).[EASE_CUBIC](Animator.md#ease_cubic)
+Animator.EASE\_CUBIC
 
 #### Defined in
 
-[Animator.ts:4](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Animator.ts#L4)
+[Animator.ts:4](https://github.com/traines-source/transport-network-animator/blob/master/src/Animator.ts#L4)
 
 ___
 
@@ -96,11 +96,11 @@ ___
 
 #### Inherited from
 
-[Animator](Animator.md).[EASE_NONE](Animator.md#ease_none)
+Animator.EASE\_NONE
 
 #### Defined in
 
-[Animator.ts:3](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Animator.ts#L3)
+[Animator.ts:3](https://github.com/traines-source/transport-network-animator/blob/master/src/Animator.ts#L3)
 
 ___
 
@@ -124,11 +124,11 @@ ___
 
 #### Inherited from
 
-[Animator](Animator.md).[EASE_SINE](Animator.md#ease_sine)
+Animator.EASE\_SINE
 
 #### Defined in
 
-[Animator.ts:5](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Animator.ts#L5)
+[Animator.ts:5](https://github.com/traines-source/transport-network-animator/blob/master/src/Animator.ts#L5)
 
 ## Methods
 
@@ -149,17 +149,17 @@ ___
 
 #### Inherited from
 
-[Animator](Animator.md).[animate](Animator.md#animate)
+Animator.animate
 
 #### Defined in
 
-[Animator.ts:47](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Animator.ts#L47)
+[Animator.ts:47](https://github.com/traines-source/transport-network-animator/blob/master/src/Animator.ts#L47)
 
 ___
 
 ### ease
 
-▸ **ease**(`ease`): [`Animator`](Animator.md)
+▸ **ease**(`ease`): `Animator`
 
 #### Parameters
 
@@ -169,21 +169,21 @@ ___
 
 #### Returns
 
-[`Animator`](Animator.md)
+`Animator`
 
 #### Inherited from
 
-[Animator](Animator.md).[ease](Animator.md#ease)
+Animator.ease
 
 #### Defined in
 
-[Animator.ts:34](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Animator.ts#L34)
+[Animator.ts:34](https://github.com/traines-source/transport-network-animator/blob/master/src/Animator.ts#L34)
 
 ___
 
 ### from
 
-▸ **from**(`from`): [`Animator`](Animator.md)
+▸ **from**(`from`): `Animator`
 
 #### Parameters
 
@@ -193,15 +193,15 @@ ___
 
 #### Returns
 
-[`Animator`](Animator.md)
+`Animator`
 
 #### Inherited from
 
-[Animator](Animator.md).[from](Animator.md#from)
+Animator.from
 
 #### Defined in
 
-[Animator.ts:19](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Animator.ts#L19)
+[Animator.ts:19](https://github.com/traines-source/transport-network-animator/blob/master/src/Animator.ts#L19)
 
 ___
 
@@ -215,11 +215,11 @@ ___
 
 #### Overrides
 
-[Animator](Animator.md).[now](Animator.md#now)
+Animator.now
 
 #### Defined in
 
-[svg/SvgAnimator.ts:9](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/svg/SvgAnimator.ts#L9)
+[svg/SvgAnimator.ts:9](https://github.com/traines-source/transport-network-animator/blob/master/src/svg/SvgAnimator.ts#L9)
 
 ___
 
@@ -239,17 +239,17 @@ ___
 
 #### Overrides
 
-[Animator](Animator.md).[requestFrame](Animator.md#requestframe)
+Animator.requestFrame
 
 #### Defined in
 
-[svg/SvgAnimator.ts:17](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/svg/SvgAnimator.ts#L17)
+[svg/SvgAnimator.ts:17](https://github.com/traines-source/transport-network-animator/blob/master/src/svg/SvgAnimator.ts#L17)
 
 ___
 
 ### timePassed
 
-▸ **timePassed**(`timePassed`): [`Animator`](Animator.md)
+▸ **timePassed**(`timePassed`): `Animator`
 
 #### Parameters
 
@@ -259,15 +259,15 @@ ___
 
 #### Returns
 
-[`Animator`](Animator.md)
+`Animator`
 
 #### Inherited from
 
-[Animator](Animator.md).[timePassed](Animator.md#timepassed)
+Animator.timePassed
 
 #### Defined in
 
-[Animator.ts:29](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Animator.ts#L29)
+[Animator.ts:29](https://github.com/traines-source/transport-network-animator/blob/master/src/Animator.ts#L29)
 
 ___
 
@@ -288,17 +288,17 @@ ___
 
 #### Overrides
 
-[Animator](Animator.md).[timeout](Animator.md#timeout)
+Animator.timeout
 
 #### Defined in
 
-[svg/SvgAnimator.ts:13](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/svg/SvgAnimator.ts#L13)
+[svg/SvgAnimator.ts:13](https://github.com/traines-source/transport-network-animator/blob/master/src/svg/SvgAnimator.ts#L13)
 
 ___
 
 ### to
 
-▸ **to**(`to`): [`Animator`](Animator.md)
+▸ **to**(`to`): `Animator`
 
 #### Parameters
 
@@ -308,15 +308,15 @@ ___
 
 #### Returns
 
-[`Animator`](Animator.md)
+`Animator`
 
 #### Inherited from
 
-[Animator](Animator.md).[to](Animator.md#to)
+Animator.to
 
 #### Defined in
 
-[Animator.ts:24](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Animator.ts#L24)
+[Animator.ts:24](https://github.com/traines-source/transport-network-animator/blob/master/src/Animator.ts#L24)
 
 ___
 
@@ -337,8 +337,8 @@ ___
 
 #### Inherited from
 
-[Animator](Animator.md).[wait](Animator.md#wait)
+Animator.wait
 
 #### Defined in
 
-[Animator.ts:39](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Animator.ts#L39)
+[Animator.ts:39](https://github.com/traines-source/transport-network-animator/blob/master/src/Animator.ts#L39)

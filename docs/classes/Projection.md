@@ -34,7 +34,7 @@
 
 #### Defined in
 
-[Projection.ts:11](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Projection.ts#L11)
+[Projection.ts:11](https://github.com/traines-source/transport-network-animator/blob/master/src/Projection.ts#L11)
 
 ## Properties
 
@@ -42,13 +42,15 @@
 
 ▪ `Static` **projections**: `Object`
 
+The definitions of available projections, which can be added to.
+
 #### Index signature
 
 ▪ [name: `string`]: (`lonlat`: [`Vector`](Vector.md)) => [`Vector`](Vector.md)
 
 #### Defined in
 
-[Projection.ts:21](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Projection.ts#L21)
+[Projection.ts:27](https://github.com/traines-source/transport-network-animator/blob/master/src/Projection.ts#L27)
 
 ## Accessors
 
@@ -56,25 +58,29 @@
 
 • `Static` `get` **default**(): [`Projection`](Projection.md)
 
+The default projection as set by [Config.mapProjection](Config.md#mapprojection)
+
 #### Returns
 
 [`Projection`](Projection.md)
 
 #### Defined in
 
-[Projection.ts:17](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Projection.ts#L17)
+[Projection.ts:20](https://github.com/traines-source/transport-network-animator/blob/master/src/Projection.ts#L20)
 
 ## Methods
 
 ### project
 
-▸ **project**(`c`): [`Vector`](Vector.md)
+▸ **project**(`coords`): [`Vector`](Vector.md)
+
+Project the given coordinates to the target projection.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `c` | [`Vector`](Vector.md) |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `coords` | [`Vector`](Vector.md) | The coords in WGS84 / EPSG:4326 |
 
 #### Returns
 
@@ -82,4 +88,4 @@
 
 #### Defined in
 
-[Projection.ts:32](https://github.com/traines-source/transport-network-animator/blob/eb636e3/src/Projection.ts#L32)
+[Projection.ts:42](https://github.com/traines-source/transport-network-animator/blob/master/src/Projection.ts#L42)

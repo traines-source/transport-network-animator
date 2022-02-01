@@ -4,11 +4,12 @@ export class Config {
     /**
      * Whether to automatically start TNA. Set to false if you want to run custom code (e.g. setting up paths etc. programmatically) beforehand.
      * This needs to be set in the SVG to the SVG tag (data-auto-start="false"). Setting it in JavaScript will not have any effect.
+     * If set to false, you will need to fire an event from your JavaScript if you eventually want to start TNA: `document.dispatchEvent(new Event('startTransportNetworkAnimator'));`
      */
     autoStart = true;
 
     /**
-     * Which map projection to use if you use data-lonlat attributes on stations. For choices and custom projections, see Projection.ts
+     * Which map projection to use if you use data-lonlat attributes on stations. For choices and custom projections, see {@link Projection}
      */
     mapProjection = 'epsg3857';
 
@@ -79,6 +80,9 @@ export class Config {
      */
     gravitatorColorDeviation = 0.02;
 
+    /**
+     * The default Config that will be used everywhere except when specifically overriden. Access it from your JavaScript code to set config values using `TNA.Config.default`, e.g. `TNA.Config.default.beckStyle = false;` 
+     */
     public static get default(): Config {
         return this._default || (this._default = new Config());
     }
