@@ -8,6 +8,9 @@ import { Config } from "./Config";
 export { SvgAnimator } from "./svg/SvgAnimator";
 export { Config } from "./Config";
 export { Projection } from "./Projection";
+export { Vector } from "./Vector";
+export { Rotation } from "./Rotation";
+export { Animator } from "./Animator";
 
 let timePassed = 0;
 
