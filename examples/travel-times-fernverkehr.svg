@@ -1,442 +1,442 @@
 <?xml-stylesheet type="text/css" href="travel-times-fernverkehr.css" ?>
-<svg viewBox="15300 9700 1920 1080" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" data-beck-style="false">
+<svg viewBox="15300 9700 1920 1080" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" data-auto-start="false">
 <g id="">
     <image href="map_1920.png" x="15093" y="9598" width="2343" height="1317"/>
     <g id="elements">
         <!-- e2h: >=9, e1h: >=18, e12h: >=36 -->
 
-        <path data-line="BL_AH" class="some 5" data-stops="+0 BL +0 AH" data-length="240" data-from="1987 0 noanim" data-to="1988 0 noanim" />
-        <path data-line="BL_AH" class="some 5" data-stops="+0 BL +0 AH" data-length="230" data-from="1988 0 noanim" data-to="1990 0 noanim" />
-        <path data-line="BL_AH" class="some 6" data-stops="+0 BL +0 AH" data-length="220" data-from="1990 0 noanim" data-to="1991 0 noanim" />
-        <path data-line="BL_AH" class="e2h 9"  data-stops="+0 BL +0 AH" data-length="200" data-from="1991 0 noanim" data-to="1994 0 noanim" />
-        <path data-line="BL_AH" class="e2h 11" data-stops="+0 BL +0 AH" data-length="180" data-from="1994 0 noanim" data-to="1996 0 noanim" />
-        <path data-line="BL_AH" class="e2h 15" data-stops="+0 BL +0 AH" data-length="160" data-from="1996 0 noanim" data-to="1997 0 noanim" />
-        <path data-line="BL_AH" class="e2h 15" data-stops="+0 BL +0 AH" data-length="140" data-from="1997 0 noanim" data-to="2001 0 noanim" />
-        <path data-line="BL_AH" class="e1h 19" data-stops="+0 BL +0 AH" data-length="130" data-from="2001 0 noanim" data-to="2003 0 noanim" />
-        <path data-line="BL_AH" class="e1h 22" data-stops="+0 BL +0 AH" data-length="135" data-from="2003 0 noanim" data-to="2005 0 noanim" />
-        <path data-line="BL_AH" class="e1h 23" data-stops="+0 BL +0 AH" data-length="90" data-from="2005 0 noanim" data-to="2008 0 noanim" />
-        <path data-line="BL_AH" class="e1h 32" data-stops="+0 BL +0 AH" data-length="95" data-from="2008 0 noanim" data-to="2013 0 noanim" />
-        <path data-line="BL_AH" class="e1h 34" data-stops="+0 BL +0 AH" data-length="100" data-from="2013 0 noanim" data-to="2019 0 noanim" />
-        <path data-line="BL_AH" class="e1h 34" data-stops="+0 BL +0 AH" data-length="105" data-from="2019 0 noanim" data-to="2020 0 noanim" />
-        <path data-line="BL_AH" class="e12h 36" data-stops="+0 BL +0 AH" data-length="105" data-from="2020 0 noanim" />
+        <path data-line="BL_AH" class="some 5" data-stops="+0 BL +0 AH" data-weight="240" data-from="1987 0 noanim" data-to="1988 0 noanim" />
+        <path data-line="BL_AH" class="some 5" data-stops="+0 BL +0 AH" data-weight="230" data-from="1988 0 noanim" data-to="1990 0 noanim" />
+        <path data-line="BL_AH" class="some 6" data-stops="+0 BL +0 AH" data-weight="220" data-from="1990 0 noanim" data-to="1991 0 noanim" />
+        <path data-line="BL_AH" class="e2h 9"  data-stops="+0 BL +0 AH" data-weight="200" data-from="1991 0 noanim" data-to="1994 0 noanim" />
+        <path data-line="BL_AH" class="e2h 11" data-stops="+0 BL +0 AH" data-weight="180" data-from="1994 0 noanim" data-to="1996 0 noanim" />
+        <path data-line="BL_AH" class="e2h 15" data-stops="+0 BL +0 AH" data-weight="160" data-from="1996 0 noanim" data-to="1997 0 noanim" />
+        <path data-line="BL_AH" class="e2h 15" data-stops="+0 BL +0 AH" data-weight="140" data-from="1997 0 noanim" data-to="2001 0 noanim" />
+        <path data-line="BL_AH" class="e1h 19" data-stops="+0 BL +0 AH" data-weight="130" data-from="2001 0 noanim" data-to="2003 0 noanim" />
+        <path data-line="BL_AH" class="e1h 22" data-stops="+0 BL +0 AH" data-weight="135" data-from="2003 0 noanim" data-to="2005 0 noanim" />
+        <path data-line="BL_AH" class="e1h 23" data-stops="+0 BL +0 AH" data-weight="90" data-from="2005 0 noanim" data-to="2008 0 noanim" />
+        <path data-line="BL_AH" class="e1h 32" data-stops="+0 BL +0 AH" data-weight="95" data-from="2008 0 noanim" data-to="2013 0 noanim" />
+        <path data-line="BL_AH" class="e1h 34" data-stops="+0 BL +0 AH" data-weight="100" data-from="2013 0 noanim" data-to="2019 0 noanim" />
+        <path data-line="BL_AH" class="e1h 34" data-stops="+0 BL +0 AH" data-weight="105" data-from="2019 0 noanim" data-to="2020 0 noanim" />
+        <path data-line="BL_AH" class="e12h 36" data-stops="+0 BL +0 AH" data-weight="105" data-from="2020 0 noanim" />
 
-        <path data-line="AH_HH" class="e12h 50" data-stops="+0 AH +0 HH" data-length="75" data-from="1987 0 noanim" data-to="1991 0 noanim" />
-        <path data-line="AH_HH" class="e12h 50" data-stops="+0 AH +0 HH" data-length="70" data-from="1991 0 noanim" data-to="1998 0 noanim" />
-        <path data-line="AH_HH" class="e12h 70" data-stops="+0 AH +0 HH" data-length="75" data-from="1998 0 noanim" />
+        <path data-line="AH_HH" class="e12h 50" data-stops="+0 AH +0 HH" data-weight="75" data-from="1987 0 noanim" data-to="1991 0 noanim" />
+        <path data-line="AH_HH" class="e12h 50" data-stops="+0 AH +0 HH" data-weight="70" data-from="1991 0 noanim" data-to="1998 0 noanim" />
+        <path data-line="AH_HH" class="e12h 70" data-stops="+0 AH +0 HH" data-weight="75" data-from="1998 0 noanim" />
 
         <!-- not all via Kassel until 1991 -->
-        <path data-line="FKW_HH" class="e12h ?" data-stops="+0 FKW +0 HH" data-length="120" data-from="1987 0 noanim" data-to="1988 0 noanim" />
-        <path data-line="FKW_HH" class="e12h ?" data-stops="+0 FKW +0 HH" data-length="110" data-from="1988 0 noanim" data-to="1991 0 noanim" />
-        <path data-line="FKW_HH" class="e12h 33+" data-stops="+0 FKW +0 HH" data-length="55" data-from="1991 0 noanim" data-to="1994 0 noanim" />
-        <path data-line="FKW_HH" class="e12h 39" data-stops="+0 FKW +0 HH" data-length="50" data-from="1994 0 noanim" data-to="2000 0 noanim" />
-        <path data-line="FKW_HH" class="e12h 73" data-stops="+0 FKW +0 HH" data-length="55" data-from="2000 0 noanim" />
+        <path data-line="FKW_HH" class="e12h ?" data-stops="+0 FKW +0 HH" data-weight="120" data-from="1987 0 noanim" data-to="1988 0 noanim" />
+        <path data-line="FKW_HH" class="e12h ?" data-stops="+0 FKW +0 HH" data-weight="110" data-from="1988 0 noanim" data-to="1991 0 noanim" />
+        <path data-line="FKW_HH" class="e12h 33+" data-stops="+0 FKW +0 HH" data-weight="55" data-from="1991 0 noanim" data-to="1994 0 noanim" />
+        <path data-line="FKW_HH" class="e12h 39" data-stops="+0 FKW +0 HH" data-weight="50" data-from="1994 0 noanim" data-to="2000 0 noanim" />
+        <path data-line="FKW_HH" class="e12h 73" data-stops="+0 FKW +0 HH" data-weight="55" data-from="2000 0 noanim" />
 
-        <path data-line="BL_WSR" class="e2h 17" data-stops="+0 BL +0 WSR" data-length="200" data-from="1987 0 noanim" data-to="1989 0 noanim" />
-        <path data-line="BL_WSR" class="e2h 15" data-stops="+0 BL +0 WSR" data-length="180" data-from="1989 0 noanim" data-to="1991 0 noanim" />
-        <path data-line="BL_WSR" class="e2h 12" data-stops="+0 BL +0 WSR" data-length="175" data-from="1991 0 noanim" data-to="1993 0 noanim" />
-        <path data-line="BL_WSR" class="e2h 12" data-stops="+0 BL +0 WSR" data-length="170" data-from="1993 0 noanim" data-to="1996 0 noanim" />
-        <path data-line="BL_WSR" class="e2h 12" data-stops="+0 BL +0 WSR" data-length="165" data-from="1996 0 noanim" />
+        <path data-line="BL_WSR" class="e2h 17" data-stops="+0 BL +0 WSR" data-weight="200" data-from="1987 0 noanim" data-to="1989 0 noanim" />
+        <path data-line="BL_WSR" class="e2h 15" data-stops="+0 BL +0 WSR" data-weight="180" data-from="1989 0 noanim" data-to="1991 0 noanim" />
+        <path data-line="BL_WSR" class="e2h 12" data-stops="+0 BL +0 WSR" data-weight="175" data-from="1991 0 noanim" data-to="1993 0 noanim" />
+        <path data-line="BL_WSR" class="e2h 12" data-stops="+0 BL +0 WSR" data-weight="170" data-from="1993 0 noanim" data-to="1996 0 noanim" />
+        <path data-line="BL_WSR" class="e2h 12" data-stops="+0 BL +0 WSR" data-weight="165" data-from="1996 0 noanim" />
 
-        <path data-line="WR_WS" class="e2h 12" data-stops="+0 WR +0 WS" data-length="70" data-from="1987 0 noanim" data-to="1992 0 noanim" />
-        <path data-line="WR_WS" class="e2h 12" data-stops="+0 WR +0 WS" data-length="60" data-from="1992 0 noanim" data-to="2019 0 noanim" />
-        <path data-line="WR_WS" class="e2h 16" data-stops="+0 WR +0 WS" data-length="50" data-from="2019 0 noanim"  />
+        <path data-line="WR_WS" class="e2h 12" data-stops="+0 WR +0 WS" data-weight="70" data-from="1987 0 noanim" data-to="1992 0 noanim" />
+        <path data-line="WR_WS" class="e2h 12" data-stops="+0 WR +0 WS" data-weight="60" data-from="1992 0 noanim" data-to="2019 0 noanim" />
+        <path data-line="WR_WS" class="e2h 16" data-stops="+0 WR +0 WS" data-weight="50" data-from="2019 0 noanim"  />
 
-        <path data-line="WR_WSR" class="some 8" data-stops="+0 WR +0 WSR" data-length="75" data-from="1987 0 noanim" data-to="1989 0 noanim" />
-        <path data-line="WR_WSR" class="some 8" data-stops="+0 WR +0 WSR" data-length="70" data-from="1989 0 noanim" data-to="1992 0 noanim" />
-        <path data-line="WR_WSR" class="some 8" data-stops="+0 WR +0 WSR" data-length="55" data-from="1992 0 noanim" data-to="2000 0 noanim" />
-        <path data-line="WR_WSR" class="some 8" data-stops="+0 WR +0 WSR" data-length="50" data-from="2000 0 noanim" data-to="2003 0 noanim" />
-        <path data-line="WR_WSR" class="e2h 10" data-stops="+0 WR +0 WSR" data-length="45" data-from="2003 0 noanim" data-to="2009 0 noanim" />
-        <path data-line="WR_WSR" class="e2h 10" data-stops="+0 WR +0 WSR" data-length="50" data-from="2009 0 noanim" />
+        <path data-line="WR_WSR" class="some 8" data-stops="+0 WR +0 WSR" data-weight="75" data-from="1987 0 noanim" data-to="1989 0 noanim" />
+        <path data-line="WR_WSR" class="some 8" data-stops="+0 WR +0 WSR" data-weight="70" data-from="1989 0 noanim" data-to="1992 0 noanim" />
+        <path data-line="WR_WSR" class="some 8" data-stops="+0 WR +0 WSR" data-weight="55" data-from="1992 0 noanim" data-to="2000 0 noanim" />
+        <path data-line="WR_WSR" class="some 8" data-stops="+0 WR +0 WSR" data-weight="50" data-from="2000 0 noanim" data-to="2003 0 noanim" />
+        <path data-line="WR_WSR" class="e2h 10" data-stops="+0 WR +0 WSR" data-weight="45" data-from="2003 0 noanim" data-to="2009 0 noanim" />
+        <path data-line="WR_WSR" class="e2h 10" data-stops="+0 WR +0 WSR" data-weight="50" data-from="2009 0 noanim" />
 
-        <path data-line="AH_WS" class="some 1" data-stops="+0 AH +0 WS" data-length="150" data-from="1987 0 noanim" data-to="1990 0 noanim" />
-        <path data-line="AH_WS" class="e2h 12" data-stops="+0 AH +0 WS" data-length="110" data-from="1990 0 noanim" data-to="1991 0 noanim" />
-        <path data-line="AH_WS" class="some 2" data-stops="+0 AH +0 WS" data-length="100" data-from="1991 0 noanim" data-to="1996 0 noanim" />
-        <path data-line="AH_WS" class="e2h 11" data-stops="+0 AH +0 WS" data-length="80" data-from="1996 0 noanim" data-to="2000 0 noanim" />
-        <path data-line="AH_WS" class="e2h 11" data-stops="+0 AH +0 WS" data-length="60" data-from="2000 0 noanim" data-to="2006 0 noanim" />
-        <path data-line="AH_WS" class="e2h 11" data-stops="+0 AH +0 WS" data-length="50" data-from="2006 0 noanim" />
+        <path data-line="AH_WS" class="some 1" data-stops="+0 AH +0 WS" data-weight="150" data-from="1987 0 noanim" data-to="1990 0 noanim" />
+        <path data-line="AH_WS" class="e2h 12" data-stops="+0 AH +0 WS" data-weight="110" data-from="1990 0 noanim" data-to="1991 0 noanim" />
+        <path data-line="AH_WS" class="some 2" data-stops="+0 AH +0 WS" data-weight="100" data-from="1991 0 noanim" data-to="1996 0 noanim" />
+        <path data-line="AH_WS" class="e2h 11" data-stops="+0 AH +0 WS" data-weight="80" data-from="1996 0 noanim" data-to="2000 0 noanim" />
+        <path data-line="AH_WS" class="e2h 11" data-stops="+0 AH +0 WS" data-weight="60" data-from="2000 0 noanim" data-to="2006 0 noanim" />
+        <path data-line="AH_WS" class="e2h 11" data-stops="+0 AH +0 WS" data-weight="50" data-from="2006 0 noanim" />
 
-        <path data-line="AH_AL" class="e2h 15" data-stops="+0 AH +0 AL" data-length="40" data-from="1987 0 noanim" data-to="1990 0 noanim" />
-        <path data-line="AH_AL" class="e1h 21" data-stops="+0 AH +0 AL" data-length="40" data-from="1990 0 noanim" data-to="1998 0 noanim" />
-        <path data-line="AH_AL" class="e2h 21" data-stops="+0 AH +0 AL" data-length="40" data-from="1998 0 noanim" data-to="2020 0 noanim" />
-        <path data-line="AH_AL" class="some 21" data-stops="+0 AH +0 AL" data-length="40" data-from="2020 0 noanim" data-to="2030 0 noanim" />
-        <path data-line="AH_AL" class="e1h 21" data-stops="+0 AH +0 AL" data-length="40" data-from="2030 0 noanim" />
+        <path data-line="AH_AL" class="e2h 15" data-stops="+0 AH +0 AL" data-weight="40" data-from="1987 0 noanim" data-to="1990 0 noanim" />
+        <path data-line="AH_AL" class="e1h 21" data-stops="+0 AH +0 AL" data-weight="40" data-from="1990 0 noanim" data-to="1998 0 noanim" />
+        <path data-line="AH_AL" class="e2h 21" data-stops="+0 AH +0 AL" data-weight="40" data-from="1998 0 noanim" data-to="2020 0 noanim" />
+        <path data-line="AH_AL" class="some 21" data-stops="+0 AH +0 AL" data-weight="40" data-from="2020 0 noanim" data-to="2030 0 noanim" />
+        <path data-line="AH_AL" class="e1h 21" data-stops="+0 AH +0 AL" data-weight="40" data-from="2030 0 noanim" />
 
-        <path data-line="BL_WR" class="e2h 11" data-stops="+0 BL +0 WR" data-length="170" data-from="1987 0 noanim" data-to="1993 0 noanim" />
-        <path data-line="BL_WR" class="e2h 9" data-stops="+0 BL +0 WR" data-length="150" data-from="1993 0 noanim" data-to="1997 0 noanim" />
-        <path data-line="BL_WR" class="e2h 9" data-stops="+0 BL +0 WR" data-length="160" data-from="1997 0 noanim" data-to="1999 0 noanim" />
-        <path data-line="BL_WR" class="some 9" data-stops="+0 BL +0 WR" data-length="190" data-from="1999 0 noanim" data-to="2001 0 " />
-        <path data-line="BL_WR" class="some 1" data-stops="+0 BL +0 WR" data-length="140" data-from="2007 0" data-to="2013 0 noanim" />
-        <path data-line="BL_WR" class="some 3" data-stops="+0 BL +0 WR" data-length="130" data-from="2013 0 noanim" data-to="2015 0 noanim" />
-        <path data-line="BL_WR" class="some 5" data-stops="+0 BL +0 WR" data-length="120" data-from="2015 0 noanim" data-to="2020 0 noanim" />
-        <path data-line="BL_WR" class="e2h 18" data-stops="+0 BL +0 WR" data-length="120" data-from="2020 0 noanim" />
+        <path data-line="BL_WR" class="e2h 11" data-stops="+0 BL +0 WR" data-weight="170" data-from="1987 0 noanim" data-to="1993 0 noanim" />
+        <path data-line="BL_WR" class="e2h 9" data-stops="+0 BL +0 WR" data-weight="150" data-from="1993 0 noanim" data-to="1997 0 noanim" />
+        <path data-line="BL_WR" class="e2h 9" data-stops="+0 BL +0 WR" data-weight="160" data-from="1997 0 noanim" data-to="1999 0 noanim" />
+        <path data-line="BL_WR" class="some 9" data-stops="+0 BL +0 WR" data-weight="190" data-from="1999 0 noanim" data-to="2001 0 " />
+        <path data-line="BL_WR" class="some 1" data-stops="+0 BL +0 WR" data-weight="140" data-from="2007 0" data-to="2013 0 noanim" />
+        <path data-line="BL_WR" class="some 3" data-stops="+0 BL +0 WR" data-weight="130" data-from="2013 0 noanim" data-to="2015 0 noanim" />
+        <path data-line="BL_WR" class="some 5" data-stops="+0 BL +0 WR" data-weight="120" data-from="2015 0 noanim" data-to="2020 0 noanim" />
+        <path data-line="BL_WR" class="e2h 18" data-stops="+0 BL +0 WR" data-weight="120" data-from="2020 0 noanim" />
 
-        <path data-line="AH_AK" class="e2h 11" data-stops="+0 AH +0 AK" data-length="80" data-from="1987 0 noanim" data-to="1991 0 noanim" />
-        <path data-line="AH_AK" class="some 8" data-stops="+0 AH +0 AK" data-length="90" data-from="1991 0 noanim" data-to="1993 0 noanim" />
-        <path data-line="AH_AK" class="e2h 12" data-stops="+0 AH +0 AK" data-length="90" data-from="1993 0 noanim" data-to="1995 0 noanim" />
-        <path data-line="AH_AK" class="e2h 12" data-stops="+0 AH +0 AK" data-length="60" data-from="1995 0 noanim" data-to="2000 0 noanim" />
-        <path data-line="AH_AK" class="some 9" data-stops="+0 AH +0 AK" data-length="70" data-from="2000 0 noanim" data-to="2009 0 noanim" />
-        <path data-line="AH_AK" class="e2h 9" data-stops="+0 AH +0 AK" data-length="70" data-from="2009 0 noanim" />
+        <path data-line="AH_AK" class="e2h 11" data-stops="+0 AH +0 AK" data-weight="80" data-from="1987 0 noanim" data-to="1991 0 noanim" />
+        <path data-line="AH_AK" class="some 8" data-stops="+0 AH +0 AK" data-weight="90" data-from="1991 0 noanim" data-to="1993 0 noanim" />
+        <path data-line="AH_AK" class="e2h 12" data-stops="+0 AH +0 AK" data-weight="90" data-from="1993 0 noanim" data-to="1995 0 noanim" />
+        <path data-line="AH_AK" class="e2h 12" data-stops="+0 AH +0 AK" data-weight="60" data-from="1995 0 noanim" data-to="2000 0 noanim" />
+        <path data-line="AH_AK" class="some 9" data-stops="+0 AH +0 AK" data-weight="70" data-from="2000 0 noanim" data-to="2009 0 noanim" />
+        <path data-line="AH_AK" class="e2h 9" data-stops="+0 AH +0 AK" data-weight="70" data-from="2009 0 noanim" />
 
-        <path data-line="AH_AWLA" class="some 6" data-stops="+0 AH +0 AWLA" data-length="180" data-from="1987 0 noanim" data-to="1994 0 noanim" />
-        <path data-line="AH_AWLA" class="some 6" data-stops="+0 AH +0 AWLA" data-length="200" data-from="1994 0 noanim" data-to="1998 0 noanim" />
-        <path data-line="AH_AWLA" class="some 6" data-stops="+0 AH +0 AWLA" data-length="180" data-from="1998 0 noanim" data-to="2007 0 noanim" />
-        <path data-line="AH_AWLA" class="some 6" data-stops="+0 AH +0 AWLA" data-length="200" data-from="2007 0 noanim" />
+        <path data-line="AH_AWLA" class="some 6" data-stops="+0 AH +0 AWLA" data-weight="180" data-from="1987 0 noanim" data-to="1994 0 noanim" />
+        <path data-line="AH_AWLA" class="some 6" data-stops="+0 AH +0 AWLA" data-weight="200" data-from="1994 0 noanim" data-to="1998 0 noanim" />
+        <path data-line="AH_AWLA" class="some 6" data-stops="+0 AH +0 AWLA" data-weight="180" data-from="1998 0 noanim" data-to="2007 0 noanim" />
+        <path data-line="AH_AWLA" class="some 6" data-stops="+0 AH +0 AWLA" data-weight="200" data-from="2007 0 noanim" />
 
-        <path data-line="AH_HB" class="e1h 35" data-stops="+0 AH +0 HB" data-length="50" data-from="1987 0 noanim" data-to="2000 0 noanim" />
-        <path data-line="AH_HB" class="e1h 35" data-stops="+0 AH +0 HB" data-length="55" data-from="2000 0 noanim" />        
+        <path data-line="AH_HB" class="e1h 35" data-stops="+0 AH +0 HB" data-weight="50" data-from="1987 0 noanim" data-to="2000 0 noanim" />
+        <path data-line="AH_HB" class="e1h 35" data-stops="+0 AH +0 HB" data-weight="55" data-from="2000 0 noanim" />        
 
-        <path data-line="HB_HH" class="e1h 21" data-stops="+0 HB +0 HH" data-length="60" data-from="1987 0 noanim" />
+        <path data-line="HB_HH" class="e1h 21" data-stops="+0 HB +0 HH" data-weight="60" data-from="1987 0 noanim" />
 
-        <path data-line="HH_BL" class="some 3" data-stops="+0 HH +0 BL" data-length="240" data-from="1991 0 noanim" data-to="1995 0 noanim" />
-        <path data-line="HH_BL" class="some 3" data-stops="+0 HH +0 BL" data-length="210" data-from="1995 0 noanim" data-to="1996 0 noanim" />
-        <path data-line="HH_BL" class="some 1" data-stops="+0 HH +0 BL" data-length="150" data-from="1996 0 noanim" data-to="1997 0" />
-        <path data-line="HH_BL" class="e1h 31" data-stops="+0 HH +0 BL" data-length="110" data-from="1998 0" data-to="1999 0 noanim" />
-        <path data-line="HH_BL" class="e1h 35" data-stops="+0 HH +0 BL" data-length="95" data-from="1999 0 noanim" data-to="2006 0 noanim" />
-        <path data-line="HH_BL" class="e12h 60" data-stops="+0 HH +0 BL" data-length="95" data-from="2006 0 noanim" data-to="2030 0 noanim" />
-        <path data-line="HH_BL" class="e12h 65" data-stops="+0 HH +0 BL" data-length="80" data-from="2030 0 noanim" />
+        <path data-line="HH_BL" class="some 3" data-stops="+0 HH +0 BL" data-weight="240" data-from="1991 0 noanim" data-to="1995 0 noanim" />
+        <path data-line="HH_BL" class="some 3" data-stops="+0 HH +0 BL" data-weight="210" data-from="1995 0 noanim" data-to="1996 0 noanim" />
+        <path data-line="HH_BL" class="some 1" data-stops="+0 HH +0 BL" data-weight="150" data-from="1996 0 noanim" data-to="1997 0" />
+        <path data-line="HH_BL" class="e1h 31" data-stops="+0 HH +0 BL" data-weight="110" data-from="1998 0" data-to="1999 0 noanim" />
+        <path data-line="HH_BL" class="e1h 35" data-stops="+0 HH +0 BL" data-weight="95" data-from="1999 0 noanim" data-to="2006 0 noanim" />
+        <path data-line="HH_BL" class="e12h 60" data-stops="+0 HH +0 BL" data-weight="95" data-from="2006 0 noanim" data-to="2030 0 noanim" />
+        <path data-line="HH_BL" class="e12h 65" data-stops="+0 HH +0 BL" data-weight="80" data-from="2030 0 noanim" />
 
-        <path data-line="HH_HBS" class="e1h 19" data-stops="+0 HH +0 HBS" data-length="30" data-from="1987 0 noanim" data-to="1990 0 noanim" />
-        <path data-line="HH_HBS" class="e1h 19" data-stops="+0 HH +0 HBS" data-length="40" data-from="1990 0 noanim" data-to="2001 0 noanim" />
-        <path data-line="HH_HBS" class="e1h 19" data-stops="+0 HH +0 HBS" data-length="30" data-from="2001 0 noanim" />
+        <path data-line="HH_HBS" class="e1h 19" data-stops="+0 HH +0 HBS" data-weight="30" data-from="1987 0 noanim" data-to="1990 0 noanim" />
+        <path data-line="HH_HBS" class="e1h 19" data-stops="+0 HH +0 HBS" data-weight="40" data-from="1990 0 noanim" data-to="2001 0 noanim" />
+        <path data-line="HH_HBS" class="e1h 19" data-stops="+0 HH +0 HBS" data-weight="30" data-from="2001 0 noanim" />
 
-        <path data-line="BL_HBS" class="e2h 11" data-stops="+0 BL +0 HBS" data-length="190" data-from="1987 0 noanim" data-to="1990 0 noanim" />
-        <path data-line="BL_HBS" class="e1h 25" data-stops="+0 BL +0 HBS" data-length="80" data-from="1998 0 noanim" />
+        <path data-line="BL_HBS" class="e2h 11" data-stops="+0 BL +0 HBS" data-weight="190" data-from="1987 0 noanim" data-to="1990 0 noanim" />
+        <path data-line="BL_HBS" class="e1h 25" data-stops="+0 BL +0 HBS" data-weight="80" data-from="1998 0 noanim" />
 
         <!-- hochwasser 2013 -->
-        <path data-line="BL_LM" class="e2h 11" data-stops="+0 BL +0 LM" data-length="100" data-from="1990 0 noanim" data-to="1992 0 noanim" />        
-        <path data-line="BL_LM" class="e1h 26" data-stops="+0 BL +0 LM" data-length="100" data-from="1992 0 noanim" data-to="1993 0 noanim" />        
-        <path data-line="BL_LM" class="e1h 25" data-stops="+0 BL +0 LM" data-length="80" data-from="1993 0 noanim" data-to="1996 0 noanim" />
-        <path data-line="BL_LM" class="e1h 25" data-stops="+0 BL +0 LM" data-length="70" data-from="1996 0 noanim" data-to="1998 0 noanim" />
-        <path data-line="BL_LM" class="e2h 12" data-stops="+0 BL +0 LM" data-length="80" data-from="1998 0 noanim" data-to="2003 0 noanim" />
-        <path data-line="BL_LM" class="some 3" data-stops="+0 BL +0 LM" data-length="90" data-from="2003 0 noanim" />
+        <path data-line="BL_LM" class="e2h 11" data-stops="+0 BL +0 LM" data-weight="100" data-from="1990 0 noanim" data-to="1992 0 noanim" />        
+        <path data-line="BL_LM" class="e1h 26" data-stops="+0 BL +0 LM" data-weight="100" data-from="1992 0 noanim" data-to="1993 0 noanim" />        
+        <path data-line="BL_LM" class="e1h 25" data-stops="+0 BL +0 LM" data-weight="80" data-from="1993 0 noanim" data-to="1996 0 noanim" />
+        <path data-line="BL_LM" class="e1h 25" data-stops="+0 BL +0 LM" data-weight="70" data-from="1996 0 noanim" data-to="1998 0 noanim" />
+        <path data-line="BL_LM" class="e2h 12" data-stops="+0 BL +0 LM" data-weight="80" data-from="1998 0 noanim" data-to="2003 0 noanim" />
+        <path data-line="BL_LM" class="some 3" data-stops="+0 BL +0 LM" data-weight="90" data-from="2003 0 noanim" />
 
-        <path data-line="HBS_LM" class="some 2" data-stops="+0 HBS +0 LM" data-length="120" data-from="1987 0 noanim" data-to="1990 0 noanim" />        
-        <path data-line="HBS_LM" class="e2h 11" data-stops="+0 HBS +0 LM" data-length="80" data-from="1990 0 noanim" data-to="1992 0 noanim" />        
-        <path data-line="HBS_LM" class="e1h 26" data-stops="+0 HBS +0 LM" data-length="80" data-from="1992 0 noanim" data-to="1993 0 noanim" />        
-        <path data-line="HBS_LM" class="e1h 25" data-stops="+0 HBS +0 LM" data-length="50" data-from="1993 0 noanim" data-to="1996 0 noanim" />
-        <path data-line="HBS_LM" class="e12h 40" data-stops="+0 HBS +0 LM" data-length="45" data-from="1996 0 noanim" data-to="1998 0 noanim" />
-        <path data-line="HBS_LM" class="e1h 25" data-stops="+0 HBS +0 LM" data-length="45" data-from="1998 0 noanim" data-to="2003 0 noanim" />
-        <path data-line="HBS_LM" class="e1h 20" data-stops="+0 HBS +0 LM" data-length="45" data-from="2003 0 noanim" />
+        <path data-line="HBS_LM" class="some 2" data-stops="+0 HBS +0 LM" data-weight="120" data-from="1987 0 noanim" data-to="1990 0 noanim" />        
+        <path data-line="HBS_LM" class="e2h 11" data-stops="+0 HBS +0 LM" data-weight="80" data-from="1990 0 noanim" data-to="1992 0 noanim" />        
+        <path data-line="HBS_LM" class="e1h 26" data-stops="+0 HBS +0 LM" data-weight="80" data-from="1992 0 noanim" data-to="1993 0 noanim" />        
+        <path data-line="HBS_LM" class="e1h 25" data-stops="+0 HBS +0 LM" data-weight="50" data-from="1993 0 noanim" data-to="1996 0 noanim" />
+        <path data-line="HBS_LM" class="e12h 40" data-stops="+0 HBS +0 LM" data-weight="45" data-from="1996 0 noanim" data-to="1998 0 noanim" />
+        <path data-line="HBS_LM" class="e1h 25" data-stops="+0 HBS +0 LM" data-weight="45" data-from="1998 0 noanim" data-to="2003 0 noanim" />
+        <path data-line="HBS_LM" class="e1h 20" data-stops="+0 HBS +0 LM" data-weight="45" data-from="2003 0 noanim" />
 
-        <path data-line="LM_WS" class="e2h 15" data-stops="+0 LM +0 WS" data-length="160" data-from="1987 0 noanim" data-to="1992 0 noanim" />        
-        <path data-line="LM_WS" class="e2h 15" data-stops="+0 LM +0 WS" data-length="130" data-from="1992 0 noanim" data-to="1999 0 noanim" />        
-        <path data-line="LM_WS" class="some 7" data-stops="+0 LM +0 WS" data-length="140" data-from="1999 0 noanim" data-to="2003 0 noanim" />        
-        <path data-line="LM_WS" class="some 1" data-stops="+0 LM +0 WS" data-length="120" data-from="2003 0 noanim" />
+        <path data-line="LM_WS" class="e2h 15" data-stops="+0 LM +0 WS" data-weight="160" data-from="1987 0 noanim" data-to="1992 0 noanim" />        
+        <path data-line="LM_WS" class="e2h 15" data-stops="+0 LM +0 WS" data-weight="130" data-from="1992 0 noanim" data-to="1999 0 noanim" />        
+        <path data-line="LM_WS" class="some 7" data-stops="+0 LM +0 WS" data-weight="140" data-from="1999 0 noanim" data-to="2003 0 noanim" />        
+        <path data-line="LM_WS" class="some 1" data-stops="+0 LM +0 WS" data-weight="120" data-from="2003 0 noanim" />
 
-        <path data-line="FKW_HBS" class="some 8" data-stops="+0 FKW +0 HBS" data-length="80" data-from="1991 0 noanim" data-to="1993 0 noanim" />
-        <path data-line="FKW_HBS" class="e2h 14" data-stops="+0 FKW +0 HBS" data-length="75" data-from="1993 0 noanim" data-to="2011 0 noanim" />
-        <path data-line="FKW_HBS" class="e1h 19" data-stops="+0 FKW +0 HBS" data-length="75" data-from="2011 0 noanim" />
+        <path data-line="FKW_HBS" class="some 8" data-stops="+0 FKW +0 HBS" data-weight="80" data-from="1991 0 noanim" data-to="1993 0 noanim" />
+        <path data-line="FKW_HBS" class="e2h 14" data-stops="+0 FKW +0 HBS" data-weight="75" data-from="1993 0 noanim" data-to="2011 0 noanim" />
+        <path data-line="FKW_HBS" class="e1h 19" data-stops="+0 FKW +0 HBS" data-weight="75" data-from="2011 0 noanim" />
 
         <!-- not all stopping at Fulda and Kassel -->
-        <path data-line="FFU_FKW" class="e12h ?" data-stops="+0 FFU +0 FKW" data-length="70" data-from="1987 0 noanim" data-to="1991 0 noanim" />
-        <path data-line="FFU_FKW" class="e12h ?" data-stops="+0 FFU +0 FKW" data-length="30" data-from="1991 0 noanim" />
+        <path data-line="FFU_FKW" class="e12h ?" data-stops="+0 FFU +0 FKW" data-weight="70" data-from="1987 0 noanim" data-to="1991 0 noanim" />
+        <path data-line="FFU_FKW" class="e12h ?" data-stops="+0 FFU +0 FKW" data-weight="30" data-from="1991 0 noanim" />
 
-        <path data-line="FFU_FF" class="e1h 26" data-stops="+0 FFU +0 FF" data-length="60" data-from="1987 0 noanim" data-to="1991 0 noanim" />
-        <path data-line="FFU_FF" class="e12h 39" data-stops="+0 FFU +0 FF" data-length="55" data-from="1991 0 noanim" data-to="2030 0 noanim" />
-        <path data-line="FFU_FF" class="e12h 45" data-stops="+0 FFU +0 FF" data-length="35" data-from="2030 0 noanim" />
+        <path data-line="FFU_FF" class="e1h 26" data-stops="+0 FFU +0 FF" data-weight="60" data-from="1987 0 noanim" data-to="1991 0 noanim" />
+        <path data-line="FFU_FF" class="e12h 39" data-stops="+0 FFU +0 FF" data-weight="55" data-from="1991 0 noanim" data-to="2030 0 noanim" />
+        <path data-line="FFU_FF" class="e12h 45" data-stops="+0 FFU +0 FF" data-weight="35" data-from="2030 0 noanim" />
 
-        <path data-line="FFU_NWH" class="e1h 23" data-stops="+0 FFU +0 NWH" data-length="60" data-from="1987 0 noanim" data-to="1988 0 noanim" />
-        <path data-line="FFU_NWH" class="e1h 17" data-stops="+0 FFU +0 NWH" data-length="40" data-from="1988 0 noanim" data-to="1992 0 noanim" />
-        <path data-line="FFU_NWH" class="e1h 19" data-stops="+0 FFU +0 NWH" data-length="30" data-from="1992 0 noanim" />
+        <path data-line="FFU_NWH" class="e1h 23" data-stops="+0 FFU +0 NWH" data-weight="60" data-from="1987 0 noanim" data-to="1988 0 noanim" />
+        <path data-line="FFU_NWH" class="e1h 17" data-stops="+0 FFU +0 NWH" data-weight="40" data-from="1988 0 noanim" data-to="1992 0 noanim" />
+        <path data-line="FFU_NWH" class="e1h 19" data-stops="+0 FFU +0 NWH" data-weight="30" data-from="1992 0 noanim" />
 
-        <path data-line="FF_RM" class="e1h 32" data-stops="+0 FF +0 RM" data-length="40" data-from="1987 0 noanim" data-to="1988 0 noanim" />
-        <path data-line="FF_RM" class="e1h 32" data-stops="+0 FF +0 RM" data-length="45" data-from="1988 0 noanim" data-to="1991 0 noanim" />
-        <path data-line="FF_RM" class="e12h 39" data-stops="+0 FF +0 RM" data-length="40" data-from="1991 0 noanim" data-to="1999 0 noanim" />
-        <path data-line="FF_RM" class="e12h 39" data-stops="+0 FF +0 RM" data-length="35" data-from="1999 0 noanim" data-to="2030 0 noanim" />
-        <path data-line="FF_RM" class="e12h 39" data-stops="+0 FF +0 RM" data-length="30" data-from="2030 0 noanim" />
+        <path data-line="FF_RM" class="e1h 32" data-stops="+0 FF +0 RM" data-weight="40" data-from="1987 0 noanim" data-to="1988 0 noanim" />
+        <path data-line="FF_RM" class="e1h 32" data-stops="+0 FF +0 RM" data-weight="45" data-from="1988 0 noanim" data-to="1991 0 noanim" />
+        <path data-line="FF_RM" class="e12h 39" data-stops="+0 FF +0 RM" data-weight="40" data-from="1991 0 noanim" data-to="1999 0 noanim" />
+        <path data-line="FF_RM" class="e12h 39" data-stops="+0 FF +0 RM" data-weight="35" data-from="1999 0 noanim" data-to="2030 0 noanim" />
+        <path data-line="FF_RM" class="e12h 39" data-stops="+0 FF +0 RM" data-weight="30" data-from="2030 0 noanim" />
 
-        <path data-line="FF_FMZ" class="e1h 25" data-stops="+0 FF +0 FMZ" data-length="25" data-from="1987 0 noanim" data-to="2001 0 noanim" />
-        <path data-line="FF_FMZ" class="e1h 26" data-stops="+0 FF +0 FMZ" data-length="30" data-from="2001 0 noanim" />
+        <path data-line="FF_FMZ" class="e1h 25" data-stops="+0 FF +0 FMZ" data-weight="25" data-from="1987 0 noanim" data-to="2001 0 noanim" />
+        <path data-line="FF_FMZ" class="e1h 26" data-stops="+0 FF +0 FMZ" data-weight="30" data-from="2001 0 noanim" />
 
-        <path data-line="FF_NWH" class="e1h 27" data-stops="+0 FF +0 NWH" data-length="80" data-from="1987 0 noanim" data-to="1994 0 noanim" />
-        <path data-line="FF_NWH" class="e1h 21" data-stops="+0 FF +0 NWH" data-length="70" data-from="1994 0 noanim" />
+        <path data-line="FF_NWH" class="e1h 27" data-stops="+0 FF +0 NWH" data-weight="80" data-from="1987 0 noanim" data-to="1994 0 noanim" />
+        <path data-line="FF_NWH" class="e1h 21" data-stops="+0 FF +0 NWH" data-weight="70" data-from="1994 0 noanim" />
 
-        <path data-line="FF_FG" class="e1h 33" data-stops="+0 FF +0 FG" data-length="40" data-from="1987 0 noanim" data-to="2001 0 noanim" />
-        <path data-line="FF_FG" class="e2h 9" data-stops="+0 FF +0 FG" data-length="40" data-from="2001 0 noanim" />
+        <path data-line="FF_FG" class="e1h 33" data-stops="+0 FF +0 FG" data-weight="40" data-from="1987 0 noanim" data-to="2001 0 noanim" />
+        <path data-line="FF_FG" class="e2h 9" data-stops="+0 FF +0 FG" data-weight="40" data-from="2001 0 noanim" />
 
-        <path data-line="FG_FKW" class="e1h 20" data-stops="+0 FG +0 FKW" data-length="80" data-from="1987 0 noanim" data-to="1988 0 noanim" />
-        <path data-line="FG_FKW" class="e2h 14" data-stops="+0 FG +0 FKW" data-length="80" data-from="1988 0 noanim" />
+        <path data-line="FG_FKW" class="e1h 20" data-stops="+0 FG +0 FKW" data-weight="80" data-from="1987 0 noanim" data-to="1988 0 noanim" />
+        <path data-line="FG_FKW" class="e2h 14" data-stops="+0 FG +0 FKW" data-weight="80" data-from="1988 0 noanim" />
 
-        <path data-line="FMZ_RM" class="e1h 32" data-stops="+0 FMZ +0 RM" data-length="40" data-from="1987 0 noanim" data-to="1988 0 noanim" />
-        <path data-line="FMZ_RM" class="e12h 40" data-stops="+0 FMZ +0 RM" data-length="40" data-from="1988 0 noanim" data-to="1993 0 noanim" />
-        <path data-line="FMZ_RM" class="e1h 35" data-stops="+0 FMZ +0 RM" data-length="40" data-from="1993 0 noanim" />
+        <path data-line="FMZ_RM" class="e1h 32" data-stops="+0 FMZ +0 RM" data-weight="40" data-from="1987 0 noanim" data-to="1988 0 noanim" />
+        <path data-line="FMZ_RM" class="e12h 40" data-stops="+0 FMZ +0 RM" data-weight="40" data-from="1988 0 noanim" data-to="1993 0 noanim" />
+        <path data-line="FMZ_RM" class="e1h 35" data-stops="+0 FMZ +0 RM" data-weight="40" data-from="1993 0 noanim" />
 
-        <path data-line="FMZ_KKO" class="e12h 60" data-stops="+0 FMZ +0 KKO" data-length="50" data-from="1987 0 noanim" data-to="2003 0 noanim" />
-        <path data-line="FMZ_KKO" class="e1h 40-" data-stops="+0 FMZ +0 KKO" data-length="50" data-from="2003 0 noanim" data-to="2008 0 noanim" />
-        <path data-line="FMZ_KKO" class="e12h 40" data-stops="+0 FMZ +0 KKO" data-length="50" data-from="2008 0 noanim" data-to="2030 0 noanim" />
-        <path data-line="FMZ_KKO" class="e1h 40" data-stops="+0 FMZ +0 KKO" data-length="50" data-from="2030 0 noanim" />
+        <path data-line="FMZ_KKO" class="e12h 60" data-stops="+0 FMZ +0 KKO" data-weight="50" data-from="1987 0 noanim" data-to="2003 0 noanim" />
+        <path data-line="FMZ_KKO" class="e1h 40-" data-stops="+0 FMZ +0 KKO" data-weight="50" data-from="2003 0 noanim" data-to="2008 0 noanim" />
+        <path data-line="FMZ_KKO" class="e12h 40" data-stops="+0 FMZ +0 KKO" data-weight="50" data-from="2008 0 noanim" data-to="2030 0 noanim" />
+        <path data-line="FMZ_KKO" class="e1h 40" data-stops="+0 FMZ +0 KKO" data-weight="50" data-from="2030 0 noanim" />
 
-        <path data-line="KKO_KK" class="e12h 60" data-stops="+0 KKO +0 KK" data-length="50" data-from="1987 0 noanim" data-to="2003 0 noanim" />
-        <path data-line="KKO_KK" class="e12h 40-" data-stops="+0 KKO +0 KK" data-length="55" data-from="2003 0 noanim" data-to="2008 0 noanim" />
-        <path data-line="KKO_KK" class="e12h 40" data-stops="+0 KKO +0 KK" data-length="55" data-from="2008 0 noanim" data-to="2030 0 noanim" />
-        <path data-line="KKO_KK" class="e1h 40" data-stops="+0 KKO +0 KK" data-length="55" data-from="2030 0 noanim" />
+        <path data-line="KKO_KK" class="e12h 60" data-stops="+0 KKO +0 KK" data-weight="50" data-from="1987 0 noanim" data-to="2003 0 noanim" />
+        <path data-line="KKO_KK" class="e12h 40-" data-stops="+0 KKO +0 KK" data-weight="55" data-from="2003 0 noanim" data-to="2008 0 noanim" />
+        <path data-line="KKO_KK" class="e12h 40" data-stops="+0 KKO +0 KK" data-weight="55" data-from="2008 0 noanim" data-to="2030 0 noanim" />
+        <path data-line="KKO_KK" class="e1h 40" data-stops="+0 KKO +0 KK" data-weight="55" data-from="2030 0 noanim" />
 
-        <path data-line="KKO_STR" class="e2h 15" data-stops="+0 KKO +0 STR" data-length="80" data-from="1987 0 noanim" data-to="2005 0 noanim" />
-        <path data-line="KKO_STR" class="some 6" data-stops="+0 KKO +0 STR" data-length="90" data-from="2005 0 noanim" data-to="2015 0 noanim" />
-        <path data-line="KKO_STR" class="e2h 8" data-stops="+0 KKO +0 STR" data-length="80" data-from="2030 0 noanim" />
+        <path data-line="KKO_STR" class="e2h 15" data-stops="+0 KKO +0 STR" data-weight="80" data-from="1987 0 noanim" data-to="2005 0 noanim" />
+        <path data-line="KKO_STR" class="some 6" data-stops="+0 KKO +0 STR" data-weight="90" data-from="2005 0 noanim" data-to="2015 0 noanim" />
+        <path data-line="KKO_STR" class="e2h 8" data-stops="+0 KKO +0 STR" data-weight="80" data-from="2030 0 noanim" />
 
-        <path data-line="FF_KK" class="e2h 18" data-stops="+0 FF +0 KK" data-length="140" data-from="1987 0 noanim" data-to="1988 0 noanim" />
-        <path data-line="FF_KK" class="some 6" data-stops="+0 FF +0 KK" data-length="140" data-from="1988 0 noanim" data-to="2003 0 noanim" />
-        <path data-line="FF_KK" class="e12h 49" data-stops="+0 FF +0 KK" data-length="70" data-from="2003 0 noanim" data-to="2010 0 noanim" />
-        <path data-line="FF_KK" class="e12h 49" data-stops="+0 FF +0 KK" data-length="65" data-from="2010 0 noanim" data-to="2030 0 noanim" />
-        <path data-line="FF_KK" class="e12h 49" data-stops="+0 FF +0 KK" data-length="60" data-from="2030 0 noanim" />
+        <path data-line="FF_KK" class="e2h 18" data-stops="+0 FF +0 KK" data-weight="140" data-from="1987 0 noanim" data-to="1988 0 noanim" />
+        <path data-line="FF_KK" class="some 6" data-stops="+0 FF +0 KK" data-weight="140" data-from="1988 0 noanim" data-to="2003 0 noanim" />
+        <path data-line="FF_KK" class="e12h 49" data-stops="+0 FF +0 KK" data-weight="70" data-from="2003 0 noanim" data-to="2010 0 noanim" />
+        <path data-line="FF_KK" class="e12h 49" data-stops="+0 FF +0 KK" data-weight="65" data-from="2010 0 noanim" data-to="2030 0 noanim" />
+        <path data-line="FF_KK" class="e12h 49" data-stops="+0 FF +0 KK" data-weight="60" data-from="2030 0 noanim" />
 
-        <path data-line="RM_TS" class="e1h 26" data-stops="+0 RM +0 TS" data-length="80" data-from="1987 0 noanim" data-to="1991 0 noanim" />
-        <path data-line="RM_TS" class="e12h 46" data-stops="+0 RM +0 TS" data-length="40" data-from="1991 0 noanim" data-to="2030 0 noanim" />
-        <path data-line="RM_TS" class="e12h 46" data-stops="+0 RM +0 TS" data-length="30" data-from="2030 0 noanim" />
+        <path data-line="RM_TS" class="e1h 26" data-stops="+0 RM +0 TS" data-weight="80" data-from="1987 0 noanim" data-to="1991 0 noanim" />
+        <path data-line="RM_TS" class="e12h 46" data-stops="+0 RM +0 TS" data-weight="40" data-from="1991 0 noanim" data-to="2030 0 noanim" />
+        <path data-line="RM_TS" class="e12h 46" data-stops="+0 RM +0 TS" data-weight="30" data-from="2030 0 noanim" />
 
-        <path data-line="RK_TS" class="e2h 15" data-stops="+0 RK +0 TS" data-length="60" data-from="1987 0 noanim" data-to="1991 0 noanim" />
-        <path data-line="RK_TS" class="e1h 23" data-stops="+0 RK +0 TS" data-length="50" data-from="1991 0 noanim" data-to="1997 0 noanim" />
-        <path data-line="RK_TS" class="e1h 26" data-stops="+0 RK +0 TS" data-length="40" data-from="1997 0 noanim" data-to="2030 0 noanim" />
-        <path data-line="RK_TS" class="e12h 36" data-stops="+0 RK +0 TS" data-length="30" data-from="2030 0 noanim" />
+        <path data-line="RK_TS" class="e2h 15" data-stops="+0 RK +0 TS" data-weight="60" data-from="1987 0 noanim" data-to="1991 0 noanim" />
+        <path data-line="RK_TS" class="e1h 23" data-stops="+0 RK +0 TS" data-weight="50" data-from="1991 0 noanim" data-to="1997 0 noanim" />
+        <path data-line="RK_TS" class="e1h 26" data-stops="+0 RK +0 TS" data-weight="40" data-from="1997 0 noanim" data-to="2030 0 noanim" />
+        <path data-line="RK_TS" class="e12h 36" data-stops="+0 RK +0 TS" data-weight="30" data-from="2030 0 noanim" />
 
-        <path data-line="RM_SSH" class="e1h 20" data-stops="+0 RM +0 SSH" data-length="80" data-from="1987 0 noanim" data-to="2001 0 noanim" />
-        <path data-line="RM_SSH" class="e2h 13" data-stops="+0 RM +0 SSH" data-length="80" data-from="2001 0 noanim" data-to="2020 0 noanim" />
-        <path data-line="RM_SSH" class="e2h 13" data-stops="+0 RM +0 SSH" data-length="70" data-from="2020 0 noanim" />
+        <path data-line="RM_SSH" class="e1h 20" data-stops="+0 RM +0 SSH" data-weight="80" data-from="1987 0 noanim" data-to="2001 0 noanim" />
+        <path data-line="RM_SSH" class="e2h 13" data-stops="+0 RM +0 SSH" data-weight="80" data-from="2001 0 noanim" data-to="2020 0 noanim" />
+        <path data-line="RM_SSH" class="e2h 13" data-stops="+0 RM +0 SSH" data-weight="70" data-from="2020 0 noanim" />
 
-        <path data-line="RK_RM" class="e1h 29" data-stops="+0 RK +0 RM" data-length="25" data-from="1987 0 noanim" data-to="1995 0 noanim" />
-        <path data-line="RK_RM" class="e1h 32" data-stops="+0 RK +0 RM" data-length="20" data-from="1995 0 noanim" data-to="2003 0 noanim" />
-        <path data-line="RK_RM" class="e12h 41" data-stops="+0 RK +0 RM" data-length="20" data-from="2003 0 noanim" />
+        <path data-line="RK_RM" class="e1h 29" data-stops="+0 RK +0 RM" data-weight="25" data-from="1987 0 noanim" data-to="1995 0 noanim" />
+        <path data-line="RK_RM" class="e1h 32" data-stops="+0 RK +0 RM" data-weight="20" data-from="1995 0 noanim" data-to="2003 0 noanim" />
+        <path data-line="RK_RM" class="e12h 41" data-stops="+0 RK +0 RM" data-weight="20" data-from="2003 0 noanim" />
 
-        <path data-line="RK_RB" class="e1h 28" data-stops="+0 RK +0 RB" data-length="100" data-from="1987 0 noanim" data-to="2013 0 noanim" />
-        <path data-line="RK_RB" class="e12h 48" data-stops="+0 RK +0 RB" data-length="95" data-from="2013 0 noanim" data-to="2030 0 noanim" />
-        <path data-line="RK_RB" class="e12h 48" data-stops="+0 RK +0 RB" data-length="75" data-from="2030 0 noanim"  />
+        <path data-line="RK_RB" class="e1h 28" data-stops="+0 RK +0 RB" data-weight="100" data-from="1987 0 noanim" data-to="2013 0 noanim" />
+        <path data-line="RK_RB" class="e12h 48" data-stops="+0 RK +0 RB" data-weight="95" data-from="2013 0 noanim" data-to="2030 0 noanim" />
+        <path data-line="RK_RB" class="e12h 48" data-stops="+0 RK +0 RB" data-weight="75" data-from="2030 0 noanim"  />
 
-        <path data-line="TS_RSI" class="some 8" data-stops="+0 TS +0 RSI" data-length="120" data-from="1987 0 noanim" data-to="1999 0 noanim" />
-        <path data-line="TS_RSI" class="e2h 9" data-stops="+0 TS +0 RSI" data-length="105" data-from="1999 0 noanim" data-to="2010 0 noanim" />
-        <path data-line="TS_RSI" class="some 8" data-stops="+0 TS +0 RSI" data-length="110" data-from="2010 0 noanim" data-to="2014 0 noanim" />
-        <path data-line="TS_RSI" class="some 8" data-stops="+0 TS +0 RSI" data-length="115" data-from="2014 0 noanim" data-to="2018 0 noanim" />
-        <path data-line="TS_RSI" class="e2h 17" data-stops="+0 TS +0 RSI" data-length="115" data-from="2018 0 noanim" data-to="2030 0 noanim" />
-        <path data-line="TS_RSI" class="e2h 18" data-stops="+0 TS +0 RSI" data-length="105" data-from="2030 0 noanim" />
+        <path data-line="TS_RSI" class="some 8" data-stops="+0 TS +0 RSI" data-weight="120" data-from="1987 0 noanim" data-to="1999 0 noanim" />
+        <path data-line="TS_RSI" class="e2h 9" data-stops="+0 TS +0 RSI" data-weight="105" data-from="1999 0 noanim" data-to="2010 0 noanim" />
+        <path data-line="TS_RSI" class="some 8" data-stops="+0 TS +0 RSI" data-weight="110" data-from="2010 0 noanim" data-to="2014 0 noanim" />
+        <path data-line="TS_RSI" class="some 8" data-stops="+0 TS +0 RSI" data-weight="115" data-from="2014 0 noanim" data-to="2018 0 noanim" />
+        <path data-line="TS_RSI" class="e2h 17" data-stops="+0 TS +0 RSI" data-weight="115" data-from="2018 0 noanim" data-to="2030 0 noanim" />
+        <path data-line="TS_RSI" class="e2h 18" data-stops="+0 TS +0 RSI" data-weight="105" data-from="2030 0 noanim" />
 
-        <path data-line="TS_TU" class="e12h 40" data-stops="+0 TS +0 TU" data-length="55" data-from="1987 0 noanim" data-to="2030 0 noanim" />
-        <path data-line="TS_TU" class="e12h 63" data-stops="+0 TS +0 TU" data-length="30" data-from="2030 0 noanim" />
+        <path data-line="TS_TU" class="e12h 40" data-stops="+0 TS +0 TU" data-weight="55" data-from="1987 0 noanim" data-to="2030 0 noanim" />
+        <path data-line="TS_TU" class="e12h 63" data-stops="+0 TS +0 TU" data-weight="30" data-from="2030 0 noanim" />
 
-        <path data-line="MA_TU" class="e12h 12" data-stops="+0 MA +0 TU" data-length="40" data-from="1987 0 noanim" />
+        <path data-line="MA_TU" class="e12h 12" data-stops="+0 MA +0 TU" data-weight="40" data-from="1987 0 noanim" />
 
-        <path data-line="MLI_TU" class="some 4" data-stops="+0 MLI +0 TU" data-length="110" data-from="1987 0 noanim" data-to="1992 0 noanim"/>
-        <path data-line="MLI_TU" class="some 4" data-stops="+0 MLI +0 TU" data-length="90" data-from="1992 0 noanim" data-to="1995 0 noanim"/>
-        <path data-line="MLI_TU" class="e2h 9" data-stops="+0 MLI +0 TU" data-length="100" data-from="1995 0 noanim" data-to="2001 0 noanim"/>
-        <path data-line="MLI_TU" class="some 2" data-stops="+0 MLI +0 TU" data-length="100" data-from="2001 0 noanim"/>
+        <path data-line="MLI_TU" class="some 4" data-stops="+0 MLI +0 TU" data-weight="110" data-from="1987 0 noanim" data-to="1992 0 noanim"/>
+        <path data-line="MLI_TU" class="some 4" data-stops="+0 MLI +0 TU" data-weight="90" data-from="1992 0 noanim" data-to="1995 0 noanim"/>
+        <path data-line="MLI_TU" class="e2h 9" data-stops="+0 MLI +0 TU" data-weight="100" data-from="1995 0 noanim" data-to="2001 0 noanim"/>
+        <path data-line="MLI_TU" class="some 2" data-stops="+0 MLI +0 TU" data-weight="100" data-from="2001 0 noanim"/>
 
-        <path data-line="MH_MLI" class="some 2" data-stops="+0 MH +0 MLI" data-length="140" data-from="1987 0 noanim"/>
+        <path data-line="MH_MLI" class="some 2" data-stops="+0 MH +0 MLI" data-weight="140" data-from="1987 0 noanim"/>
 
-        <path data-line="MA_MH" class="e12h 12" data-stops="+0 MA +0 MH" data-length="30" data-from="1987 0 noanim" />
+        <path data-line="MA_MH" class="e12h 12" data-stops="+0 MA +0 MH" data-weight="30" data-from="1987 0 noanim" />
 
-        <path data-line="MGP_MH" class="some 2" data-stops="+0 MGP +0 MH" data-length="75" data-from="1987 0 noanim" data-to="1991 0 noanim" />
-        <path data-line="MGP_MH" class="some 4" data-stops="+0 MGP +0 MH" data-length="80" data-from="1991 0 noanim" data-to="1998 0 noanim" />
-        <path data-line="MGP_MH" class="some 4" data-stops="+0 MGP +0 MH" data-length="85" data-from="1998 0 noanim" data-to="2005 0 noanim" />
-        <path data-line="MGP_MH" class="some 4" data-stops="+0 MGP +0 MH" data-length="90" data-from="2005 0 noanim" data-to="2030 0 noanim" />
-        <path data-line="MGP_MH" class="some 4" data-stops="+0 MGP +0 MH" data-length="75" data-from="2030 0 noanim" />
+        <path data-line="MGP_MH" class="some 2" data-stops="+0 MGP +0 MH" data-weight="75" data-from="1987 0 noanim" data-to="1991 0 noanim" />
+        <path data-line="MGP_MH" class="some 4" data-stops="+0 MGP +0 MH" data-weight="80" data-from="1991 0 noanim" data-to="1998 0 noanim" />
+        <path data-line="MGP_MH" class="some 4" data-stops="+0 MGP +0 MH" data-weight="85" data-from="1998 0 noanim" data-to="2005 0 noanim" />
+        <path data-line="MGP_MH" class="some 4" data-stops="+0 MGP +0 MH" data-weight="90" data-from="2005 0 noanim" data-to="2030 0 noanim" />
+        <path data-line="MGP_MH" class="some 4" data-stops="+0 MGP +0 MH" data-weight="75" data-from="2030 0 noanim" />
 
-        <path data-line="MH_NN" class="e1h 23" data-stops="+0 MH +0 NN" data-length="110" data-from="1987 0 noanim" data-to="2007 0 noanim" />
-        <path data-line="MH_NN" class="e12h 65" data-stops="+0 MH +0 NN" data-length="60" data-from="2007 0 noanim" />
+        <path data-line="MH_NN" class="e1h 23" data-stops="+0 MH +0 NN" data-weight="110" data-from="1987 0 noanim" data-to="2007 0 noanim" />
+        <path data-line="MH_NN" class="e12h 65" data-stops="+0 MH +0 NN" data-weight="60" data-from="2007 0 noanim" />
 
-        <path data-line="MH_NRH" class="some 6" data-stops="+0 MH +0 NRH" data-length="80" data-from="1987 0 noanim" data-to="1990 0 noanim" />
-        <path data-line="MH_NRH" class="e2h 9" data-stops="+0 MH +0 NRH" data-length="80" data-from="1990 0 noanim" data-to="1997 0 noanim" />
-        <path data-line="MH_NRH" class="e2h 12" data-stops="+0 MH +0 NRH" data-length="90" data-from="1997 0 noanim" data-to="2001 0 noanim" />
-        <path data-line="MH_NRH" class="e2h 18" data-stops="+0 MH +0 NRH" data-length="80" data-from="2030 0 noanim" />
+        <path data-line="MH_NRH" class="some 6" data-stops="+0 MH +0 NRH" data-weight="80" data-from="1987 0 noanim" data-to="1990 0 noanim" />
+        <path data-line="MH_NRH" class="e2h 9" data-stops="+0 MH +0 NRH" data-weight="80" data-from="1990 0 noanim" data-to="1997 0 noanim" />
+        <path data-line="MH_NRH" class="e2h 12" data-stops="+0 MH +0 NRH" data-weight="90" data-from="1997 0 noanim" data-to="2001 0 noanim" />
+        <path data-line="MH_NRH" class="e2h 18" data-stops="+0 MH +0 NRH" data-weight="80" data-from="2030 0 noanim" />
 
-        <path data-line="NHO_NRH" class="some 4" data-stops="+0 NHO +0 NRH" data-length="130" data-from="1987 0 noanim" data-to="1990 0 noanim" />
-        <path data-line="NHO_NRH" class="e2h 9" data-stops="+0 NHO +0 NRH" data-length="130" data-from="1990 0 noanim" data-to="2001 0 noanim" />
-        <path data-line="NHO_NRH" class="e2h 9" data-stops="+0 NHO +0 NRH" data-length="110" data-from="2030 0 noanim"  />
+        <path data-line="NHO_NRH" class="some 4" data-stops="+0 NHO +0 NRH" data-weight="130" data-from="1987 0 noanim" data-to="1990 0 noanim" />
+        <path data-line="NHO_NRH" class="e2h 9" data-stops="+0 NHO +0 NRH" data-weight="130" data-from="1990 0 noanim" data-to="2001 0 noanim" />
+        <path data-line="NHO_NRH" class="e2h 9" data-stops="+0 NHO +0 NRH" data-weight="110" data-from="2030 0 noanim"  />
 
-        <path data-line="MA_NN" class="e2h 16" data-stops="+0 MA +0 NN" data-length="70" data-from="1987 0 noanim" data-to="1999 0 noanim" />
-        <path data-line="MA_NN" class="e1h 21" data-stops="+0 MA +0 NN" data-length="70" data-from="1999 0 noanim" data-to="2001 0 noanim" />
-        <path data-line="MA_NN" class="e1h 21" data-stops="+0 MA +0 NN" data-length="60" data-from="2001 0 noanim" data-to="2007 0 noanim" />
-        <path data-line="MA_NN" class="e2h 12" data-stops="+0 MA +0 NN" data-length="60" data-from="2007 0 noanim" data-to="2011 0 noanim" />
-        <path data-line="MA_NN" class="e2h 12" data-stops="+0 MA +0 NN" data-length="70" data-from="2011 0 noanim" />
+        <path data-line="MA_NN" class="e2h 16" data-stops="+0 MA +0 NN" data-weight="70" data-from="1987 0 noanim" data-to="1999 0 noanim" />
+        <path data-line="MA_NN" class="e1h 21" data-stops="+0 MA +0 NN" data-weight="70" data-from="1999 0 noanim" data-to="2001 0 noanim" />
+        <path data-line="MA_NN" class="e1h 21" data-stops="+0 MA +0 NN" data-weight="60" data-from="2001 0 noanim" data-to="2007 0 noanim" />
+        <path data-line="MA_NN" class="e2h 12" data-stops="+0 MA +0 NN" data-weight="60" data-from="2007 0 noanim" data-to="2011 0 noanim" />
+        <path data-line="MA_NN" class="e2h 12" data-stops="+0 MA +0 NN" data-weight="70" data-from="2011 0 noanim" />
         
-        <path data-line="NRH_NPA" class="e2h 11" data-stops="+0 NRH +0 NPA" data-length="60" data-from="1987 0 noanim" data-to="2001 0 noanim" />
-        <path data-line="NRH_NPA" class="e2h 12" data-stops="+0 NRH +0 NPA" data-length="70" data-from="2001 0 noanim" data-to="2008 0 noanim" />
-        <path data-line="NRH_NPA" class="e2h 12" data-stops="+0 NRH +0 NPA" data-length="60" data-from="2008 0 noanim" />
+        <path data-line="NRH_NPA" class="e2h 11" data-stops="+0 NRH +0 NPA" data-weight="60" data-from="1987 0 noanim" data-to="2001 0 noanim" />
+        <path data-line="NRH_NPA" class="e2h 12" data-stops="+0 NRH +0 NPA" data-weight="70" data-from="2001 0 noanim" data-to="2008 0 noanim" />
+        <path data-line="NRH_NPA" class="e2h 12" data-stops="+0 NRH +0 NPA" data-weight="60" data-from="2008 0 noanim" />
 
-        <path data-line="NN_NRH" class="e2h 11" data-stops="+0 NN +0 NRH" data-length="60" data-from="1987 0 noanim" />
+        <path data-line="NN_NRH" class="e2h 11" data-stops="+0 NN +0 NRH" data-weight="60" data-from="1987 0 noanim" />
 
-        <path data-line="NN_TS" class="some 8" data-stops="+0 NN +0 TS" data-length="140" data-from="1987 0 noanim" data-to="1990 0 noanim" />
-        <path data-line="NN_TS" class="e2h 12" data-stops="+0 NN +0 TS" data-length="130" data-from="1990 0 noanim" data-to="2015 0 noanim" />
-        <path data-line="NN_TS" class="some 8" data-stops="+0 NN +0 TS" data-length="135" data-from="2015 0 noanim" data-to="2020 0 noanim" />
-        <path data-line="NN_TS" class="some 8" data-stops="+0 NN +0 TS" data-length="130" data-from="2020 0 noanim" data-to="2030 0 noanim" />
-        <path data-line="NN_TS" class="e1h 35" data-stops="+0 NN +0 TS" data-length="140" data-from="2030 0 noanim" />
+        <path data-line="NN_TS" class="some 8" data-stops="+0 NN +0 TS" data-weight="140" data-from="1987 0 noanim" data-to="1990 0 noanim" />
+        <path data-line="NN_TS" class="e2h 12" data-stops="+0 NN +0 TS" data-weight="130" data-from="1990 0 noanim" data-to="2015 0 noanim" />
+        <path data-line="NN_TS" class="some 8" data-stops="+0 NN +0 TS" data-weight="135" data-from="2015 0 noanim" data-to="2020 0 noanim" />
+        <path data-line="NN_TS" class="some 8" data-stops="+0 NN +0 TS" data-weight="130" data-from="2020 0 noanim" data-to="2030 0 noanim" />
+        <path data-line="NN_TS" class="e1h 35" data-stops="+0 NN +0 TS" data-weight="140" data-from="2030 0 noanim" />
 
-        <path data-line="NN_NWH" class="e1h 29" data-stops="+0 NN +0 NWH" data-length="55" data-from="1987 0 noanim" data-to="1999 0 noanim" />
-        <path data-line="NN_NWH" class="e1h 35" data-stops="+0 NN +0 NWH" data-length="50" data-from="1999 0 noanim" data-to="2003 0 noanim" />
-        <path data-line="NN_NWH" class="e12h 38" data-stops="+0 NN +0 NWH" data-length="50" data-from="2003 0 noanim" data-to="2030 0 noanim" />
-        <path data-line="NN_NWH" class="e12h 79" data-stops="+0 NN +0 NWH" data-length="30" data-from="2030 0 noanim" />
+        <path data-line="NN_NWH" class="e1h 29" data-stops="+0 NN +0 NWH" data-weight="55" data-from="1987 0 noanim" data-to="1999 0 noanim" />
+        <path data-line="NN_NWH" class="e1h 35" data-stops="+0 NN +0 NWH" data-weight="50" data-from="1999 0 noanim" data-to="2003 0 noanim" />
+        <path data-line="NN_NWH" class="e12h 38" data-stops="+0 NN +0 NWH" data-weight="50" data-from="2003 0 noanim" data-to="2030 0 noanim" />
+        <path data-line="NN_NWH" class="e12h 79" data-stops="+0 NN +0 NWH" data-weight="30" data-from="2030 0 noanim" />
 
-        <path data-line="NN_UJP" class="some 7" data-stops="+0 NN +0 UJP" data-length="190" data-from="1990 0 noanim" data-to="1992 0 noanim" />
-        <path data-line="NN_UJP" class="e2h 10" data-stops="+0 NN +0 UJP" data-length="170" data-from="1992 0 noanim" data-to="1995 0 noanim" />
-        <path data-line="NN_UJP" class="e2h 10" data-stops="+0 NN +0 UJP" data-length="150" data-from="1995 0 noanim" data-to="2000 0 noanim" />
-        <path data-line="NN_UJP" class="e2h 10" data-stops="+0 NN +0 UJP" data-length="130" data-from="2000 0 noanim" data-to="2007 0 noanim" />
-        <path data-line="NN_UJP" class="e1h 27" data-stops="+0 NN +0 UJP" data-length="130" data-from="2007 0 noanim" data-to="2011 0 noanim" />
-        <path data-line="NN_UJP" class="e1h 27" data-stops="+0 NN +0 UJP" data-length="140" data-from="2011 0 noanim" data-to="2016 0 noanim" />
-        <path data-line="NN_UJP" class="e1h 21" data-stops="+0 NN +0 UJP" data-length="150" data-from="2016 0 noanim" data-to="2018 0 noanim" />
-        <path data-line="NN_UJP" class="some 2" data-stops="+0 NN +0 UJP" data-length="160" data-from="2018 0 noanim"/>
+        <path data-line="NN_UJP" class="some 7" data-stops="+0 NN +0 UJP" data-weight="190" data-from="1990 0 noanim" data-to="1992 0 noanim" />
+        <path data-line="NN_UJP" class="e2h 10" data-stops="+0 NN +0 UJP" data-weight="170" data-from="1992 0 noanim" data-to="1995 0 noanim" />
+        <path data-line="NN_UJP" class="e2h 10" data-stops="+0 NN +0 UJP" data-weight="150" data-from="1995 0 noanim" data-to="2000 0 noanim" />
+        <path data-line="NN_UJP" class="e2h 10" data-stops="+0 NN +0 UJP" data-weight="130" data-from="2000 0 noanim" data-to="2007 0 noanim" />
+        <path data-line="NN_UJP" class="e1h 27" data-stops="+0 NN +0 UJP" data-weight="130" data-from="2007 0 noanim" data-to="2011 0 noanim" />
+        <path data-line="NN_UJP" class="e1h 27" data-stops="+0 NN +0 UJP" data-weight="140" data-from="2011 0 noanim" data-to="2016 0 noanim" />
+        <path data-line="NN_UJP" class="e1h 21" data-stops="+0 NN +0 UJP" data-weight="150" data-from="2016 0 noanim" data-to="2018 0 noanim" />
+        <path data-line="NN_UJP" class="some 2" data-stops="+0 NN +0 UJP" data-weight="160" data-from="2018 0 noanim"/>
 
         <!-- secret connections via NWH -->
-        <path data-line="NN_UE" class="e1h 24" data-stops="+0 NN +0 UE" data-length="70" data-from="2018 0 noanim" data-to="2030 0 noanim" />
-        <path data-line="NN_UE" class="e12h 45" data-stops="+0 NN +0 UE" data-length="60" data-from="2030 0 noanim" />
+        <path data-line="NN_UE" class="e1h 24" data-stops="+0 NN +0 UE" data-weight="70" data-from="2018 0 noanim" data-to="2030 0 noanim" />
+        <path data-line="NN_UE" class="e12h 45" data-stops="+0 NN +0 UE" data-weight="60" data-from="2030 0 noanim" />
 
-        <path data-line="LL_UJP" class="some 1" data-stops="+0 LL +0 UJP" data-length="90" data-from="1987 0 noanim" data-to="1990 0 noanim" />
-        <path data-line="LL_UJP" class="e2h 9" data-stops="+0 LL +0 UJP" data-length="90" data-from="1990 0 noanim" data-to="1991 0 noanim" />
-        <path data-line="LL_UJP" class="some 3" data-stops="+0 LL +0 UJP" data-length="70" data-from="1991 0 noanim" data-to="1998 0 noanim" />
-        <path data-line="LL_UJP" class="e2h 12" data-stops="+0 LL +0 UJP" data-length="70" data-from="1998 0 noanim" data-to="2000 0 noanim" />
-        <path data-line="LL_UJP" class="e2h 9" data-stops="+0 LL +0 UJP" data-length="60" data-from="2000 0 noanim" data-to="2007 0 noanim" />
-        <path data-line="LL_UJP" class="e1h 22" data-stops="+0 LL +0 UJP" data-length="50" data-from="2007 0 noanim" data-to="2011 0 noanim" />
-        <path data-line="LL_UJP" class="e2h 14" data-stops="+0 LL +0 UJP" data-length="60" data-from="2007 0 noanim" data-to="2016 0 noanim" />
-        <path data-line="LL_UJP" class="e1h 21" data-stops="+0 LL +0 UJP" data-length="60" data-from="2016 0 noanim" data-to="2018 0 noanim" />
-        <path data-line="LL_UJP" class="some 3" data-stops="+0 LL +0 UJP" data-length="70" data-from="2018 0 noanim" />
+        <path data-line="LL_UJP" class="some 1" data-stops="+0 LL +0 UJP" data-weight="90" data-from="1987 0 noanim" data-to="1990 0 noanim" />
+        <path data-line="LL_UJP" class="e2h 9" data-stops="+0 LL +0 UJP" data-weight="90" data-from="1990 0 noanim" data-to="1991 0 noanim" />
+        <path data-line="LL_UJP" class="some 3" data-stops="+0 LL +0 UJP" data-weight="70" data-from="1991 0 noanim" data-to="1998 0 noanim" />
+        <path data-line="LL_UJP" class="e2h 12" data-stops="+0 LL +0 UJP" data-weight="70" data-from="1998 0 noanim" data-to="2000 0 noanim" />
+        <path data-line="LL_UJP" class="e2h 9" data-stops="+0 LL +0 UJP" data-weight="60" data-from="2000 0 noanim" data-to="2007 0 noanim" />
+        <path data-line="LL_UJP" class="e1h 22" data-stops="+0 LL +0 UJP" data-weight="50" data-from="2007 0 noanim" data-to="2011 0 noanim" />
+        <path data-line="LL_UJP" class="e2h 14" data-stops="+0 LL +0 UJP" data-weight="60" data-from="2007 0 noanim" data-to="2016 0 noanim" />
+        <path data-line="LL_UJP" class="e1h 21" data-stops="+0 LL +0 UJP" data-weight="60" data-from="2016 0 noanim" data-to="2018 0 noanim" />
+        <path data-line="LL_UJP" class="some 3" data-stops="+0 LL +0 UJP" data-weight="70" data-from="2018 0 noanim" />
 
-        <path data-line="UE_UJP" class="some 7" data-stops="+0 UE +0 UJP" data-length="40" data-from="1987 0 noanim" data-to="1997 0 noanim" />
-        <path data-line="UE_UJP" class="some 3" data-stops="+0 UE +0 UJP" data-length="30" data-from="2019 0 noanim" />
+        <path data-line="UE_UJP" class="some 7" data-stops="+0 UE +0 UJP" data-weight="40" data-from="1987 0 noanim" data-to="1997 0 noanim" />
+        <path data-line="UE_UJP" class="some 3" data-stops="+0 UE +0 UJP" data-weight="30" data-from="2019 0 noanim" />
 
-        <path data-line="FKW_UE" class="some 1" data-stops="+0 FKW +0 UE" data-length="210" data-from="1987 0 noanim" data-to="1990 0 noanim" />
-        <path data-line="FKW_UE" class="some 8" data-stops="+0 FKW +0 UE" data-length="160" data-from="1990 0 noanim" data-to="1992 0 noanim" />
-        <path data-line="FKW_UE" class="some 8" data-stops="+0 FKW +0 UE" data-length="130" data-from="1992 0 noanim" data-to="1995 0 noanim" />
-        <path data-line="FKW_UE" class="some 8" data-stops="+0 FKW +0 UE" data-length="100" data-from="1995 0 noanim" data-to="2003 0 noanim" />
-        <path data-line="FKW_UE" class="some 8" data-stops="+0 FKW +0 UE" data-length="90" data-from="2003 0 noanim" data-to="2030 0 noanim" />
-        <path data-line="FKW_UE" class="e2h 9" data-stops="+0 FKW +0 UE" data-length="100" data-from="2030 0 noanim" />
+        <path data-line="FKW_UE" class="some 1" data-stops="+0 FKW +0 UE" data-weight="210" data-from="1987 0 noanim" data-to="1990 0 noanim" />
+        <path data-line="FKW_UE" class="some 8" data-stops="+0 FKW +0 UE" data-weight="160" data-from="1990 0 noanim" data-to="1992 0 noanim" />
+        <path data-line="FKW_UE" class="some 8" data-stops="+0 FKW +0 UE" data-weight="130" data-from="1992 0 noanim" data-to="1995 0 noanim" />
+        <path data-line="FKW_UE" class="some 8" data-stops="+0 FKW +0 UE" data-weight="100" data-from="1995 0 noanim" data-to="2003 0 noanim" />
+        <path data-line="FKW_UE" class="some 8" data-stops="+0 FKW +0 UE" data-weight="90" data-from="2003 0 noanim" data-to="2030 0 noanim" />
+        <path data-line="FKW_UE" class="e2h 9" data-stops="+0 FKW +0 UE" data-weight="100" data-from="2030 0 noanim" />
 
-        <path data-line="FFU_UE" class="some 4" data-stops="+0 FFU +0 UE" data-length="190" data-from="1987 0 noanim" data-to="1990 0 noanim" />
-        <path data-line="FFU_UE" class="e2h 15" data-stops="+0 FFU +0 UE" data-length="150" data-from="1990 0 noanim" data-to="1992 0 noanim" />
-        <path data-line="FFU_UE" class="e2h 15" data-stops="+0 FFU +0 UE" data-length="130" data-from="1992 0 noanim" data-to="1995 0 noanim" />
-        <path data-line="FFU_UE" class="e1h 20" data-stops="+0 FFU +0 UE" data-length="80" data-from="1995 0 noanim" data-to="2030 0 noanim" />
-        <path data-line="FFU_UE" class="e12h 20" data-stops="+0 FFU +0 UE" data-length="60" data-from="2030 0 noanim" />
+        <path data-line="FFU_UE" class="some 4" data-stops="+0 FFU +0 UE" data-weight="190" data-from="1987 0 noanim" data-to="1990 0 noanim" />
+        <path data-line="FFU_UE" class="e2h 15" data-stops="+0 FFU +0 UE" data-weight="150" data-from="1990 0 noanim" data-to="1992 0 noanim" />
+        <path data-line="FFU_UE" class="e2h 15" data-stops="+0 FFU +0 UE" data-weight="130" data-from="1992 0 noanim" data-to="1995 0 noanim" />
+        <path data-line="FFU_UE" class="e1h 20" data-stops="+0 FFU +0 UE" data-weight="80" data-from="1995 0 noanim" data-to="2030 0 noanim" />
+        <path data-line="FFU_UE" class="e12h 20" data-stops="+0 FFU +0 UE" data-weight="60" data-from="2030 0 noanim" />
         
-        <path data-line="LL_UE" class="e2h 18" data-stops="+0 LL +0 UE" data-length="90" data-from="1987 0 noanim" data-to="1992 0 noanim" />
-        <path data-line="LL_UE" class="e2h 18" data-stops="+0 LL +0 UE" data-length="75" data-from="1992 0 noanim" data-to="2000 0 noanim" />
-        <path data-line="LL_UE" class="e2h 17" data-stops="+0 LL +0 UE" data-length="70" data-from="2000 0 noanim" data-to="2004 0 noanim" />
-        <path data-line="LL_UE" class="e1h 20" data-stops="+0 LL +0 UE" data-length="70" data-from="2004 0 noanim" data-to="2016 0 noanim" />
-        <path data-line="LL_UE" class="e1h 33" data-stops="+0 LL +0 UE" data-length="40" data-from="2016 0 noanim" data-to="2030 0 noanim" />
-        <path data-line="LL_UE" class="e12h 46" data-stops="+0 LL +0 UE" data-length="40" data-from="2030 0 noanim" />
+        <path data-line="LL_UE" class="e2h 18" data-stops="+0 LL +0 UE" data-weight="90" data-from="1987 0 noanim" data-to="1992 0 noanim" />
+        <path data-line="LL_UE" class="e2h 18" data-stops="+0 LL +0 UE" data-weight="75" data-from="1992 0 noanim" data-to="2000 0 noanim" />
+        <path data-line="LL_UE" class="e2h 17" data-stops="+0 LL +0 UE" data-weight="70" data-from="2000 0 noanim" data-to="2004 0 noanim" />
+        <path data-line="LL_UE" class="e1h 20" data-stops="+0 LL +0 UE" data-weight="70" data-from="2004 0 noanim" data-to="2016 0 noanim" />
+        <path data-line="LL_UE" class="e1h 33" data-stops="+0 LL +0 UE" data-weight="40" data-from="2016 0 noanim" data-to="2030 0 noanim" />
+        <path data-line="LL_UE" class="e12h 46" data-stops="+0 LL +0 UE" data-weight="40" data-from="2030 0 noanim" />
 
-        <path data-line="LHA_UE" class="e1h 19" data-stops="+0 LHA +0 UE" data-length="80" data-from="1987 0 noanim" data-to="1992 0 noanim" />
-        <path data-line="LHA_UE" class="e2h 12" data-stops="+0 LHA +0 UE" data-length="80" data-from="1992 0 noanim" data-to="2016 0 noanim" />
-        <path data-line="LHA_UE" class="e2h 15" data-stops="+0 LHA +0 UE" data-length="30" data-from="2016 0 noanim" data-to="2018 0 noanim" />
-        <path data-line="LHA_UE" class="e1h 22" data-stops="+0 LHA +0 UE" data-length="30" data-from="2018 0 noanim" data-to="2030 0 noanim" />
-        <path data-line="LHA_UE" class="e12h 44" data-stops="+0 LHA +0 UE" data-length="30" data-from="2030 0 noanim" />
+        <path data-line="LHA_UE" class="e1h 19" data-stops="+0 LHA +0 UE" data-weight="80" data-from="1987 0 noanim" data-to="1992 0 noanim" />
+        <path data-line="LHA_UE" class="e2h 12" data-stops="+0 LHA +0 UE" data-weight="80" data-from="1992 0 noanim" data-to="2016 0 noanim" />
+        <path data-line="LHA_UE" class="e2h 15" data-stops="+0 LHA +0 UE" data-weight="30" data-from="2016 0 noanim" data-to="2018 0 noanim" />
+        <path data-line="LHA_UE" class="e1h 22" data-stops="+0 LHA +0 UE" data-weight="30" data-from="2018 0 noanim" data-to="2030 0 noanim" />
+        <path data-line="LHA_UE" class="e12h 44" data-stops="+0 LHA +0 UE" data-weight="30" data-from="2030 0 noanim" />
 
-        <path data-line="LHA_LL" class="e1h 21" data-stops="+0 LHA +0 LL" data-length="30" data-from="1987 0 noanim" data-to="2005 0 noanim" />
-        <path data-line="LHA_LL" class="e1h 21" data-stops="+0 LHA +0 LL" data-length="20" data-from="2005 0 noanim" />
+        <path data-line="LHA_LL" class="e1h 21" data-stops="+0 LHA +0 LL" data-weight="30" data-from="1987 0 noanim" data-to="2005 0 noanim" />
+        <path data-line="LHA_LL" class="e1h 21" data-stops="+0 LHA +0 LL" data-weight="20" data-from="2005 0 noanim" />
 
-        <path data-line="BL_LHA" class="e2h 11" data-stops="+0 BL +0 LHA" data-length="120" data-from="1987 0 noanim" data-to="1991 0 noanim" />
-        <path data-line="BL_LHA" class="e2h 13" data-stops="+0 BL +0 LHA" data-length="140" data-from="1991 0 noanim" data-to="1995 0 noanim" />
-        <path data-line="BL_LHA" class="e2h 13" data-stops="+0 BL +0 LHA" data-length="120" data-from="1995 0 noanim" data-to="2006 0 noanim" />
-        <path data-line="BL_LHA" class="e2h 13" data-stops="+0 BL +0 LHA" data-length="80" data-from="2006 0 noanim" data-to="2016 0 noanim" />
-        <path data-line="BL_LHA" class="e2h 13" data-stops="+0 BL +0 LHA" data-length="70" data-from="2016 0 noanim" data-to="2018 0 noanim" />
-        <path data-line="BL_LHA" class="e1h 22" data-stops="+0 BL +0 LHA" data-length="70" data-from="2018 0 noanim" data-to="2030 0 noanim" />
-        <path data-line="BL_LHA" class="e12h 43" data-stops="+0 BL +0 LHA" data-length="70" data-from="2030 0 noanim" />
+        <path data-line="BL_LHA" class="e2h 11" data-stops="+0 BL +0 LHA" data-weight="120" data-from="1987 0 noanim" data-to="1991 0 noanim" />
+        <path data-line="BL_LHA" class="e2h 13" data-stops="+0 BL +0 LHA" data-weight="140" data-from="1991 0 noanim" data-to="1995 0 noanim" />
+        <path data-line="BL_LHA" class="e2h 13" data-stops="+0 BL +0 LHA" data-weight="120" data-from="1995 0 noanim" data-to="2006 0 noanim" />
+        <path data-line="BL_LHA" class="e2h 13" data-stops="+0 BL +0 LHA" data-weight="80" data-from="2006 0 noanim" data-to="2016 0 noanim" />
+        <path data-line="BL_LHA" class="e2h 13" data-stops="+0 BL +0 LHA" data-weight="70" data-from="2016 0 noanim" data-to="2018 0 noanim" />
+        <path data-line="BL_LHA" class="e1h 22" data-stops="+0 BL +0 LHA" data-weight="70" data-from="2018 0 noanim" data-to="2030 0 noanim" />
+        <path data-line="BL_LHA" class="e12h 43" data-stops="+0 BL +0 LHA" data-weight="70" data-from="2030 0 noanim" />
 
-        <path data-line="BL_LL" class="e2h 14" data-stops="+0 BL +0 LL" data-length="130" data-from="1987 0 noanim" data-to="1991 0 noanim" />
-        <path data-line="BL_LL" class="e2h 11" data-stops="+0 BL +0 LL" data-length="150" data-from="1991 0 noanim" data-to="1994 0 noanim" />
-        <path data-line="BL_LL" class="e2h 5" data-stops="+0 BL +0 LL" data-length="120" data-from="1994 0 noanim" data-to="2003 0 noanim" />
-        <path data-line="BL_LL" class="e2h 5" data-stops="+0 BL +0 LL" data-length="105" data-from="2003 0 noanim" data-to="2006 0 noanim" />
-        <path data-line="BL_LL" class="e1h 31" data-stops="+0 BL +0 LL" data-length="70" data-from="2006 0 noanim" data-to="2030 0 noanim" />
-        <path data-line="BL_LL" class="e12h 47" data-stops="+0 BL +0 LL" data-length="70" data-from="2030 0 noanim" />
+        <path data-line="BL_LL" class="e2h 14" data-stops="+0 BL +0 LL" data-weight="130" data-from="1987 0 noanim" data-to="1991 0 noanim" />
+        <path data-line="BL_LL" class="e2h 11" data-stops="+0 BL +0 LL" data-weight="150" data-from="1991 0 noanim" data-to="1994 0 noanim" />
+        <path data-line="BL_LL" class="e2h 5" data-stops="+0 BL +0 LL" data-weight="120" data-from="1994 0 noanim" data-to="2003 0 noanim" />
+        <path data-line="BL_LL" class="e2h 5" data-stops="+0 BL +0 LL" data-weight="105" data-from="2003 0 noanim" data-to="2006 0 noanim" />
+        <path data-line="BL_LL" class="e1h 31" data-stops="+0 BL +0 LL" data-weight="70" data-from="2006 0 noanim" data-to="2030 0 noanim" />
+        <path data-line="BL_LL" class="e12h 47" data-stops="+0 BL +0 LL" data-weight="70" data-from="2030 0 noanim" />
 
-        <path data-line="DH_LL" class="e1h 23" data-stops="+0 DH +0 LL" data-length="90" data-from="1987 0 noanim" data-to="1990 0 noanim" />
-        <path data-line="DH_LL" class="e1h 22" data-stops="+0 DH +0 LL" data-length="100" data-from="1990 0 noanim" data-to="1992 0 noanim" />
-        <path data-line="DH_LL" class="e1h 22" data-stops="+0 DH +0 LL" data-length="80" data-from="1992 0 noanim" data-to="2000 0 noanim" />
-        <path data-line="DH_LL" class="e1h 22" data-stops="+0 DH +0 LL" data-length="70" data-from="2000 0 noanim" />
+        <path data-line="DH_LL" class="e1h 23" data-stops="+0 DH +0 LL" data-weight="90" data-from="1987 0 noanim" data-to="1990 0 noanim" />
+        <path data-line="DH_LL" class="e1h 22" data-stops="+0 DH +0 LL" data-weight="100" data-from="1990 0 noanim" data-to="1992 0 noanim" />
+        <path data-line="DH_LL" class="e1h 22" data-stops="+0 DH +0 LL" data-weight="80" data-from="1992 0 noanim" data-to="2000 0 noanim" />
+        <path data-line="DH_LL" class="e1h 22" data-stops="+0 DH +0 LL" data-weight="70" data-from="2000 0 noanim" />
 
-        <path data-line="BL_DH" class="e1h 23" data-stops="+0 BL +0 DH" data-length="140" data-from="1987 0 noanim" data-to="1988 0 noanim" />
-        <path data-line="BL_DH" class="e1h 23" data-stops="+0 BL +0 DH" data-length="160" data-from="1988 0 noanim" data-to="1992 0 noanim" />
-        <path data-line="BL_DH" class="e2h 18" data-stops="+0 BL +0 DH" data-length="130" data-from="1992 0 noanim" data-to="2016 0 noanim" />
-        <path data-line="BL_DH" class="e2h 11" data-stops="+0 BL +0 DH" data-length="120" data-from="2016 0 noanim" data-to="2020 0 noanim" />
-        <path data-line="BL_DH" class="e1h 21" data-stops="+0 BL +0 DH" data-length="110" data-from="2020 0 noanim" data-to="2030 0 noanim" />
-        <path data-line="BL_DH" class="e1h 24" data-stops="+0 BL +0 DH" data-length="80" data-from="2030 0 noanim" />
+        <path data-line="BL_DH" class="e1h 23" data-stops="+0 BL +0 DH" data-weight="140" data-from="1987 0 noanim" data-to="1988 0 noanim" />
+        <path data-line="BL_DH" class="e1h 23" data-stops="+0 BL +0 DH" data-weight="160" data-from="1988 0 noanim" data-to="1992 0 noanim" />
+        <path data-line="BL_DH" class="e2h 18" data-stops="+0 BL +0 DH" data-weight="130" data-from="1992 0 noanim" data-to="2016 0 noanim" />
+        <path data-line="BL_DH" class="e2h 11" data-stops="+0 BL +0 DH" data-weight="120" data-from="2016 0 noanim" data-to="2020 0 noanim" />
+        <path data-line="BL_DH" class="e1h 21" data-stops="+0 BL +0 DH" data-weight="110" data-from="2020 0 noanim" data-to="2030 0 noanim" />
+        <path data-line="BL_DH" class="e1h 24" data-stops="+0 BL +0 DH" data-weight="80" data-from="2030 0 noanim" />
 
-        <path data-line="BFP_BL" class="some 1" data-stops="+0 BFP +0 BL" data-length="60" data-from="1987 0 noanim" data-to="1997 0 noanim" />
-        <path data-line="BFP_BL" class="e2h 10" data-stops="+0 BFP +0 BL" data-length="60" data-from="1997 0 noanim" data-to="2005 0 noanim" />
-        <path data-line="BFP_BL" class="some 6" data-stops="+0 BFP +0 BL" data-length="60" data-from="2005 0 noanim" data-to="2015 0 noanim" />
-        <path data-line="BFP_BL" class="e2h 9" data-stops="+0 BFP +0 BL" data-length="60" data-from="2015 0 noanim" data-to="2030 0 noanim" />
-        <path data-line="BFP_BL" class="e2h 12" data-stops="+0 BFP +0 BL" data-length="50" data-from="2030 0 noanim" />
+        <path data-line="BFP_BL" class="some 1" data-stops="+0 BFP +0 BL" data-weight="60" data-from="1987 0 noanim" data-to="1997 0 noanim" />
+        <path data-line="BFP_BL" class="e2h 10" data-stops="+0 BFP +0 BL" data-weight="60" data-from="1997 0 noanim" data-to="2005 0 noanim" />
+        <path data-line="BFP_BL" class="some 6" data-stops="+0 BFP +0 BL" data-weight="60" data-from="2005 0 noanim" data-to="2015 0 noanim" />
+        <path data-line="BFP_BL" class="e2h 9" data-stops="+0 BFP +0 BL" data-weight="60" data-from="2015 0 noanim" data-to="2030 0 noanim" />
+        <path data-line="BFP_BL" class="e2h 12" data-stops="+0 BFP +0 BL" data-weight="50" data-from="2030 0 noanim" />
 
-        <path data-line="BCS_BL" class="some 6" data-stops="+0 BCS +0 BL" data-length="100" data-from="1987 0 noanim" data-to="1993 0 noanim" />
-        <path data-line="BCS_BL" class="some 8" data-stops="+0 BCS +0 BL" data-length="80" data-from="1993 0 noanim" data-to="1998 0 noanim" />
-        <path data-line="BCS_BL" class="some 7" data-stops="+0 BCS +0 BL" data-length="120" data-from="1998 0 noanim" data-to="1999 0 noanim" />
-        <path data-line="BCS_BL" class="some 7" data-stops="+0 BCS +0 BL" data-length="100" data-from="1999 0 noanim" data-to="2012 0 noanim" />
-        <path data-line="BCS_BL" class="some 3" data-stops="+0 BCS +0 BL" data-length="80" data-from="2012 0 noanim" data-to="2030 0 noanim" />
-        <path data-line="BCS_BL" class="e2h 9" data-stops="+0 BCS +0 BL" data-length="80" data-from="2030 0 noanim" />
+        <path data-line="BCS_BL" class="some 6" data-stops="+0 BCS +0 BL" data-weight="100" data-from="1987 0 noanim" data-to="1993 0 noanim" />
+        <path data-line="BCS_BL" class="some 8" data-stops="+0 BCS +0 BL" data-weight="80" data-from="1993 0 noanim" data-to="1998 0 noanim" />
+        <path data-line="BCS_BL" class="some 7" data-stops="+0 BCS +0 BL" data-weight="120" data-from="1998 0 noanim" data-to="1999 0 noanim" />
+        <path data-line="BCS_BL" class="some 7" data-stops="+0 BCS +0 BL" data-weight="100" data-from="1999 0 noanim" data-to="2012 0 noanim" />
+        <path data-line="BCS_BL" class="some 3" data-stops="+0 BCS +0 BL" data-weight="80" data-from="2012 0 noanim" data-to="2030 0 noanim" />
+        <path data-line="BCS_BL" class="e2h 9" data-stops="+0 BCS +0 BL" data-weight="80" data-from="2030 0 noanim" />
 
-        <path data-line="BCS_DG" class="some 9" data-stops="+0 BCS +0 DG" data-length="80" data-from="1987 0 noanim" data-to="1995 0 noanim" />
-        <path data-line="BCS_DG" class="some 6" data-stops="+0 BCS +0 DG" data-length="70" data-from="1995 0 noanim" data-to="1998 0 noanim" />
-        <path data-line="BCS_DG" class="some 6" data-stops="+0 BCS +0 DG" data-length="80" data-from="1998 0 noanim" data-to="2001 0 noanim" />
+        <path data-line="BCS_DG" class="some 9" data-stops="+0 BCS +0 DG" data-weight="80" data-from="1987 0 noanim" data-to="1995 0 noanim" />
+        <path data-line="BCS_DG" class="some 6" data-stops="+0 BCS +0 DG" data-weight="70" data-from="1995 0 noanim" data-to="1998 0 noanim" />
+        <path data-line="BCS_DG" class="some 6" data-stops="+0 BCS +0 DG" data-weight="80" data-from="1998 0 noanim" data-to="2001 0 noanim" />
 
-        <path data-line="DG_DH" class="some 2" data-stops="+0 DG +0 DH" data-length="120" data-from="1987 0 noanim" data-to="1993 0 noanim" />
-        <path data-line="DG_DH" class="some 9" data-stops="+0 DG +0 DH" data-length="100" data-from="1993 0 noanim" data-to="2000 0 noanim" />
-        <path data-line="DG_DH" class="some 4" data-stops="+0 DG +0 DH" data-length="80" data-from="2000 0 noanim" data-to="2005 0 noanim" />
+        <path data-line="DG_DH" class="some 2" data-stops="+0 DG +0 DH" data-weight="120" data-from="1987 0 noanim" data-to="1993 0 noanim" />
+        <path data-line="DG_DH" class="some 9" data-stops="+0 DG +0 DH" data-weight="100" data-from="1993 0 noanim" data-to="2000 0 noanim" />
+        <path data-line="DG_DH" class="some 4" data-stops="+0 DG +0 DH" data-weight="80" data-from="2000 0 noanim" data-to="2005 0 noanim" />
 
-        <path data-line="DC_DH" class="some 8" data-stops="+0 DC +0 DH" data-length="80" data-from="1987 0 noanim" data-to="1988 0 noanim" />
-        <path data-line="DC_DH" class="some 8" data-stops="+0 DC +0 DH" data-length="90" data-from="1988 0 noanim" data-to="1990 0 noanim" />
-        <path data-line="DC_DH" class="e2h 10" data-stops="+0 DC +0 DH" data-length="90" data-from="1990 0 noanim" data-to="1992 0 noanim" />
-        <path data-line="DC_DH" class="e2h 10" data-stops="+0 DC +0 DH" data-length="70" data-from="1992 0 noanim" data-to="1998 0 noanim" />
-        <path data-line="DC_DH" class="e2h 10" data-stops="+0 DC +0 DH" data-length="90" data-from="1998 0 noanim" data-to="2001 0 noanim" />
-        <path data-line="DC_DH" class="some 8" data-stops="+0 DC +0 DH" data-length="80" data-from="2001 0 noanim" data-to="2003 0 noanim" />
-        <path data-line="DC_DH" class="some 7" data-stops="+0 DC +0 DH" data-length="70" data-from="2004 0 noanim" data-to="2007 0 noanim" />
-        <path data-line="DC_DH" class="e2h 9" data-stops="+0 DC +0 DH" data-length="70" data-from="2030 0 noanim"  />
+        <path data-line="DC_DH" class="some 8" data-stops="+0 DC +0 DH" data-weight="80" data-from="1987 0 noanim" data-to="1988 0 noanim" />
+        <path data-line="DC_DH" class="some 8" data-stops="+0 DC +0 DH" data-weight="90" data-from="1988 0 noanim" data-to="1990 0 noanim" />
+        <path data-line="DC_DH" class="e2h 10" data-stops="+0 DC +0 DH" data-weight="90" data-from="1990 0 noanim" data-to="1992 0 noanim" />
+        <path data-line="DC_DH" class="e2h 10" data-stops="+0 DC +0 DH" data-weight="70" data-from="1992 0 noanim" data-to="1998 0 noanim" />
+        <path data-line="DC_DH" class="e2h 10" data-stops="+0 DC +0 DH" data-weight="90" data-from="1998 0 noanim" data-to="2001 0 noanim" />
+        <path data-line="DC_DH" class="some 8" data-stops="+0 DC +0 DH" data-weight="80" data-from="2001 0 noanim" data-to="2003 0 noanim" />
+        <path data-line="DC_DH" class="some 7" data-stops="+0 DC +0 DH" data-weight="70" data-from="2004 0 noanim" data-to="2007 0 noanim" />
+        <path data-line="DC_DH" class="e2h 9" data-stops="+0 DC +0 DH" data-weight="70" data-from="2030 0 noanim"  />
 
-        <path data-line="BCS_LL" class="e2h 11" data-stops="+0 BCS +0 LL" data-length="140" data-from="1987 0 noanim" data-to="1989 0 noanim" />
-        <path data-line="BCS_LL" class="e2h 11" data-stops="+0 BCS +0 LL" data-length="160" data-from="1989 0 noanim" data-to="1992 0 noanim" />
-        <path data-line="BCS_LL" class="e2h 11" data-stops="+0 BCS +0 LL" data-length="110" data-from="1992 0 noanim" data-to="1998 0 noanim" />
-        <path data-line="BCS_LL" class="some 8" data-stops="+0 BCS +0 LL" data-length="110" data-from="1998 0 noanim" data-to="2000 0 noanim" />
+        <path data-line="BCS_LL" class="e2h 11" data-stops="+0 BCS +0 LL" data-weight="140" data-from="1987 0 noanim" data-to="1989 0 noanim" />
+        <path data-line="BCS_LL" class="e2h 11" data-stops="+0 BCS +0 LL" data-weight="160" data-from="1989 0 noanim" data-to="1992 0 noanim" />
+        <path data-line="BCS_LL" class="e2h 11" data-stops="+0 BCS +0 LL" data-weight="110" data-from="1992 0 noanim" data-to="1998 0 noanim" />
+        <path data-line="BCS_LL" class="some 8" data-stops="+0 BCS +0 LL" data-weight="110" data-from="1998 0 noanim" data-to="2000 0 noanim" />
 
-        <path data-line="DC_UJP" class="some 7" data-stops="+0 DC +0 UJP" data-length="150" data-from="1987 0 noanim" data-to="1990 0 noanim" />
-        <path data-line="DC_UJP" class="some 8" data-stops="+0 DC +0 UJP" data-length="165" data-from="1990 0 noanim" data-to="1992 0 noanim" />
-        <path data-line="DC_UJP" class="some 5" data-stops="+0 DC +0 UJP" data-length="150" data-from="1992 0 noanim" data-to="1993 0 noanim" />
-        <path data-line="DC_UJP" class="some 5" data-stops="+0 DC +0 UJP" data-length="120" data-from="1993 0 noanim" data-to="1997 0 noanim" />
-        <path data-line="DC_UJP" class="some 4" data-stops="+0 DC +0 UJP" data-length="140" data-from="1998 0 noanim" data-to="2000 0 noanim" />
-        <path data-line="DC_UJP" class="e2h 8" data-stops="+0 DC +0 UJP" data-length="110" data-from="2030 0 noanim" />
+        <path data-line="DC_UJP" class="some 7" data-stops="+0 DC +0 UJP" data-weight="150" data-from="1987 0 noanim" data-to="1990 0 noanim" />
+        <path data-line="DC_UJP" class="some 8" data-stops="+0 DC +0 UJP" data-weight="165" data-from="1990 0 noanim" data-to="1992 0 noanim" />
+        <path data-line="DC_UJP" class="some 5" data-stops="+0 DC +0 UJP" data-weight="150" data-from="1992 0 noanim" data-to="1993 0 noanim" />
+        <path data-line="DC_UJP" class="some 5" data-stops="+0 DC +0 UJP" data-weight="120" data-from="1993 0 noanim" data-to="1997 0 noanim" />
+        <path data-line="DC_UJP" class="some 4" data-stops="+0 DC +0 UJP" data-weight="140" data-from="1998 0 noanim" data-to="2000 0 noanim" />
+        <path data-line="DC_UJP" class="e2h 8" data-stops="+0 DC +0 UJP" data-weight="110" data-from="2030 0 noanim" />
 
         <!-- Gutenfürst Grenze? -->
-        <path data-line="DC_NHO" class="some 1" data-stops="+0 DC +0 NHO" data-length="200" data-from="1987 0 noanim" data-to="1990 0 noanim" />
-        <path data-line="DC_NHO" class="some 6" data-stops="+0 DC +0 NHO" data-length="160" data-from="1990 0 noanim" data-to="1993 0 noanim" />
-        <path data-line="DC_NHO" class="e2h 11" data-stops="+0 DC +0 NHO" data-length="140" data-from="1993 0 noanim" data-to="2000 0 noanim" />
-        <path data-line="DC_NHO" class="e2h 11" data-stops="+0 DC +0 NHO" data-length="120" data-from="2000 0 noanim" data-to="2001 0 noanim" />
-        <path data-line="DC_NHO" class="e2h 9" data-stops="+0 DC +0 NHO" data-length="105" data-from="2001 0 noanim" data-to="2005 0 noanim" />
-        <path data-line="DC_NHO" class="some 5" data-stops="+0 DC +0 NHO" data-length="130" data-from="2005 0 noanim" data-to="2007 0 noanim" />
-        <path data-line="DC_NHO" class="e2h 9" data-stops="+0 DC +0 NHO" data-length="100" data-from="2030 0 noanim" />
+        <path data-line="DC_NHO" class="some 1" data-stops="+0 DC +0 NHO" data-weight="200" data-from="1987 0 noanim" data-to="1990 0 noanim" />
+        <path data-line="DC_NHO" class="some 6" data-stops="+0 DC +0 NHO" data-weight="160" data-from="1990 0 noanim" data-to="1993 0 noanim" />
+        <path data-line="DC_NHO" class="e2h 11" data-stops="+0 DC +0 NHO" data-weight="140" data-from="1993 0 noanim" data-to="2000 0 noanim" />
+        <path data-line="DC_NHO" class="e2h 11" data-stops="+0 DC +0 NHO" data-weight="120" data-from="2000 0 noanim" data-to="2001 0 noanim" />
+        <path data-line="DC_NHO" class="e2h 9" data-stops="+0 DC +0 NHO" data-weight="105" data-from="2001 0 noanim" data-to="2005 0 noanim" />
+        <path data-line="DC_NHO" class="some 5" data-stops="+0 DC +0 NHO" data-weight="130" data-from="2005 0 noanim" data-to="2007 0 noanim" />
+        <path data-line="DC_NHO" class="e2h 9" data-stops="+0 DC +0 NHO" data-weight="100" data-from="2030 0 noanim" />
 
-        <path data-line="NHO_NN" class="some 1" data-stops="+0 NHO +0 NN" data-length="120" data-from="1987 0 noanim" data-to="1993 0 noanim" />
-        <path data-line="NHO_NN" class="e2h 10" data-stops="+0 NHO +0 NN" data-length="105" data-from="1993 0 noanim" data-to="2005 0 noanim" />
-        <path data-line="NHO_NN" class="some 5" data-stops="+0 NHO +0 NN" data-length="105" data-from="2005 0 noanim" data-to="2007 0 noanim" />
+        <path data-line="NHO_NN" class="some 1" data-stops="+0 NHO +0 NN" data-weight="120" data-from="1987 0 noanim" data-to="1993 0 noanim" />
+        <path data-line="NHO_NN" class="e2h 10" data-stops="+0 NHO +0 NN" data-weight="105" data-from="1993 0 noanim" data-to="2005 0 noanim" />
+        <path data-line="NHO_NN" class="some 5" data-stops="+0 NHO +0 NN" data-weight="105" data-from="2005 0 noanim" data-to="2007 0 noanim" />
 
-        <path data-line="LHA_LM" class="e1h 23" data-stops="+0 LHA +0 LM" data-length="60" data-from="1987 0 noanim" data-to="1988 0 noanim" />
-        <path data-line="LHA_LM" class="e1h 23" data-stops="+0 LHA +0 LM" data-length="90" data-from="1988 0 noanim" data-to="1992 0 noanim" />
-        <path data-line="LHA_LM" class="e1h 23" data-stops="+0 LHA +0 LM" data-length="70" data-from="1992 0 noanim" data-to="1993 0 noanim" />
-        <path data-line="LHA_LM" class="e1h 23" data-stops="+0 LHA +0 LM" data-length="50" data-from="1993 0 noanim" />
+        <path data-line="LHA_LM" class="e1h 23" data-stops="+0 LHA +0 LM" data-weight="60" data-from="1987 0 noanim" data-to="1988 0 noanim" />
+        <path data-line="LHA_LM" class="e1h 23" data-stops="+0 LHA +0 LM" data-weight="90" data-from="1988 0 noanim" data-to="1992 0 noanim" />
+        <path data-line="LHA_LM" class="e1h 23" data-stops="+0 LHA +0 LM" data-weight="70" data-from="1992 0 noanim" data-to="1993 0 noanim" />
+        <path data-line="LHA_LM" class="e1h 23" data-stops="+0 LHA +0 LM" data-weight="50" data-from="1993 0 noanim" />
 
-        <path data-line="KA_KK" class="e1h 26" data-stops="+0 KA +0 KK" data-length="40" data-from="1987 0 noanim" data-to="1997 0 noanim" />
-        <path data-line="KA_KK" class="e2h 16" data-stops="+0 KA +0 KK" data-length="40" data-from="1997 0 noanim" data-to="2030 0 noanim" />
-        <path data-line="KA_KK" class="e12h 45" data-stops="+0 KA +0 KK" data-length="40" data-from="2030 0 noanim" />
+        <path data-line="KA_KK" class="e1h 26" data-stops="+0 KA +0 KK" data-weight="40" data-from="1987 0 noanim" data-to="1997 0 noanim" />
+        <path data-line="KA_KK" class="e2h 16" data-stops="+0 KA +0 KK" data-weight="40" data-from="1997 0 noanim" data-to="2030 0 noanim" />
+        <path data-line="KA_KK" class="e12h 45" data-stops="+0 KA +0 KK" data-weight="40" data-from="2030 0 noanim" />
 
-        <path data-line="EDG_KK" class="e12h 105" data-stops="+0 EDG +0 KK" data-length="40" data-from="1987 0 noanim" />
+        <path data-line="EDG_KK" class="e12h 105" data-stops="+0 EDG +0 KK" data-weight="40" data-from="1987 0 noanim" />
 
-        <path data-line="EDO_KK" class="e12h 97" data-stops="+0 EDO +0 KK" data-length="70" data-from="1987 0 noanim" />
+        <path data-line="EDO_KK" class="e12h 97" data-stops="+0 EDO +0 KK" data-weight="70" data-from="1987 0 noanim" />
 
-        <path data-line="EDG_EDO" class="e12h 89" data-stops="+0 EDG +0 EDO" data-length="35" data-from="1987 0 noanim" />
+        <path data-line="EDG_EDO" class="e12h 89" data-stops="+0 EDG +0 EDO" data-weight="35" data-from="1987 0 noanim" />
 
-        <path data-line="EDG_EMST" class="e12h 39" data-stops="+0 EDG +0 EMST" data-length="60" data-from="1987 0 noanim" />
+        <path data-line="EDG_EMST" class="e12h 39" data-stops="+0 EDG +0 EMST" data-weight="60" data-from="1987 0 noanim" />
 
-        <path data-line="EDO_EMST" class="e1h 26" data-stops="+0 EDO +0 EMST" data-length="30" data-from="1987 0 noanim" />
+        <path data-line="EDO_EMST" class="e1h 26" data-stops="+0 EDO +0 EMST" data-weight="30" data-from="1987 0 noanim" />
 
-        <path data-line="EMST_HE" class="some 5" data-stops="+0 EMST +0 HE" data-length="110" data-from="1987 0 noanim" data-to="2006 0 noanim" />
-        <path data-line="EMST_HE" class="e2h 10" data-stops="+0 EMST +0 HE" data-length="110" data-from="2006 0 noanim" data-to="2030 0 noanim" />
-        <path data-line="EMST_HE" class="some 8" data-stops="+0 EMST +0 HE" data-length="110" data-from="2030 0 noanim" />
+        <path data-line="EMST_HE" class="some 5" data-stops="+0 EMST +0 HE" data-weight="110" data-from="1987 0 noanim" data-to="2006 0 noanim" />
+        <path data-line="EMST_HE" class="e2h 10" data-stops="+0 EMST +0 HE" data-weight="110" data-from="2006 0 noanim" data-to="2030 0 noanim" />
+        <path data-line="EMST_HE" class="some 8" data-stops="+0 EMST +0 HE" data-weight="110" data-from="2030 0 noanim" />
 
-        <path data-line="HE_HB" class="some 1" data-stops="+0 HE +0 HB" data-length="105" data-from="1987 0 noanim"  />
+        <path data-line="HE_HB" class="some 1" data-stops="+0 HE +0 HB" data-weight="105" data-from="1987 0 noanim"  />
 
-        <path data-line="EMST_HO" class="e12h 38" data-stops="+0 EMST +0 HO" data-length="25" data-from="1987 0 noanim" data-to="1998 0 noanim" />
-        <path data-line="EMST_HO" class="e1h 36" data-stops="+0 EMST +0 HO" data-length="25" data-from="1998 0 noanim" />
+        <path data-line="EMST_HO" class="e12h 38" data-stops="+0 EMST +0 HO" data-weight="25" data-from="1987 0 noanim" data-to="1998 0 noanim" />
+        <path data-line="EMST_HO" class="e1h 36" data-stops="+0 EMST +0 HO" data-weight="25" data-from="1998 0 noanim" />
 
-        <path data-line="HB_HO" class="e1h 37" data-stops="+0 HB +0 HO" data-length="50" data-from="1987 0 noanim" />
+        <path data-line="HB_HO" class="e1h 37" data-stops="+0 HB +0 HO" data-weight="50" data-from="1987 0 noanim" />
 
-        <path data-line="HH_HO" class="e2h 9" data-stops="+0 HH +0 HO" data-length="75" data-from="1987 0 noanim" />
+        <path data-line="HH_HO" class="e2h 9" data-stops="+0 HH +0 HO" data-weight="75" data-from="1987 0 noanim" />
 
-        <path data-line="EDO_FKW" class="some 1" data-stops="+0 EDO +0 FKW" data-length="150" data-from="1987 0 noanim" data-to="1989 0 noanim" />
-        <path data-line="EDO_FKW" class="e2h 16" data-stops="+0 EDO +0 FKW" data-length="140" data-from="1989 0 noanim" data-to="2011 0 noanim" />
-        <path data-line="EDO_FKW" class="some 6" data-stops="+0 EDO +0 FKW" data-length="135" data-from="2011 0 noanim" data-to="2030 0 noanim" />
-        <path data-line="EDO_FKW" class="e2h 10" data-stops="+0 EDO +0 FKW" data-length="135" data-from="2030 0 noanim" />
+        <path data-line="EDO_FKW" class="some 1" data-stops="+0 EDO +0 FKW" data-weight="150" data-from="1987 0 noanim" data-to="1989 0 noanim" />
+        <path data-line="EDO_FKW" class="e2h 16" data-stops="+0 EDO +0 FKW" data-weight="140" data-from="1989 0 noanim" data-to="2011 0 noanim" />
+        <path data-line="EDO_FKW" class="some 6" data-stops="+0 EDO +0 FKW" data-weight="135" data-from="2011 0 noanim" data-to="2030 0 noanim" />
+        <path data-line="EDO_FKW" class="e2h 10" data-stops="+0 EDO +0 FKW" data-weight="135" data-from="2030 0 noanim" />
 
 
 
@@ -649,4 +649,9 @@
 <rect id="epoch-label-bg" x="16990" y="9750" width="180" height="90" />
 <text id="epoch-label" x="17080" y="9800"></text>
 <script xlink:href="../dist/network-animator.js" />
+<script type="text/javascript">
+    TNA.Config.default.beckStyle = false;
+    TNA.Config.default.gravitatorColorDeviation = 0;
+    document.dispatchEvent(new Event('startTransportNetworkAnimator'));
+</script>
 </svg>
