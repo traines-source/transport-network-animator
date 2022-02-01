@@ -3,24 +3,20 @@ import { Vector } from "./Vector";
 import { Line } from "./drawables/Line";
 import { Utils } from "./Utils";
 import { StationProvider } from "./Network";
+import { Config } from "./Config";
 
 const fmin = require('fmin');
 
 
 export class Gravitator {
-    static INERTNESS = 100;
-    static GRADIENT_SCALE = 0.000000001;
     static DEVIATION_WARNING = 0.2;
-    static INITIALIZE_RELATIVE_TO_EUCLIDIAN_DISTANCE = true;
-    static SPEED = 250;
-    static MAX_ANIM_DURATION = 6;
-    static COLOR_DEVIATION = 0.02;
 
     private initialWeightFactors: {[id: string] : number} = {};
     private averageEuclidianLengthRatio: number = -1;
     private edges: {[id: string]: Line} = {};
     private vertices: {[id: string] : {station: Station, index: Vector, startCoords: Vector}} = {};
     private dirty = false;
+    private gradientScale = 0;
 
     constructor(private stationProvider: StationProvider) {
         
@@ -45,7 +41,7 @@ export class Gravitator {
             this.averageEuclidianLengthRatio = weights / euclidian;
             console.log('averageEuclidianLengthRatio^-1', 1/this.averageEuclidianLengthRatio);
         }
-        
+        this.gradientScale = 1/Math.pow(euclidian, 2)*Config.default.gravitatorGradientScale;
     }
 
     private getWeightsSum() {
@@ -71,7 +67,7 @@ export class Gravitator {
     private initializeGraph() {
         for (const [key, edge] of Object.entries(this.edges)) {
             if (this.initialWeightFactors[key] == undefined) {
-                this.initialWeightFactors[key] = Gravitator.INITIALIZE_RELATIVE_TO_EUCLIDIAN_DISTANCE
+                this.initialWeightFactors[key] = Config.default.gravitatorInitializeRelativeToEuclidianDistance
                     ? 1 / this.averageEuclidianLengthRatio
                     : this.edgeVector(edge).length / (edge.weight || 0);
             }
@@ -124,9 +120,9 @@ export class Gravitator {
             fx += (
                     Math.pow(A[vertex.index.x]-vertex.startCoords.x, 2) +
                     Math.pow(A[vertex.index.y]-vertex.startCoords.y, 2)
-                ) * Gravitator.INERTNESS;
-            fxprime[vertex.index.x] += 2 * (A[vertex.index.x]-vertex.startCoords.x) * Gravitator.INERTNESS;
-            fxprime[vertex.index.y] += 2 * (A[vertex.index.y]-vertex.startCoords.y) * Gravitator.INERTNESS;
+                ) * Config.default.gravitatorInertness;
+            fxprime[vertex.index.x] += 2 * (A[vertex.index.x]-vertex.startCoords.x) * Config.default.gravitatorInertness;
+            fxprime[vertex.index.y] += 2 * (A[vertex.index.y]-vertex.startCoords.y) * Config.default.gravitatorInertness;
         }
         return fx;
     }
@@ -136,9 +132,9 @@ export class Gravitator {
             fx += (
                     Math.pow(A[vertex.index.x]-vertex.station.baseCoords.x, 2) +
                     Math.pow(A[vertex.index.y]-vertex.station.baseCoords.y, 2)
-                ) * Gravitator.INERTNESS;
-            fxprime[vertex.index.x] += 2 * (A[vertex.index.x]-vertex.station.baseCoords.x) * Gravitator.INERTNESS;
-            fxprime[vertex.index.y] += 2 * (A[vertex.index.y]-vertex.station.baseCoords.y) * Gravitator.INERTNESS;
+                ) * Config.default.gravitatorInertness;
+            fxprime[vertex.index.x] += 2 * (A[vertex.index.x]-vertex.station.baseCoords.x) * Config.default.gravitatorInertness;
+            fxprime[vertex.index.y] += 2 * (A[vertex.index.y]-vertex.station.baseCoords.y) * Config.default.gravitatorInertness;
         }
         return fx;
     }
@@ -159,7 +155,7 @@ export class Gravitator {
 
     private scaleGradientToEnsureWorkingStepSize(fxprime: number[]): void {
         for (let i=0; i<fxprime.length; i++) {
-            fxprime[i] *= Gravitator.GRADIENT_SCALE;
+            fxprime[i] *= this.gradientScale;
         }
     }
 
@@ -176,7 +172,9 @@ export class Gravitator {
     } 
 
     private moveStationsAndLines(solution: number[], delay: number, animate: boolean): number {
-        const animationDurationSeconds = animate ? Math.min(Gravitator.MAX_ANIM_DURATION, this.getTotalDistanceToMove(solution) / Gravitator.SPEED) : 0;
+        const animationDurationSeconds = animate
+            ? Math.min(Config.default.gravitatorAnimMaxDurationSeconds, this.getTotalDistanceToMove(solution) / Config.default.gravitatorAnimSpeed)
+            : 0;
         for (const vertex of Object.values(this.vertices)) {
             vertex.station.move(delay, animationDurationSeconds, new Vector(solution[vertex.index.x], solution[vertex.index.y]));
         }
@@ -190,7 +188,7 @@ export class Gravitator {
 
     private getColorByDeviation(edge: Line, weight: number) {
         const initialDist = this.vertices[edge.termini[0].stationId].startCoords.delta(this.vertices[edge.termini[1].stationId].startCoords).length;
-        return Math.max(-1, Math.min(1, (weight - this.averageEuclidianLengthRatio * initialDist) * Gravitator.COLOR_DEVIATION));
+        return Math.max(-1, Math.min(1, (weight - this.averageEuclidianLengthRatio * initialDist) * Config.default.gravitatorColorDeviation));
     }
 
     private getTotalDistanceToMove(solution: number[]) {
