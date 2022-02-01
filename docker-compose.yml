@@ -8,6 +8,7 @@ services:
       - ./dist/:/app/dist/
       - ./examples/:/app/examples/
       - ./output/:/app/output/
+      - ./screentest/:/app/screentest/
     shm_size: 1G
     entrypoint: "timecut examples/ice-network.svg --start 5 --duration=450 --viewport=3840,2160 --fps=60 --pipe-mode --launch-arguments='--no-sandbox --disable-setuid-sandbox --allow-file-access-from-files' --pix-fmt=yuv420p --output=output/out.mp4"
 

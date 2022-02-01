@@ -6,3 +6,5 @@ working
 .nyc_output
 *.log
 script.md
+*-diff.png
+*-new.png
