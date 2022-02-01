@@ -33,6 +33,7 @@
 - [isDeltaMatchingParallel](Vector.md#isdeltamatchingparallel)
 - [rotate](Vector.md#rotate)
 - [round](Vector.md#round)
+- [scale](Vector.md#scale)
 - [signedLengthProjectedAt](Vector.md#signedlengthprojectedat)
 - [solveDeltaForIntersection](Vector.md#solvedeltaforintersection)
 - [withLength](Vector.md#withlength)
@@ -155,7 +156,7 @@ ___
 
 #### Defined in
 
-[Vector.ts:84](https://github.com/traines-source/transport-network-animator/blob/master/src/Vector.ts#L84)
+[Vector.ts:88](https://github.com/traines-source/transport-network-animator/blob/master/src/Vector.ts#L88)
 
 ___
 
@@ -176,7 +177,7 @@ ___
 
 #### Defined in
 
-[Vector.ts:104](https://github.com/traines-source/transport-network-animator/blob/master/src/Vector.ts#L104)
+[Vector.ts:108](https://github.com/traines-source/transport-network-animator/blob/master/src/Vector.ts#L108)
 
 ___
 
@@ -196,7 +197,7 @@ ___
 
 #### Defined in
 
-[Vector.ts:96](https://github.com/traines-source/transport-network-animator/blob/master/src/Vector.ts#L96)
+[Vector.ts:100](https://github.com/traines-source/transport-network-animator/blob/master/src/Vector.ts#L100)
 
 ___
 
@@ -216,7 +217,7 @@ ___
 
 #### Defined in
 
-[Vector.ts:88](https://github.com/traines-source/transport-network-animator/blob/master/src/Vector.ts#L88)
+[Vector.ts:92](https://github.com/traines-source/transport-network-animator/blob/master/src/Vector.ts#L92)
 
 ___
 
@@ -236,7 +237,7 @@ ___
 
 #### Defined in
 
-[Vector.ts:42](https://github.com/traines-source/transport-network-animator/blob/master/src/Vector.ts#L42)
+[Vector.ts:46](https://github.com/traines-source/transport-network-animator/blob/master/src/Vector.ts#L46)
 
 ___
 
@@ -256,7 +257,7 @@ ___
 
 #### Defined in
 
-[Vector.ts:51](https://github.com/traines-source/transport-network-animator/blob/master/src/Vector.ts#L51)
+[Vector.ts:55](https://github.com/traines-source/transport-network-animator/blob/master/src/Vector.ts#L55)
 
 ___
 
@@ -276,7 +277,7 @@ ___
 
 #### Defined in
 
-[Vector.ts:109](https://github.com/traines-source/transport-network-animator/blob/master/src/Vector.ts#L109)
+[Vector.ts:113](https://github.com/traines-source/transport-network-animator/blob/master/src/Vector.ts#L113)
 
 ___
 
@@ -290,7 +291,7 @@ ___
 
 #### Defined in
 
-[Vector.ts:75](https://github.com/traines-source/transport-network-animator/blob/master/src/Vector.ts#L75)
+[Vector.ts:79](https://github.com/traines-source/transport-network-animator/blob/master/src/Vector.ts#L79)
 
 ___
 
@@ -311,7 +312,7 @@ ___
 
 #### Defined in
 
-[Vector.ts:69](https://github.com/traines-source/transport-network-animator/blob/master/src/Vector.ts#L69)
+[Vector.ts:73](https://github.com/traines-source/transport-network-animator/blob/master/src/Vector.ts#L73)
 
 ___
 
@@ -331,7 +332,7 @@ ___
 
 #### Defined in
 
-[Vector.ts:46](https://github.com/traines-source/transport-network-animator/blob/master/src/Vector.ts#L46)
+[Vector.ts:50](https://github.com/traines-source/transport-network-animator/blob/master/src/Vector.ts#L50)
 
 ___
 
@@ -351,7 +352,27 @@ ___
 
 #### Defined in
 
-[Vector.ts:113](https://github.com/traines-source/transport-network-animator/blob/master/src/Vector.ts#L113)
+[Vector.ts:117](https://github.com/traines-source/transport-network-animator/blob/master/src/Vector.ts#L117)
+
+___
+
+### scale
+
+▸ **scale**(`factor`): [`Vector`](Vector.md)
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `factor` | `number` |
+
+#### Returns
+
+[`Vector`](Vector.md)
+
+#### Defined in
+
+[Vector.ts:42](https://github.com/traines-source/transport-network-animator/blob/master/src/Vector.ts#L42)
 
 ___
 
@@ -397,7 +418,7 @@ ___
 
 #### Defined in
 
-[Vector.ts:55](https://github.com/traines-source/transport-network-animator/blob/master/src/Vector.ts#L55)
+[Vector.ts:59](https://github.com/traines-source/transport-network-animator/blob/master/src/Vector.ts#L59)
 
 ___
 

@@ -16,32 +16,5 @@
     "source": "https://registry.npmjs.org/fmin/-/fmin-0.0.2.tgz",
     "license": "BSD-3-Clause",
     "licenseText": "Copyright 2016, Ben Frederickson\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without modification,\nare permitted provided that the following conditions are met:\n\n* Redistributions of source code must retain the above copyright notice, this\n  list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above copyright notice,\n  this list of conditions and the following disclaimer in the documentation\n  and/or other materials provided with the distribution.\n\n* Neither the name of the author nor the names of contributors may be used to\n  endorse or promote products derived from this software without specific prior\n  written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND\nANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\nWARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR\nANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\nLOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON\nANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\nSOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n"
-  },
-  {
-    "name": "mgrs",
-    "version": "1.0.0",
-    "author": "proj4 team",
-    "repository": "https://github.com/proj4js/mgrs",
-    "source": "https://registry.npmjs.org/mgrs/-/mgrs-1.0.0.tgz",
-    "license": "MIT",
-    "licenseText": "Copyright (c) 2012, Mike Adair, Richard Greenwood, Didier Richard, Stephen Irons, Olivier Terral, Calvin Metcalf\n\n Permission is hereby granted, free of charge, to any person obtaining a\n copy of this software and associated documentation files (the \"Software\"),\n to deal in the Software without restriction, including without limitation\n the rights to use, copy, modify, merge, publish, distribute, sublicense,\n and/or sell copies of the Software, and to permit persons to whom the\n Software is furnished to do so, subject to the following conditions:\n\n The above copyright notice and this permission notice shall be included\n in all copies or substantial portions of the Software.\n\n _THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS\n OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL\n THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING\n FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\n DEALINGS IN THE SOFTWARE._"
-  },
-  {
-    "name": "proj4",
-    "version": "2.7.5",
-    "author": "",
-    "repository": "https://github.com/proj4js/proj4js",
-    "source": "https://registry.npmjs.org/proj4/-/proj4-2.7.5.tgz",
-    "license": "MIT",
-    "licenseText": "## Proj4js -- Javascript reprojection library. \n \nAuthors:\n- Mike Adair madairATdmsolutions.ca\n- Richard Greenwood richATgreenwoodmap.com\n- Didier Richard didier.richardATign.fr\n- Stephen Irons stephen.ironsATclear.net.nz\n- Olivier Terral oterralATgmail.com\n- Calvin Metcalf cmetcalfATappgeo.com\n\nCopyright (c) 2014, Mike Adair, Richard Greenwood, Didier Richard, Stephen Irons, Olivier Terral and Calvin Metcalf\n\n Permission is hereby granted, free of charge, to any person obtaining a\n copy of this software and associated documentation files (the \"Software\"),\n to deal in the Software without restriction, including without limitation\n the rights to use, copy, modify, merge, publish, distribute, sublicense,\n and/or sell copies of the Software, and to permit persons to whom the\n Software is furnished to do so, subject to the following conditions:\n\n The above copyright notice and this permission notice shall be included\n in all copies or substantial portions of the Software.\n\n _THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS\n OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL\n THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING\n FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\n DEALINGS IN THE SOFTWARE._\n"
-  },
-  {
-    "name": "wkt-parser",
-    "version": "1.3.2",
-    "author": "",
-    "repository": "https://github.com/proj4js/wkt-parser",
-    "source": "https://registry.npmjs.org/wkt-parser/-/wkt-parser-1.3.2.tgz",
-    "license": "MIT",
-    "licenseText": "## Proj4js -- Javascript reprojection library. \n \nAuthors:\n- Mike Adair madairATdmsolutions.ca\n- Richard Greenwood richATgreenwoodmap.com\n- Didier Richard didier.richardATign.fr\n- Stephen Irons stephen.ironsATclear.net.nz\n- Olivier Terral oterralATgmail.com\n- Calvin Metcalf cmetcalfATappgeo.com\n\nCopyright (c) 2014, Mike Adair, Richard Greenwood, Didier Richard, Stephen Irons, Olivier Terral and Calvin Metcalf\n\n Permission is hereby granted, free of charge, to any person obtaining a\n copy of this software and associated documentation files (the \"Software\"),\n to deal in the Software without restriction, including without limitation\n the rights to use, copy, modify, merge, publish, distribute, sublicense,\n and/or sell copies of the Software, and to permit persons to whom the\n Software is furnished to do so, subject to the following conditions:\n\n The above copyright notice and this permission notice shall be included\n in all copies or substantial portions of the Software.\n\n _THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS\n OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL\n THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING\n FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\n DEALINGS IN THE SOFTWARE._\n"
   }
 ]

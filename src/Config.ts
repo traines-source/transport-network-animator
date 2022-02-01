@@ -19,7 +19,7 @@ export class Config {
     /**
      * Scale of the map projection when converting to SVG coordinate system.
      */
-    mapProjectionScale = 200;
+    mapProjectionScale = 1;
 
     /**
      * Maximum zoom level.
@@ -134,7 +134,7 @@ export class Config {
     gravitatorColorDeviation = 0.02;
 
     /**
-     * The default Config that will be used everywhere except when specifically overriden. Access it from your JavaScript code to set config values using `TNA.Config.default`, e.g. `TNA.Config.default.beckStyle = false;` 
+     * The default Config that will be used everywhere except when specifically overridden. Access it from your JavaScript code to set config values using `TNA.Config.default`, e.g. `TNA.Config.default.beckStyle = false;` 
      */
     public static get default(): Config {
         return this._default || (this._default = new Config());

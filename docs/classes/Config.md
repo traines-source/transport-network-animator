@@ -236,7 +236,7 @@ ___
 
 ### mapProjectionScale
 
-• **mapProjectionScale**: `number` = `200`
+• **mapProjectionScale**: `number` = `1`
 
 Scale of the map projection when converting to SVG coordinate system.
 
@@ -335,7 +335,7 @@ How much padding to add around bounding box of zoomed elements to calculate the 
 
 • `Static` `get` **default**(): [`Config`](Config.md)
 
-The default Config that will be used everywhere except when specifically overriden. Access it from your JavaScript code to set config values using `TNA.Config.default`, e.g. `TNA.Config.default.beckStyle = false;`
+The default Config that will be used everywhere except when specifically overridden. Access it from your JavaScript code to set config values using `TNA.Config.default`, e.g. `TNA.Config.default.beckStyle = false;`
 
 #### Returns
 

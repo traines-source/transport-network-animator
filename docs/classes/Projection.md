@@ -34,7 +34,7 @@
 
 #### Defined in
 
-[Projection.ts:11](https://github.com/traines-source/transport-network-animator/blob/master/src/Projection.ts#L11)
+[Projection.ts:8](https://github.com/traines-source/transport-network-animator/blob/master/src/Projection.ts#L8)
 
 ## Properties
 
@@ -50,7 +50,7 @@ The definitions of available projections, which can be added to.
 
 #### Defined in
 
-[Projection.ts:27](https://github.com/traines-source/transport-network-animator/blob/master/src/Projection.ts#L27)
+[Projection.ts:24](https://github.com/traines-source/transport-network-animator/blob/master/src/Projection.ts#L24)
 
 ## Accessors
 
@@ -66,7 +66,7 @@ The default projection as set by [Config.mapProjection](Config.md#mapprojection)
 
 #### Defined in
 
-[Projection.ts:20](https://github.com/traines-source/transport-network-animator/blob/master/src/Projection.ts#L20)
+[Projection.ts:17](https://github.com/traines-source/transport-network-animator/blob/master/src/Projection.ts#L17)
 
 ## Methods
 
@@ -88,4 +88,4 @@ Project the given coordinates to the target projection.
 
 #### Defined in
 
-[Projection.ts:42](https://github.com/traines-source/transport-network-animator/blob/master/src/Projection.ts#L42)
+[Projection.ts:35](https://github.com/traines-source/transport-network-animator/blob/master/src/Projection.ts#L35)

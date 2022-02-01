@@ -35,8 +35,12 @@ export class Vector {
         return this.dotProduct(s)/s.dotProduct(s);
     }
 
-    add(that : Vector): Vector {
+    add(that: Vector): Vector {
         return new Vector(this.x + that.x, this.y + that.y);
+    }
+
+    scale(factor: number) {
+        return new Vector(this.x*factor, this.y*factor);
     }
 
     delta(that: Vector): Vector {
