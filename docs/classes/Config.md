@@ -10,18 +10,28 @@
 
 ### Properties
 
+- [animSpeed](Config.md#animspeed)
 - [autoStart](Config.md#autostart)
 - [beckStyle](Config.md#beckstyle)
+- [defaultStationDimen](Config.md#defaultstationdimen)
 - [gravitatorAnimMaxDurationSeconds](Config.md#gravitatoranimmaxdurationseconds)
 - [gravitatorAnimSpeed](Config.md#gravitatoranimspeed)
 - [gravitatorColorDeviation](Config.md#gravitatorcolordeviation)
 - [gravitatorGradientScale](Config.md#gravitatorgradientscale)
 - [gravitatorInertness](Config.md#gravitatorinertness)
 - [gravitatorInitializeRelativeToEuclidianDistance](Config.md#gravitatorinitializerelativetoeuclidiandistance)
+- [labelDistance](Config.md#labeldistance)
+- [labelHeight](Config.md#labelheight)
+- [lineDistance](Config.md#linedistance)
 - [mapProjection](Config.md#mapprojection)
 - [mapProjectionScale](Config.md#mapprojectionscale)
+- [minNodeDistance](Config.md#minnodedistance)
 - [trainTimetableSpeed](Config.md#traintimetablespeed)
+- [trainTrackOffset](Config.md#traintrackoffset)
+- [trainWagonLength](Config.md#trainwagonlength)
+- [zoomDuration](Config.md#zoomduration)
 - [zoomMaxScale](Config.md#zoommaxscale)
+- [zoomPaddingFactor](Config.md#zoompaddingfactor)
 
 ### Accessors
 
@@ -35,17 +45,32 @@
 
 ## Properties
 
+### animSpeed
+
+• **animSpeed**: `number` = `100`
+
+Animation speed for lines.
+
+#### Defined in
+
+[Config.ts:43](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L43)
+
+___
+
 ### autoStart
 
 • **autoStart**: `boolean` = `true`
 
 Whether to automatically start TNA. Set to false if you want to run custom code (e.g. setting up paths etc. programmatically) beforehand.
 This needs to be set in the SVG to the SVG tag (data-auto-start="false"). Setting it in JavaScript will not have any effect.
-If set to false, you will need to fire an event from your JavaScript if you eventually want to start TNA: `document.dispatchEvent(new Event('startTransportNetworkAnimator'));`
+If set to false, you will need to fire an event from your JavaScript if you eventually want to start TNA:
+```
+document.dispatchEvent(new Event('startTransportNetworkAnimator'));
+```
 
 #### Defined in
 
-[Config.ts:9](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L9)
+[Config.ts:12](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L12)
 
 ___
 
@@ -58,7 +83,19 @@ This can also be set for each SVG path individually (data-beck-style="false").
 
 #### Defined in
 
-[Config.ts:30](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L30)
+[Config.ts:33](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L33)
+
+___
+
+### defaultStationDimen
+
+• **defaultStationDimen**: `number` = `10`
+
+Size of a station with a single line.
+
+#### Defined in
+
+[Config.ts:53](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L53)
 
 ___
 
@@ -70,7 +107,7 @@ Upper bound for animation duration.
 
 #### Defined in
 
-[Config.ts:76](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L76)
+[Config.ts:129](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L129)
 
 ___
 
@@ -82,7 +119,7 @@ How fast to animate the distortion. Depends on the scale of your map.
 
 #### Defined in
 
-[Config.ts:71](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L71)
+[Config.ts:124](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L124)
 
 ___
 
@@ -94,7 +131,7 @@ Color edges that are unusually long in red and those that are unusually short in
 
 #### Defined in
 
-[Config.ts:81](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L81)
+[Config.ts:134](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L134)
 
 ___
 
@@ -108,7 +145,7 @@ Do experimentally adjust it if the optimization takes a long time or leads to ba
 
 #### Defined in
 
-[Config.ts:51](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L51)
+[Config.ts:104](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L104)
 
 ___
 
@@ -123,7 +160,7 @@ Set to 0 to disable.
 
 #### Defined in
 
-[Config.ts:44](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L44)
+[Config.ts:97](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L97)
 
 ___
 
@@ -145,7 +182,43 @@ Bear in mind that the euclidian distance depends on your chosen map projection a
 
 #### Defined in
 
-[Config.ts:66](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L66)
+[Config.ts:119](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L119)
+
+___
+
+### labelDistance
+
+• **labelDistance**: `number` = `0`
+
+Extra distance of labels from the station.
+
+#### Defined in
+
+[Config.ts:63](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L63)
+
+___
+
+### labelHeight
+
+• **labelHeight**: `number` = `12`
+
+Height of labels. This influences the spacing of labels to stations.
+
+#### Defined in
+
+[Config.ts:58](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L58)
+
+___
+
+### lineDistance
+
+• **lineDistance**: `number` = `6`
+
+Distance of neighboring lines at stations.
+
+#### Defined in
+
+[Config.ts:48](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L48)
 
 ___
 
@@ -157,7 +230,7 @@ Which map projection to use if you use data-lonlat attributes on stations. For c
 
 #### Defined in
 
-[Config.ts:14](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L14)
+[Config.ts:17](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L17)
 
 ___
 
@@ -169,7 +242,19 @@ Scale of the map projection when converting to SVG coordinate system.
 
 #### Defined in
 
-[Config.ts:19](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L19)
+[Config.ts:22](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L22)
+
+___
+
+### minNodeDistance
+
+• **minNodeDistance**: `number` = `0`
+
+Minimum distance of corners for Harry Beck style.
+
+#### Defined in
+
+[Config.ts:38](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L38)
 
 ___
 
@@ -182,7 +267,43 @@ The default (60) means that if numbers given in the timetables are interpreted a
 
 #### Defined in
 
-[Config.ts:36](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L36)
+[Config.ts:89](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L89)
+
+___
+
+### trainTrackOffset
+
+• **trainTrackOffset**: `number` = `0`
+
+Offset of train relative to line.
+
+#### Defined in
+
+[Config.ts:83](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L83)
+
+___
+
+### trainWagonLength
+
+• **trainWagonLength**: `number` = `10`
+
+Length of one train section.
+
+#### Defined in
+
+[Config.ts:78](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L78)
+
+___
+
+### zoomDuration
+
+• **zoomDuration**: `number` = `1`
+
+Duration of zoom at the beginning of every instant.
+
+#### Defined in
+
+[Config.ts:68](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L68)
 
 ___
 
@@ -194,7 +315,19 @@ Maximum zoom level.
 
 #### Defined in
 
-[Config.ts:24](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L24)
+[Config.ts:27](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L27)
+
+___
+
+### zoomPaddingFactor
+
+• **zoomPaddingFactor**: `number` = `40`
+
+How much padding to add around bounding box of zoomed elements to calculate the actual canvas extent.
+
+#### Defined in
+
+[Config.ts:73](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L73)
 
 ## Accessors
 
@@ -210,4 +343,4 @@ The default Config that will be used everywhere except when specifically overrid
 
 #### Defined in
 
-[Config.ts:86](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L86)
+[Config.ts:139](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L139)

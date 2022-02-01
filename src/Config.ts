@@ -4,7 +4,10 @@ export class Config {
     /**
      * Whether to automatically start TNA. Set to false if you want to run custom code (e.g. setting up paths etc. programmatically) beforehand.
      * This needs to be set in the SVG to the SVG tag (data-auto-start="false"). Setting it in JavaScript will not have any effect.
-     * If set to false, you will need to fire an event from your JavaScript if you eventually want to start TNA: `document.dispatchEvent(new Event('startTransportNetworkAnimator'));`
+     * If set to false, you will need to fire an event from your JavaScript if you eventually want to start TNA:
+     * ```
+     * document.dispatchEvent(new Event('startTransportNetworkAnimator'));
+     * ```
      */
     autoStart = true;
 
