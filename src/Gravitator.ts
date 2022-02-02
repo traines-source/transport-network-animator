@@ -17,7 +17,6 @@ export class Gravitator {
     private edges: {[id: string]: {line: Line, inclination: Vector}} = {};
     private vertices: {[id: string]: {station: Station, index: Vector, startCoords: Vector}} = {};
     private dirty = false;
-    private gradientScale = 0;
 
     constructor(private stationProvider: StationProvider) {
         
@@ -44,7 +43,6 @@ export class Gravitator {
         if (this.averageEuclidianLengthRatio == -1 && edgeCount > 0) {
             this.averageEuclidianLengthRatio = weights / euclidian;
             this.averageEuclidianLength = euclidian / edgeCount;
-            this.gradientScale = 1/Math.pow(euclidian, 2)*Config.default.gravitatorGradientScale;
             console.log('averageEuclidianLengthRatio^-1', 1/this.averageEuclidianLengthRatio);
         }
     }
@@ -165,7 +163,7 @@ export class Gravitator {
             const deltaXCurrent = this.deltaX(A, this.vertices, edge.termini);
             const deltaYCurrent = this.deltaY(A, this.vertices, edge.termini);
             const squaredDeltaCurrent = Math.pow(deltaXCurrent, 2)+Math.pow(deltaYCurrent, 2);
-            const normCurrent = this.averageEuclidianLength / Math.sqrt(squaredDeltaCurrent);
+            const normCurrent = 1 / Math.sqrt(squaredDeltaCurrent);
             const normXCurrent = deltaXCurrent * normCurrent;
             const normYCurrent = deltaYCurrent * normCurrent;
 
@@ -186,10 +184,10 @@ export class Gravitator {
             const deltaYCurrentPrimeY1 = -1;
 
             const squareRootPrime = Math.pow(squaredDeltaCurrent,-3/2);
-            const normCurrentPrimeX0 = -this.averageEuclidianLength*(deltaXCurrent*deltaXCurrentPrimeX0+deltaYCurrent*deltaYCurrentPrimeX0)*squareRootPrime;
-            const normCurrentPrimeX1 = -this.averageEuclidianLength*(deltaXCurrent*deltaXCurrentPrimeX1+deltaYCurrent*deltaYCurrentPrimeX1)*squareRootPrime;
-            const normCurrentPrimeY0 = -this.averageEuclidianLength*(deltaXCurrent*deltaXCurrentPrimeY0+deltaYCurrent*deltaYCurrentPrimeY0)*squareRootPrime;
-            const normCurrentPrimeY1 = -this.averageEuclidianLength*(deltaXCurrent*deltaXCurrentPrimeY1+deltaYCurrent*deltaYCurrentPrimeY1)*squareRootPrime;
+            const normCurrentPrimeX0 = -1*(deltaXCurrent*deltaXCurrentPrimeX0+deltaYCurrent*deltaYCurrentPrimeX0)*squareRootPrime;
+            const normCurrentPrimeX1 = -1*(deltaXCurrent*deltaXCurrentPrimeX1+deltaYCurrent*deltaYCurrentPrimeX1)*squareRootPrime;
+            const normCurrentPrimeY0 = -1*(deltaXCurrent*deltaXCurrentPrimeY0+deltaYCurrent*deltaYCurrentPrimeY0)*squareRootPrime;
+            const normCurrentPrimeY1 = -1*(deltaXCurrent*deltaXCurrentPrimeY1+deltaYCurrent*deltaYCurrentPrimeY1)*squareRootPrime;
             
             const normXCurrentPrimeX0 = deltaXCurrentPrimeX0*normCurrent+deltaXCurrent*normCurrentPrimeX0;
             const normXCurrentPrimeX1 = deltaXCurrentPrimeX1*normCurrent+deltaXCurrent*normCurrentPrimeX1;
@@ -212,21 +210,23 @@ export class Gravitator {
     private deltaToNewDistancesToEnsureAccuracy(fx: number, A: number[], fxprime: number[]): number {
         for (const [key, e] of Object.entries(this.edges)) {
             const edge = e.line;
-            const v = Math.pow(this.deltaX(A, this.vertices, edge.termini), 2)
-                        + Math.pow(this.deltaY(A, this.vertices, edge.termini), 2)
-                        - Math.pow(this.initialWeightFactors[key] * (edge.weight || 0), 2);
+            const c = 1 / Math.pow(this.initialWeightFactors[key] * (edge.weight || 0), 2);
+            const v = (
+                Math.pow(this.deltaX(A, this.vertices, edge.termini), 2) +
+                Math.pow(this.deltaY(A, this.vertices, edge.termini), 2)
+            ) * c - 1;
             fx += Math.pow(v, 2);
-            fxprime[this.vertices[edge.termini[0].stationId].index.x] += +4 * v * this.deltaX(A, this.vertices, edge.termini);
-            fxprime[this.vertices[edge.termini[0].stationId].index.y] += +4 * v * this.deltaY(A, this.vertices, edge.termini);
-            fxprime[this.vertices[edge.termini[1].stationId].index.x] += -4 * v * this.deltaX(A, this.vertices, edge.termini);
-            fxprime[this.vertices[edge.termini[1].stationId].index.y] += -4 * v * this.deltaY(A, this.vertices, edge.termini);
+            fxprime[this.vertices[edge.termini[0].stationId].index.x] += +4 * v * c * this.deltaX(A, this.vertices, edge.termini);
+            fxprime[this.vertices[edge.termini[0].stationId].index.y] += +4 * v * c * this.deltaY(A, this.vertices, edge.termini);
+            fxprime[this.vertices[edge.termini[1].stationId].index.x] += -4 * v * c * this.deltaX(A, this.vertices, edge.termini);
+            fxprime[this.vertices[edge.termini[1].stationId].index.y] += -4 * v * c * this.deltaY(A, this.vertices, edge.termini);
         }
         return fx;
     }
 
     private scaleGradientToEnsureWorkingStepSize(fxprime: number[]): void {
         for (let i=0; i<fxprime.length; i++) {
-            fxprime[i] *= this.gradientScale;
+            fxprime[i] *= Config.default.gravitatorGradientScale;
         }
     }
 
@@ -291,7 +291,7 @@ export class Gravitator {
     private startEdgeInclination(line: Line): Vector {
         const deltaXStart = this.deltaXStart(this.vertices, line.termini);
         const deltaYStart = this.deltaYStart(this.vertices, line.termini);
-        const normStart = this.averageEuclidianLength / Math.sqrt(Math.pow(deltaXStart, 2)+Math.pow(deltaYStart, 2));
+        const normStart = 1 / Math.sqrt(Math.pow(deltaXStart, 2)+Math.pow(deltaYStart, 2));
         return new Vector(deltaXStart * normStart, deltaYStart * normStart);
     }
 

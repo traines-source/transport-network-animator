@@ -94,22 +94,22 @@ export class Config {
      * This should be adjusted by experimentation depending on how far the nodes move from their starting positions during your animation.
      * Set to 0 to disable.
      */
-    gravitatorInertness = 100;
+    gravitatorInertness = 0.01;
 
     /**
      * Whether to use the inclination-preserving algorithm. This tries to preserve the orientation of edges in space.
      * When false, the location-preserving algorithm is used, which punishes nodes for traveling too far from their original and last position.
      * The inclination-preserving algorithm usually yields better results, but is more computationally intensive.
-     * It usually works best with a higher {@link Config.gravitatorInertness} than the location-preserving algorithm.
+     * Make sure to experiment with different {@link Config.gravitatorInertness} values as well.
      */
-    gravitatorUseInclinationInertness = false;
+    gravitatorUseInclinationInertness = true;
 
     /**
      * Gradient scaling to ensure gradient is not extremely large or extremely small.
      * The default value should be fine in most cases.
      * Do experimentally adjust it if the optimization takes a long time or leads to bad results (large deviations). 
      */
-    gravitatorGradientScale = 0.1;
+    gravitatorGradientScale = 0.01;
 
     /**
      * When true, distances will be adjusted to the average ratio between all given weights and the sum of euclidian distances between nodes.
