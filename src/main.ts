@@ -14,8 +14,9 @@ export { Rotation } from "./Rotation";
 let timePassed = 0;
 
 const network: Network = new Network(new SvgNetwork(), new DrawableSorter());
-const animateFromInstant: Instant = getStartInstant();
 let started = false;
+let stopped = false;
+const animateFromInstant: Instant = getStartInstant();
 
 if (Config.default.autoStart) {
     started = true;
@@ -39,6 +40,7 @@ function getStartInstant(): Instant {
     if(window.location.hash) {
         const animateFromInstant: string[] = window.location.hash.replace('#', '').split('-');
         const instant = new Instant(parseInt(animateFromInstant[0]) || 0, parseFloat(animateFromInstant[1]) || 0, '');
+        stopped = animateFromInstant[2] == 'stop';
         console.log('fast forward to', instant);
         return instant;
     }
@@ -54,11 +56,13 @@ function slide(instant: Instant, animate: boolean): void {
     network.drawTimedDrawablesAt(instant, animate);
     const next = network.nextInstant(instant);
     
-    if (next) {
+    if (!(stopped && animate) && next) {
         const delta = instant.delta(next);
         timePassed += delta;
         const delay = animate ? delta : 0;
         const animator = new SvgAnimator();
         animator.wait(delay*1000, () => slide(next, animate));
+    } else {
+        console.log('Stopped.');
     }
 }
