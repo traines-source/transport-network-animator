@@ -238,7 +238,7 @@ export class Gravitator {
                 Math.pow(this.deltaX(solution, this.vertices, edge.termini), 2) +
                 Math.pow(this.deltaY(solution, this.vertices, edge.termini), 2)
             ) / (this.initialWeightFactors[key] * (edge.weight || 0)) - 1;
-            sum += deviation;
+            sum += Math.abs(deviation);
             if (Math.abs(deviation) > Gravitator.DEVIATION_WARNING) {
                 console.warn(edge.name, 'diverges by ', deviation);
             }
@@ -292,7 +292,7 @@ export class Gravitator {
         const deltaXStart = this.deltaXStart(this.vertices, line.termini);
         const deltaYStart = this.deltaYStart(this.vertices, line.termini);
         const normStart = this.averageEuclidianLength / Math.sqrt(Math.pow(deltaXStart, 2)+Math.pow(deltaYStart, 2));
-        return new Vector(deltaXStart / normStart, deltaYStart / normStart);
+        return new Vector(deltaXStart * normStart, deltaYStart * normStart);
     }
 
     addEdge(line: Line) {
