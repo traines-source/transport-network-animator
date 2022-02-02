@@ -13,6 +13,7 @@ export class Gravitator {
 
     private initialWeightFactors: {[id: string] : number} = {};
     private averageEuclidianLengthRatio: number = -1;
+    private averageEuclidianLength = 1;
     private edges: {[id: string]: Line} = {};
     private vertices: {[id: string] : {station: Station, index: Vector, startCoords: Vector}} = {};
     private dirty = false;
@@ -36,9 +37,11 @@ export class Gravitator {
     private initialize() {
         const weights = this.getWeightsSum();
         const euclidian = this.getEuclidianDistanceSum();
-        console.log('weights:', weights, 'euclidian:', euclidian);
-        if (this.averageEuclidianLengthRatio == -1 && Object.values(this.edges).length > 0) {
+        const edgeCount = Object.values(this.edges).length;
+        console.log('weights:', weights, 'euclidian:', euclidian);        
+        if (this.averageEuclidianLengthRatio == -1 && edgeCount > 0) {
             this.averageEuclidianLengthRatio = weights / euclidian;
+            this.averageEuclidianLength = euclidian / edgeCount;
             console.log('averageEuclidianLengthRatio^-1', 1/this.averageEuclidianLengthRatio);
         }
         this.gradientScale = 1/Math.pow(euclidian, 2)*Config.default.gravitatorGradientScale;
@@ -89,10 +92,10 @@ export class Gravitator {
                 fxprime[i] = 0;
             }
             let fx = 0;
-            fx = this.deltaToStartStationPositionsToEnsureInertness(fx, A, fxprime, gravitator);
-            fx = this.deltaToCurrentStationPositionsToEnsureInertness(fx, A, fxprime, gravitator);
-            fx = this.deltaToNewDistancesToEnsureAccuracy(fx, A, fxprime, gravitator);
-            this.scaleGradientToEnsureWorkingStepSize(fxprime);
+            fx = gravitator.deltaToStartStationPositionsToEnsureInertness(fx, A, fxprime);
+            fx = gravitator.deltaToCurrentStationPositionsToEnsureInertness(fx, A, fxprime);
+            fx = gravitator.deltaToNewDistancesToEnsureAccuracy(fx, A, fxprime);
+            gravitator.scaleGradientToEnsureWorkingStepSize(fxprime);
             return fx;
         }, start, params);
         return solution.x;
@@ -115,8 +118,8 @@ export class Gravitator {
         return A[vertices[termini[0].stationId].index.y] - A[vertices[termini[1].stationId].index.y];
     }
 
-    private deltaToStartStationPositionsToEnsureInertness(fx: number, A: number[], fxprime: number[], gravitator: Gravitator): number {
-        for (const vertex of Object.values(gravitator.vertices)) {
+    private deltaToStartStationPositionsToEnsureInertness(fx: number, A: number[], fxprime: number[]): number {
+        for (const vertex of Object.values(this.vertices)) {
             fx += (
                     Math.pow(A[vertex.index.x]-vertex.startCoords.x, 2) +
                     Math.pow(A[vertex.index.y]-vertex.startCoords.y, 2)
@@ -127,8 +130,8 @@ export class Gravitator {
         return fx;
     }
 
-    private deltaToCurrentStationPositionsToEnsureInertness(fx: number, A: number[], fxprime: number[], gravitator: Gravitator): number {
-        for (const vertex of Object.values(gravitator.vertices)) {
+    private deltaToCurrentStationPositionsToEnsureInertness(fx: number, A: number[], fxprime: number[]): number {
+        for (const vertex of Object.values(this.vertices)) {
             fx += (
                     Math.pow(A[vertex.index.x]-vertex.station.baseCoords.x, 2) +
                     Math.pow(A[vertex.index.y]-vertex.station.baseCoords.y, 2)
@@ -139,16 +142,16 @@ export class Gravitator {
         return fx;
     }
 
-    private deltaToNewDistancesToEnsureAccuracy(fx: number, A: number[], fxprime: number[], gravitator: Gravitator): number {
-        for (const [key, edge] of Object.entries(gravitator.edges)) {                
-            const v = Math.pow(this.deltaX(A, gravitator.vertices, edge.termini), 2)
-                        + Math.pow(this.deltaY(A, gravitator.vertices, edge.termini), 2)
-                        - Math.pow(gravitator.initialWeightFactors[key] * (edge.weight || 0), 2);
+    private deltaToNewDistancesToEnsureAccuracy(fx: number, A: number[], fxprime: number[]): number {
+        for (const [key, edge] of Object.entries(this.edges)) {                
+            const v = Math.pow(this.deltaX(A, this.vertices, edge.termini), 2)
+                        + Math.pow(this.deltaY(A, this.vertices, edge.termini), 2)
+                        - Math.pow(this.initialWeightFactors[key] * (edge.weight || 0), 2);
             fx += Math.pow(v, 2);
-            fxprime[gravitator.vertices[edge.termini[0].stationId].index.x] += +4 * v * this.deltaX(A, gravitator.vertices, edge.termini);
-            fxprime[gravitator.vertices[edge.termini[0].stationId].index.y] += +4 * v * this.deltaY(A, gravitator.vertices, edge.termini);
-            fxprime[gravitator.vertices[edge.termini[1].stationId].index.x] += -4 * v * this.deltaX(A, gravitator.vertices, edge.termini);
-            fxprime[gravitator.vertices[edge.termini[1].stationId].index.y] += -4 * v * this.deltaY(A, gravitator.vertices, edge.termini);
+            fxprime[this.vertices[edge.termini[0].stationId].index.x] += +4 * v * this.deltaX(A, this.vertices, edge.termini);
+            fxprime[this.vertices[edge.termini[0].stationId].index.y] += +4 * v * this.deltaY(A, this.vertices, edge.termini);
+            fxprime[this.vertices[edge.termini[1].stationId].index.x] += -4 * v * this.deltaX(A, this.vertices, edge.termini);
+            fxprime[this.vertices[edge.termini[1].stationId].index.y] += -4 * v * this.deltaY(A, this.vertices, edge.termini);
         }
         return fx;
     }
