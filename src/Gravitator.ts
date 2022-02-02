@@ -131,25 +131,22 @@ export class Gravitator {
     }
 
     private deltaToStartStationPositionsToEnsureInertness(fx: number, A: number[], fxprime: number[]): number {
-        for (const vertex of Object.values(this.vertices)) {
-            fx += (
-                    Math.pow(A[vertex.index.x]-vertex.startCoords.x, 2) +
-                    Math.pow(A[vertex.index.y]-vertex.startCoords.y, 2)
-                ) * Config.default.gravitatorInertness;
-            fxprime[vertex.index.x] += 2 * (A[vertex.index.x]-vertex.startCoords.x) * Config.default.gravitatorInertness;
-            fxprime[vertex.index.y] += 2 * (A[vertex.index.y]-vertex.startCoords.y) * Config.default.gravitatorInertness;
-        }
-        return fx;
+        return this.deltaToPreviousStationPositionsToEnsureInertness(fx, A, fxprime, true);
     }
 
     private deltaToCurrentStationPositionsToEnsureInertness(fx: number, A: number[], fxprime: number[]): number {
+        return this.deltaToPreviousStationPositionsToEnsureInertness(fx, A, fxprime, false);
+    }
+
+    private deltaToPreviousStationPositionsToEnsureInertness(fx: number, A: number[], fxprime: number[], useStartPosition: boolean): number {
         for (const vertex of Object.values(this.vertices)) {
+            const vector = useStartPosition ? vertex.startCoords : vertex.station.baseCoords;
             fx += (
-                    Math.pow(A[vertex.index.x]-vertex.station.baseCoords.x, 2) +
-                    Math.pow(A[vertex.index.y]-vertex.station.baseCoords.y, 2)
+                    Math.pow(A[vertex.index.x]-vector.x, 2) +
+                    Math.pow(A[vertex.index.y]-vector.y, 2)
                 ) * Config.default.gravitatorInertness;
-            fxprime[vertex.index.x] += 2 * (A[vertex.index.x]-vertex.station.baseCoords.x) * Config.default.gravitatorInertness;
-            fxprime[vertex.index.y] += 2 * (A[vertex.index.y]-vertex.station.baseCoords.y) * Config.default.gravitatorInertness;
+            fxprime[vertex.index.x] += 2 * (A[vertex.index.x]-vector.x) * Config.default.gravitatorInertness;
+            fxprime[vertex.index.y] += 2 * (A[vertex.index.y]-vector.y) * Config.default.gravitatorInertness;
         }
         return fx;
     }
