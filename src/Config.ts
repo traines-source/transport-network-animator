@@ -94,7 +94,7 @@ export class Config {
      * This should be adjusted by experimentation depending on how far the nodes move from their starting positions during your animation.
      * Set to 0 to disable.
      */
-    gravitatorInertness = 0.01;
+    gravitatorInertness = 0.1;
 
     /**
      * Whether to use the inclination-preserving algorithm. This tries to preserve the orientation of edges in space.

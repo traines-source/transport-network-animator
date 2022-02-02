@@ -138,7 +138,7 @@ ___
 
 ### gravitatorGradientScale
 
-• **gravitatorGradientScale**: `number` = `0.1`
+• **gravitatorGradientScale**: `number` = `0.01`
 
 Gradient scaling to ensure gradient is not extremely large or extremely small.
 The default value should be fine in most cases.
@@ -152,7 +152,7 @@ ___
 
 ### gravitatorInertness
 
-• **gravitatorInertness**: `number` = `100`
+• **gravitatorInertness**: `number` = `0.1`
 
 How much to take into account the original and current positions of nodes/stations to optimize the new positions.
 This is meant to avoid nodes flapping around and keeping the network in a recognizable layout, even if it is not the optimal layout.
@@ -189,12 +189,12 @@ ___
 
 ### gravitatorUseInclinationInertness
 
-• **gravitatorUseInclinationInertness**: `boolean` = `false`
+• **gravitatorUseInclinationInertness**: `boolean` = `true`
 
 Whether to use the inclination-preserving algorithm. This tries to preserve the orientation of edges in space.
 When false, the location-preserving algorithm is used, which punishes nodes for traveling too far from their original and last position.
 The inclination-preserving algorithm usually yields better results, but is more computationally intensive.
-It usually works best with a higher [Config.gravitatorInertness](Config.md#gravitatorinertness) than the location-preserving algorithm.
+Make sure to experiment with different [Config.gravitatorInertness](Config.md#gravitatorinertness) values as well.
 
 #### Defined in
 

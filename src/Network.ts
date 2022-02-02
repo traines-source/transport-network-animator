@@ -154,6 +154,9 @@ export class Network implements StationProvider {
     }
     
     private eraseElement(element: TimedDrawable, delay: number, animate: boolean, reverse: boolean): number {
+        if (element instanceof Line) {
+            this.gravitator.removeEdge(element);
+        }
         return element.erase(delay, animate, reverse);
     }
     

@@ -141,12 +141,15 @@ export class Gravitator {
     private deltaToPreviousStationPositionsToEnsureInertness(fx: number, A: number[], fxprime: number[], useStartPosition: boolean): number {
         for (const vertex of Object.values(this.vertices)) {
             const vector = useStartPosition ? vertex.startCoords : vertex.station.baseCoords;
+            
+            const c = 1 / Math.pow(this.averageEuclidianLength, 2);
             fx += (
                     Math.pow(A[vertex.index.x]-vector.x, 2) +
                     Math.pow(A[vertex.index.y]-vector.y, 2)
-                ) * Config.default.gravitatorInertness;
-            fxprime[vertex.index.x] += 2 * (A[vertex.index.x]-vector.x) * Config.default.gravitatorInertness;
-            fxprime[vertex.index.y] += 2 * (A[vertex.index.y]-vector.y) * Config.default.gravitatorInertness;
+                ) * c * Config.default.gravitatorInertness;
+            
+            fxprime[vertex.index.x] += 2 * (A[vertex.index.x]-vector.x) * c * Config.default.gravitatorInertness;
+            fxprime[vertex.index.y] += 2 * (A[vertex.index.y]-vector.y) * c * Config.default.gravitatorInertness;
         }
         return fx;
     }
@@ -207,11 +210,12 @@ export class Gravitator {
     private deltaToNewDistancesToEnsureAccuracy(fx: number, A: number[], fxprime: number[]): number {
         for (const [key, e] of Object.entries(this.edges)) {
             const edge = e.line;
-            const c = 1 / Math.pow(this.initialWeightFactors[key] * (edge.weight || 0), 2);
+            const f = 1;
+            const c = f / Math.pow(this.initialWeightFactors[key] * (edge.weight || 0), 2);
             const v = (
                 Math.pow(this.deltaX(A, this.vertices, edge.termini), 2) +
                 Math.pow(this.deltaY(A, this.vertices, edge.termini), 2)
-            ) * c - 1;
+            ) * c - f;
             fx += Math.pow(v, 2);
             fxprime[this.vertices[edge.termini[0].stationId].index.x] += +4 * v * c * this.deltaX(A, this.vertices, edge.termini);
             fxprime[this.vertices[edge.termini[0].stationId].index.y] += +4 * v * c * this.deltaY(A, this.vertices, edge.termini);
@@ -300,6 +304,14 @@ export class Gravitator {
         this.addVertex(line.termini[0].stationId);
         this.addVertex(line.termini[1].stationId);
         this.edges[id] = {line: line, inclination: this.startEdgeInclination(line)};
+    }
+
+    removeEdge(line: Line) {
+        if (line.weight == undefined) 
+            return;
+        this.dirty = true;
+        const id = this.getIdentifier(line);
+        delete this.edges[id];
     }
 
     private getIdentifier(line: Line) {
