@@ -97,6 +97,14 @@ export class Config {
     gravitatorInertness = 100;
 
     /**
+     * Whether to use the inclination-preserving algorithm. This tries to preserve the orientation of edges in space.
+     * When false, the location-preserving algorithm is used, which punishes nodes for traveling too far from their original and last position.
+     * The inclination-preserving algorithm usually yields better results, but is more computationally intensive.
+     * It usually works best with a higher {@link Config.gravitatorInertness} than the location-preserving algorithm.
+     */
+    gravitatorUseInclinationInertness = false;
+
+    /**
      * Gradient scaling to ensure gradient is not extremely large or extremely small.
      * The default value should be fine in most cases.
      * Do experimentally adjust it if the optimization takes a long time or leads to bad results (large deviations). 

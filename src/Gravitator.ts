@@ -92,8 +92,12 @@ export class Gravitator {
                 fxprime[i] = 0;
             }
             let fx = 0;
-            fx = gravitator.deltaToStartStationPositionsToEnsureInertness(fx, A, fxprime);
-            fx = gravitator.deltaToCurrentStationPositionsToEnsureInertness(fx, A, fxprime);
+            if (Config.default.gravitatorUseInclinationInertness) {
+                fx = gravitator.deltaToInclinationToEnsureInertness(fx, A, fxprime);
+            } else {
+                fx = gravitator.deltaToStartStationPositionsToEnsureInertness(fx, A, fxprime);
+                fx = gravitator.deltaToCurrentStationPositionsToEnsureInertness(fx, A, fxprime);
+            }            
             fx = gravitator.deltaToNewDistancesToEnsureAccuracy(fx, A, fxprime);
             gravitator.scaleGradientToEnsureWorkingStepSize(fxprime);
             return fx;
@@ -118,6 +122,14 @@ export class Gravitator {
         return A[vertices[termini[0].stationId].index.y] - A[vertices[termini[1].stationId].index.y];
     }
 
+    private deltaXStart(vertices: {[id: string] : {station: Station, startCoords: Vector}}, termini: Stop[]): number {
+        return vertices[termini[0].stationId].startCoords.x - vertices[termini[1].stationId].startCoords.x;
+    }
+
+    private deltaYStart(vertices: {[id: string] : {station: Station, startCoords: Vector}}, termini: Stop[]): number {
+        return vertices[termini[0].stationId].startCoords.y - vertices[termini[1].stationId].startCoords.y;
+    }
+
     private deltaToStartStationPositionsToEnsureInertness(fx: number, A: number[], fxprime: number[]): number {
         for (const vertex of Object.values(this.vertices)) {
             fx += (
@@ -138,6 +150,58 @@ export class Gravitator {
                 ) * Config.default.gravitatorInertness;
             fxprime[vertex.index.x] += 2 * (A[vertex.index.x]-vertex.station.baseCoords.x) * Config.default.gravitatorInertness;
             fxprime[vertex.index.y] += 2 * (A[vertex.index.y]-vertex.station.baseCoords.y) * Config.default.gravitatorInertness;
+        }
+        return fx;
+    }
+
+    private deltaToInclinationToEnsureInertness(fx: number, A: number[], fxprime: number[]): number {
+        for (const [key, edge] of Object.entries(this.edges)) {
+            const deltaXStart = this.deltaXStart(this.vertices, edge.termini);
+            const deltaYStart = this.deltaYStart(this.vertices, edge.termini);
+            const normStart = this.averageEuclidianLength / Math.sqrt(Math.pow(deltaXStart, 2)+Math.pow(deltaYStart, 2));
+            const normXStart = deltaXStart / normStart;
+            const normYStart = deltaYStart / normStart;
+            
+            const deltaXCurrent = this.deltaX(A, this.vertices, edge.termini);
+            const deltaYCurrent = this.deltaY(A, this.vertices, edge.termini);
+            const squaredDeltaCurrent = Math.pow(deltaXCurrent, 2)+Math.pow(deltaYCurrent, 2);
+            const normCurrent = this.averageEuclidianLength / Math.sqrt(squaredDeltaCurrent);
+            const normXCurrent = deltaXCurrent * normCurrent;
+            const normYCurrent = deltaYCurrent * normCurrent;
+
+            fx += (
+                Math.pow(normXCurrent-normXStart, 2) +
+                Math.pow(normYCurrent-normYStart, 2)
+            ) * Config.default.gravitatorInertness;
+
+            const deltaXCurrentPrimeX0 = 1;
+            const deltaXCurrentPrimeX1 = -1;
+            const deltaXCurrentPrimeY0 = 0;
+            const deltaXCurrentPrimeY1 = 0;
+            const deltaYCurrentPrimeX0 = 0;
+            const deltaYCurrentPrimeX1 = 0;
+            const deltaYCurrentPrimeY0 = 1;
+            const deltaYCurrentPrimeY1 = -1;
+
+            const normCurrentPrimeX0 = -this.averageEuclidianLength*(deltaXCurrent*deltaXCurrentPrimeX0+deltaYCurrent*deltaYCurrentPrimeX0)*Math.pow(squaredDeltaCurrent,-3/2);
+            const normCurrentPrimeX1 = -this.averageEuclidianLength*(deltaXCurrent*deltaXCurrentPrimeX1+deltaYCurrent*deltaYCurrentPrimeX1)*Math.pow(squaredDeltaCurrent,-3/2);
+            const normCurrentPrimeY0 = -this.averageEuclidianLength*(deltaXCurrent*deltaXCurrentPrimeY0+deltaYCurrent*deltaYCurrentPrimeY0)*Math.pow(squaredDeltaCurrent,-3/2);
+            const normCurrentPrimeY1 = -this.averageEuclidianLength*(deltaXCurrent*deltaXCurrentPrimeY1+deltaYCurrent*deltaYCurrentPrimeY1)*Math.pow(squaredDeltaCurrent,-3/2);
+            
+            const normXCurrentPrimeX0 = deltaXCurrentPrimeX0*normCurrent+deltaXCurrent*normCurrentPrimeX0;
+            const normXCurrentPrimeX1 = deltaXCurrentPrimeX1*normCurrent+deltaXCurrent*normCurrentPrimeX1;
+            const normXCurrentPrimeY0 = deltaXCurrentPrimeY0*normCurrent+deltaXCurrent*normCurrentPrimeY0;
+            const normXCurrentPrimeY1 = deltaXCurrentPrimeY1*normCurrent+deltaXCurrent*normCurrentPrimeY1;
+            const normYCurrentPrimeX0 = deltaYCurrentPrimeX0*normCurrent+deltaYCurrent*normCurrentPrimeX0;
+            const normYCurrentPrimeX1 = deltaYCurrentPrimeX1*normCurrent+deltaYCurrent*normCurrentPrimeX1;
+            const normYCurrentPrimeY0 = deltaYCurrentPrimeY0*normCurrent+deltaYCurrent*normCurrentPrimeY0;
+            const normYCurrentPrimeY1 = deltaYCurrentPrimeY1*normCurrent+deltaYCurrent*normCurrentPrimeY1;
+
+            const c = 2 * Config.default.gravitatorInertness;
+            fxprime[this.vertices[edge.termini[0].stationId].index.x] += c * ((normXCurrent-normXStart) * normXCurrentPrimeX0 + (normYCurrent-normYStart) * normYCurrentPrimeX0);
+            fxprime[this.vertices[edge.termini[0].stationId].index.y] += c * ((normXCurrent-normXStart) * normXCurrentPrimeY0 + (normYCurrent-normYStart) * normYCurrentPrimeY0);
+            fxprime[this.vertices[edge.termini[1].stationId].index.x] += c * ((normXCurrent-normXStart) * normXCurrentPrimeX1 + (normYCurrent-normYStart) * normYCurrentPrimeX1);
+            fxprime[this.vertices[edge.termini[1].stationId].index.y] += c * ((normXCurrent-normXStart) * normXCurrentPrimeY1 + (normYCurrent-normYStart) * normYCurrentPrimeY1);
         }
         return fx;
     }

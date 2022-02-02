@@ -20,6 +20,7 @@
 - [gravitatorGradientScale](Config.md#gravitatorgradientscale)
 - [gravitatorInertness](Config.md#gravitatorinertness)
 - [gravitatorInitializeRelativeToEuclidianDistance](Config.md#gravitatorinitializerelativetoeuclidiandistance)
+- [gravitatorUseInclinationInertness](Config.md#gravitatoruseinclinationinertness)
 - [labelDistance](Config.md#labeldistance)
 - [labelHeight](Config.md#labelheight)
 - [lineDistance](Config.md#linedistance)
@@ -107,7 +108,7 @@ Upper bound for animation duration.
 
 #### Defined in
 
-[Config.ts:129](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L129)
+[Config.ts:137](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L137)
 
 ___
 
@@ -119,7 +120,7 @@ How fast to animate the distortion. Depends on the scale of your map.
 
 #### Defined in
 
-[Config.ts:124](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L124)
+[Config.ts:132](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L132)
 
 ___
 
@@ -131,7 +132,7 @@ Color edges that are unusually long in red and those that are unusually short in
 
 #### Defined in
 
-[Config.ts:134](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L134)
+[Config.ts:142](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L142)
 
 ___
 
@@ -145,7 +146,7 @@ Do experimentally adjust it if the optimization takes a long time or leads to ba
 
 #### Defined in
 
-[Config.ts:104](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L104)
+[Config.ts:112](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L112)
 
 ___
 
@@ -182,7 +183,22 @@ Bear in mind that the euclidian distance depends on your chosen map projection a
 
 #### Defined in
 
-[Config.ts:119](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L119)
+[Config.ts:127](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L127)
+
+___
+
+### gravitatorUseInclinationInertness
+
+• **gravitatorUseInclinationInertness**: `boolean` = `false`
+
+Whether to use the inclination-preserving algorithm. This tries to preserve the orientation of edges in space.
+When false, the location-preserving algorithm is used, which punishes nodes for traveling too far from their original and last position.
+The inclination-preserving algorithm usually yields better results, but is more computationally intensive.
+It usually works best with a higher [Config.gravitatorInertness](Config.md#gravitatorinertness) than the location-preserving algorithm.
+
+#### Defined in
+
+[Config.ts:105](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L105)
 
 ___
 
@@ -343,4 +359,4 @@ The default Config that will be used everywhere except when specifically overrid
 
 #### Defined in
 
-[Config.ts:139](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L139)
+[Config.ts:147](https://github.com/traines-source/transport-network-animator/blob/master/src/Config.ts#L147)
