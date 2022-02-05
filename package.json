@@ -5,7 +5,9 @@
   "main": "network-animator.js",
   "directories": {},
   "dependencies": {
+    "@types/delaunator": "^5.0.0",
     "@types/node": "^14.17.33",
+    "delaunator": "^5.0.0",
     "fmin": "0.0.2"
   },
   "devDependencies": {

@@ -4,6 +4,7 @@ import { Line } from "./drawables/Line";
 import { Utils } from "./Utils";
 import { StationProvider } from "./Network";
 import { Config } from "./Config";
+import { CrumpledImage } from "./drawables/CrumpledImage";
 
 const fmin = require('fmin');
 
@@ -17,6 +18,7 @@ export class Gravitator {
     private edges: {[id: string]: {line: Line, inclination: Vector}} = {};
     private vertices: {[id: string]: {station: Station, index: Vector, startCoords: Vector}} = {};
     private dirty = false;
+    private crumpledImage: CrumpledImage | undefined;
 
     constructor(private stationProvider: StationProvider) {
         
@@ -44,6 +46,7 @@ export class Gravitator {
             this.averageEuclidianLengthRatio = weights / euclidian;
             this.averageEuclidianLength = euclidian / edgeCount;
             console.log('averageEuclidianLengthRatio^-1', 1/this.averageEuclidianLengthRatio);
+            this.crumpledImage?.initialize(Object.values(this.vertices).map(v => v.station));
         }
     }
 
@@ -259,6 +262,7 @@ export class Gravitator {
             const coords = [this.getNewStationPosition(edge.termini[0].stationId, solution), this.getNewStationPosition(edge.termini[1].stationId, solution)];
             edge.move(delay, animationDurationSeconds, coords, this.getColorByDeviation(edge, edge.weight || 0));
         }
+        this.crumpledImage?.crumple(delay, animationDurationSeconds);
         delay += animationDurationSeconds;
         return delay;
     }
@@ -312,6 +316,13 @@ export class Gravitator {
         this.dirty = true;
         const id = this.getIdentifier(line);
         delete this.edges[id];
+    }
+
+    setCrumpledImage(crumpledImage: CrumpledImage) {
+        if (this.crumpledImage != undefined) {
+            console.warn("Currently, only one crumpled image at a time is supported. Replacing.");
+        }
+        this.crumpledImage = crumpledImage;
     }
 
     private getIdentifier(line: Line) {

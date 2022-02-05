@@ -1,6 +1,6 @@
 import { Vector } from "../Vector";
 import { SvgAnimator } from "./SvgAnimator";
-import { KenImageAdapter } from "../drawables/Image";
+import { KenImageAdapter } from "../drawables/KenImage";
 import { SvgAbstractTimedDrawable } from "./SvgAbstractTimedDrawable";
 import { BoundingBox } from "../BoundingBox";
 

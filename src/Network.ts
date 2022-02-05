@@ -10,6 +10,7 @@ import { Gravitator } from "./Gravitator";
 import { Line } from "./drawables/Line";
 import { DrawableSorter } from "./DrawableSorter";
 import { Config } from "./Config";
+import { CrumpledImage } from "./drawables/CrumpledImage";
 
 export interface StationProvider {
     stationById(id: string): Station | undefined;
@@ -178,6 +179,9 @@ export class Network implements StationProvider {
             this.setSlideIndexElement(element.to, element);
         if (element instanceof Station) {
             this.stations[element.id] = element;
+        }
+        if (element instanceof CrumpledImage) {
+            this.gravitator.setCrumpledImage(element);
         }
     }
 

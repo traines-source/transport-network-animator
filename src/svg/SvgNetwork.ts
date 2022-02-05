@@ -14,9 +14,11 @@ import { SvgGenericTimedDrawable } from "./SvgGenericTimedDrawable";
 import { Train } from "../drawables/Train";
 import { SvgTrain } from "./SvgTrain";
 import { SvgAnimator } from "./SvgAnimator";
-import { SvgKenImage } from "./SvgImage";
-import { KenImage } from "../drawables/Image";
+import { SvgKenImage } from "./SvgKenImage";
+import { KenImage } from "../drawables/KenImage";
 import { Config } from "../Config";
+import { CrumpledImage } from "../drawables/CrumpledImage";
+import { SvgCrumpledImage } from "./SvgCrumpledImage";
 
 export class SvgNetwork implements NetworkAdapter {
 
@@ -78,6 +80,8 @@ export class SvgNetwork implements NetworkAdapter {
             return new Label(new SvgLabel(element), network);
         } else if (element.localName == 'image' && element.dataset.zoom != undefined) {
             return new KenImage(new SvgKenImage(element));
+        } else if (element.localName == 'foreignObject' && element.dataset.crumpledImage != undefined) {
+            return new CrumpledImage(new SvgCrumpledImage(element));
         } else if (element.dataset.from != undefined || element.dataset.to != undefined) {
             return new GenericTimedDrawable(new SvgGenericTimedDrawable(element));
         }
