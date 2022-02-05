@@ -25,4 +25,11 @@ export class BoundingBox {
         const minimalEdgeDistance = new Vector(Math.min(edgeDistance.x, ratioPreservingEdgeDistance.x), Math.min(edgeDistance.y, ratioPreservingEdgeDistance.y));
         return new BoundingBox(center.add(new Vector(-minimalEdgeDistance.x, -minimalEdgeDistance.y)), center.add(minimalEdgeDistance));
     }
+
+    add(...coords: Vector[]) {
+        for(let i=0; i<coords.length; i++) {
+            this.tl = this.tl.bothAxisMins(coords[i]);
+            this.br = this.br.bothAxisMaxs(coords[i]);
+        }
+    }
 }

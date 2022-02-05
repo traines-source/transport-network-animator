@@ -21,13 +21,11 @@ export class CrumpledImage extends AbstractTimedDrawable {
     }
 
     initialize(stations: Station[]) {
-        
         this.vertices = stations.map(n => ({station: n, startCoords: n.baseCoords}));
         const delaunay = Delaunator.from(this.vertices, n => n.startCoords.x, n => n.startCoords.y);
         
         this.setTriangles(delaunay.triangles);
         this.setTrianglesExtendedToCanvasBoundaries(delaunay.triangles, delaunay.halfedges);
-        
     }
 
     private setTriangles(triangles: Uint32Array) {

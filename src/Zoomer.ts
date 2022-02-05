@@ -25,8 +25,7 @@ export class Zoomer {
                 if (pad && !boundingBox.isNull()) {
                     boundingBox = this.paddedBoundingBox(boundingBox);
                 }
-                this.boundingBox.tl = this.boundingBox.tl.bothAxisMins(boundingBox.tl);
-                this.boundingBox.br = this.boundingBox.br.bothAxisMaxs(boundingBox.br);
+                this.boundingBox.add(boundingBox.tl, boundingBox.br);
             }
         }
     }

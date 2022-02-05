@@ -44,7 +44,7 @@ export class SvgCrumpledImage extends SvgAbstractTimedDrawable implements Crumpl
 
     draw(delaySeconds: number, animationDurationSeconds: number, vertices: {src: Vector[], dst: Station[]}[]): void {
         const animator = new SvgAnimator();
-        animator.wait(delaySeconds*1000, () => {
+        animator.wait((delaySeconds+animationDurationSeconds)*1000, () => {
             this.element.style.visibility = 'visible';
             const ctx = this.canvas.getContext('2d');
             if (ctx != null && vertices.length > 0) {
@@ -106,8 +106,9 @@ export class SvgCrumpledImage extends SvgAbstractTimedDrawable implements Crumpl
         var dx = (s0.x * (s2.y * d1.x - s1.y * d2.x) + s0.y * (s1.x * d2.x - s2.x * d1.x) + (s2.x * s1.y - s1.x * s2.y) * d0.x) / denom;
         var dy = (s0.x * (s2.y * d1.y - s1.y * d2.y) + s0.y * (s1.x * d2.y - s2.x * d1.y) + (s2.x * s1.y - s1.x * s2.y) * d0.y) / denom;
 
-        ctx.transform(m11, m12, m21, m22, dx, dy);
+        ctx.transform(m11, m12, m21, m22, dx, dy);        
         ctx.drawImage(im, 0, 0);
+       
         ctx.restore();
     };
 
