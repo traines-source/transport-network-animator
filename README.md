@@ -4,7 +4,7 @@ An SVG-based tool to animate maps of public transportation networks.
 
 See an example of how to use it in the [examples/](https://github.com/traines-source/transport-network-animator/blame/master/examples/trains.svg) directory. See it in action in this video: https://youtu.be/1-3F0ViONS4
 
-![Example Network](https://github.com/traines-source/transport-network-animator/blame/master/examples/ice-network.png?raw=true)
+![Example Network](examples/ice-network.png?raw=true)
 
 This is not
 * a graph layout algorithm. You will have to position the stations (nodes) yourself.
