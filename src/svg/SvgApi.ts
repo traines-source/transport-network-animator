@@ -4,8 +4,8 @@ import { Instant } from "../Instant";
 import { Rotation } from "../Rotation";
 
 /**
- * There is no need to access this class and its subclasses directly.
- * The attributes documented here should be used directly in the SVG code as attributes to the respective SVG element tags, while converting the attribute name from `camelCase` to `data-kebap-case`. 
+ * There is no need to access this interfaces and its child interfaces and classes directly.
+ * The attributes documented here should be used in the SVG code as attributes to the respective SVG element tags, while converting the attribute name from `camelCase` to `data-kebap-case`. 
  */
 export interface SvgAbstractTimedDrawableAttributes {
     /**
@@ -17,10 +17,12 @@ export interface SvgAbstractTimedDrawableAttributes {
     
     /**
      * Indicates when this element shall appear.
+     * 
      * Pattern: `(?<epoch>\d+) (?<second>\d+)(?<flag> [\w-]+)?` e.g. `2020 5 noanim-nozoom`
      * `epoch`: Epochs will be executed in order. Years can be used as epochs. 
      * `second`: Seconds reset to 0 with every epoch.
      * `flag`: Optional. `reverse`, `noanim`, `nozoom`, `keepzoom`. Can be combined with `-`.
+     * 
      * See further explanations in root Readme.
      * 
      * SVG: `data-from`
@@ -29,10 +31,12 @@ export interface SvgAbstractTimedDrawableAttributes {
 
     /**
      * Indicates when this element shall disappear.
+     * 
      * Pattern: `(?<epoch>\d+) (?<second>\d+)(?<flag> [\w-]+)?` e.g. `2020 5 noanim-nozoom`
      * `epoch`: Epochs will be executed in order. Years can be used as epochs. 
      * `second`: Seconds reset to 0 with every epoch.
      * `flag`: Optional. `reverse`, `noanim`, `nozoom`, `keepzoom`. Can be combined with `-`.
+     * 
      * See further explanations in root Readme.
      *  
      * SVG: `data-to`
@@ -135,6 +139,7 @@ export interface SvgLineAttributes extends SvgAbstractTimedDrawableAttributes {
 
     /**
      * A space-separated list of Station identifiers, and, optionally, a preceding track info.
+     * 
      * Pattern: `((?<trackInfo>[-+]\d*\*? )?(?<stationId>\w+( |$)))+` e.g. `+1 Frankfurt - Hannover +2* Berlin`
      * `stationId`: The identifier of a station defined elsewhere in the SVG ({@link SvgStationAttributes.id}).
      * `trackInfo`: see {@link https://github.com/traines-source/transport-network-animator#tracks}
@@ -255,6 +260,7 @@ export interface SvgTrainAttributes extends SvgAbstractTimedDrawableAttributes {
 
     /**
      * Stops of the Line given above at which the Train is supposed to stop, with departure and arrival times in between.
+     * 
      * Pattern: `(?<stationId>\w+( (?<depArrInfo>[-+]\d+[-+]\d+) |$))+` e.g. `Berlin +11+50 Hannover +56+120 Frankfurt`
      * `stationId`: The identifier of a station defined elsewhere in the SVG ({@link SvgStationAttributes.id}). Must be a stop of the Line on which the train runs.
      * `depArrInfo`: see {@link https://github.com/traines-source/transport-network-animator#trains-beta}

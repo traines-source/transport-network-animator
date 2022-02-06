@@ -2,8 +2,8 @@
 
 # Interface: SvgAbstractTimedDrawableAttributes
 
-There is no need to access this class and its subclasses directly.
-The attributes documented here should be used directly in the SVG code as attributes to the respective SVG element tags, while converting the attribute name from `camelCase` to `data-kebap-case`.
+There is no need to access this interfaces and its child interfaces and classes directly.
+The attributes documented here should be used in the SVG code as attributes to the respective SVG element tags, while converting the attribute name from `camelCase` to `data-kebap-case`.
 
 ## Hierarchy
 
@@ -36,17 +36,19 @@ The attributes documented here should be used directly in the SVG code as attrib
 • **from**: `Instant`
 
 Indicates when this element shall appear.
+
 Pattern: `(?<epoch>\d+) (?<second>\d+)(?<flag> [\w-]+)?` e.g. `2020 5 noanim-nozoom`
 `epoch`: Epochs will be executed in order. Years can be used as epochs.
 `second`: Seconds reset to 0 with every epoch.
 `flag`: Optional. `reverse`, `noanim`, `nozoom`, `keepzoom`. Can be combined with `-`.
+
 See further explanations in root Readme.
 
 SVG: `data-from`
 
 #### Defined in
 
-svg/SvgApi.ts:28
+[svg/SvgApi.ts:30](https://github.com/traines-source/transport-network-animator/blob/master/src/svg/SvgApi.ts#L30)
 
 ___
 
@@ -60,7 +62,7 @@ SVG: `name`, the standard SVG name attribute
 
 #### Defined in
 
-svg/SvgApi.ts:16
+[svg/SvgApi.ts:16](https://github.com/traines-source/transport-network-animator/blob/master/src/svg/SvgApi.ts#L16)
 
 ___
 
@@ -69,14 +71,16 @@ ___
 • **to**: `Instant`
 
 Indicates when this element shall disappear.
+
 Pattern: `(?<epoch>\d+) (?<second>\d+)(?<flag> [\w-]+)?` e.g. `2020 5 noanim-nozoom`
 `epoch`: Epochs will be executed in order. Years can be used as epochs.
 `second`: Seconds reset to 0 with every epoch.
 `flag`: Optional. `reverse`, `noanim`, `nozoom`, `keepzoom`. Can be combined with `-`.
+
 See further explanations in root Readme.
 
 SVG: `data-to`
 
 #### Defined in
 
-svg/SvgApi.ts:40
+[svg/SvgApi.ts:44](https://github.com/traines-source/transport-network-animator/blob/master/src/svg/SvgApi.ts#L44)
