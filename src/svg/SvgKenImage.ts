@@ -3,8 +3,9 @@ import { SvgAnimator } from "./SvgAnimator";
 import { KenImageAdapter } from "../drawables/KenImage";
 import { SvgAbstractTimedDrawable } from "./SvgAbstractTimedDrawable";
 import { BoundingBox } from "../BoundingBox";
+import { SvgKenImageAttributes } from "./SvgApi";
 
-export class SvgKenImage extends SvgAbstractTimedDrawable implements KenImageAdapter {
+export class SvgKenImage extends SvgAbstractTimedDrawable implements KenImageAdapter, SvgKenImageAttributes {
 
     constructor(protected element: SVGGraphicsElement) {
         super(element);

@@ -4,8 +4,9 @@ import { SvgAbstractTimedDrawable } from "./SvgAbstractTimedDrawable";
 import { BoundingBox } from "../BoundingBox";
 import { CrumpledImageAdapter } from "../drawables/CrumpledImage";
 import { Station } from "../drawables/Station";
+import { SvgCrumpledImageAttributes } from "./SvgApi";
 
-export class SvgCrumpledImage extends SvgAbstractTimedDrawable implements CrumpledImageAdapter {
+export class SvgCrumpledImage extends SvgAbstractTimedDrawable implements CrumpledImageAdapter, SvgCrumpledImageAttributes {
     private canvas: HTMLCanvasElement;
     private canvasBoundingBox: BoundingBox | undefined;
     private img: HTMLImageElement;
@@ -27,8 +28,12 @@ export class SvgCrumpledImage extends SvgAbstractTimedDrawable implements Crumpl
         return this.canvasBoundingBox;
     }
 
+    get crumpledImage(): string {
+        return this.element.dataset.crumpledImage || "";
+    }
+
     private setupImage() {
-        this.img.src = this.element.dataset.crumpledImage || "";
+        this.img.src = this.crumpledImage;
         this.img.style.visibility = 'hidden';
         
         this.canvas.setAttribute("width", this.boundingBox.dimensions.x+"");

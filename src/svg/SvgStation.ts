@@ -4,8 +4,9 @@ import { Rotation } from "../Rotation";
 import { SvgAnimator } from "./SvgAnimator";
 import { SvgAbstractTimedDrawable } from "./SvgAbstractTimedDrawable";
 import { Config } from "../Config";
+import { SvgStationAttributes } from "./SvgApi";
 
-export class SvgStation extends SvgAbstractTimedDrawable implements StationAdapter {
+export class SvgStation extends SvgAbstractTimedDrawable implements StationAdapter, SvgStationAttributes {
 
     constructor(protected element: SVGRectElement) {
         super(element);
@@ -37,6 +38,9 @@ export class SvgStation extends SvgAbstractTimedDrawable implements StationAdapt
     get rotation(): Rotation {
         return Rotation.from(this.element.dataset.dir || 'n');
     }
+    /**
+     * öasdfkljsdfklj
+     */
     get labelDir(): Rotation {
         return Rotation.from(this.element.dataset.labelDir || 'n');
     }

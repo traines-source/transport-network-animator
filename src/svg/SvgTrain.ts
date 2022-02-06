@@ -7,8 +7,9 @@ import { SvgAnimator } from "./SvgAnimator";
 import { SvgAbstractTimedDrawable } from "./SvgAbstractTimedDrawable";
 import { SvgUtils } from "./SvgUtils";
 import { Config } from "../Config";
+import { SvgTrainAttributes } from "./SvgApi";
 
-export class SvgTrain extends SvgAbstractTimedDrawable implements TrainAdapter {
+export class SvgTrain extends SvgAbstractTimedDrawable implements TrainAdapter, SvgTrainAttributes {
 
     private _stops: Stop[] = [];
 

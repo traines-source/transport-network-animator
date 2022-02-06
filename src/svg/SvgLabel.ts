@@ -6,8 +6,9 @@ import { BoundingBox } from "../BoundingBox";
 import { SvgAnimator } from "./SvgAnimator";
 import { SvgAbstractTimedDrawable } from "./SvgAbstractTimedDrawable";
 import { Config } from "../Config";
+import { SvgLabelAttributes } from "./SvgApi";
 
-export class SvgLabel extends SvgAbstractTimedDrawable implements LabelAdapter {
+export class SvgLabel extends SvgAbstractTimedDrawable implements LabelAdapter, SvgLabelAttributes {
 
     constructor(protected element: SVGGraphicsElement) {
         super(element);

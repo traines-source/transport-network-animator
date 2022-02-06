@@ -6,8 +6,9 @@ import { SvgAnimator } from "./SvgAnimator";
 import { SvgAbstractTimedDrawable } from "./SvgAbstractTimedDrawable";
 import { SvgUtils } from "./SvgUtils";
 import { Rotation } from "../Rotation";
+import { SvgLineAttributes } from "./SvgApi";
 
-export class SvgLine extends SvgAbstractTimedDrawable implements LineAdapter {
+export class SvgLine extends SvgAbstractTimedDrawable implements LineAdapter, SvgLineAttributes {
 
     private _stops: Stop[] = [];
     private _boundingBox = new BoundingBox(Vector.NULL, Vector.NULL);

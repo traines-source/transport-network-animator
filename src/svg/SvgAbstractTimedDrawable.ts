@@ -2,8 +2,9 @@ import { Instant } from "../Instant";
 import { Vector } from "../Vector";
 import { BoundingBox } from "../BoundingBox";
 import { AbstractTimedDrawableAdapter } from "../drawables/AbstractTimedDrawable";
+import { SvgAbstractTimedDrawableAttributes } from "./SvgApi";
 
-export class SvgAbstractTimedDrawable implements AbstractTimedDrawableAdapter {
+export class SvgAbstractTimedDrawable implements AbstractTimedDrawableAdapter, SvgAbstractTimedDrawableAttributes {
 
     constructor(protected element: SVGGraphicsElement) {
 
