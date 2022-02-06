@@ -31,8 +31,8 @@
   "scripts": {
     "wp": "webpack",
     "wpw": "webpack --watch",
-    "test": "mocha -r ts-node/register test/**/*.spec.ts",
-    "coverage": "nyc mocha -r ts-node/register test/**/*.spec.ts",
+    "test": "mocha -r ts-node/register 'test/**/*.spec.ts'",
+    "coverage": "nyc mocha -r ts-node/register 'test/**/*.spec.ts'",
     "screentest": "docker-compose run --rm -u $(id -u ${USER}):$(id -g ${USER}) --entrypoint 'jest --runInBand --detectOpenHandles --forceExit' network-animator-render /app/screentest/_screentest.spec.js",
     "docs": "typedoc --plugin typedoc-plugin-markdown --plugin typedoc-plugin-merge-modules --mergeModulesMergeMode project --out docs --readme none --excludePrivate --githubPages false --gitRevision master src/main.ts src/svg/SvgApi.ts",
     "build": "npm run wp && npm run test && npm run screentest && npm run docs"

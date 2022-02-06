@@ -5,6 +5,7 @@ import { Utils } from "./Utils";
 import { StationProvider } from "./Network";
 import { Config } from "./Config";
 import { CrumpledImage } from "./drawables/CrumpledImage";
+import { TimedDrawable } from "./drawables/TimedDrawable";
 
 const fmin = require('fmin');
 
@@ -20,8 +21,7 @@ export class Gravitator {
     private dirty = false;
     private crumpledImage: CrumpledImage | undefined;
 
-    constructor(private stationProvider: StationProvider) {
-        
+    constructor() {
     }
 
     gravitate(delay: number, animate: boolean): number {
@@ -284,9 +284,9 @@ export class Gravitator {
         return new Vector(solution[this.vertices[stationId].index.x], solution[this.vertices[stationId].index.y]);
     }
 
-    private addVertex(vertexId: string) {
+    private addVertex(vertexId: string, stationProvider: StationProvider) {
         if (this.vertices[vertexId] == undefined) {
-            const station = this.stationProvider.stationById(vertexId);
+            const station = stationProvider.stationById(vertexId);
             if (station == undefined)
                 throw new Error('Station with ID ' + vertexId + ' is undefined');
             this.vertices[vertexId] = {station: station, index: Vector.NULL, startCoords: station.baseCoords};
@@ -300,13 +300,13 @@ export class Gravitator {
         return new Vector(deltaXStart * normStart, deltaYStart * normStart);
     }
 
-    addEdge(line: Line) {
+    addEdge(line: Line, stationProvider: StationProvider) {
         if (line.weight == undefined) 
             return;
         this.dirty = true;
         const id = this.getIdentifier(line);
-        this.addVertex(line.termini[0].stationId);
-        this.addVertex(line.termini[1].stationId);
+        this.addVertex(line.termini[0].stationId, stationProvider);
+        this.addVertex(line.termini[1].stationId, stationProvider);
         this.edges[id] = {line: line, inclination: this.startEdgeInclination(line)};
     }
 
@@ -318,11 +318,13 @@ export class Gravitator {
         delete this.edges[id];
     }
 
-    setCrumpledImage(crumpledImage: CrumpledImage) {
-        if (this.crumpledImage != undefined) {
-            console.warn("Currently, only one crumpled image at a time is supported. Replacing.");
+    setIfCrumpledImage(element: TimedDrawable) {
+        if (element instanceof CrumpledImage) {
+            if (this.crumpledImage != undefined) {
+                console.warn("Currently, only one crumpled image at a time is supported. Replacing.");
+            }
+            this.crumpledImage = element;
         }
-        this.crumpledImage = crumpledImage;
     }
 
     private getIdentifier(line: Line) {

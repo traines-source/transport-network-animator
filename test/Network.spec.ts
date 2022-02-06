@@ -8,21 +8,27 @@ import { TimedDrawable } from '../src/drawables/TimedDrawable';
 import { BoundingBox } from "../src/BoundingBox";
 import { Instant } from '../src/Instant';
 import { DrawableSorter } from '../src/DrawableSorter';
+import { Gravitator } from '../src/Gravitator';
 
 describe('Network', () => {
     let networkAdapter: NetworkAdapter;
     let timedDrawable: TimedDrawable;
     let stationAdapter: StationAdapter;
+    let gravitator: Gravitator;
 
     beforeEach(() => {
         networkAdapter = mock();
         when(networkAdapter.canvasSize).thenReturn(new BoundingBox(new Vector(0,0), new Vector(1000,1000)));
         timedDrawable = mock();
         stationAdapter = mock();
+        gravitator = mock();
+        when(gravitator.gravitate(anything(), anything())).thenCall((delay: number, animate: boolean) => {
+            return delay;
+        });
     })
 
     it('whenNextInstant', () => {
-        const underTest = new Network(instance(networkAdapter), new DrawableSorter());
+        const underTest = new Network(instance(networkAdapter), new DrawableSorter(), instance(gravitator));
 
         when(timedDrawable.from).thenReturn(new Instant(1, 1, ''));
         when(timedDrawable.to).thenReturn(new Instant(1, 2, ''));
@@ -40,7 +46,7 @@ describe('Network', () => {
     })
 
     it('whenInitialize', () => {
-        const underTest = new Network(instance(networkAdapter), new DrawableSorter());
+        const underTest = new Network(instance(networkAdapter), new DrawableSorter(), instance(gravitator));
         underTest.initialize()
         verify(networkAdapter.initialize(underTest)).called();
     })
@@ -49,7 +55,7 @@ describe('Network', () => {
         when(stationAdapter.id).thenReturn('a');
         const a = new Station(instance(stationAdapter));
 
-        const underTest = new Network(instance(networkAdapter), new DrawableSorter());
+        const underTest = new Network(instance(networkAdapter), new DrawableSorter(), instance(gravitator));
         underTest.addToIndex(a);
 
         expect(underTest.stationById('a')).eql(a);
@@ -58,13 +64,13 @@ describe('Network', () => {
     })
 
     it('whenDrawTimedDrawableAt_givenNotExistingInstant_thenDoNothing', () => {
-        const underTest = new Network(instance(networkAdapter), new DrawableSorter());
+        const underTest = new Network(instance(networkAdapter), new DrawableSorter(), instance(gravitator));
 
         expect(underTest.drawTimedDrawablesAt(Instant.BIG_BANG, true)).eql(1);
     })
 
     it('whenDrawTimedDrawableAt_givenAnimatedInstantButAnimateFalse_thenDontAnimate', () => {
-        const underTest = new Network(instance(networkAdapter), new DrawableSorter());
+        const underTest = new Network(instance(networkAdapter), new DrawableSorter(), instance(gravitator));
 
         when(timedDrawable.from).thenReturn(new Instant(1, 1, ''));
         when(timedDrawable.to).thenReturn(new Instant(2, 3, 'reverse'));
@@ -80,7 +86,7 @@ describe('Network', () => {
     })
 
     it('whenDrawTimedDrawableAt_givenDrawableAtBigBang_thenDrawForever', () => {
-        const underTest = new Network(instance(networkAdapter), new DrawableSorter());
+        const underTest = new Network(instance(networkAdapter), new DrawableSorter(), instance(gravitator));
 
         when(timedDrawable.from).thenReturn(Instant.BIG_BANG);
         when(timedDrawable.to).thenReturn(Instant.BIG_BANG);
@@ -94,7 +100,7 @@ describe('Network', () => {
     })
 
     it('whenDrawTimedDrawableAt_givenAnimatedInstantButAnimateTrue_thenAnimate', () => {
-        const underTest = new Network(instance(networkAdapter), new DrawableSorter());
+        const underTest = new Network(instance(networkAdapter), new DrawableSorter(), instance(gravitator));
 
         when(timedDrawable.from).thenReturn(new Instant(1, 1, ''));
         when(timedDrawable.to).thenReturn(new Instant(2, 3, ''));
@@ -122,7 +128,7 @@ describe('Network', () => {
     })
 
     it('whenDrawTimedDrawableAt_givenDrawAndEraseForSameInstant_thenObeyOrder', () => {
-        const underTest = new Network(instance(networkAdapter), new DrawableSorter());
+        const underTest = new Network(instance(networkAdapter), new DrawableSorter(), instance(gravitator));
 
         when(timedDrawable.from).thenReturn(new Instant(2, 3, ''));
         when(timedDrawable.to).thenReturn(new Instant(2, 4, ''));
@@ -149,7 +155,7 @@ describe('Network', () => {
     })
 
     it('whenDrawTimedDrawableAt_givenMultipleDrawAndEraseForSameInstant_thenObeyOrder', () => {
-        const underTest = new Network(instance(networkAdapter), new DrawableSorter());
+        const underTest = new Network(instance(networkAdapter), new DrawableSorter(), instance(gravitator));
 
         when(timedDrawable.name).thenReturn("01");
         when(timedDrawable.from).thenReturn(new Instant(1, 1, ''));
@@ -202,7 +208,7 @@ describe('Network', () => {
         const drawableSorter: DrawableSorter = mock();
         when(drawableSorter.sort(anything(), anything(), anything())).thenReturn([{delay: 0, reverse: true}, {delay: 3, reverse: false}]);
 
-        const underTest = new Network(instance(networkAdapter), instance(drawableSorter));
+        const underTest = new Network(instance(networkAdapter), instance(drawableSorter), instance(gravitator));
 
         when(timedDrawable.name).thenReturn("00");
         when(timedDrawable.from).thenReturn(new Instant(1, 1, ''));
@@ -240,7 +246,7 @@ describe('Network', () => {
         const v = new Vector(1, 1);
         const r = new Rotation(90);
         when(networkAdapter.createVirtualStop('a', v, r)).thenReturn(a);
-        const underTest = new Network(instance(networkAdapter), new DrawableSorter());
+        const underTest = new Network(instance(networkAdapter), new DrawableSorter(), instance(gravitator));
 
         expect(underTest.createVirtualStop('a', v, r)).eql(a);
         expect(underTest.stationById('a')).eql(a);

@@ -10,7 +10,6 @@ import { Gravitator } from "./Gravitator";
 import { Line } from "./drawables/Line";
 import { DrawableSorter } from "./DrawableSorter";
 import { Config } from "./Config";
-import { CrumpledImage } from "./drawables/CrumpledImage";
 
 export interface StationProvider {
     stationById(id: string): Station | undefined;
@@ -30,11 +29,9 @@ export class Network implements StationProvider {
     private stations: { [id: string] : Station } = {};
     private lineGroups: { [id: string] : LineGroup } = {};
     private drawableBuffer: TimedDrawable[] = [];
-    private gravitator: Gravitator;
     private zoomer: Zoomer;
 
-    constructor(private adapter: NetworkAdapter, private drawableSorter: DrawableSorter) {
-        this.gravitator = new Gravitator(this);
+    constructor(private adapter: NetworkAdapter, private drawableSorter: DrawableSorter, private gravitator: Gravitator) {
         this.zoomer = new Zoomer(this.adapter.canvasSize, Config.default.zoomMaxScale);
     }
 
@@ -149,7 +146,7 @@ export class Network implements StationProvider {
     
     private drawElement(element: TimedDrawable, delay: number, animate: boolean, reverse: boolean): number {
         if (element instanceof Line) {
-            this.gravitator.addEdge(element);
+            this.gravitator.addEdge(element, this);
         }
         return element.draw(delay, animate, reverse);
     }
@@ -180,9 +177,7 @@ export class Network implements StationProvider {
         if (element instanceof Station) {
             this.stations[element.id] = element;
         }
-        if (element instanceof CrumpledImage) {
-            this.gravitator.setCrumpledImage(element);
-        }
+        this.gravitator.setIfCrumpledImage(element);
     }
 
     private setSlideIndexElement(instant: Instant, element: TimedDrawable): void {

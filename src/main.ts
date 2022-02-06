@@ -4,6 +4,7 @@ import { Instant } from "./Instant";
 import { SvgAnimator } from "./svg/SvgAnimator";
 import { DrawableSorter } from "./DrawableSorter";
 import { Config } from "./Config";
+import { Gravitator } from "./Gravitator";
 
 export { SvgAnimator } from "./svg/SvgAnimator";
 export { Config } from "./Config";
@@ -13,7 +14,7 @@ export { Rotation } from "./Rotation";
 
 let timePassed = 0;
 
-const network: Network = new Network(new SvgNetwork(), new DrawableSorter());
+const network: Network = new Network(new SvgNetwork(), new DrawableSorter(), new Gravitator());
 let started = false;
 let stopped = false;
 const animateFromInstant: Instant = getStartInstant();
