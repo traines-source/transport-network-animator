@@ -4,7 +4,7 @@ An SVG-based tool to animate maps of public transportation networks.
 
 See an example of how to use it in the [examples/](https://github.com/traines-source/transport-network-animator/blame/master/examples/trains.svg) directory. See it in action in this video: https://youtu.be/1-3F0ViONS4
 
-![Example Network](examples/ice-network.png?raw=true)
+![Example Network](https://github.com/traines-source/transport-network-animator/blame/master/examples/ice-network.png?raw=true)
 
 This is not
 * a graph layout algorithm. You will have to position the stations (nodes) yourself.
@@ -35,7 +35,7 @@ Each line segment needs to be an SVG `path` element having a name (`data-line`) 
 
 The algorithm will try to find a nice "Harry Beck style" way to draw the lines. Sometimes it will fail. You can fix this by adjusting station positioning and rotation and by adding additional "helper" stations while setting `class="helper"` in the example or making these helper stations invisible however you like.
 
-Lines will be animated with a constant speed, that is currently only configurable in the code.
+Lines will be animated with a constant speed that can be [configured](https://github.com/traines-source/transport-network-animator/blob/master/docs/classes/Config.md#animspeed).
 
 ### Instants
 An "instant" is a point in time, consisting of an "epoch", a "second" and a flag. Seconds start again from 0 for each new epoch. Events defined for the same epoch and second will (a bit counterintuitively) not be animated at the same time, but exactly consecutively. This is very handy for multiple line segments or lines that should appear directly one after another in one single fluid animation. The order in which they are animated depends on the order the elements appear in the SVG source, with one exception: when removing elements (`data-to`), consecutive elements with the same name and instant will be animated in reverse order.
@@ -57,7 +57,7 @@ A label, being an SVG `text` element, can be defined for a station (`data-statio
 ### Zoom
 For each instant, the canvas will zoom to the bounding box of all elements that are altered during that instant. Elements that have `nozoom` or `keepzoom` set are not taken into account for the calculation of the bounding box. If in this instant no elements qualify for zooming, the canvas will be zoomed out completely. However, if a `keepzoom` element is the first element for that instant, the bounding box of the previous instant will be retained. That is, if all other elements for this instant do not contribute to the bounding box, the bounding box will stay the same as in the last instant.
 
-There is always one second reserved for zooming at the beginning of each instant, which can currently only be configured in code. Only after that second will the animation of elements for that instant start. Zoom can be disabled altogether by removing the `zoomable` group.
+There is always one second reserved for zooming at the beginning of each instant, unless [configured](https://github.com/traines-source/transport-network-animator/blob/master/docs/classes/Config.md#zoomduration) otherwise. Only after that second will the animation of elements for that instant start. Zoom can be disabled altogether by removing the `zoomable` group.
 
 ### Trains (Beta)
 Trains can be animated on previously defined lines (see example [trains.svg](https://github.com/traines-source/transport-network-animator/blame/master/examples/trains.svg)). They are just paths that are moved along other paths. A `path` that is supposed to represent a train must have the `data-train` attribute, referencing the line name defined previously on which the train is supposed to run. In the `data-stops` attribute, a list of stations of this line at which the train is supposed to stop must be given, including the departure and arrival times, e.g. `Berlin +11+50 Hannover +56+120 Frankfurt`, meaning the train needs 39 minutes between Berlin and Hannover and stops at Hannover for 6 minutes, arriving in Frankfurt after another 64 minutes. The time is given in seconds relative to the `data-from` instant. This makes it easy to animate the trains according to a real timetable if one second in the animation corresponds to one minute in reality. Pluses (`+`) are mandatory, minuses (`-`) can be used instead to let the train start from the origin before the `data-from` instant.
@@ -66,12 +66,14 @@ The number of train segments can be specified using the `data-length` attribute 
 
 A train can run across multiple line segments. However, there exists currently a limitation that a train must stop at least once per line segment. More complex train routing is not yet supported. If you want to represent a station with trains stopping at multiple tracks and positions at the platforms, it might make sense to represent each stopping position and each fork/switch as a separate dummy station and have these connected with line segments all of the same line. You can then define a lot of trains for the same line which are stopping at specific positions by referencing the dummy stations.
 
-## Why SVG?
+## Tips
 Using SVG as the base, the appearance of the map can be tweaked and styled as you wish, with additional SVG elements and CSS. The styles (e.g. colors) of the lines should also be adjusted via CSS. It might also come in handy to add a background map as SVG or embedded image. Please note that SVG filters do not seem to be supported by the [timecut](https://github.com/tungs/timecut) renderer, in case you want to render your animation to a video.
 
 For debugging, look at possible errors and warnings in the developer console of your browser. By appending a hashtag and the epoch to the URL under which you're viewing your SVG and then refreshing the page, you can jump to that very epoch skipping the preceding ones, so that you don't have to watch the entire animation over and over again.
 
-The code could probably quite easily be rewritten to use another base technology, e.g. HTML5 Canvas. It's mainly just the TS classes in the `svg` subdirectory that have to be reimplemented. I just happen to think (currently) that SVG is the best choice.
+For additional configuration options to tweak the behaviour of TNA, see [Config](https://github.com/traines-source/transport-network-animator/blob/master/docs/classes/Config.md).
+
+The code could probably be rewritten to use another base technology, e.g. HTML5 Canvas. It's mainly just the TS classes in the `svg` subdirectory that have to be reimplemented. I just happen to think that SVG is the best choice.
 
 ## Breaking Changes
 * Stations need to have a `data-station` attribute instead of an `id`. Elements that can be animated will be sourced from the entire SVG document instead of only the `elements` and `station` groups.
@@ -86,4 +88,19 @@ You will often find examples for these experimental features over at https://git
 * Optionally starting transport-network-animator only when a specific event is received, to be able to execute custom code beforehand (e.g. reading paths from geojson).
 * Firing event for every epoch, to be able to run custom code.
 * Drawing lines in geographical order (e.g. north to south) instead of defined order.
+* Built-in support for map projections so you can work in WGS84 as much as possible.
 * Overridable drawing speed for lines.
+
+## Development
+
+npm and, for certain actions, Docker are required. The development environment is tested on Linux, but might also work on other platforms.
+
+Clone the repo and run `npm install`. The following npm scripts are available:
+
+* `npm run wp`: Build the `dist/network-animator.js` distribution file so the changes can be used in an SVG project file
+* `npm run wpw`: Continuously watch for changes and build
+* `npm run test`: Run unit tests
+* `npm run coverage`: Run unit tests with coverage
+* `npm run screentest`: Run cypress screenshot regression tests
+* `npm run docs`: Build the TS docs
+* `npm run build`: Run wp, test, screentest, docs in one go – useful before committing

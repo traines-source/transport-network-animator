@@ -1,9 +1,20 @@
+/**
+ * To override configuration values, you can access the default instance of this class in your own JavaScript, e.g.:
+ * 
+ * ```
+ * TNA.Config.default.beckStyle = false;
+ * ```
+ * 
+ * Your JavaScript code needs to be included after transport-network-animator itself.
+ * This also means that you most likely want to set {@link Config.autoStart} to `false`, which needs to be set directly in the SVG (`data-auto-start="false"`).
+ * See a full example here: {@link https://github.com/traines-source/transport-network-animator/blob/master/examples/travel-times-fernverkehr.svg?short_path=c3daf6a#L651}
+ */
 export class Config {
     private static _default: Config;
 
     /**
      * Whether to automatically start TNA. Set to false if you want to run custom code (e.g. setting up paths etc. programmatically) beforehand.
-     * This needs to be set in the SVG to the SVG tag (data-auto-start="false"). Setting it in JavaScript will not have any effect.
+     * This needs to be set in the SVG to the SVG tag (`data-auto-start="false"`). Setting it in JavaScript will not have any effect.
      * If set to false, you will need to fire an event from your JavaScript if you eventually want to start TNA:
      * ```
      * document.dispatchEvent(new Event('startTransportNetworkAnimator'));
