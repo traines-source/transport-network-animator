@@ -2,30 +2,39 @@ import { Station } from "./Station";
 import { Vector } from "../Vector";
 import Delaunator from "delaunator";
 import { AbstractTimedDrawableAdapter, AbstractTimedDrawable } from "./AbstractTimedDrawable";
+import { Rotation } from "../Rotation";
 
-interface Vertex {station: Station, startCoords: Vector};
+export interface Vertex {currentCoords: () => Vector, startCoords: Vector};
+export interface Triangle {a: Vertex, b: Vertex, c: Vertex};
 
 export interface CrumpledImageAdapter extends AbstractTimedDrawableAdapter {
-    draw(delaySeconds: number, animationDurationSeconds: number, triangles: {src: Vector[], dst: Station[]}[]): void;
+    draw(delaySeconds: number, animationDurationSeconds: number, triangles: Triangle[]): void;
     erase(delaySeconds: number): void;
 }
 
 export class CrumpledImage extends AbstractTimedDrawable {
+    static EXTEND_BEYOND_CANVAS_FACTOR = 2;
 
     private vertices: Vertex[] = [];
-    private triangles: {a: Vertex, b: Vertex, c: Vertex}[] = [];
-    private extendToCanvas: {a: Vertex, b: Vertex, c: Vertex, aExtendedStartCoords: Vector, cExtendedStartCoords: Vector, baFactor: number, bcFactor: number}[] = [];
+    private triangles: Triangle[] = [];
+    private extendToCanvas: {triangle: Triangle, aExtendedStartCoords: Vector, cExtendedStartCoords: Vector, baFactor: number, bcFactor: number}[] = [];
+    private canvasSides: { corner: Vector, side: Vector }[] = [];
 
     constructor(protected adapter: CrumpledImageAdapter) {
         super(adapter);
     }
 
     initialize(stations: Station[]) {
-        this.vertices = stations.map(n => ({station: n, startCoords: n.baseCoords}));
-        const delaunay = Delaunator.from(this.vertices, n => n.startCoords.x, n => n.startCoords.y);
+        this.vertices = stations.map(n => ({currentCoords: () => n.baseCoords, startCoords: n.baseCoords}));
+        this.canvasSides = this.getCanvasSides();
+        let delaunay = Delaunator.from(this.vertices, n => n.startCoords.x, n => n.startCoords.y);
         
         this.setTriangles(delaunay.triangles);
         this.setTrianglesExtendedToCanvasBoundaries(delaunay.triangles, delaunay.halfedges);
+        //this.setTrianglesExtendedToCanvasCorners();
+
+        delaunay = Delaunator.from(this.vertices, n => n.startCoords.x, n => n.startCoords.y);
+        this.setTriangles(delaunay.triangles);
     }
 
     private setTriangles(triangles: Uint32Array) {
@@ -42,9 +51,9 @@ export class CrumpledImage extends AbstractTimedDrawable {
         const single: Vector[][] = [];
         for (let i = 0; i < halfEdges.length; i++) {
             if (halfEdges[i] == -1) {
-                const a = this.vertices[triangles[i]];
+                const c = this.vertices[triangles[i]];
                 const b = this.vertices[triangles[this.prevHalfedge(i)]];
-                const c = this.vertices[triangles[this.nextHalfedge(i)]];
+                const a = this.vertices[triangles[this.nextHalfedge(i)]];
 
                 single.push([a.startCoords, c.startCoords]);
 
@@ -52,14 +61,22 @@ export class CrumpledImage extends AbstractTimedDrawable {
                 const bc = b.startCoords.delta(c.startCoords);
                 const baFactor = this.factorToExtendVectorToCanvasBoundaries(b.startCoords, ba);
                 const bcFactor = this.factorToExtendVectorToCanvasBoundaries(b.startCoords, bc);
+                const aExtendedStartCoords = b.startCoords.add(ba.scale(baFactor));
+                const cExtendedStartCoords = b.startCoords.add(bc.scale(bcFactor));
                 this.extendToCanvas.push({
-                    a: a,
-                    b: b,
-                    c: c,
-                    aExtendedStartCoords: b.startCoords.add(ba.scale(baFactor)),
-                    cExtendedStartCoords: b.startCoords.add(bc.scale(bcFactor)),
+                    triangle: {a: a, b: b, c: c},
+                    aExtendedStartCoords: aExtendedStartCoords,
+                    cExtendedStartCoords: cExtendedStartCoords,
                     baFactor: baFactor,
                     bcFactor: bcFactor,
+                });
+                this.vertices.push({
+                    currentCoords: () => this.extendCurrentVector(b, a, baFactor),
+                    startCoords: aExtendedStartCoords
+                });
+                this.vertices.push({
+                    currentCoords: () => this.extendCurrentVector(b, c, bcFactor),
+                    startCoords: cExtendedStartCoords
                 });
             }
         }
@@ -67,12 +84,44 @@ export class CrumpledImage extends AbstractTimedDrawable {
         //console.log(single.map(v => v[0].x + " " + v[0].y + " L " +  v[1].x + " " + v[1].y).join(" M "));
     }
 
+    private extendCurrentVector(origin: Vertex, direction: Vertex, factor: number) {
+        return origin.currentCoords().add(origin.currentCoords().delta(direction.currentCoords()).scale(factor));
+    }
+
+    private setTrianglesExtendedToCanvasCorners() {
+        for (let i=0; i<this.canvasSides.length; i++) {
+            let minAngleBefore = Rotation.from("n");
+            let minAngleAfter = Rotation.from("n");
+            let minExtended = -1;
+            for (let j=0; j<this.extendToCanvas.length; j++) {
+                const e = this.extendToCanvas[i];
+                const extendedToCorner = e.triangle.b.startCoords.delta(this.canvasSides[i].corner);
+                const angleBefore = e.triangle.b.startCoords.delta(e.aExtendedStartCoords).angle(extendedToCorner);
+                const angleAfter = e.triangle.b.startCoords.delta(e.cExtendedStartCoords).angle(extendedToCorner);
+                /*const dist = this.extendToCanvas[i].aExtendedStartCoords.delta(this.canvasSides[i].corner).length +
+                    this.extendToCanvas[i].cExtendedStartCoords.delta(this.canvasSides[i].corner).length;*/
+                if (minExtended == -1 || angleBefore.degrees + angleAfter.degrees < minAngleBefore.degrees + minAngleAfter.degrees) {
+                    minAngleBefore = angleBefore;
+                    minAngleAfter = angleAfter;
+                    minExtended = i;
+                }
+            }
+
+            const e = this.extendToCanvas[minExtended];
+            const interpolatedFactor = (minAngleBefore.degrees*e.baFactor+minAngleAfter.degrees*e.bcFactor)/(minAngleBefore.degrees+minAngleAfter.degrees);
+            const interpolatedExtend = {currentCoords: () => new Vector(0, 0), startCoords: this.canvasSides[i].corner};
+            this.vertices.push({
+                currentCoords: () => this.extendCurrentVector(e.triangle.b, interpolatedExtend, interpolatedFactor),
+                startCoords: this.canvasSides[i].corner
+            });
+        }
+    }
+
     private factorToExtendVectorToCanvasBoundaries(origin: Vector, extend: Vector): number {
-        const canvasSides = this.getCanvasSides();
-        for (let i=0; i<canvasSides.length; i++) {
-            const solution = canvasSides[i].corner.delta(origin).solveDeltaForIntersection(canvasSides[i].side, extend);
+        for (let i=0; i<this.canvasSides.length; i++) {
+            const solution = this.canvasSides[i].corner.delta(origin).solveDeltaForIntersection(this.canvasSides[i].side, extend);
             if (solution.a >= 0 && solution.a <= 1 && solution.b >= 0) {
-                return solution.b;
+                return solution.b*CrumpledImage.EXTEND_BEYOND_CANVAS_FACTOR;
             }
         }
         throw new Error(extend + " does not seem to intersect with canvas boundaries, which is impossible.");
@@ -81,15 +130,17 @@ export class CrumpledImage extends AbstractTimedDrawable {
     private getCanvasSides(): {corner: Vector, side: Vector}[] {
         const tl = this.adapter.boundingBox.tl;
         const br = this.adapter.boundingBox.br;
-        const t = new Vector(br.x-tl.x, 0);
-        const r = new Vector(0, tl.y-br.y);
-        const b = new Vector(tl.x-br.x, 0);
-        const l = new Vector(0, br.y-tl.y);
+        const tr = new Vector(br.x, tl.y);
+        const bl = new Vector(tl.x, br.y);
+        const t = new Vector(tr.x-tl.x, 0);
+        const r = new Vector(0, br.y-tr.y);
+        const b = new Vector(bl.x-br.x, 0);
+        const l = new Vector(0, tl.y-bl.y);
         return [
             { corner: tl, side: t },
-            { corner: br, side: r },
+            { corner: tr, side: r },
             { corner: br, side: b },
-            { corner: tl, side: l }
+            { corner: bl, side: l }
         ];
     }
 
@@ -107,8 +158,7 @@ export class CrumpledImage extends AbstractTimedDrawable {
     }
 
     crumple(delay: number, animationDurationSeconds: number) {
-        this.adapter.draw(delay, animationDurationSeconds,
-            this.triangles.map(t => ({src: [t.a.startCoords, t.b.startCoords, t.c.startCoords], dst: [t.a.station, t.b.station, t.c.station]})));
+        this.adapter.draw(delay, animationDurationSeconds, this.triangles);
         return 0;
     }
 

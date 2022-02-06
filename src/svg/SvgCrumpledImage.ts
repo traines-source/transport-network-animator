@@ -2,8 +2,7 @@ import { Vector } from "../Vector";
 import { SvgAnimator } from "./SvgAnimator";
 import { SvgAbstractTimedDrawable } from "./SvgAbstractTimedDrawable";
 import { BoundingBox } from "../BoundingBox";
-import { CrumpledImageAdapter } from "../drawables/CrumpledImage";
-import { Station } from "../drawables/Station";
+import { CrumpledImageAdapter, Triangle } from "../drawables/CrumpledImage";
 import { SvgCrumpledImageAttributes } from "./SvgApi";
 
 export class SvgCrumpledImage extends SvgAbstractTimedDrawable implements CrumpledImageAdapter, SvgCrumpledImageAttributes {
@@ -47,14 +46,17 @@ export class SvgCrumpledImage extends SvgAbstractTimedDrawable implements Crumpl
         this.element.appendChild(this.img);
     }
 
-    draw(delaySeconds: number, animationDurationSeconds: number, vertices: {src: Vector[], dst: Station[]}[]): void {
+    draw(delaySeconds: number, animationDurationSeconds: number, triangles: Triangle[]): void {
         const animator = new SvgAnimator();
-        animator.wait((delaySeconds+animationDurationSeconds)*1000, () => {
+        animator.wait(delaySeconds*1000, () => {
             this.element.style.visibility = 'visible';
             const ctx = this.canvas.getContext('2d');
-            if (ctx != null && vertices.length > 0) {
-                this.mapTriangles(vertices.map(v => ({src: v.src, dst: v.dst.map(s => s.baseCoords)})), ctx);
-            }
+            if (ctx != null && triangles.length > 0) {
+                animator.animate(animationDurationSeconds*1000, (x, isLast) => {
+                    this.mapTriangles(triangles, ctx);
+                    return true;
+                });
+            }            
         });
     }
 
@@ -65,11 +67,13 @@ export class SvgCrumpledImage extends SvgAbstractTimedDrawable implements Crumpl
         });
     }
 
-    private mapTriangles(triangles: {src: Vector[], dst: Vector[]}[], ctx: CanvasRenderingContext2D) {
+    private mapTriangles(triangles: Triangle[], ctx: CanvasRenderingContext2D) {
         ctx.clearRect(0, 0, this.boundingBox.dimensions.x, this.boundingBox.dimensions.y);
         for (let i=0;i<triangles.length;i++) {
-            const src = triangles[i].src.map(c => this.svg2ImgCoords(c));
-            const dst = triangles[i].dst.map(c => this.svg2CanvasCoords(c));
+            const t = triangles[i];
+            const tArr = [t.a, t.b, t.c];
+            const src = tArr.map(c => this.svg2ImgCoords(c.startCoords));
+            const dst = tArr.map(c => this.svg2CanvasCoords(c.currentCoords()));
             this.drawTriangle(ctx, this.img,
                 dst[0], dst[1], dst[2],
                 src[0], src[1], src[2]
