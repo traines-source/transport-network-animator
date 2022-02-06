@@ -36,6 +36,7 @@ SVG: `path`
 Indicates when this element shall appear.
 
 Pattern: `(?<epoch>\d+) (?<second>\d+)(?<flag> [\w-]+)?` e.g. `2020 5 noanim-nozoom`
+
 `epoch`: Epochs will be executed in order. Years can be used as epochs.
 `second`: Seconds reset to 0 with every epoch.
 `flag`: Optional. `reverse`, `noanim`, `nozoom`, `keepzoom`. Can be combined with `-`.
@@ -50,7 +51,7 @@ SVG: `data-from`
 
 #### Defined in
 
-[svg/SvgApi.ts:30](https://github.com/traines-source/transport-network-animator/blob/master/src/svg/SvgApi.ts#L30)
+[svg/SvgApi.ts:31](https://github.com/traines-source/transport-network-animator/blob/master/src/svg/SvgApi.ts#L31)
 
 ___
 
@@ -66,7 +67,7 @@ SVG: `data-length`
 
 #### Defined in
 
-[svg/SvgApi.ts:281](https://github.com/traines-source/transport-network-animator/blob/master/src/svg/SvgApi.ts#L281)
+[svg/SvgApi.ts:285](https://github.com/traines-source/transport-network-animator/blob/master/src/svg/SvgApi.ts#L285)
 
 ___
 
@@ -88,7 +89,7 @@ SVG: `data-train`
 
 #### Defined in
 
-[svg/SvgApi.ts:259](https://github.com/traines-source/transport-network-animator/blob/master/src/svg/SvgApi.ts#L259)
+[svg/SvgApi.ts:262](https://github.com/traines-source/transport-network-animator/blob/master/src/svg/SvgApi.ts#L262)
 
 ___
 
@@ -98,7 +99,8 @@ ___
 
 Stops of the Line given above at which the Train is supposed to stop, with departure and arrival times in between.
 
-Pattern: `(?<stationId>\w+( (?<depArrInfo>[-+]\d+[-+]\d+) |$))+` e.g. `Berlin +11+50 Hannover +56+120 Frankfurt`
+Pattern: `((?<stationId>\w+)( (?<depArrInfo>[-+]\d+[-+]\d+) |$))+` e.g. `Berlin +11+50 Hannover +56+120 Frankfurt`
+
 `stationId`: The identifier of a station defined elsewhere in the SVG ([SvgStationAttributes.id](SvgStationAttributes.md#id)). Must be a stop of the Line on which the train runs.
 `depArrInfo`: see [https://github.com/traines-source/transport-network-animator#trains-beta](https://github.com/traines-source/transport-network-animator#trains-beta)
 
@@ -108,7 +110,7 @@ SVG: `data-stops`
 
 #### Defined in
 
-[svg/SvgApi.ts:272](https://github.com/traines-source/transport-network-animator/blob/master/src/svg/SvgApi.ts#L272)
+[svg/SvgApi.ts:276](https://github.com/traines-source/transport-network-animator/blob/master/src/svg/SvgApi.ts#L276)
 
 ___
 
@@ -119,6 +121,7 @@ ___
 Indicates when this element shall disappear.
 
 Pattern: `(?<epoch>\d+) (?<second>\d+)(?<flag> [\w-]+)?` e.g. `2020 5 noanim-nozoom`
+
 `epoch`: Epochs will be executed in order. Years can be used as epochs.
 `second`: Seconds reset to 0 with every epoch.
 `flag`: Optional. `reverse`, `noanim`, `nozoom`, `keepzoom`. Can be combined with `-`.
@@ -133,4 +136,4 @@ SVG: `data-to`
 
 #### Defined in
 
-[svg/SvgApi.ts:44](https://github.com/traines-source/transport-network-animator/blob/master/src/svg/SvgApi.ts#L44)
+[svg/SvgApi.ts:46](https://github.com/traines-source/transport-network-animator/blob/master/src/svg/SvgApi.ts#L46)

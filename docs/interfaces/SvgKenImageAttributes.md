@@ -35,6 +35,7 @@ SVG: `image`
 Indicates when this element shall appear.
 
 Pattern: `(?<epoch>\d+) (?<second>\d+)(?<flag> [\w-]+)?` e.g. `2020 5 noanim-nozoom`
+
 `epoch`: Epochs will be executed in order. Years can be used as epochs.
 `second`: Seconds reset to 0 with every epoch.
 `flag`: Optional. `reverse`, `noanim`, `nozoom`, `keepzoom`. Can be combined with `-`.
@@ -49,7 +50,7 @@ SVG: `data-from`
 
 #### Defined in
 
-[svg/SvgApi.ts:30](https://github.com/traines-source/transport-network-animator/blob/master/src/svg/SvgApi.ts#L30)
+[svg/SvgApi.ts:31](https://github.com/traines-source/transport-network-animator/blob/master/src/svg/SvgApi.ts#L31)
 
 ___
 
@@ -78,6 +79,7 @@ ___
 Indicates when this element shall disappear.
 
 Pattern: `(?<epoch>\d+) (?<second>\d+)(?<flag> [\w-]+)?` e.g. `2020 5 noanim-nozoom`
+
 `epoch`: Epochs will be executed in order. Years can be used as epochs.
 `second`: Seconds reset to 0 with every epoch.
 `flag`: Optional. `reverse`, `noanim`, `nozoom`, `keepzoom`. Can be combined with `-`.
@@ -92,7 +94,7 @@ SVG: `data-to`
 
 #### Defined in
 
-[svg/SvgApi.ts:44](https://github.com/traines-source/transport-network-animator/blob/master/src/svg/SvgApi.ts#L44)
+[svg/SvgApi.ts:46](https://github.com/traines-source/transport-network-animator/blob/master/src/svg/SvgApi.ts#L46)
 
 ___
 
@@ -110,4 +112,4 @@ SVG: `data-zoom`
 
 #### Defined in
 
-[svg/SvgApi.ts:67](https://github.com/traines-source/transport-network-animator/blob/master/src/svg/SvgApi.ts#L67)
+[svg/SvgApi.ts:69](https://github.com/traines-source/transport-network-animator/blob/master/src/svg/SvgApi.ts#L69)
