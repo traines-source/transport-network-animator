@@ -252,7 +252,7 @@ ___
 
 • **mapProjection**: `string` = `'epsg3857'`
 
-Which map projection to use if you use data-lonlat attributes on stations. For choices and custom projections, see [Projection](Projection.md)
+Which map projection to use if you use `data-lon-lat` attributes on stations. For choices and custom projections, see [Projection](Projection.md)
 
 #### Defined in
 

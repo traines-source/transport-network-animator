@@ -100,7 +100,7 @@ SVG: `data-label-dir`
 
 #### Defined in
 
-[svg/SvgApi.ts:239](https://github.com/traines-source/transport-network-animator/blob/master/src/svg/SvgApi.ts#L239)
+[svg/SvgApi.ts:240](https://github.com/traines-source/transport-network-animator/blob/master/src/svg/SvgApi.ts#L240)
 
 ___
 
@@ -109,6 +109,7 @@ ___
 • **lonLat**: `undefined` \| [`Vector`](../classes/Vector.md)
 
 The position of the station in WGS84 / EPSG:4326, i.e. GPS coordinates.
+Longitude and latitude are to be separated by a space, e.g. `28.9603 41.01`.
 This will be automatically projected to SVG coordinates using [Projection.default](../classes/Projection.md#default).
 If set, this overrides the [baseCoords](SvgStationAttributes.md#basecoords) coordinates.
 
@@ -116,7 +117,7 @@ SVG: `data-lon-lat`
 
 #### Defined in
 
-[svg/SvgApi.ts:221](https://github.com/traines-source/transport-network-animator/blob/master/src/svg/SvgApi.ts#L221)
+[svg/SvgApi.ts:222](https://github.com/traines-source/transport-network-animator/blob/master/src/svg/SvgApi.ts#L222)
 
 ___
 
@@ -150,7 +151,7 @@ SVG: `data-dir`
 
 #### Defined in
 
-[svg/SvgApi.ts:230](https://github.com/traines-source/transport-network-animator/blob/master/src/svg/SvgApi.ts#L230)
+[svg/SvgApi.ts:231](https://github.com/traines-source/transport-network-animator/blob/master/src/svg/SvgApi.ts#L231)
 
 ___
 

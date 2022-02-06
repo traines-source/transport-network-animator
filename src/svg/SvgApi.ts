@@ -213,6 +213,7 @@ export interface SvgStationAttributes extends SvgAbstractTimedDrawableAttributes
 
     /**
      * The position of the station in WGS84 / EPSG:4326, i.e. GPS coordinates.
+     * Longitude and latitude are to be separated by a space, e.g. `28.9603 41.01`.
      * This will be automatically projected to SVG coordinates using {@link Projection.default}.
      * If set, this overrides the {@link baseCoords} coordinates.
      * 

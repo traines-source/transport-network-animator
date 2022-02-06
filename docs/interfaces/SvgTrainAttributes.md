@@ -67,7 +67,7 @@ SVG: `data-length`
 
 #### Defined in
 
-[svg/SvgApi.ts:285](https://github.com/traines-source/transport-network-animator/blob/master/src/svg/SvgApi.ts#L285)
+[svg/SvgApi.ts:286](https://github.com/traines-source/transport-network-animator/blob/master/src/svg/SvgApi.ts#L286)
 
 ___
 
@@ -89,7 +89,7 @@ SVG: `data-train`
 
 #### Defined in
 
-[svg/SvgApi.ts:262](https://github.com/traines-source/transport-network-animator/blob/master/src/svg/SvgApi.ts#L262)
+[svg/SvgApi.ts:263](https://github.com/traines-source/transport-network-animator/blob/master/src/svg/SvgApi.ts#L263)
 
 ___
 
@@ -110,7 +110,7 @@ SVG: `data-stops`
 
 #### Defined in
 
-[svg/SvgApi.ts:276](https://github.com/traines-source/transport-network-animator/blob/master/src/svg/SvgApi.ts#L276)
+[svg/SvgApi.ts:277](https://github.com/traines-source/transport-network-animator/blob/master/src/svg/SvgApi.ts#L277)
 
 ___
 

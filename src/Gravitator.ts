@@ -30,9 +30,7 @@ export class Gravitator {
         this.dirty = false;
         this.initialize();
         this.initializeGraph();
-        const startTime = performance.now()
         const solution = this.minimizeLoss();
-        console.log("Time taken for optimization:", performance.now()-startTime, "(incl: "+Config.default.gravitatorUseInclinationInertness+")");
         this.assertDistances(solution);
         return this.moveStationsAndLines(solution, delay, animate);
     }
@@ -41,11 +39,9 @@ export class Gravitator {
         const weights = this.getWeightsSum();
         const euclidian = this.getEuclidianDistanceSum();
         const edgeCount = Object.values(this.edges).length;
-        console.log('weights:', weights, 'euclidian:', euclidian);
         if (this.averageEuclidianLengthRatio == -1 && edgeCount > 0) {
             this.averageEuclidianLengthRatio = weights / euclidian;
             this.averageEuclidianLength = euclidian / edgeCount;
-            console.log('averageEuclidianLengthRatio^-1', 1/this.averageEuclidianLengthRatio);
             this.crumpledImage?.initialize(Object.values(this.vertices).map(v => v.station));
         }
     }

@@ -11,7 +11,7 @@ This is not
 * an interactive UI. The map must be defined in SVG code.
 
 This is
-* a "Harry Beck style" algorithm. It will try to nicely draw the lines between the stations.
+* a "[Harry Beck](https://en.wikipedia.org/wiki/Harry_Beck) style" algorithm. It will try to nicely draw the lines between the stations.
 * a time saver (given this software already exists). It saves you from having to tediously position and animate every single line segment.
 
 ## Steps to Animate a Network Map

@@ -23,7 +23,7 @@ export class Config {
     autoStart = true;
 
     /**
-     * Which map projection to use if you use data-lonlat attributes on stations. For choices and custom projections, see {@link Projection}
+     * Which map projection to use if you use `data-lon-lat` attributes on stations. For choices and custom projections, see {@link Projection}
      */
     mapProjection = 'epsg3857';
 
