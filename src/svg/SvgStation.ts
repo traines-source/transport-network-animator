@@ -38,14 +38,12 @@ export class SvgStation extends SvgAbstractTimedDrawable implements StationAdapt
     get rotation(): Rotation {
         return Rotation.from(this.element.dataset.dir || 'n');
     }
-    /**
-     * öasdfkljsdfklj
-     */
+
     get labelDir(): Rotation {
         return Rotation.from(this.element.dataset.labelDir || 'n');
     }
 
-    draw(delaySeconds: number, getPositionBoundaries: () => {[id: string]: [number, number]}): void {
+    draw(delaySeconds: number, animationDurationSeconds: number, getPositionBoundaries: () => {[id: string]: [number, number]}): void {
         const animator = new SvgAnimator();
         animator.wait(delaySeconds*1000, () => {
             const positionBoundaries = getPositionBoundaries();
@@ -54,7 +52,9 @@ export class SvgStation extends SvgAbstractTimedDrawable implements StationAdapt
             if (!this.element.className.baseVal.includes('station')) {
                 this.element.className.baseVal += ' station ' + this.id;
             }
-            this.element.style.visibility = stopDimen[0] < 0 && stopDimen[1] < 0 ? 'hidden' : 'visible';
+            stopDimen[0] < 0 && stopDimen[1] < 0
+                ? this.hide(animationDurationSeconds)
+                : this.show(animationDurationSeconds);
     
             this.element.setAttribute('width', (Math.max(stopDimen[0], 0) * Config.default.lineDistance + Config.default.defaultStationDimen) + '');
             this.element.setAttribute('height', (Math.max(stopDimen[1], 0) * Config.default.lineDistance + Config.default.defaultStationDimen) + '');
@@ -89,10 +89,10 @@ export class SvgStation extends SvgAbstractTimedDrawable implements StationAdapt
         return true;
     }
 
-    erase(delaySeconds: number): void {
+    erase(delaySeconds: number, animationDurationSeconds: number): void {
         const animator = new SvgAnimator();
         animator.wait(delaySeconds*1000, () => {
-            this.element.style.visibility = 'hidden';
+            this.hide(animationDurationSeconds*1000);
         });
     }
     

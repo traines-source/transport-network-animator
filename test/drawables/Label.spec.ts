@@ -29,13 +29,13 @@ describe('Label', () => {
         when(stationProvider.stationById('a')).thenReturn(instance(station));
         const l = new Label(instance(labelAdapter), instance(stationProvider));
         expect(l.draw(2, false)).eql(0);
-        verify(labelAdapter.draw(anything(), anything(), anything(), anything())).never();
-        verify(labelAdapter.erase(anything())).called();        
+        verify(labelAdapter.draw(anything(), anything(), anything(), anything(), anything())).never();
+        verify(labelAdapter.erase(anything(), anything())).called();        
     })
 
     it('givenNorthStationWithNorthLabel', () => {
         when(labelAdapter.forStation).thenReturn('a');
-        when(labelAdapter.draw(anything(), anything(), anything(), anything())).thenCall((d: number, v: Vector, r: Rotation) => {
+        when(labelAdapter.draw(anything(), anything(), anything(), anything(), anything())).thenCall((d: number, a: number, v: Vector, r: Rotation) => {
             expect(v).eql(new Vector(30, 7));
             expect(r).eql(Rotation.from('n'));
         });
@@ -52,7 +52,7 @@ describe('Label', () => {
 
     it('givenNorthStationWithNorthEastLabel', () => {
         when(labelAdapter.forStation).thenReturn('a');
-        when(labelAdapter.draw(anything(), anything(), anything(), anything())).thenCall((d: number, v: Vector, r: Rotation) => {
+        when(labelAdapter.draw(anything(), anything(), anything(), anything(), anything())).thenCall((d: number, a: number, v: Vector, r: Rotation) => {
             expect(v).eql(new Vector(15, 27));
             expect(r).eql(Rotation.from('ne'));
         });
@@ -69,7 +69,7 @@ describe('Label', () => {
 
     it('givenNorthEastStationWithNorthWestLabel', () => {
         when(labelAdapter.forStation).thenReturn('a');
-        when(labelAdapter.draw(anything(), anything(), anything(), anything())).thenCall((d: number, v: Vector, r: Rotation) => {
+        when(labelAdapter.draw(anything(), anything(), anything(), anything(), anything())).thenCall((d: number, a: number, v: Vector, r: Rotation) => {
             expect(v.x).greaterThan(12);
             expect(v.x).lessThan(13);
             expect(v.y).greaterThan(-1);

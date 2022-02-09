@@ -7,9 +7,9 @@ import { Config } from "../Config";
 
 export interface TrainAdapter extends AbstractTimedDrawableAdapter {
     stops: Stop[];
-    draw(delaySeconds: number, animate: boolean, follow: {path: Vector[], from: number, to: number}): void;
+    draw(delaySeconds: number, animationDurationSeconds: number, follow: {path: Vector[], from: number, to: number}): void;
     move(delaySeconds: number, animationDurationSeconds: number, follow: {path: Vector[], from: number, to: number}): void;
-    erase(delaySeconds: number): void;
+    erase(delaySeconds: number, animationDurationSeconds: number): void;
 }
 
 export class Train extends AbstractTimedDrawable {
@@ -29,7 +29,7 @@ export class Train extends AbstractTimedDrawable {
             const path = lineGroup.getPathBetween(stops[i-1].stationId, stops[i].stationId);
             if (path != null) {
                 if (i == 1) {
-                    this.adapter.draw(delay, animate, path);
+                    this.adapter.draw(delay, animate ? Config.default.fadeDurationSeconds : 0, path);
                 }
                 if (animate) {
                     this.adapter.move(delay + this.scaleSpeed(arrdep.departure) - this.from.second, this.scaleSpeed(arrdep.arrival - arrdep.departure), path);
@@ -42,7 +42,7 @@ export class Train extends AbstractTimedDrawable {
     }
 
     erase(delay: number, animate: boolean, reverse: boolean): number {
-        this.adapter.erase(delay);
+        this.adapter.erase(delay, animate ? Config.default.fadeDurationSeconds : 0);
         return 0;
     }
 

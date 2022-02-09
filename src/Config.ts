@@ -54,6 +54,13 @@ export class Config {
     animSpeed = 100;
 
     /**
+     * How long to fade in/out elements that are not specially animated.
+     * This applies to Labels, Stations, Trains and generic SVG elements.
+     * Albeit an animation, this does not delay consecutive animations.
+     */
+    fadeDurationSeconds = 0.2;
+
+    /**
      * Distance of neighboring lines at stations.
      */
     lineDistance = 6;

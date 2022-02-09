@@ -11,9 +11,12 @@ export class SvgGenericTimedDrawable extends SvgAbstractTimedDrawable implements
     draw(delaySeconds: number, animationDurationSeconds: number): void {
         const animator = new SvgAnimator();
         animator.wait(delaySeconds*1000, () => {
-            this.element.style.visibility = 'visible';
+            this.show(animationDurationSeconds);
+
             if (this.element.localName == 'g') {
-                this.element.style.opacity = '1';
+                if (animationDurationSeconds == 0) {
+                    this.element.style.opacity = '1';
+                }
                 if (this.element.onfocus != undefined) {
                     this.element.focus();
                 }
@@ -21,10 +24,10 @@ export class SvgGenericTimedDrawable extends SvgAbstractTimedDrawable implements
         });
     }
 
-    erase(delaySeconds: number): void {
+    erase(delaySeconds: number, animationDurationSeconds: number): void {
         const animator = new SvgAnimator();
         animator.wait(delaySeconds*1000, () => {
-            this.element.style.visibility = 'hidden';
+            this.hide(animationDurationSeconds);
             if (this.element.localName == 'g') {
                 this.element.style.opacity = '0';
             }

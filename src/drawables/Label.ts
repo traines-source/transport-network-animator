@@ -8,8 +8,8 @@ import { Config } from "../Config";
 export interface LabelAdapter extends AbstractTimedDrawableAdapter {
     forStation: string | undefined;
     forLine: string | undefined;
-    draw(delaySeconds: number, textCoords: Vector, labelDir: Rotation, children: LabelAdapter[]): void;
-    erase(delaySeconds: number): void;
+    draw(delaySeconds: number, animationDurationSeconds: number, textCoords: Vector, labelDir: Rotation, children: LabelAdapter[]): void;
+    erase(delaySeconds: number, animationDurationSeconds: number): void;
     cloneForStation(stationId: string): LabelAdapter;
 }
 
@@ -38,13 +38,14 @@ export class Label extends AbstractTimedDrawable {
     }
 
     draw(delay: number, animate: boolean): number {
+        const animationDurationSeconds = animate ? Config.default.fadeDurationSeconds : 0;
         if (this.adapter.forStation != undefined) {
             const station = this.forStation;
             station.addLabel(this);
             if (station.linesExisting()) {
-                this.drawForStation(delay, station, false);
+                this.drawForStation(delay, animationDurationSeconds, station, false);
             } else {
-                this.adapter.erase(delay);
+                this.adapter.erase(delay, animate ? Config.default.fadeDurationSeconds : 0);
             }
         } else if (this.adapter.forLine != undefined) {
             const termini = this.stationProvider.lineGroupById(this.adapter.forLine).termini;
@@ -56,7 +57,7 @@ export class Label extends AbstractTimedDrawable {
                         if (l.hasChildren()) {
                             found = true;
                             l.children.push(this);
-                            l.draw(delay, animate);                            
+                            l.draw(delay, animate);
                         }
                     });
                     if (!found) {
@@ -70,12 +71,12 @@ export class Label extends AbstractTimedDrawable {
             
             });
         } else {
-            this.adapter.draw(delay, Vector.NULL, Rotation.from('n'), []);
+            this.adapter.draw(delay, animationDurationSeconds, Vector.NULL, Rotation.from('n'), []);
         }
         return 0;
     }
 
-    private drawForStation(delaySeconds: number, station: Station, forLine: boolean) {
+    private drawForStation(delaySeconds: number, animationDurationSeconds: number, station: Station, forLine: boolean) {
         const baseCoord = station.baseCoords;
         let yOffset = 0;
         for (let i=0; i<station.labels.length; i++) {
@@ -93,19 +94,19 @@ export class Label extends AbstractTimedDrawable {
         const anchor = new Vector(station.stationSizeForAxis('x', unitv.x), station.stationSizeForAxis('y', unitv.y));
         const textCoords = baseCoord.add(anchor.rotate(stationDir)).add(new Vector(0, yOffset));
     
-        this.adapter.draw(delaySeconds, textCoords, labelDir, this.children.map(c => c.adapter));
+        this.adapter.draw(delaySeconds, animationDurationSeconds, textCoords, labelDir, this.children.map(c => c.adapter));
     }
 
     erase(delay: number, animate: boolean, reverse: boolean): number {
         if (this.adapter.forStation != undefined) {
             this.forStation.removeLabel(this);
-            this.adapter.erase(delay);
+            this.adapter.erase(delay, animate ? Config.default.fadeDurationSeconds : 0);
         } else if (this.adapter.forLine != undefined) {
             this.children.forEach(c => {
                 c.erase(delay, animate, reverse);
             });
         } else {
-            this.adapter.erase(delay);
+            this.adapter.erase(delay, animate ? Config.default.fadeDurationSeconds : 0);
         }
         return 0;
     }

@@ -15,8 +15,8 @@ export interface StationAdapter extends AbstractTimedDrawableAdapter {
     rotation: Rotation;
     labelDir: Rotation;
     id: string;
-    draw(delaySeconds: number, getPositionBoundaries: () => {[id: string]: [number, number]}): void;
-    erase(delaySeconds: number): void;
+    draw(delaySeconds: number, animationDurationSeconds: number, getPositionBoundaries: () => {[id: string]: [number, number]}): void;
+    erase(delaySeconds: number, animationDurationSeconds: number): void;
     move(delaySeconds: number, animationDurationSeconds: number, from: Vector, to: Vector, callback: () => void): void;
 }
 
@@ -176,9 +176,9 @@ export class Station extends AbstractTimedDrawable {
 
     draw(delaySeconds: number, animate: boolean): number {
         const station = this;
-        this.existingLabels.forEach(l => l.draw(delaySeconds, false));
+        this.existingLabels.forEach(l => l.draw(delaySeconds, animate));
         const t = station.positionBoundaries();
-        this.adapter.draw(delaySeconds, function() { return t; });
+        this.adapter.draw(delaySeconds, animate ? Config.default.fadeDurationSeconds : 0, function() { return t; });
         return 0;
     }
 
@@ -187,8 +187,8 @@ export class Station extends AbstractTimedDrawable {
         this.adapter.move(delaySeconds, animationDurationSeconds, this.baseCoords, to, () => station.existingLabels.forEach(l => l.draw(0, false)));
     }
 
-    erase(delaySeconds: number, animate: boolean, reverse: boolean): number {
-        this.adapter.erase(delaySeconds);
+    erase(delaySeconds: number, animate: boolean): number {
+        this.adapter.erase(delaySeconds, animate ? Config.default.fadeDurationSeconds : 0);
         return 0;
     }
 

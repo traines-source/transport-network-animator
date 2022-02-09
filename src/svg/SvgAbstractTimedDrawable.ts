@@ -3,6 +3,8 @@ import { Vector } from "../Vector";
 import { BoundingBox } from "../BoundingBox";
 import { AbstractTimedDrawableAdapter } from "../drawables/AbstractTimedDrawable";
 import { SvgAbstractTimedDrawableAttributes } from "./SvgApi";
+import { SvgAnimator } from "./SvgAnimator";
+import { Animator } from "../Animator";
 
 export class SvgAbstractTimedDrawable implements AbstractTimedDrawableAdapter, SvgAbstractTimedDrawableAttributes {
 
@@ -45,5 +47,35 @@ export class SvgAbstractTimedDrawable implements AbstractTimedDrawableAdapter, S
             }
         }
         return Instant.BIG_BANG;
+    }
+
+    protected show(fadeSeconds: number) {
+        if (fadeSeconds == 0) {
+            this.element.style.visibility = 'visible';
+        } else if (getComputedStyle(this.element).visibility != 'visible') {
+            this.element.style.opacity = '0';
+            this.element.style.visibility = 'visible';
+            const animator = new SvgAnimator();
+            animator.ease(Animator.EASE_CUBIC).animate(fadeSeconds*1000, (x, isLast) => {
+                this.element.style.opacity = x + '';
+                return true;
+            });
+        }
+    }
+
+    protected hide(fadeSeconds: number) {
+        if (fadeSeconds != 0) {
+            this.element.style.opacity = '1';
+            const animator = new SvgAnimator();
+            animator.ease(Animator.EASE_CUBIC).from(1).to(0).animate(fadeSeconds*1000, (x, isLast) => {
+                this.element.style.opacity = x + '';
+                if (isLast) {
+                    this.element.style.visibility = 'hidden';
+                }
+                return true;
+            });
+        } else {
+            this.element.style.visibility = 'hidden';
+        }
     }
 }

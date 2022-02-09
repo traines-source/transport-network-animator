@@ -39,13 +39,13 @@ export class SvgTrain extends SvgAbstractTimedDrawable implements TrainAdapter, 
         return this._stops;
     }
 
-    draw(delaySeconds: number, animate: boolean, follow: { path: Vector[], from: number, to: number }): void {
+    draw(delaySeconds: number, animationDurationSeconds: number, follow: { path: Vector[], from: number, to: number }): void {
         this.element.className.baseVal += ' train';
         this.setPath(this.calcTrainHinges(this.getPathLength(follow).lengthToStart, follow.path));
         if (!this.from.flag.includes('autoshow')) {
             const animator = new SvgAnimator();
             animator.wait(delaySeconds*1000, () => {
-                this.element.style.visibility = 'visible';
+                this.show(animationDurationSeconds);
             });
         }
     }
@@ -53,14 +53,14 @@ export class SvgTrain extends SvgAbstractTimedDrawable implements TrainAdapter, 
     move(delaySeconds: number, animationDurationSeconds: number, follow: { path: Vector[], from: number, to: number }) {
         const animator = new SvgAnimator();
         animator.wait(delaySeconds*1000, () => {
-            this.element.style.visibility = 'visible';
+            this.show(animationDurationSeconds != 0 ? Config.default.fadeDurationSeconds : 0);
             const pathLength = this.getPathLength(follow);
             animator
                 .ease(SvgAnimator.EASE_SINE)
                 .from(pathLength.lengthToStart)
                 .to(pathLength.lengthToStart+pathLength.totalBoundedLength)
                 .timePassed(delaySeconds < 0 ? (-delaySeconds*1000) : 0)
-                .animate(animationDurationSeconds*1000, (x, isLast) => this.animateFrame(x, isLast, follow.path));
+                .animate(animationDurationSeconds*1000, (x, isLast) => this.animateFrame(x, isLast, follow.path, animationDurationSeconds));
         });
     }
 
@@ -91,10 +91,10 @@ export class SvgTrain extends SvgAbstractTimedDrawable implements TrainAdapter, 
         return path[path.length - 1];
     }
 
-    erase(delaySeconds: number): void {
+    erase(delaySeconds: number, animationDurationSeconds: number): void {
         const animator = new SvgAnimator();
         animator.wait(delaySeconds*1000, () => {
-            this.element.style.visibility = 'hidden';
+            this.hide(animationDurationSeconds);
         });
     }
 
@@ -111,11 +111,11 @@ export class SvgTrain extends SvgAbstractTimedDrawable implements TrainAdapter, 
         return newTrain;
     }
 
-    private animateFrame(x: number, isLast: boolean, path: Vector[]): boolean {
+    private animateFrame(x: number, isLast: boolean, path: Vector[], animationDurationSeconds: number): boolean {
         const trainPath = this.calcTrainHinges(x, path);
         this.setPath(trainPath);
         if (isLast && this.from.flag.includes('autoshow')) {
-            this.element.style.visibility = 'hidden';
+            this.hide(animationDurationSeconds != 0 ? Config.default.fadeDurationSeconds : 0);
         }
         return true;
     }
