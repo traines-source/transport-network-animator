@@ -1,6 +1,6 @@
 #!/bin/bash
 
-TIMECUT_ARGUMENTS="--viewport=3840,2160 --fps=60 --pipe-mode"
+TIMECUT_ARGUMENTS="--viewport=1920,1080,deviceScaleFactor=2 --fps=30 --pipe-mode"
 LAUNCH_ARGUMENTS="--no-sandbox --disable-setuid-sandbox --allow-file-access-from-files"
 WORKERS=3
 START_TIME=0
@@ -77,6 +77,7 @@ while [ "$i" -le "$WORKERS" ]; do
         -v $(realpath ${OUTPUT_DIR}):/output/ \
         --shm-size=1G \
         --entrypoint timecut \
+        #--network transport-network-animator_default \
         ${DOCKER_IMAGE} \
         ${INPUT} --start ${CURRENT_SLICE_START} --duration ${CURRENT_SLICE_LENGTH} ${TIMECUT_ARGUMENTS} --launch-arguments="${LAUNCH_ARGUMENTS}" --output=${OUTPUT_FILE}
 
