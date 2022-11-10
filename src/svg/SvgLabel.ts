@@ -109,7 +109,7 @@ export class SvgLabel extends SvgAbstractTimedDrawable implements LabelAdapter, 
         const container = document.createElementNS('http://www.w3.org/1999/xhtml', 'div');
         lineLabel.appendChild(container);
        
-        document.getElementById('elements')?.appendChild(lineLabel);
+        this.element.parentElement?.appendChild(lineLabel);
         return new SvgLabel(lineLabel)
     }
     

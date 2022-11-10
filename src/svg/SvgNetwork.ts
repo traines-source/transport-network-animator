@@ -26,6 +26,7 @@ export class SvgNetwork implements NetworkAdapter {
 
     private currentZoomCenter: Vector = Vector.NULL;
     private currentZoomScale: number = 1;
+    private parent: HTMLElement | null = null;
 
     constructor() {
         this.svgConfig();
@@ -75,6 +76,9 @@ export class SvgNetwork implements NetworkAdapter {
         } else if (element.localName == 'path' && element.dataset.train != undefined) {
             return new Train(new SvgTrain(element), network, Config.default);
         } else if (element.localName == 'rect' && element.dataset.station != undefined) {
+            if (!this.parent) {
+                this.parent = (<SVGRectElement>element).parentElement;
+            }
             return new Station(new SvgStation(element));
         } else if (element.localName == 'text' && (element.dataset.station != undefined || element.dataset.line != undefined)) {
             return new Label(new SvgLabel(element), network);
@@ -94,7 +98,7 @@ export class SvgNetwork implements NetworkAdapter {
         helpStop.setAttribute('data-dir', rotation.name);
         this.setCoord(helpStop, baseCoords);
         helpStop.className.baseVal = 'helper';
-        document.getElementById('elements')?.appendChild(helpStop);
+        this.parent?.appendChild(helpStop);
         return new Station(new SvgStation(helpStop));  
     }
 
