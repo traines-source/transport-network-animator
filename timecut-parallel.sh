@@ -60,6 +60,11 @@ echo "Building image..."
 DOCKER_IMAGE=$(echo -e $DOCKERFILE | docker build --quiet -)
 echo "Image built."
 
+docker network create -d bridge tna-network || echo "Network already existing (?)."
+docker run --name tnaserve -d -v $(pwd):/app/ --workdir /app/ --network tna-network python python -m http.server 3000
+
+echo "Started tnaserve."
+
 i=1
 while [ "$i" -le "$WORKERS" ]; do
     OUTPUT_FILE=/output/${IDENTIFIER}_${i}.$FILE_TYPE
@@ -77,7 +82,7 @@ while [ "$i" -le "$WORKERS" ]; do
         -v $(realpath ${OUTPUT_DIR}):/output/ \
         --shm-size=1G \
         --entrypoint timecut \
-        #--network transport-network-animator_default \
+        --network tna-network \
         ${DOCKER_IMAGE} \
         ${INPUT} --start ${CURRENT_SLICE_START} --duration ${CURRENT_SLICE_LENGTH} ${TIMECUT_ARGUMENTS} --launch-arguments="${LAUNCH_ARGUMENTS}" --output=${OUTPUT_FILE}
 
@@ -97,6 +102,7 @@ wait_until_workers_finished() {
         DPS=$(docker ps --format '{{.Names}}')
         if [[ $DPS != *"timecut-worker-"* ]]; then
             echo "$(date) All workers finished, concatenating final video file..."
+            docker rm -f tnaserve
             docker run \
                 --name $CONTAINER_PREFIX-concat \
                 -u $(id -u ${USER}):$(id -g ${USER}) \
