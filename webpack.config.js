@@ -1,10 +1,10 @@
+const webpack = require('webpack');
 const path = require('path');
 const LicensePlugin = require('webpack-license-plugin')
+const TerserPlugin = require('terser-webpack-plugin');
 
-module.exports = {
-  mode: 'development',
+const defaultConfig = {
   entry: './src/main.ts',
-  devtool: 'inline-source-map',
   module: {
     rules: [
       {
@@ -20,11 +20,33 @@ module.exports = {
   resolve: {
     extensions: [ '.ts', '.ts', '.js' ],
   },
-  output: {
-    filename: 'network-animator.js',
-    path: path.resolve(__dirname, 'dist'),
-  },
-  plugins: [
-    new LicensePlugin()
-  ],
 };
+
+module.exports = [
+  {
+    ...defaultConfig,
+    mode: 'development',
+    devtool: 'source-map',
+    output: {
+      filename: 'network-animator.js',
+      path: path.resolve(__dirname, 'dist'),
+    },
+  },
+  {
+    ...defaultConfig,
+    mode: 'production',
+    output: {
+      filename: 'network-animator.min.js',
+      path: path.resolve(__dirname, 'dist'),
+    },
+    optimization: {
+      minimizer: [new TerserPlugin({
+        extractComments: false,
+      })],
+    },
+    plugins: [
+      new LicensePlugin({ outputFilename: 'network-animator.LICENSES.json' }),
+      new webpack.BannerPlugin({banner: 'https://github.com/traines-source/transport-network-animator MIT License. For vendor licenses, please see network-animator.LICENSES.json'})
+    ],
+  },
+];
