@@ -1,7 +1,7 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/Animator.ts":
+/***/ "./src/Animator-exposed.ts":
 /*!*********************************!*\
   !*** ./src/Animator-exposed.ts ***!
   \*********************************/
@@ -16,7 +16,7 @@ module.exports = ___EXPOSE_LOADER_IMPORT___;
 
 /***/ }),
 
-/***/ "./src/ArrivalDepartureTime.ts":
+/***/ "./src/ArrivalDepartureTime-exposed.ts":
 /*!*********************************************!*\
   !*** ./src/ArrivalDepartureTime-exposed.ts ***!
   \*********************************************/
@@ -31,7 +31,7 @@ module.exports = ___EXPOSE_LOADER_IMPORT___;
 
 /***/ }),
 
-/***/ "./src/BoundingBox.ts":
+/***/ "./src/BoundingBox-exposed.ts":
 /*!************************************!*\
   !*** ./src/BoundingBox-exposed.ts ***!
   \************************************/
@@ -46,7 +46,7 @@ module.exports = ___EXPOSE_LOADER_IMPORT___;
 
 /***/ }),
 
-/***/ "./src/Config.ts":
+/***/ "./src/Config-exposed.ts":
 /*!*******************************!*\
   !*** ./src/Config-exposed.ts ***!
   \*******************************/
@@ -61,7 +61,7 @@ module.exports = ___EXPOSE_LOADER_IMPORT___;
 
 /***/ }),
 
-/***/ "./src/DrawableSorter.ts":
+/***/ "./src/DrawableSorter-exposed.ts":
 /*!***************************************!*\
   !*** ./src/DrawableSorter-exposed.ts ***!
   \***************************************/
@@ -91,7 +91,7 @@ module.exports = ___EXPOSE_LOADER_IMPORT___;
 
 /***/ }),
 
-/***/ "./src/Instant.ts":
+/***/ "./src/Instant-exposed.ts":
 /*!********************************!*\
   !*** ./src/Instant-exposed.ts ***!
   \********************************/
@@ -106,7 +106,7 @@ module.exports = ___EXPOSE_LOADER_IMPORT___;
 
 /***/ }),
 
-/***/ "./src/LineGroup.ts":
+/***/ "./src/LineGroup-exposed.ts":
 /*!**********************************!*\
   !*** ./src/LineGroup-exposed.ts ***!
   \**********************************/
@@ -136,7 +136,7 @@ module.exports = ___EXPOSE_LOADER_IMPORT___;
 
 /***/ }),
 
-/***/ "./src/PreferredTrack.ts":
+/***/ "./src/PreferredTrack-exposed.ts":
 /*!***************************************!*\
   !*** ./src/PreferredTrack-exposed.ts ***!
   \***************************************/
@@ -151,7 +151,7 @@ module.exports = ___EXPOSE_LOADER_IMPORT___;
 
 /***/ }),
 
-/***/ "./src/Projection.ts":
+/***/ "./src/Projection-exposed.ts":
 /*!***********************************!*\
   !*** ./src/Projection-exposed.ts ***!
   \***********************************/
@@ -166,7 +166,7 @@ module.exports = ___EXPOSE_LOADER_IMPORT___;
 
 /***/ }),
 
-/***/ "./src/Rotation.ts":
+/***/ "./src/Rotation-exposed.ts":
 /*!*********************************!*\
   !*** ./src/Rotation-exposed.ts ***!
   \*********************************/
@@ -181,7 +181,7 @@ module.exports = ___EXPOSE_LOADER_IMPORT___;
 
 /***/ }),
 
-/***/ "./src/Utils.ts":
+/***/ "./src/Utils-exposed.ts":
 /*!******************************!*\
   !*** ./src/Utils-exposed.ts ***!
   \******************************/
@@ -196,7 +196,7 @@ module.exports = ___EXPOSE_LOADER_IMPORT___;
 
 /***/ }),
 
-/***/ "./src/Vector.ts":
+/***/ "./src/Vector-exposed.ts":
 /*!*******************************!*\
   !*** ./src/Vector-exposed.ts ***!
   \*******************************/
@@ -211,7 +211,7 @@ module.exports = ___EXPOSE_LOADER_IMPORT___;
 
 /***/ }),
 
-/***/ "./src/Zoomer.ts":
+/***/ "./src/Zoomer-exposed.ts":
 /*!*******************************!*\
   !*** ./src/Zoomer-exposed.ts ***!
   \*******************************/
@@ -226,7 +226,7 @@ module.exports = ___EXPOSE_LOADER_IMPORT___;
 
 /***/ }),
 
-/***/ "./src/drawables/AbstractTimedDrawable.ts":
+/***/ "./src/drawables/AbstractTimedDrawable-exposed.ts":
 /*!********************************************************!*\
   !*** ./src/drawables/AbstractTimedDrawable-exposed.ts ***!
   \********************************************************/
@@ -241,7 +241,7 @@ module.exports = ___EXPOSE_LOADER_IMPORT___;
 
 /***/ }),
 
-/***/ "./src/drawables/CrumpledImage.ts":
+/***/ "./src/drawables/CrumpledImage-exposed.ts":
 /*!************************************************!*\
   !*** ./src/drawables/CrumpledImage-exposed.ts ***!
   \************************************************/
@@ -256,7 +256,7 @@ module.exports = ___EXPOSE_LOADER_IMPORT___;
 
 /***/ }),
 
-/***/ "./src/drawables/GenericTimedDrawable.ts":
+/***/ "./src/drawables/GenericTimedDrawable-exposed.ts":
 /*!*******************************************************!*\
   !*** ./src/drawables/GenericTimedDrawable-exposed.ts ***!
   \*******************************************************/
@@ -271,7 +271,7 @@ module.exports = ___EXPOSE_LOADER_IMPORT___;
 
 /***/ }),
 
-/***/ "./src/drawables/KenImage.ts":
+/***/ "./src/drawables/KenImage-exposed.ts":
 /*!*******************************************!*\
   !*** ./src/drawables/KenImage-exposed.ts ***!
   \*******************************************/
@@ -316,7 +316,7 @@ module.exports = ___EXPOSE_LOADER_IMPORT___;
 
 /***/ }),
 
-/***/ "./src/drawables/Station.ts":
+/***/ "./src/drawables/Station-exposed.ts":
 /*!******************************************!*\
   !*** ./src/drawables/Station-exposed.ts ***!
   \******************************************/
@@ -361,7 +361,7 @@ module.exports = ___EXPOSE_LOADER_IMPORT___;
 
 /***/ }),
 
-/***/ "./src/svg/SvgAbstractTimedDrawable.ts":
+/***/ "./src/svg/SvgAbstractTimedDrawable-exposed.ts":
 /*!*****************************************************!*\
   !*** ./src/svg/SvgAbstractTimedDrawable-exposed.ts ***!
   \*****************************************************/
@@ -376,7 +376,7 @@ module.exports = ___EXPOSE_LOADER_IMPORT___;
 
 /***/ }),
 
-/***/ "./src/svg/SvgAnimator.ts":
+/***/ "./src/svg/SvgAnimator-exposed.ts":
 /*!****************************************!*\
   !*** ./src/svg/SvgAnimator-exposed.ts ***!
   \****************************************/
@@ -391,7 +391,7 @@ module.exports = ___EXPOSE_LOADER_IMPORT___;
 
 /***/ }),
 
-/***/ "./src/svg/SvgCrumpledImage.ts":
+/***/ "./src/svg/SvgCrumpledImage-exposed.ts":
 /*!*********************************************!*\
   !*** ./src/svg/SvgCrumpledImage-exposed.ts ***!
   \*********************************************/
@@ -406,7 +406,7 @@ module.exports = ___EXPOSE_LOADER_IMPORT___;
 
 /***/ }),
 
-/***/ "./src/svg/SvgGenericTimedDrawable.ts":
+/***/ "./src/svg/SvgGenericTimedDrawable-exposed.ts":
 /*!****************************************************!*\
   !*** ./src/svg/SvgGenericTimedDrawable-exposed.ts ***!
   \****************************************************/
@@ -421,7 +421,7 @@ module.exports = ___EXPOSE_LOADER_IMPORT___;
 
 /***/ }),
 
-/***/ "./src/svg/SvgKenImage.ts":
+/***/ "./src/svg/SvgKenImage-exposed.ts":
 /*!****************************************!*\
   !*** ./src/svg/SvgKenImage-exposed.ts ***!
   \****************************************/
@@ -436,7 +436,7 @@ module.exports = ___EXPOSE_LOADER_IMPORT___;
 
 /***/ }),
 
-/***/ "./src/svg/SvgLabel.ts":
+/***/ "./src/svg/SvgLabel-exposed.ts":
 /*!*************************************!*\
   !*** ./src/svg/SvgLabel-exposed.ts ***!
   \*************************************/
@@ -451,7 +451,7 @@ module.exports = ___EXPOSE_LOADER_IMPORT___;
 
 /***/ }),
 
-/***/ "./src/svg/SvgLine.ts":
+/***/ "./src/svg/SvgLine-exposed.ts":
 /*!************************************!*\
   !*** ./src/svg/SvgLine-exposed.ts ***!
   \************************************/
@@ -481,7 +481,7 @@ module.exports = ___EXPOSE_LOADER_IMPORT___;
 
 /***/ }),
 
-/***/ "./src/svg/SvgStation.ts":
+/***/ "./src/svg/SvgStation-exposed.ts":
 /*!***************************************!*\
   !*** ./src/svg/SvgStation-exposed.ts ***!
   \***************************************/
@@ -496,7 +496,7 @@ module.exports = ___EXPOSE_LOADER_IMPORT___;
 
 /***/ }),
 
-/***/ "./src/svg/SvgTrain.ts":
+/***/ "./src/svg/SvgTrain-exposed.ts":
 /*!*************************************!*\
   !*** ./src/svg/SvgTrain-exposed.ts ***!
   \*************************************/
@@ -511,7 +511,7 @@ module.exports = ___EXPOSE_LOADER_IMPORT___;
 
 /***/ }),
 
-/***/ "./src/svg/SvgUtils.ts":
+/***/ "./src/svg/SvgUtils-exposed.ts":
 /*!*************************************!*\
   !*** ./src/svg/SvgUtils-exposed.ts ***!
   \*************************************/
@@ -1116,7 +1116,7 @@ exports.ArrivalDepartureTime = ArrivalDepartureTime;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.BoundingBox = void 0;
-const Vector_1 = __webpack_require__(/*! ./Vector */ "./src/Vector.ts");
+const Vector_1 = __webpack_require__(/*! ./Vector */ "./src/Vector-exposed.ts");
 class BoundingBox {
     constructor(tl, br) {
         this.tl = tl;
@@ -1323,7 +1323,7 @@ exports.Config = Config;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.DrawableSorter = void 0;
 const Line_1 = __webpack_require__(/*! ./drawables/Line */ "./src/drawables/Line-exposed.ts");
-const Vector_1 = __webpack_require__(/*! ./Vector */ "./src/Vector.ts");
+const Vector_1 = __webpack_require__(/*! ./Vector */ "./src/Vector-exposed.ts");
 class DrawableSorter {
     constructor() {
     }
@@ -1411,10 +1411,10 @@ exports.DrawableSorter = DrawableSorter;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Gravitator = void 0;
-const Vector_1 = __webpack_require__(/*! ./Vector */ "./src/Vector.ts");
-const Utils_1 = __webpack_require__(/*! ./Utils */ "./src/Utils.ts");
-const Config_1 = __webpack_require__(/*! ./Config */ "./src/Config.ts");
-const CrumpledImage_1 = __webpack_require__(/*! ./drawables/CrumpledImage */ "./src/drawables/CrumpledImage.ts");
+const Vector_1 = __webpack_require__(/*! ./Vector */ "./src/Vector-exposed.ts");
+const Utils_1 = __webpack_require__(/*! ./Utils */ "./src/Utils-exposed.ts");
+const Config_1 = __webpack_require__(/*! ./Config */ "./src/Config-exposed.ts");
+const CrumpledImage_1 = __webpack_require__(/*! ./drawables/CrumpledImage */ "./src/drawables/CrumpledImage-exposed.ts");
 const fmin = __webpack_require__(/*! fmin */ "./node_modules/fmin/build/fmin.js");
 class Gravitator {
     constructor() {
@@ -1751,8 +1751,8 @@ Instant.BIG_BANG = new Instant(0, 0, '');
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.LineGroup = void 0;
-const Station_1 = __webpack_require__(/*! ./drawables/Station */ "./src/drawables/Station.ts");
-const Vector_1 = __webpack_require__(/*! ./Vector */ "./src/Vector.ts");
+const Station_1 = __webpack_require__(/*! ./drawables/Station */ "./src/drawables/Station-exposed.ts");
+const Vector_1 = __webpack_require__(/*! ./Vector */ "./src/Vector-exposed.ts");
 class LineGroup {
     constructor() {
         this._lines = [];
@@ -1889,12 +1889,12 @@ exports.LineGroup = LineGroup;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Network = void 0;
-const Instant_1 = __webpack_require__(/*! ./Instant */ "./src/Instant.ts");
-const Station_1 = __webpack_require__(/*! ./drawables/Station */ "./src/drawables/Station.ts");
-const Zoomer_1 = __webpack_require__(/*! ./Zoomer */ "./src/Zoomer.ts");
-const LineGroup_1 = __webpack_require__(/*! ./LineGroup */ "./src/LineGroup.ts");
+const Instant_1 = __webpack_require__(/*! ./Instant */ "./src/Instant-exposed.ts");
+const Station_1 = __webpack_require__(/*! ./drawables/Station */ "./src/drawables/Station-exposed.ts");
+const Zoomer_1 = __webpack_require__(/*! ./Zoomer */ "./src/Zoomer-exposed.ts");
+const LineGroup_1 = __webpack_require__(/*! ./LineGroup */ "./src/LineGroup-exposed.ts");
 const Line_1 = __webpack_require__(/*! ./drawables/Line */ "./src/drawables/Line-exposed.ts");
-const Config_1 = __webpack_require__(/*! ./Config */ "./src/Config.ts");
+const Config_1 = __webpack_require__(/*! ./Config */ "./src/Config-exposed.ts");
 class Network {
     constructor(adapter, drawableSorter, gravitator) {
         this.adapter = adapter;
@@ -2135,8 +2135,8 @@ exports.PreferredTrack = PreferredTrack;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Projection = void 0;
-const Config_1 = __webpack_require__(/*! ./Config */ "./src/Config.ts");
-const Vector_1 = __webpack_require__(/*! ./Vector */ "./src/Vector.ts");
+const Config_1 = __webpack_require__(/*! ./Config */ "./src/Config-exposed.ts");
+const Vector_1 = __webpack_require__(/*! ./Vector */ "./src/Vector-exposed.ts");
 class Projection {
     constructor(_projection) {
         this._projection = _projection;
@@ -2179,7 +2179,7 @@ Projection.projections = {
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Rotation = void 0;
-const Utils_1 = __webpack_require__(/*! ./Utils */ "./src/Utils.ts");
+const Utils_1 = __webpack_require__(/*! ./Utils */ "./src/Utils-exposed.ts");
 class Rotation {
     constructor(_degrees) {
         this._degrees = _degrees;
@@ -2321,8 +2321,8 @@ Utils.IMPRECISION = 0.001;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Vector = void 0;
-const Rotation_1 = __webpack_require__(/*! ./Rotation */ "./src/Rotation.ts");
-const Utils_1 = __webpack_require__(/*! ./Utils */ "./src/Utils.ts");
+const Rotation_1 = __webpack_require__(/*! ./Rotation */ "./src/Rotation-exposed.ts");
+const Utils_1 = __webpack_require__(/*! ./Utils */ "./src/Utils-exposed.ts");
 class Vector {
     constructor(_x, _y) {
         this._x = _x;
@@ -2439,10 +2439,10 @@ Vector.NULL = new Vector(0, 0);
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Zoomer = void 0;
-const Vector_1 = __webpack_require__(/*! ./Vector */ "./src/Vector.ts");
-const Rotation_1 = __webpack_require__(/*! ./Rotation */ "./src/Rotation.ts");
-const BoundingBox_1 = __webpack_require__(/*! ./BoundingBox */ "./src/BoundingBox.ts");
-const Config_1 = __webpack_require__(/*! ./Config */ "./src/Config.ts");
+const Vector_1 = __webpack_require__(/*! ./Vector */ "./src/Vector-exposed.ts");
+const Rotation_1 = __webpack_require__(/*! ./Rotation */ "./src/Rotation-exposed.ts");
+const BoundingBox_1 = __webpack_require__(/*! ./BoundingBox */ "./src/BoundingBox-exposed.ts");
+const Config_1 = __webpack_require__(/*! ./Config */ "./src/Config-exposed.ts");
 class Zoomer {
     constructor(canvasSize, zoomMaxScale = 3) {
         this.canvasSize = canvasSize;
@@ -2569,9 +2569,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.CrumpledImage = void 0;
-const Vector_1 = __webpack_require__(/*! ../Vector */ "./src/Vector.ts");
+const Vector_1 = __webpack_require__(/*! ../Vector */ "./src/Vector-exposed.ts");
 const delaunator_1 = __importDefault(__webpack_require__(/*! delaunator */ "./node_modules/delaunator/index.js"));
-const AbstractTimedDrawable_1 = __webpack_require__(/*! ./AbstractTimedDrawable */ "./src/drawables/AbstractTimedDrawable.ts");
+const AbstractTimedDrawable_1 = __webpack_require__(/*! ./AbstractTimedDrawable */ "./src/drawables/AbstractTimedDrawable-exposed.ts");
 ;
 ;
 class CrumpledImage extends AbstractTimedDrawable_1.AbstractTimedDrawable {
@@ -2688,8 +2688,8 @@ CrumpledImage.EXTEND_BEYOND_CANVAS_FACTOR = 2;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.GenericTimedDrawable = void 0;
-const AbstractTimedDrawable_1 = __webpack_require__(/*! ./AbstractTimedDrawable */ "./src/drawables/AbstractTimedDrawable.ts");
-const Config_1 = __webpack_require__(/*! ../Config */ "./src/Config.ts");
+const AbstractTimedDrawable_1 = __webpack_require__(/*! ./AbstractTimedDrawable */ "./src/drawables/AbstractTimedDrawable-exposed.ts");
+const Config_1 = __webpack_require__(/*! ../Config */ "./src/Config-exposed.ts");
 class GenericTimedDrawable extends AbstractTimedDrawable_1.AbstractTimedDrawable {
     constructor(adapter) {
         super(adapter);
@@ -2719,10 +2719,10 @@ exports.GenericTimedDrawable = GenericTimedDrawable;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.KenImage = void 0;
-const Vector_1 = __webpack_require__(/*! ../Vector */ "./src/Vector.ts");
-const Zoomer_1 = __webpack_require__(/*! ../Zoomer */ "./src/Zoomer.ts");
-const Instant_1 = __webpack_require__(/*! ../Instant */ "./src/Instant.ts");
-const AbstractTimedDrawable_1 = __webpack_require__(/*! ./AbstractTimedDrawable */ "./src/drawables/AbstractTimedDrawable.ts");
+const Vector_1 = __webpack_require__(/*! ../Vector */ "./src/Vector-exposed.ts");
+const Zoomer_1 = __webpack_require__(/*! ../Zoomer */ "./src/Zoomer-exposed.ts");
+const Instant_1 = __webpack_require__(/*! ../Instant */ "./src/Instant-exposed.ts");
+const AbstractTimedDrawable_1 = __webpack_require__(/*! ./AbstractTimedDrawable */ "./src/drawables/AbstractTimedDrawable-exposed.ts");
 class KenImage extends AbstractTimedDrawable_1.AbstractTimedDrawable {
     constructor(adapter) {
         super(adapter);
@@ -2763,10 +2763,10 @@ exports.KenImage = KenImage;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Label = void 0;
-const Rotation_1 = __webpack_require__(/*! ../Rotation */ "./src/Rotation.ts");
-const Vector_1 = __webpack_require__(/*! ../Vector */ "./src/Vector.ts");
-const AbstractTimedDrawable_1 = __webpack_require__(/*! ./AbstractTimedDrawable */ "./src/drawables/AbstractTimedDrawable.ts");
-const Config_1 = __webpack_require__(/*! ../Config */ "./src/Config.ts");
+const Rotation_1 = __webpack_require__(/*! ../Rotation */ "./src/Rotation-exposed.ts");
+const Vector_1 = __webpack_require__(/*! ../Vector */ "./src/Vector-exposed.ts");
+const AbstractTimedDrawable_1 = __webpack_require__(/*! ./AbstractTimedDrawable */ "./src/drawables/AbstractTimedDrawable-exposed.ts");
+const Config_1 = __webpack_require__(/*! ../Config */ "./src/Config-exposed.ts");
 class Label extends AbstractTimedDrawable_1.AbstractTimedDrawable {
     constructor(adapter, stationProvider) {
         super(adapter);
@@ -2876,12 +2876,12 @@ exports.Label = Label;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Line = void 0;
-const Vector_1 = __webpack_require__(/*! ../Vector */ "./src/Vector.ts");
-const Rotation_1 = __webpack_require__(/*! ../Rotation */ "./src/Rotation.ts");
-const Utils_1 = __webpack_require__(/*! ../Utils */ "./src/Utils.ts");
-const PreferredTrack_1 = __webpack_require__(/*! ../PreferredTrack */ "./src/PreferredTrack.ts");
-const AbstractTimedDrawable_1 = __webpack_require__(/*! ./AbstractTimedDrawable */ "./src/drawables/AbstractTimedDrawable.ts");
-const Config_1 = __webpack_require__(/*! ../Config */ "./src/Config.ts");
+const Vector_1 = __webpack_require__(/*! ../Vector */ "./src/Vector-exposed.ts");
+const Rotation_1 = __webpack_require__(/*! ../Rotation */ "./src/Rotation-exposed.ts");
+const Utils_1 = __webpack_require__(/*! ../Utils */ "./src/Utils-exposed.ts");
+const PreferredTrack_1 = __webpack_require__(/*! ../PreferredTrack */ "./src/PreferredTrack-exposed.ts");
+const AbstractTimedDrawable_1 = __webpack_require__(/*! ./AbstractTimedDrawable */ "./src/drawables/AbstractTimedDrawable-exposed.ts");
+const Config_1 = __webpack_require__(/*! ../Config */ "./src/Config-exposed.ts");
 class Line extends AbstractTimedDrawable_1.AbstractTimedDrawable {
     constructor(adapter, stationProvider, config = Config_1.Config.default) {
         super(adapter);
@@ -3111,12 +3111,12 @@ exports.Line = Line;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Station = exports.Stop = void 0;
-const Vector_1 = __webpack_require__(/*! ../Vector */ "./src/Vector.ts");
-const Utils_1 = __webpack_require__(/*! ../Utils */ "./src/Utils.ts");
-const BoundingBox_1 = __webpack_require__(/*! ../BoundingBox */ "./src/BoundingBox.ts");
-const AbstractTimedDrawable_1 = __webpack_require__(/*! ./AbstractTimedDrawable */ "./src/drawables/AbstractTimedDrawable.ts");
-const Projection_1 = __webpack_require__(/*! ../Projection */ "./src/Projection.ts");
-const Config_1 = __webpack_require__(/*! ../Config */ "./src/Config.ts");
+const Vector_1 = __webpack_require__(/*! ../Vector */ "./src/Vector-exposed.ts");
+const Utils_1 = __webpack_require__(/*! ../Utils */ "./src/Utils-exposed.ts");
+const BoundingBox_1 = __webpack_require__(/*! ../BoundingBox */ "./src/BoundingBox-exposed.ts");
+const AbstractTimedDrawable_1 = __webpack_require__(/*! ./AbstractTimedDrawable */ "./src/drawables/AbstractTimedDrawable-exposed.ts");
+const Projection_1 = __webpack_require__(/*! ../Projection */ "./src/Projection-exposed.ts");
+const Config_1 = __webpack_require__(/*! ../Config */ "./src/Config-exposed.ts");
 class Stop {
     constructor(stationId, trackInfo) {
         this.stationId = stationId;
@@ -3300,9 +3300,9 @@ exports.Station = Station;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Train = void 0;
-const ArrivalDepartureTime_1 = __webpack_require__(/*! ../ArrivalDepartureTime */ "./src/ArrivalDepartureTime.ts");
-const AbstractTimedDrawable_1 = __webpack_require__(/*! ./AbstractTimedDrawable */ "./src/drawables/AbstractTimedDrawable.ts");
-const Config_1 = __webpack_require__(/*! ../Config */ "./src/Config.ts");
+const ArrivalDepartureTime_1 = __webpack_require__(/*! ../ArrivalDepartureTime */ "./src/ArrivalDepartureTime-exposed.ts");
+const AbstractTimedDrawable_1 = __webpack_require__(/*! ./AbstractTimedDrawable */ "./src/drawables/AbstractTimedDrawable-exposed.ts");
+const Config_1 = __webpack_require__(/*! ../Config */ "./src/Config-exposed.ts");
 class Train extends AbstractTimedDrawable_1.AbstractTimedDrawable {
     constructor(adapter, stationProvider, config) {
         super(adapter);
@@ -3358,20 +3358,20 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Rotation = exports.Vector = exports.Projection = exports.Config = exports.SvgAnimator = void 0;
 const SvgNetwork_1 = __webpack_require__(/*! ./svg/SvgNetwork */ "./src/svg/SvgNetwork-exposed.ts");
 const Network_1 = __webpack_require__(/*! ./Network */ "./src/Network-exposed.ts");
-const Instant_1 = __webpack_require__(/*! ./Instant */ "./src/Instant.ts");
-const SvgAnimator_1 = __webpack_require__(/*! ./svg/SvgAnimator */ "./src/svg/SvgAnimator.ts");
-const DrawableSorter_1 = __webpack_require__(/*! ./DrawableSorter */ "./src/DrawableSorter.ts");
-const Config_1 = __webpack_require__(/*! ./Config */ "./src/Config.ts");
+const Instant_1 = __webpack_require__(/*! ./Instant */ "./src/Instant-exposed.ts");
+const SvgAnimator_1 = __webpack_require__(/*! ./svg/SvgAnimator */ "./src/svg/SvgAnimator-exposed.ts");
+const DrawableSorter_1 = __webpack_require__(/*! ./DrawableSorter */ "./src/DrawableSorter-exposed.ts");
+const Config_1 = __webpack_require__(/*! ./Config */ "./src/Config-exposed.ts");
 const Gravitator_1 = __webpack_require__(/*! ./Gravitator */ "./src/Gravitator-exposed.ts");
-var SvgAnimator_2 = __webpack_require__(/*! ./svg/SvgAnimator */ "./src/svg/SvgAnimator.ts");
+var SvgAnimator_2 = __webpack_require__(/*! ./svg/SvgAnimator */ "./src/svg/SvgAnimator-exposed.ts");
 Object.defineProperty(exports, "SvgAnimator", ({ enumerable: true, get: function () { return SvgAnimator_2.SvgAnimator; } }));
-var Config_2 = __webpack_require__(/*! ./Config */ "./src/Config.ts");
+var Config_2 = __webpack_require__(/*! ./Config */ "./src/Config-exposed.ts");
 Object.defineProperty(exports, "Config", ({ enumerable: true, get: function () { return Config_2.Config; } }));
-var Projection_1 = __webpack_require__(/*! ./Projection */ "./src/Projection.ts");
+var Projection_1 = __webpack_require__(/*! ./Projection */ "./src/Projection-exposed.ts");
 Object.defineProperty(exports, "Projection", ({ enumerable: true, get: function () { return Projection_1.Projection; } }));
-var Vector_1 = __webpack_require__(/*! ./Vector */ "./src/Vector.ts");
+var Vector_1 = __webpack_require__(/*! ./Vector */ "./src/Vector-exposed.ts");
 Object.defineProperty(exports, "Vector", ({ enumerable: true, get: function () { return Vector_1.Vector; } }));
-var Rotation_1 = __webpack_require__(/*! ./Rotation */ "./src/Rotation.ts");
+var Rotation_1 = __webpack_require__(/*! ./Rotation */ "./src/Rotation-exposed.ts");
 Object.defineProperty(exports, "Rotation", ({ enumerable: true, get: function () { return Rotation_1.Rotation; } }));
 let timePassed = 0;
 const network = new Network_1.Network(new SvgNetwork_1.SvgNetwork(), new DrawableSorter_1.DrawableSorter(), new Gravitator_1.Gravitator());
@@ -3434,11 +3434,11 @@ function slide(instant, animate) {
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.SvgAbstractTimedDrawable = void 0;
-const Instant_1 = __webpack_require__(/*! ../Instant */ "./src/Instant.ts");
-const Vector_1 = __webpack_require__(/*! ../Vector */ "./src/Vector.ts");
-const BoundingBox_1 = __webpack_require__(/*! ../BoundingBox */ "./src/BoundingBox.ts");
-const SvgAnimator_1 = __webpack_require__(/*! ./SvgAnimator */ "./src/svg/SvgAnimator.ts");
-const Animator_1 = __webpack_require__(/*! ../Animator */ "./src/Animator.ts");
+const Instant_1 = __webpack_require__(/*! ../Instant */ "./src/Instant-exposed.ts");
+const Vector_1 = __webpack_require__(/*! ../Vector */ "./src/Vector-exposed.ts");
+const BoundingBox_1 = __webpack_require__(/*! ../BoundingBox */ "./src/BoundingBox-exposed.ts");
+const SvgAnimator_1 = __webpack_require__(/*! ./SvgAnimator */ "./src/svg/SvgAnimator-exposed.ts");
+const Animator_1 = __webpack_require__(/*! ../Animator */ "./src/Animator-exposed.ts");
 class SvgAbstractTimedDrawable {
     constructor(element) {
         this.element = element;
@@ -3522,7 +3522,7 @@ exports.SvgAbstractTimedDrawable = SvgAbstractTimedDrawable;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.SvgAnimator = void 0;
-const Animator_1 = __webpack_require__(/*! ../Animator */ "./src/Animator.ts");
+const Animator_1 = __webpack_require__(/*! ../Animator */ "./src/Animator-exposed.ts");
 class SvgAnimator extends Animator_1.Animator {
     constructor() {
         super();
@@ -3552,10 +3552,10 @@ exports.SvgAnimator = SvgAnimator;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.SvgCrumpledImage = void 0;
-const Vector_1 = __webpack_require__(/*! ../Vector */ "./src/Vector.ts");
-const SvgAnimator_1 = __webpack_require__(/*! ./SvgAnimator */ "./src/svg/SvgAnimator.ts");
-const SvgAbstractTimedDrawable_1 = __webpack_require__(/*! ./SvgAbstractTimedDrawable */ "./src/svg/SvgAbstractTimedDrawable.ts");
-const BoundingBox_1 = __webpack_require__(/*! ../BoundingBox */ "./src/BoundingBox.ts");
+const Vector_1 = __webpack_require__(/*! ../Vector */ "./src/Vector-exposed.ts");
+const SvgAnimator_1 = __webpack_require__(/*! ./SvgAnimator */ "./src/svg/SvgAnimator-exposed.ts");
+const SvgAbstractTimedDrawable_1 = __webpack_require__(/*! ./SvgAbstractTimedDrawable */ "./src/svg/SvgAbstractTimedDrawable-exposed.ts");
+const BoundingBox_1 = __webpack_require__(/*! ../BoundingBox */ "./src/BoundingBox-exposed.ts");
 class SvgCrumpledImage extends SvgAbstractTimedDrawable_1.SvgAbstractTimedDrawable {
     constructor(element) {
         super(element);
@@ -3667,8 +3667,8 @@ exports.SvgCrumpledImage = SvgCrumpledImage;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.SvgGenericTimedDrawable = void 0;
-const SvgAnimator_1 = __webpack_require__(/*! ./SvgAnimator */ "./src/svg/SvgAnimator.ts");
-const SvgAbstractTimedDrawable_1 = __webpack_require__(/*! ./SvgAbstractTimedDrawable */ "./src/svg/SvgAbstractTimedDrawable.ts");
+const SvgAnimator_1 = __webpack_require__(/*! ./SvgAnimator */ "./src/svg/SvgAnimator-exposed.ts");
+const SvgAbstractTimedDrawable_1 = __webpack_require__(/*! ./SvgAbstractTimedDrawable */ "./src/svg/SvgAbstractTimedDrawable-exposed.ts");
 class SvgGenericTimedDrawable extends SvgAbstractTimedDrawable_1.SvgAbstractTimedDrawable {
     constructor(element) {
         super(element);
@@ -3713,10 +3713,10 @@ exports.SvgGenericTimedDrawable = SvgGenericTimedDrawable;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.SvgKenImage = void 0;
-const Vector_1 = __webpack_require__(/*! ../Vector */ "./src/Vector.ts");
-const SvgAnimator_1 = __webpack_require__(/*! ./SvgAnimator */ "./src/svg/SvgAnimator.ts");
-const SvgAbstractTimedDrawable_1 = __webpack_require__(/*! ./SvgAbstractTimedDrawable */ "./src/svg/SvgAbstractTimedDrawable.ts");
-const BoundingBox_1 = __webpack_require__(/*! ../BoundingBox */ "./src/BoundingBox.ts");
+const Vector_1 = __webpack_require__(/*! ../Vector */ "./src/Vector-exposed.ts");
+const SvgAnimator_1 = __webpack_require__(/*! ./SvgAnimator */ "./src/svg/SvgAnimator-exposed.ts");
+const SvgAbstractTimedDrawable_1 = __webpack_require__(/*! ./SvgAbstractTimedDrawable */ "./src/svg/SvgAbstractTimedDrawable-exposed.ts");
+const BoundingBox_1 = __webpack_require__(/*! ../BoundingBox */ "./src/BoundingBox-exposed.ts");
 class SvgKenImage extends SvgAbstractTimedDrawable_1.SvgAbstractTimedDrawable {
     constructor(element) {
         super(element);
@@ -3786,12 +3786,12 @@ exports.SvgKenImage = SvgKenImage;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.SvgLabel = void 0;
-const Vector_1 = __webpack_require__(/*! ../Vector */ "./src/Vector.ts");
-const Utils_1 = __webpack_require__(/*! ../Utils */ "./src/Utils.ts");
-const BoundingBox_1 = __webpack_require__(/*! ../BoundingBox */ "./src/BoundingBox.ts");
-const SvgAnimator_1 = __webpack_require__(/*! ./SvgAnimator */ "./src/svg/SvgAnimator.ts");
-const SvgAbstractTimedDrawable_1 = __webpack_require__(/*! ./SvgAbstractTimedDrawable */ "./src/svg/SvgAbstractTimedDrawable.ts");
-const Config_1 = __webpack_require__(/*! ../Config */ "./src/Config.ts");
+const Vector_1 = __webpack_require__(/*! ../Vector */ "./src/Vector-exposed.ts");
+const Utils_1 = __webpack_require__(/*! ../Utils */ "./src/Utils-exposed.ts");
+const BoundingBox_1 = __webpack_require__(/*! ../BoundingBox */ "./src/BoundingBox-exposed.ts");
+const SvgAnimator_1 = __webpack_require__(/*! ./SvgAnimator */ "./src/svg/SvgAnimator-exposed.ts");
+const SvgAbstractTimedDrawable_1 = __webpack_require__(/*! ./SvgAbstractTimedDrawable */ "./src/svg/SvgAbstractTimedDrawable-exposed.ts");
+const Config_1 = __webpack_require__(/*! ../Config */ "./src/Config-exposed.ts");
 class SvgLabel extends SvgAbstractTimedDrawable_1.SvgAbstractTimedDrawable {
     constructor(element) {
         super(element);
@@ -3901,12 +3901,12 @@ exports.SvgLabel = SvgLabel;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.SvgLine = void 0;
-const Vector_1 = __webpack_require__(/*! ../Vector */ "./src/Vector.ts");
-const BoundingBox_1 = __webpack_require__(/*! ../BoundingBox */ "./src/BoundingBox.ts");
-const SvgAnimator_1 = __webpack_require__(/*! ./SvgAnimator */ "./src/svg/SvgAnimator.ts");
-const SvgAbstractTimedDrawable_1 = __webpack_require__(/*! ./SvgAbstractTimedDrawable */ "./src/svg/SvgAbstractTimedDrawable.ts");
-const SvgUtils_1 = __webpack_require__(/*! ./SvgUtils */ "./src/svg/SvgUtils.ts");
-const Rotation_1 = __webpack_require__(/*! ../Rotation */ "./src/Rotation.ts");
+const Vector_1 = __webpack_require__(/*! ../Vector */ "./src/Vector-exposed.ts");
+const BoundingBox_1 = __webpack_require__(/*! ../BoundingBox */ "./src/BoundingBox-exposed.ts");
+const SvgAnimator_1 = __webpack_require__(/*! ./SvgAnimator */ "./src/svg/SvgAnimator-exposed.ts");
+const SvgAbstractTimedDrawable_1 = __webpack_require__(/*! ./SvgAbstractTimedDrawable */ "./src/svg/SvgAbstractTimedDrawable-exposed.ts");
+const SvgUtils_1 = __webpack_require__(/*! ./SvgUtils */ "./src/svg/SvgUtils-exposed.ts");
+const Rotation_1 = __webpack_require__(/*! ../Rotation */ "./src/Rotation-exposed.ts");
 class SvgLine extends SvgAbstractTimedDrawable_1.SvgAbstractTimedDrawable {
     constructor(element) {
         super(element);
@@ -4068,24 +4068,24 @@ exports.SvgLine = SvgLine;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.SvgNetwork = void 0;
-const BoundingBox_1 = __webpack_require__(/*! ../BoundingBox */ "./src/BoundingBox.ts");
-const Vector_1 = __webpack_require__(/*! ../Vector */ "./src/Vector.ts");
-const Station_1 = __webpack_require__(/*! ../drawables/Station */ "./src/drawables/Station.ts");
+const BoundingBox_1 = __webpack_require__(/*! ../BoundingBox */ "./src/BoundingBox-exposed.ts");
+const Vector_1 = __webpack_require__(/*! ../Vector */ "./src/Vector-exposed.ts");
+const Station_1 = __webpack_require__(/*! ../drawables/Station */ "./src/drawables/Station-exposed.ts");
 const Line_1 = __webpack_require__(/*! ../drawables/Line */ "./src/drawables/Line-exposed.ts");
-const SvgLine_1 = __webpack_require__(/*! ./SvgLine */ "./src/svg/SvgLine.ts");
-const SvgStation_1 = __webpack_require__(/*! ./SvgStation */ "./src/svg/SvgStation.ts");
+const SvgLine_1 = __webpack_require__(/*! ./SvgLine */ "./src/svg/SvgLine-exposed.ts");
+const SvgStation_1 = __webpack_require__(/*! ./SvgStation */ "./src/svg/SvgStation-exposed.ts");
 const Label_1 = __webpack_require__(/*! ../drawables/Label */ "./src/drawables/Label-exposed.ts");
-const SvgLabel_1 = __webpack_require__(/*! ./SvgLabel */ "./src/svg/SvgLabel.ts");
-const GenericTimedDrawable_1 = __webpack_require__(/*! ../drawables/GenericTimedDrawable */ "./src/drawables/GenericTimedDrawable.ts");
-const SvgGenericTimedDrawable_1 = __webpack_require__(/*! ./SvgGenericTimedDrawable */ "./src/svg/SvgGenericTimedDrawable.ts");
+const SvgLabel_1 = __webpack_require__(/*! ./SvgLabel */ "./src/svg/SvgLabel-exposed.ts");
+const GenericTimedDrawable_1 = __webpack_require__(/*! ../drawables/GenericTimedDrawable */ "./src/drawables/GenericTimedDrawable-exposed.ts");
+const SvgGenericTimedDrawable_1 = __webpack_require__(/*! ./SvgGenericTimedDrawable */ "./src/svg/SvgGenericTimedDrawable-exposed.ts");
 const Train_1 = __webpack_require__(/*! ../drawables/Train */ "./src/drawables/Train-exposed.ts");
-const SvgTrain_1 = __webpack_require__(/*! ./SvgTrain */ "./src/svg/SvgTrain.ts");
-const SvgAnimator_1 = __webpack_require__(/*! ./SvgAnimator */ "./src/svg/SvgAnimator.ts");
-const SvgKenImage_1 = __webpack_require__(/*! ./SvgKenImage */ "./src/svg/SvgKenImage.ts");
-const KenImage_1 = __webpack_require__(/*! ../drawables/KenImage */ "./src/drawables/KenImage.ts");
-const Config_1 = __webpack_require__(/*! ../Config */ "./src/Config.ts");
-const CrumpledImage_1 = __webpack_require__(/*! ../drawables/CrumpledImage */ "./src/drawables/CrumpledImage.ts");
-const SvgCrumpledImage_1 = __webpack_require__(/*! ./SvgCrumpledImage */ "./src/svg/SvgCrumpledImage.ts");
+const SvgTrain_1 = __webpack_require__(/*! ./SvgTrain */ "./src/svg/SvgTrain-exposed.ts");
+const SvgAnimator_1 = __webpack_require__(/*! ./SvgAnimator */ "./src/svg/SvgAnimator-exposed.ts");
+const SvgKenImage_1 = __webpack_require__(/*! ./SvgKenImage */ "./src/svg/SvgKenImage-exposed.ts");
+const KenImage_1 = __webpack_require__(/*! ../drawables/KenImage */ "./src/drawables/KenImage-exposed.ts");
+const Config_1 = __webpack_require__(/*! ../Config */ "./src/Config-exposed.ts");
+const CrumpledImage_1 = __webpack_require__(/*! ../drawables/CrumpledImage */ "./src/drawables/CrumpledImage-exposed.ts");
+const SvgCrumpledImage_1 = __webpack_require__(/*! ./SvgCrumpledImage */ "./src/svg/SvgCrumpledImage-exposed.ts");
 class SvgNetwork {
     constructor() {
         this.currentZoomCenter = Vector_1.Vector.NULL;
@@ -4230,11 +4230,11 @@ SvgNetwork.SVGNS = "http://www.w3.org/2000/svg";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.SvgStation = void 0;
-const Vector_1 = __webpack_require__(/*! ../Vector */ "./src/Vector.ts");
-const Rotation_1 = __webpack_require__(/*! ../Rotation */ "./src/Rotation.ts");
-const SvgAnimator_1 = __webpack_require__(/*! ./SvgAnimator */ "./src/svg/SvgAnimator.ts");
-const SvgAbstractTimedDrawable_1 = __webpack_require__(/*! ./SvgAbstractTimedDrawable */ "./src/svg/SvgAbstractTimedDrawable.ts");
-const Config_1 = __webpack_require__(/*! ../Config */ "./src/Config.ts");
+const Vector_1 = __webpack_require__(/*! ../Vector */ "./src/Vector-exposed.ts");
+const Rotation_1 = __webpack_require__(/*! ../Rotation */ "./src/Rotation-exposed.ts");
+const SvgAnimator_1 = __webpack_require__(/*! ./SvgAnimator */ "./src/svg/SvgAnimator-exposed.ts");
+const SvgAbstractTimedDrawable_1 = __webpack_require__(/*! ./SvgAbstractTimedDrawable */ "./src/svg/SvgAbstractTimedDrawable-exposed.ts");
+const Config_1 = __webpack_require__(/*! ../Config */ "./src/Config-exposed.ts");
 class SvgStation extends SvgAbstractTimedDrawable_1.SvgAbstractTimedDrawable {
     constructor(element) {
         super(element);
@@ -4328,13 +4328,13 @@ exports.SvgStation = SvgStation;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.SvgTrain = void 0;
-const Vector_1 = __webpack_require__(/*! ../Vector */ "./src/Vector.ts");
-const BoundingBox_1 = __webpack_require__(/*! ../BoundingBox */ "./src/BoundingBox.ts");
-const Rotation_1 = __webpack_require__(/*! ../Rotation */ "./src/Rotation.ts");
-const SvgAnimator_1 = __webpack_require__(/*! ./SvgAnimator */ "./src/svg/SvgAnimator.ts");
-const SvgAbstractTimedDrawable_1 = __webpack_require__(/*! ./SvgAbstractTimedDrawable */ "./src/svg/SvgAbstractTimedDrawable.ts");
-const SvgUtils_1 = __webpack_require__(/*! ./SvgUtils */ "./src/svg/SvgUtils.ts");
-const Config_1 = __webpack_require__(/*! ../Config */ "./src/Config.ts");
+const Vector_1 = __webpack_require__(/*! ../Vector */ "./src/Vector-exposed.ts");
+const BoundingBox_1 = __webpack_require__(/*! ../BoundingBox */ "./src/BoundingBox-exposed.ts");
+const Rotation_1 = __webpack_require__(/*! ../Rotation */ "./src/Rotation-exposed.ts");
+const SvgAnimator_1 = __webpack_require__(/*! ./SvgAnimator */ "./src/svg/SvgAnimator-exposed.ts");
+const SvgAbstractTimedDrawable_1 = __webpack_require__(/*! ./SvgAbstractTimedDrawable */ "./src/svg/SvgAbstractTimedDrawable-exposed.ts");
+const SvgUtils_1 = __webpack_require__(/*! ./SvgUtils */ "./src/svg/SvgUtils-exposed.ts");
+const Config_1 = __webpack_require__(/*! ../Config */ "./src/Config-exposed.ts");
 class SvgTrain extends SvgAbstractTimedDrawable_1.SvgAbstractTimedDrawable {
     constructor(element) {
         super(element);
@@ -4449,8 +4449,8 @@ exports.SvgTrain = SvgTrain;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.SvgUtils = void 0;
-const Station_1 = __webpack_require__(/*! ../drawables/Station */ "./src/drawables/Station.ts");
-const Vector_1 = __webpack_require__(/*! ../Vector */ "./src/Vector.ts");
+const Station_1 = __webpack_require__(/*! ../drawables/Station */ "./src/drawables/Station-exposed.ts");
+const Vector_1 = __webpack_require__(/*! ../Vector */ "./src/Vector-exposed.ts");
 class SvgUtils {
     static readStops(stopsString) {
         const stops = [];
