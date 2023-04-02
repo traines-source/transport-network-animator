@@ -29,13 +29,13 @@ export class Network implements StationProvider {
     private stations: { [id: string] : Station } = {};
     private lineGroups: { [id: string] : LineGroup } = {};
     private drawableBuffer: TimedDrawable[] = [];
-    private zoomer: Zoomer;
+    private zoomer: Zoomer | undefined;
 
     constructor(private adapter: NetworkAdapter, private drawableSorter: DrawableSorter, private gravitator: Gravitator) {
-        this.zoomer = new Zoomer(this.adapter.canvasSize, Config.default.zoomMaxScale);
     }
 
     initialize(): void {
+        this.zoomer = new Zoomer(this.adapter.canvasSize, Config.default.zoomMaxScale);
         this.adapter.initialize(this);
     }
 
@@ -77,8 +77,10 @@ export class Network implements StationProvider {
         }
         delay = this.flushDrawableBuffer(delay, animate, now);
         delay = this.gravitator.gravitate(delay, animate);
-        this.adapter.zoomTo(this.zoomer.center, this.zoomer.scale, this.zoomer.duration);
-        this.zoomer.reset();
+        if (this.zoomer) {
+            this.adapter.zoomTo(this.zoomer.center, this.zoomer.scale, this.zoomer.duration);
+            this.zoomer.reset();
+        }
         return delay;
     }
 
@@ -140,7 +142,8 @@ export class Network implements StationProvider {
         delay += draw
             ? this.drawElement(element, delay, shouldAnimate, reverse)
             : this.eraseElement(element, delay, shouldAnimate, reverse);
-        this.zoomer.include(element.boundingBox, element.from, element.to, draw, animate);
+        
+        if (this.zoomer) this.zoomer.include(element.boundingBox, element.from, element.to, draw, animate);
         return delay;
     }
     

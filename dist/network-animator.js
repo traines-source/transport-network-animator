@@ -1904,9 +1904,9 @@ class Network {
         this.stations = {};
         this.lineGroups = {};
         this.drawableBuffer = [];
-        this.zoomer = new Zoomer_1.Zoomer(this.adapter.canvasSize, Config_1.Config.default.zoomMaxScale);
     }
     initialize() {
+        this.zoomer = new Zoomer_1.Zoomer(this.adapter.canvasSize, Config_1.Config.default.zoomMaxScale);
         this.adapter.initialize(this);
     }
     stationById(id) {
@@ -1942,8 +1942,10 @@ class Network {
         }
         delay = this.flushDrawableBuffer(delay, animate, now);
         delay = this.gravitator.gravitate(delay, animate);
-        this.adapter.zoomTo(this.zoomer.center, this.zoomer.scale, this.zoomer.duration);
-        this.zoomer.reset();
+        if (this.zoomer) {
+            this.adapter.zoomTo(this.zoomer.center, this.zoomer.scale, this.zoomer.duration);
+            this.zoomer.reset();
+        }
         return delay;
     }
     populateDrawableBuffer(element, delay, animate, now) {
@@ -2000,7 +2002,8 @@ class Network {
         delay += draw
             ? this.drawElement(element, delay, shouldAnimate, reverse)
             : this.eraseElement(element, delay, shouldAnimate, reverse);
-        this.zoomer.include(element.boundingBox, element.from, element.to, draw, animate);
+        if (this.zoomer)
+            this.zoomer.include(element.boundingBox, element.from, element.to, draw, animate);
         return delay;
     }
     drawElement(element, delay, animate, reverse) {
