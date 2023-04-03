@@ -1,16 +1,17 @@
 #!/bin/bash
 
-TIMECUT_ARGUMENTS="--viewport=1920,1080,deviceScaleFactor=2 --fps=30 --pipe-mode"
 LAUNCH_ARGUMENTS="--no-sandbox --disable-setuid-sandbox --allow-file-access-from-files"
 WORKERS=3
 START_TIME=0
 FILE_TYPE=mp4
+RESOLUTION="1920,1080,deviceScaleFactor=2"
+FPS=30
 
 set -e
 
 usage() { echo "Usage: $0 -i <file to render> -o <output directory> -d <duration> [-s <start time>] [-w <number of workers>]" 1>&2; exit 1; }
 
-while getopts ":i:o:d:s:w:" o; do
+while getopts ":i:o:d:s:w:r:f:" o; do
     case "${o}" in
         i)
             INPUT=${OPTARG}
@@ -27,6 +28,12 @@ while getopts ":i:o:d:s:w:" o; do
         d)
             DURATION=${OPTARG}
             ;;
+        r)
+            RESOLUTION=${OPTARG}
+            ;;
+        f)
+            FPS=${OPTARG}
+            ;;
         *)
             usage
             ;;
@@ -37,6 +44,7 @@ if [ -z "${INPUT}" ] || [ -z "${OUTPUT_DIR}" ] || [ -z "${DURATION}" ]; then
     usage
 fi
 
+TIMECUT_ARGUMENTS="--viewport=$RESOLUTION --fps=$FPS --pipe-mode"
 SLICE_LENGTH=$(($DURATION/$WORKERS))
 CURRENT_SLICE_LENGTH=$(($SLICE_LENGTH+$DURATION-$SLICE_LENGTH*$WORKERS))
 CURRENT_SLICE_START=$START_TIME
