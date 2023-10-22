@@ -24,6 +24,7 @@ SVG: `path`
 - [from](SvgTrainAttributes.md#from)
 - [length](SvgTrainAttributes.md#length)
 - [name](SvgTrainAttributes.md#name)
+- [offset](SvgTrainAttributes.md#offset)
 - [stops](SvgTrainAttributes.md#stops)
 - [to](SvgTrainAttributes.md#to)
 
@@ -90,6 +91,18 @@ SVG: `data-train`
 #### Defined in
 
 [svg/SvgApi.ts:263](https://github.com/traines-source/transport-network-animator/blob/master/src/svg/SvgApi.ts#L263)
+
+___
+
+### offset
+
+• **offset**: `number`
+
+Offset in minutes of the timetable given in [SvgTrainAttributes.stops](SvgTrainAttributes.md#stops). This is useful to more easily model a cyclic schedule. Instead of having to calculate manually the times for different trips of e.g. an hourly service, one can just repeat the same schedule definition and set an offset of e.g. 60 min.
+
+#### Defined in
+
+[svg/SvgApi.ts:291](https://github.com/traines-source/transport-network-animator/blob/master/src/svg/SvgApi.ts#L291)
 
 ___
 

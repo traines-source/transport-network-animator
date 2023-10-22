@@ -7,6 +7,7 @@ import { Config } from "../Config";
 
 export interface TrainAdapter extends AbstractTimedDrawableAdapter {
     stops: Stop[];
+    offset: number;
     draw(delaySeconds: number, animationDurationSeconds: number, follow: {path: Vector[], from: number, to: number}): void;
     move(delaySeconds: number, animationDurationSeconds: number, follow: {path: Vector[], from: number, to: number}): void;
     erase(delaySeconds: number, animationDurationSeconds: number): void;
@@ -32,7 +33,7 @@ export class Train extends AbstractTimedDrawable {
                     this.adapter.draw(delay, animate ? Config.default.fadeDurationSeconds : 0, path);
                 }
                 if (animate) {
-                    this.adapter.move(delay + this.scaleSpeed(arrdep.departure) - this.from.second, this.scaleSpeed(arrdep.arrival - arrdep.departure), path);
+                    this.adapter.move(delay + this.scaleSpeed(arrdep.departure+this.adapter.offset) - this.from.second, this.scaleSpeed(arrdep.arrival - arrdep.departure), path);
                 }
             } else {
                 throw new Error(this.name + ': No path found between ' + stops[i-1].stationId + ' ' + stops[i].stationId)

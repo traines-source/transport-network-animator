@@ -39,6 +39,13 @@ export class SvgTrain extends SvgAbstractTimedDrawable implements TrainAdapter, 
         return this._stops;
     }
 
+    get offset(): number {
+        if (this.element.dataset.offset == undefined) {
+            return 0;
+        }
+        return parseInt(this.element.dataset.offset);
+    }
+
     draw(delaySeconds: number, animationDurationSeconds: number, follow: { path: Vector[], from: number, to: number }): void {
         this.element.className.baseVal += ' train';
         this.setPath(this.calcTrainHinges(this.getPathLength(follow).lengthToStart, follow.path));

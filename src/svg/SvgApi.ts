@@ -284,4 +284,9 @@ export interface SvgTrainAttributes extends SvgAbstractTimedDrawableAttributes {
      * SVG: `data-length`
      */
     length: number;
+
+    /**
+     * Offset in minutes of the timetable given in {@link SvgTrainAttributes.stops}. This is useful to more easily model a cyclic schedule. Instead of having to calculate manually the times for different trips of e.g. an hourly service, one can just repeat the same schedule definition and set an offset of e.g. 60 min.
+     */
+    offset: number;
 }

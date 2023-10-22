@@ -6,6 +6,7 @@ transport-network-animator
 
 ### Classes
 
+- [BoundingBox](classes/BoundingBox.md)
 - [Config](classes/Config.md)
 - [Projection](classes/Projection.md)
 - [Rotation](classes/Rotation.md)

@@ -3324,7 +3324,7 @@ class Train extends AbstractTimedDrawable_1.AbstractTimedDrawable {
                     this.adapter.draw(delay, animate ? Config_1.Config.default.fadeDurationSeconds : 0, path);
                 }
                 if (animate) {
-                    this.adapter.move(delay + this.scaleSpeed(arrdep.departure) - this.from.second, this.scaleSpeed(arrdep.arrival - arrdep.departure), path);
+                    this.adapter.move(delay + this.scaleSpeed(arrdep.departure + this.adapter.offset) - this.from.second, this.scaleSpeed(arrdep.arrival - arrdep.departure), path);
                 }
             }
             else {
@@ -3355,7 +3355,7 @@ exports.Train = Train;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Rotation = exports.Vector = exports.Projection = exports.Config = exports.SvgAnimator = void 0;
+exports.BoundingBox = exports.Rotation = exports.Vector = exports.Projection = exports.Config = exports.SvgAnimator = void 0;
 const SvgNetwork_1 = __webpack_require__(/*! ./svg/SvgNetwork */ "./src/svg/SvgNetwork-exposed.ts");
 const Network_1 = __webpack_require__(/*! ./Network */ "./src/Network-exposed.ts");
 const Instant_1 = __webpack_require__(/*! ./Instant */ "./src/Instant-exposed.ts");
@@ -3373,6 +3373,8 @@ var Vector_1 = __webpack_require__(/*! ./Vector */ "./src/Vector-exposed.ts");
 Object.defineProperty(exports, "Vector", ({ enumerable: true, get: function () { return Vector_1.Vector; } }));
 var Rotation_1 = __webpack_require__(/*! ./Rotation */ "./src/Rotation-exposed.ts");
 Object.defineProperty(exports, "Rotation", ({ enumerable: true, get: function () { return Rotation_1.Rotation; } }));
+var BoundingBox_1 = __webpack_require__(/*! ./BoundingBox */ "./src/BoundingBox-exposed.ts");
+Object.defineProperty(exports, "BoundingBox", ({ enumerable: true, get: function () { return BoundingBox_1.BoundingBox; } }));
 let timePassed = 0;
 const network = new Network_1.Network(new SvgNetwork_1.SvgNetwork(), new DrawableSorter_1.DrawableSorter(), new Gravitator_1.Gravitator());
 let started = false;
@@ -4358,6 +4360,12 @@ class SvgTrain extends SvgAbstractTimedDrawable_1.SvgAbstractTimedDrawable {
             this._stops = SvgUtils_1.SvgUtils.readStops(this.element.dataset.stops);
         }
         return this._stops;
+    }
+    get offset() {
+        if (this.element.dataset.offset == undefined) {
+            return 0;
+        }
+        return parseInt(this.element.dataset.offset);
     }
     draw(delaySeconds, animationDurationSeconds, follow) {
         this.element.className.baseVal += ' train';
